@@ -146,7 +146,7 @@ size=200x200&charset-source=UTF-8&charset-target=UTF-8\
     )
     os.remove(required_file_name)
     duration = (datetime.now() - start).seconds
-    await qrcode.reply("Created QRCode in {} seconds".format(duration))
+    await qrcode.reply("ᴄʀᴇᴀᴛᴇᴅ ǫʀᴄᴏᴅᴇ ɪɴ {} sᴇᴄᴏɴᴅs".format(duration))
 
 file_help = os.path.basename(__file__)
 file_help = file_help.replace(".py", "")
