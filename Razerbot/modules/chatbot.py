@@ -1,4 +1,4 @@
-import import html
+import html
 import re
 from time import sleep
 
