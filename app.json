@@ -1,0 +1,158 @@
+{
+      "name": "RΛZΞR Bot",
+      "logo": "https://telegra.ph/file/ac7dabc39052dfc0107b1.jpg",
+      "description": "A Telegram Powerful Group Managment Bot written in Python using Pyrogram and Telethon",
+      "keywords": [
+         "telegram",
+         "group",
+         "manager",
+         "razer",
+         "razerbot"
+      ],   
+   "repository": "https://github.com/LinuxGuy312/RazerBot",
+   "addons": [
+      {
+         "options": {
+            "version": "13"
+         },
+         "plan": "heroku-postgresql"
+      }
+   ],
+   "buildpacks": [
+    {
+      "url": "https://github.com/heroku/heroku-buildpack-python"
+    },
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest"
+    }
+  ],  
+   "env": {
+      "TOKEN": {
+         "description": "Your bot token. Get one from @BotFather",
+         "value": "",
+         "required": true
+      },
+      "API_ID": {
+         "description": "Get API_ID from my.telegram.org, used for telethon based modules.",
+         "value": "",
+         "required": true
+      },
+      "API_HASH": {
+         "description": "Get API_HASH from my.telegram.org, used for telethon based modules.",
+         "value": "",
+         "required": true
+      },    
+      "SQLALCHEMY_DATABASE_URI": {
+         "description": "Your postgresql db url. If you don't have it, leave it empty.",
+         "value": "",
+         "required": false
+      },      
+      "OWNER_ID": {
+         "description": "Your user ID as an integer.",
+         "value": "",
+         "required": true
+      },
+      "BOT_ID": {
+         "description": "Your bot's User ID. Use any other bot to get it.",
+         "value": "",
+         "required": true
+      },
+      "HEROKU_API_KEY": {
+        "description": "Your Heroku API key, get it from 'https://dashboard.heroku.com/account'",
+        "value": "",
+        "required": false
+      },
+      "HEROKU_APP_NAME": {
+        "description": "Enter the Heroku app name here (Must an exact same name with your input above).",
+        "value": "",
+        "required": false
+      },
+      "OWNER_USERNAME": {
+         "description": "Your username without the @",
+         "value": "",
+         "required": true
+      },
+      "BOT_USERNAME": {
+         "description": "Your bot's username without the @",
+         "value": "",
+         "required": true
+      },
+      "BOT_NAME": {
+         "description": "Your Bot Name",
+         "value": "R Λ Z Ξ R"
+      },
+      "UPDATE_CHANNEL": {
+         "description": "Your Telegram Bot Update Channel username Without @ like: Razer312Updates.",
+         "value": "Razer312Updates",
+         "required": true
+      },
+      "SUPPORT_CHAT": {
+         "description": "Your Telegram support group chat username Without @ like: Razer312Support.",
+         "value": "Razer312Support",
+         "required": true
+      },
+      "START_IMG": {
+         "description": "Enter Your Bot Image Telegraph Link",
+         "value": "https://telegra.ph/file/c5a49f2efa04dea8a66b2.jpg",
+         "required": true
+      },
+      "BOT_TUT": {
+         "description": "Enter Your Bot Setup Video Tutorial Telegraph Link Leave As it is If You Dont Have",
+         "value": "",
+         "required": false
+      },
+      "MONGO_DB_URI": {
+         "description": "Required for database connections.",
+         "value": "",
+         "required": true
+      },
+      "EVENT_LOGS": {
+         "description": "Event logs channel to note down important bot level events, recommend to make this public. Starts with: '-100'",
+         "value": "",
+         "required": true
+      },
+      "JOIN_LOGGER": {
+         "description": "A channel where bot will print who added it to what group, useful during debugging or spam handling. Starts with: '-100'",
+         "value": "",
+         "required": true
+      },      
+      "DEV_USERS": {
+         "description": "ID of users who are Devs of your bot (can use /py etc.). If you are a noob and would come and bother Masha support then keep the current ID's here at they are and add yours.",
+         "value": "",
+         "required": true
+      },
+      "STRICT_GBAN": {
+         "description": "Enforce gbans across new groups as well as old groups. When a gbanned user talks, he will be banned.",
+         "value": "True"
+      },
+      "DRAGONS": {
+         "description": "A space separated list of user IDs who you want to assign as sudo users.",
+         "value": "",
+         "required": false
+      },
+      "DEMONS": {
+         "description": "A space separated list of user IDs who you wanna assign as support users(gban perms only).",
+         "value": "",
+         "required": false
+      },
+      "TIGERS": {
+         "description": "A space separated list of user IDs who you wanna assign as tiger users.",
+         "value": "",
+         "required": false
+      },
+      "WOLVES": {
+         "description": "A space separated list of user IDs who you want to assign as whitelisted - can't be banned with your bot.",
+         "value": "",
+         "required": false
+      },
+      "ENV": {
+         "description": "Setting this to ANYTHING will enable environment variables. Leave it as it is",
+         "value": "ANYTHING"
+      },
+      "URL": {
+         "description": "The Heroku App URL :-  https://<appname>.herokuapp.com/",
+         "value": "https://<appname>.herokuapp.com/",
+         "required": false
+      }   
+   }
+}
