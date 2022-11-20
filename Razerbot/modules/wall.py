@@ -4,7 +4,7 @@ import random
 import requests
 from bs4 import BeautifulSoup
 
-from Razerbot import telethn
+from Razerbot import telethn, SUPPORT_GROUP
 from Razerbot.events import register
 
 async def wall_download(piclink, query):
@@ -21,7 +21,7 @@ async def wall_download(piclink, query):
             f.write(requests.get(piclink).content)
         return picpath
     except Exception as e:
-        event.reply(str(e))
+        event.reply(f'Error, Report @{SUPPORT_GROUP}, {e}')
         return None
 
 @register(pattern="^/wall ?(.*)")
@@ -60,7 +60,10 @@ async def wall(event):
             "image_server": server,
         }
         res = requests.post(url2, data=data)
-        a = res.json()["link"]
+        try:
+            a = res.json()["link"]
+        except KeyError:
+            return await sear.edit("ʜᴍᴍ, ɪ ᴄᴏᴜʟᴅɴ'ᴛ ꜰɪɴᴅ ᴀɴʏᴛʜɪɴɢ. sᴏʀʀʏ.")
         if "We are sorry," not in requests.get(a).text and a not in piclinks:
             await sear.edit("📥 ᴅᴏᴡɴʟᴏᴀᴅɪɴɢ...")
             pic = await wall_download(a, query)
@@ -90,6 +93,6 @@ async def wall(event):
         )
         await sear.delete()
     except Exception as e:
-        await event.reply(str(e))
+        await event.reply(f'Error, Report @{SUPPORT_GROUP}, {e}')
     for i in piclist:
         os.remove(i)
