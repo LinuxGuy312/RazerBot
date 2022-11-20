@@ -5,7 +5,7 @@
 </h4>
 <p align="center">
     <a href="https://t.me/Razer312Bot"> Ready-To-Use Bot </a> •
-    <a href="http://www.prince-botz.tk/2022/02/tiana-bot.html?m=1"> Documentation </a> •
+    <a href="about:blank"> Documentation </a> •
     <a href="https://t.me/Razer312Updates"> Update Channel </a> •
     <a href="https://t.me/Razer312Support"> Support Chat </a> 
 </p>
@@ -84,7 +84,7 @@ $ bash start
 
 ## License
 
-Distributed under the [GNU General Public License v3.0 License.](https://github.com/Prince-Botz/TianaBot/blob/main/LICENSE) See `LICENSE.md` for more information.
+Distributed under the [GNU General Public License v3.0 License.](https://github.com/LinuxGuy312/RazerBot/blob/main/LICENSE) See `LICENSE.md` for more information.
 
 ## Acknowledgements
 

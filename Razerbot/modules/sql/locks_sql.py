@@ -3,7 +3,7 @@ import threading
 
 from sqlalchemy import Column, String, Boolean
 
-from Tianabot.modules.sql import SESSION, BASE
+from Razerbot.modules.sql import SESSION, BASE
 
 
 class Permissions(BASE):
