@@ -8,7 +8,6 @@ import Razerbot.modules.sql.users_sql as sql
 from Razerbot import (
     ALLOW_EXCL,
     CERT_PATH,
-    DONATION_LINK,
     LOGGER,
     OWNER_ID,
     PORT,

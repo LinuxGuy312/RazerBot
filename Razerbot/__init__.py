@@ -178,7 +178,6 @@ else:
     OPENWEATHERMAP_ID = Config.OPENWEATHERMAP_ID
     VIRUS_API_KEY = Config.VIRUS_API_KEY
     BOT_ID = Config.BOT_ID
-    DONATION_LINK = Config.DONATION_LINK
     LOAD = Config.LOAD
     NO_LOAD = Config.NO_LOAD
     DEL_CMDS = Config.DEL_CMDS
