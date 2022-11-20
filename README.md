@@ -56,6 +56,8 @@ Read [Docs] for Detailed Description and Setup Guide on deploying Bot.
     
 <h4>Click the button below to deploy RΛZΞR Group Managment Bot on Heroku!</h4>    
 <p><a href="https://heroku.com/deploy?template=https://github.com/LinuxGuy312/RazerBot"><img src="https://img.shields.io/badge/Deploy%20To%20Heroku-blueviolet?style=for-the-badge&logo=heroku" width="200""/></a></p>
+    
+</details>
 
 <details>
 <summary><b>🔗 Deploy to VPS</b></summary>
@@ -72,7 +74,6 @@ $ cp sample.env .env
 ```console
 $ bash start
 ```
-
 </details>
 
 ## Contact & Support
