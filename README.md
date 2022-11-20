@@ -36,7 +36,7 @@ Read [Docs] for Detailed Description and Setup Guide on deploying Bot.
 
 > Click on buttons to expand!
 <details>
-<summary><b>🔗 Requirements</b></summary>
+<summary><b>Requirements</b></summary>
 <br>
     
 - [Python3.9](https://www.python.org/downloads/release/python-390/)
@@ -47,7 +47,7 @@ Read [Docs] for Detailed Description and Setup Guide on deploying Bot.
 </details>
 
 <details>
-<summary><b>🔗 Deploy to Heroku</b></summary>
+<summary><b>Deploy to Heroku</b></summary>
 <br>
 
 > Heroku has two vars[HEROKU_API_KEY & HEROKU_APP_NAME] for Updater to work. 
@@ -60,7 +60,7 @@ Read [Docs] for Detailed Description and Setup Guide on deploying Bot.
 </details>
 
 <details>
-<summary><b>🔗 Deploy to VPS</b></summary>
+<summary><b>Deploy to VPS</b></summary>
 <br>
 
 
