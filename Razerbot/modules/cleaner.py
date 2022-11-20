@@ -30,7 +30,6 @@ command_list = [
     "gignoreblue" "start",
     "help",
     "settings",
-    "donate",
     "stalk",
     "aka",
     "leaderboard",
