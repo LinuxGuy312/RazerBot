@@ -52,7 +52,7 @@ async def is_register_admin(chat, user):
 
 @register(pattern=r"^/getqr$")
 async def parseqr(qr_e):
-    """ For .getqr command, get QR Code content from the replied photo. """
+    """ ꜰᴏʀ /getqr ᴄᴏᴍᴍᴀɴᴅ, ɢᴇᴛ ǫʀ ᴄᴏᴅᴇ ᴄᴏɴᴛᴇɴᴛ ꜰʀᴏᴍ ᴛʜᴇ ʀᴇᴘʟɪᴇᴅ ᴘʜᴏᴛᴏ. """
     if qr_e.fwd_from:
         return
 
@@ -83,13 +83,13 @@ async def parseqr(qr_e):
     end = datetime.now()
     duration = (end - start).seconds
     await qr_e.reply(
-        "Obtained QRCode contents in {} seconds.\n{}".format(duration, qr_contents)
+        "ᴏʙᴛᴀɪɴᴇᴅ ǫʀᴄᴏᴅᴇ ᴄᴏɴᴛᴇɴᴛs ɪɴ `{}` sᴇᴄᴏɴᴅs.\n{}".format(duration, qr_contents)
     )
 
 
 @register(pattern=r"^/makeqr(?: |$)([\s\S]*)")
 async def makeqr(qrcode):
-    """ For .makeqr command, make a QR Code containing the given content. """
+    """ For /makeqr command, make a QR Code containing the given content. """
     if qrcode.fwd_from:
         return
     approved_userss = approved_users.find({})
@@ -138,7 +138,7 @@ size=200x200&charset-source=UTF-8&charset-target=UTF-8\
     with open(required_file_name, "w+b") as file:
         for chunk in resp.iter_content(chunk_size=128):
             file.write(chunk)
-    await tbot.send_file(
+    await telethn.send_file(
         qrcode.chat_id,
         required_file_name,
         reply_to=reply_msg_id,
