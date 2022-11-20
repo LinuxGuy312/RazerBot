@@ -83,7 +83,7 @@ $ bash start
 
 - [Telegram Channel](https://t.me/Razer312Updates)
 - [Telegram Support Group](https://t.me/Razer312Support)
-- [Contact Owner](https://t.me/Razer_312)
+- [Contact Owner](https://t.me/Razer_312) | [Second Account](https://t.me/WH0907)
 
 ## License
 
@@ -94,3 +94,4 @@ Distributed under the [GNU General Public License v3.0 License.](https://github.
 Special thanks to these amazing projects/people which/who help power RΛZΞR Bot:
 
 - [R Λ Z Ξ R](https://t.me/Razer_312)
+- [𝔼𝕣𝕖𝕟](https://t.me/WH0907)
