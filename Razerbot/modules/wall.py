@@ -27,7 +27,7 @@ async def wall_download(piclink, query):
 @register(pattern="^/wall ?(.*)")
 async def wall(event):
     query = event.pattern_match.group(1)
-    reply_to_id = await reply_id(event)
+    reply_to_id = await event.reply_to_msg_id
     limit = 1
     if not query:
         return await event.reply("ᴡʜᴀᴛ sʜᴏᴜʟᴅ ɪ sᴇᴀʀᴄʜ?")
