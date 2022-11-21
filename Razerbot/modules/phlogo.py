@@ -19,11 +19,10 @@ async def ph(event):
 	except:
 		await event.edit("Something went wrong, try giving two words. e.g.: `/phlogo Razer Bot`")
 		return
-	pro = await event.edit("Processing...")
-	reply_to_id = event.reply_to_msg_id
+	await event.edit("Processing...")
 	result = generate(f"{p}",f"{h}")
 	pic = "ph.png"
 	result.save(pic, "png")
-	await pro.delete()
+	await event.delete()
 	await tbot.send_file(event.chat_id, pic, reply_to=event.reply_to_msg_id, forcedocument=False)
 	os.remove(pic)
