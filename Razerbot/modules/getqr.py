@@ -138,7 +138,7 @@ size=200x200&charset-source=UTF-8&charset-target=UTF-8\
     with open(required_file_name, "w+b") as file:
         for chunk in resp.iter_content(chunk_size=128):
             file.write(chunk)
-    await telethn.send_file(
+    await tbot.send_file(
         qrcode.chat_id,
         required_file_name,
         reply_to=reply_msg_id,
