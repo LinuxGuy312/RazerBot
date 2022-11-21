@@ -79,7 +79,7 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-Hᴇʟʟᴏ {} [!]({})
+Hᴇʟʟᴏ {} [ ](https://telegra.ph/file/c5a49f2efa04dea8a66b2.jpg)
 ───────────────────────
 × I'ᴍ A Pᴏᴡᴇʀꜰᴜʟ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ
 × I'ᴍ Vᴇʀʏ Fᴀꜱᴛ Aɴᴅ Eꜰꜰɪᴄɪᴇɴᴛ. I Pʀᴏᴠɪᴅᴇ Aᴡᴇꜱᴏᴍᴇ Fᴇᴀᴛᴜʀᴇꜱ!
@@ -216,7 +216,6 @@ def start(update: Update, context: CallbackContext):
             update.effective_message.reply_text(
                 PM_START_TEXT.format(
                     escape_markdown(first_name),
-                    START_IMG,
                     escape_markdown(uptime),
                     sql.num_users(),
                     sql.num_chats()),
