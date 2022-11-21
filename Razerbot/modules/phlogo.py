@@ -11,20 +11,20 @@ except ModuleNotFoundError:
 async def ph(event):
 	query = event.pattern_match.group(1)
 	if query == "":
-		o = event.edit("Give some text bruh, e.g.: `/phlogo Razer Bot`")
-		o.delete()
+		event.edit("Give some text bruh, e.g.: `/phlogo Razer Bot`")
+		event.delete()
 		return
 	try:
 		p = query.split(" ", 1)[0]
 		h = query.split(" ", 1)[1]
 	except:
-		o = event.edit("Something went wrong, try giving two words. e.g.: `/phlogo Razer Bot`")
-		o.delete()
+		event.edit("Something went wrong, try giving two words. e.g.: `/phlogo Razer Bot`")
+		event.delete()
 		return
 	await edit_delete(event, "Processing...")
 	reply_to_id = event.reply_to_msg_id
 	result = generate(f"{p}",f"{h}")
 	pic = "ph.png"
 	result.save(pic, "png")
-	await event.client.send_file(event.chat_id, pic, reply_to=event.reply_to_msg_id, forcedocument=False)
+	await tbot.send_file(event.chat_id, pic, reply_to=event.reply_to_msg_id, forcedocument=False)
 	os.remove(pic)
