@@ -11,15 +11,15 @@ except ModuleNotFoundError:
 async def ph(event):
 	query = event.pattern_match.group(1)
 	if query == "":
-		await event.edit("Give some text bruh, e.g.: `/phlogo Razer Bot`")
+		await event.reply("Give some text bruh, e.g.: `/phlogo Razer Bot`")
 		return
 	try:
 		p = query.split(" ", 1)[0]
 		h = query.split(" ", 1)[1]
 	except:
-		await event.edit("Something went wrong, try giving two words. e.g.: `/phlogo Razer Bot`")
+		await event.reply("Something went wrong, try giving two words. e.g.: `/phlogo Razer Bot`")
 		return
-	await event.edit("Processing...")
+	await event.reply("Processing...")
 	result = generate(f"{p}",f"{h}")
 	pic = "ph.png"
 	result.save(pic, "png")
