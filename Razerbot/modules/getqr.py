@@ -1,6 +1,6 @@
 import os
 from Razerbot import dispatcher
-from Razerbot import telethn
+from Razerbot import telethn as tbot
 from asyncio import sleep
 from datetime import datetime
 from telegram.ext import CommandHandler
@@ -22,7 +22,7 @@ approved_users = db.approve
 def progress(current, total):
     """ Calculate and return the download progress with given arguments. """
     print(
-        "Downloaded {} of {}\nCompleted {}".format(
+        "ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ {} ᴏꜰ {}\nᴄᴏᴍᴘʟᴇᴛᴇᴅ {}".format(
             current, total, (current / total) * 100
         )
     )
@@ -52,7 +52,11 @@ async def is_register_admin(chat, user):
 
 @register(pattern=r"^/getqr$")
 async def parseqr(qr_e):
+<<<<<<< HEAD
     """ ꜰᴏʀ /getqr ᴄᴏᴍᴍᴀɴᴅ, ɢᴇᴛ ǫʀ ᴄᴏᴅᴇ ᴄᴏɴᴛᴇɴᴛ ꜰʀᴏᴍ ᴛʜᴇ ʀᴇᴘʟɪᴇᴅ ᴘʜᴏᴛᴏ. """
+=======
+    """ For /getqr command, get QR Code content from the replied photo. """
+>>>>>>> 0e0fd44 (#1.2)
     if qr_e.fwd_from:
         return
 
@@ -83,7 +87,11 @@ async def parseqr(qr_e):
     end = datetime.now()
     duration = (end - start).seconds
     await qr_e.reply(
+<<<<<<< HEAD
         "ᴏʙᴛᴀɪɴᴇᴅ ǫʀᴄᴏᴅᴇ ᴄᴏɴᴛᴇɴᴛs ɪɴ `{}` sᴇᴄᴏɴᴅs.\n{}".format(duration, qr_contents)
+=======
+        "ᴏʙᴛᴀɪɴᴇᴅ ǫʀᴄᴏᴅᴇ ᴄᴏɴᴛᴇɴᴛs ɪɴ {} sᴇᴄᴏɴᴅs.\n{}".format(duration, qr_contents)
+>>>>>>> 0e0fd44 (#1.2)
     )
 
 

@@ -21,13 +21,21 @@ async def wall_download(piclink, query):
             f.write(requests.get(piclink).content)
         return picpath
     except Exception as e:
+<<<<<<< HEAD
         event.reply(f'Error, Report @{SUPPORT_GROUP}, {e}')
+=======
+        event.reply(f'ᴇʀʀᴏʀ, ʀᴇᴘᴏʀᴛ @{SUPPORT_GROUP}, {e}')
+>>>>>>> 0e0fd44 (#1.2)
         return None
 
 @register(pattern="^/wall ?(.*)")
 async def wall(event):
     query = event.pattern_match.group(1)
+<<<<<<< HEAD
     reply_to_id = await event.reply_to_msg_id
+=======
+    reply_to_id = event.reply_to_msg_id
+>>>>>>> 0e0fd44 (#1.2)
     limit = 1
     if not query:
         return await event.reply("ᴡʜᴀᴛ sʜᴏᴜʟᴅ ɪ sᴇᴀʀᴄʜ?")
@@ -44,6 +52,7 @@ async def wall(event):
     if not walls:
         return await sear.edit(f"ᴄᴀɴ'ᴛ ꜰɪɴᴅ ᴀɴʏᴛʜɪɴɢ ᴡɪᴛʜ : `{query}`")
     i = count = 0
+    capcount = 1
     piclist = []
     piclinks = []
     captionlist = []
@@ -76,7 +85,7 @@ async def wall(event):
             i = 0
         else:
             i += 1
-        await sear.edit(f"📥 ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ : {count}/{limit}\n\n❌ ᴇʀʀᴏʀs : {i}/5")
+        await sear.edit(f"📥 ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ : {count}/{limit}\n\n❌ ᴇʀʀᴏʀs : {i}/{limit}")
         if count == int(limit):
             break
         if i == 5:
@@ -93,6 +102,10 @@ async def wall(event):
         )
         await sear.delete()
     except Exception as e:
+<<<<<<< HEAD
         await event.reply(f'Error, Report @{SUPPORT_GROUP}, {e}')
+=======
+        await event.reply(f'ᴇʀʀᴏʀ, ʀᴇᴘᴏʀᴛ @{SUPPORT_GROUP}, {e}')
+>>>>>>> 0e0fd44 (#1.2)
     for i in piclist:
         os.remove(i)

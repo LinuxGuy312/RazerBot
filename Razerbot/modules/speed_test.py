@@ -15,12 +15,12 @@ def convert(speed):
 def speedtestxyz(update: Update, context: CallbackContext):
     buttons = [
         [
-            InlineKeyboardButton("Image", callback_data="speedtest_image"),
-            InlineKeyboardButton("Text", callback_data="speedtest_text"),
+            InlineKeyboardButton("ɪᴍᴀɢᴇ", callback_data="speedtest_image"),
+            InlineKeyboardButton("ᴛᴇxᴛ", callback_data="speedtest_text"),
         ]
     ]
     update.effective_message.reply_text(
-        "Select Ping Mode", reply_markup=InlineKeyboardMarkup(buttons)
+        "sᴇʟᴇᴄᴛ sᴘᴇᴇᴅᴛᴇsᴛ ᴍᴏᴅᴇ", reply_markup=InlineKeyboardMarkup(buttons)
     )
 
 
@@ -29,12 +29,12 @@ def speedtestxyz_callback(update: Update, context: CallbackContext):
     query = update.callback_query
 
     if query.from_user.id in DEV_USERS:
-        msg = update.effective_message.edit_text("Pinging...")
+        msg = update.effective_message.edit_text("ᴛᴇsᴛɪɴɢ sᴘᴇᴇᴅ...")
         speed = speedtest.Speedtest()
         speed.get_best_server()
         speed.download()
         speed.upload()
-        replymsg = "Ping Result:"
+        replymsg = "sᴘᴇᴇᴅᴛᴇsᴛ ʀᴇsᴜʟᴛ:"
 
         if query.data == "speedtest_image":
             speedtest_image = speed.results.share()
@@ -45,13 +45,13 @@ def speedtestxyz_callback(update: Update, context: CallbackContext):
 
         elif query.data == "speedtest_text":
             result = speed.results.dict()
-            replymsg += f"\nDownload: `{convert(result['download'])}Mb/s`\nUpload: `{convert(result['upload'])}Mb/s`\nPing: `{result['ping']}`"
+            replymsg += f"\nᴅᴏᴡɴʟᴏᴀᴅ: `{convert(result['download'])}ᴍʙᴘs`\nᴜᴘʟᴏᴀᴅ: `{convert(result['upload'])}ᴍʙᴘs`\nᴘɪɴɢ: `{result['ping']}`"
             update.effective_message.edit_text(replymsg, parse_mode=ParseMode.MARKDOWN)
     else:
         query.answer("You are required to join Heroes Association to use this command.")
 
 
-SPEED_TEST_HANDLER = DisableAbleCommandHandler("ping", speedtestxyz)
+SPEED_TEST_HANDLER = DisableAbleCommandHandler("speedtest", speedtestxyz)
 SPEED_TEST_CALLBACKHANDLER = CallbackQueryHandler(
     speedtestxyz_callback, pattern="speedtest_.*"
 )
@@ -59,5 +59,5 @@ SPEED_TEST_CALLBACKHANDLER = CallbackQueryHandler(
 dispatcher.add_handler(SPEED_TEST_HANDLER)
 dispatcher.add_handler(SPEED_TEST_CALLBACKHANDLER)
 
-__command_list__ = ["ping"]
+__command_list__ = ["speedtest"]
 __handlers__ = [SPEED_TEST_HANDLER, SPEED_TEST_CALLBACKHANDLER]

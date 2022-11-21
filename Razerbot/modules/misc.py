@@ -100,7 +100,7 @@ __help__ = """
 *Wikipedia:*
  ❍ /wiki <query>*:* wikipedia your query
 *Wallpapers:*
- ❍ /wall <query>*:* get a wallpaper from wall.alphacoders.com
+ ❍ /wall <query> ; <count 1-10>*:* get wallpapers from wall.alphacoders.com, if no count is given then 1 wallpaper will be sent.
 *Json*
  ❍ /json*:* Get Detailed info about any message
 *Knowledge:*

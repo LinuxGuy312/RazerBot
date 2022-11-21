@@ -47,7 +47,7 @@ async def _(event):
             )
             return
 
-    mone = await event.reply("⏳️ Please wait...")
+    mone = await event.reply("⏳️  ᴢɪᴘᴘɪɴɢ, ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ...")
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -59,7 +59,7 @@ async def _(event):
             )
             directory_name = downloaded_file_name
         except Exception as e:  # pylint:disable=C0103,W0703
-            await mone.reply(str(e))
+            await mone.edit(str(e))
     zipfile.ZipFile(directory_name + ".zip", "w", zipfile.ZIP_DEFLATED).write(
         directory_name
     )
@@ -129,7 +129,7 @@ async def _(event):
             )
             return
 
-    mone = await event.reply("Processing...")
+    mone = await event.reply("ᴘʀᴏᴄᴇssɪɴɢ...")
     if not os.path.isdir(TEMP_DOWNLOAD_DIRECTORY):
         os.makedirs(TEMP_DOWNLOAD_DIRECTORY)
     if event.reply_to_msg_id:
@@ -141,7 +141,7 @@ async def _(event):
                 reply_message, TEMP_DOWNLOAD_DIRECTORY
             )
         except Exception as e:
-            await mone.reply(str(e))
+            await mone.edit(str(e))
         else:
             end = datetime.now()
             (end - start).seconds
@@ -149,7 +149,7 @@ async def _(event):
         with zipfile.ZipFile(downloaded_file_name, "r") as zip_ref:
             zip_ref.extractall(extracted)
         filename = sorted(get_lst_of_files(extracted, []))
-        await event.reply("Unzipping now 😌")
+        await mone.edit("ᴜɴᴢɪᴘɪɴɢ, ᴘʟᴇᴀsᴇ ᴡᴀɪᴛ...")
         for single_file in filename:
             if os.path.exists(single_file):
                 caption_rts = os.path.basename(single_file)
@@ -179,6 +179,7 @@ async def _(event):
                         )
                     ]
                 try:
+                    await mone.delete()
                     await client.send_file(
                         event.chat_id,
                         single_file,
@@ -189,6 +190,7 @@ async def _(event):
                         attributes=document_attributes,
                     )
                 except Exception as e:
+                    await mone.delete()
                     await client.send_message(
                         event.chat_id,
                         "{} caused `{}`".format(caption_rts, str(e)),

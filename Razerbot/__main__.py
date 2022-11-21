@@ -93,12 +93,12 @@ buttons = [
         InlineKeyboardButton(text="❓ᴄᴏᴍᴍᴀɴᴅ ʜᴇʟᴘ❗️", callback_data="Razer_"),
     ],
     [
-        InlineKeyboardButton(text="👩‍💻 ɪɴꜰᴏ", callback_data="about_"),
-        InlineKeyboardButton(text="ᴏᴡɴᴇʀ 👨‍✈️", url=f"https://t.me/{OWNER_USERNAME}"),
+        InlineKeyboardButton(text="ɪɴꜰᴏ", callback_data="about_"),
+        InlineKeyboardButton(text="ᴏᴡɴᴇʀ", url=f"https://t.me/{OWNER_USERNAME}"),
     ],
    [
-        InlineKeyboardButton(text="📇 ᴜᴘᴅᴀᴛᴇs", url=f"http://t.me/{UPDATE_CHANNEL}"),
-        InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ 🫂", url=f"https://t.me/{SUPPORT_CHAT}"),
+        InlineKeyboardButton(text="ᴜᴘᴅᴀᴛᴇs", url=f"http://t.me/{UPDATE_CHANNEL}"),
+        InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"),
     ],
     [  
         InlineKeyboardButton(text="➕️ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url=f"https://t.me/{BOT_USERNAME}?startgroup=true"),
@@ -175,8 +175,6 @@ def send_help(chat_id, text, keyboard=None):
 
 @run_async
 def test(update: Update, context: CallbackContext):
-    # pprint(eval(str(update)))
-    # update.effective_message.reply_text("Hola tester! _I_ *have* `markdown`", parse_mode=ParseMode.MARKDOWN)
     update.effective_message.reply_text("This person edited a message")
     print(update.effective_message)
 
@@ -197,7 +195,7 @@ def start(update: Update, context: CallbackContext):
                     update.effective_chat.id,
                     HELPABLE[mod].__help__,
                     InlineKeyboardMarkup(
-                        [[InlineKeyboardButton(text="⬅️ ʙᴀᴄᴋ", callback_data="help_back")]]
+                        [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="help_back")]]
                     ),
                 )
 
@@ -243,8 +241,8 @@ def start(update: Update, context: CallbackContext):
                     sql.num_chats()),
                 reply_markup=InlineKeyboardMarkup(
                  [
-                  [InlineKeyboardButton(text="📄 sᴏᴜʀᴄᴇ", url="https://github.com/LinuxGuy312/RazerBot"), 
-                   InlineKeyboardButton(text="🫂 sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}")]
+                  [InlineKeyboardButton(text="ᴜᴘᴅᴀᴛᴇs", url=f"http://t.me/{UPDATE_CHANNEL}"), 
+                   InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}")]
                  ]
               ),
                 parse_mode=ParseMode.MARKDOWN,              
@@ -331,7 +329,7 @@ def help_button(update, context):
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton(text="「 Bᴀᴄᴋ 」", callback_data="help_back")]]
+                    [[InlineKeyboardButton(text="「 ʙᴀᴄᴋ 」", callback_data="help_back")]]
                 ),
             )
 
@@ -359,7 +357,7 @@ def Razer_callback_handler(update, context):
         query.message.edit_text(
             text="""𝖜𝖊𝖑𝖈𝖔𝖒𝖊 𝖙𝖔 𝖍𝖊𝖑𝖕 𝖒𝖊𝖓𝖚. 
 ────────────────────────
-*Sᴇʟᴇᴄᴛ  Aʟʟ  Cᴏᴍᴍᴀɴᴅs  Fᴏʀ  Fᴜʟʟ  Hᴇʟᴘ  Oʀ  Sᴇʟᴇᴄᴛ  Cᴀᴛᴀɢᴏʀʏ  Fᴏʀ  Mᴏʀᴇ  Hᴇʟᴘ  Dᴏᴄᴜᴍᴇɴᴛᴀᴛɪᴏɴ  Oɴ  Sᴇʟᴇᴄᴛᴇᴅ  Fɪᴇʟᴅs*""",
+*sᴇʟᴇᴄᴛ  ᴀʟʟ  ᴄᴏᴍᴍᴀɴᴅs  ꜰᴏʀ  ꜰᴜʟʟ  ʜᴇʟᴘ  ᴏʀ  sᴇʟᴇᴄᴛ  ᴄᴀᴛᴇɢᴏʀʏ  ꜰᴏʀ  ᴍᴏʀᴇ  ʜᴇʟᴘ  ᴅᴏᴄᴜᴍᴇɴᴛᴀᴛɪᴏɴ  ᴏɴ  sᴇʟᴇᴄᴛᴇᴅ  ꜰɪᴇʟᴅs*""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -368,8 +366,8 @@ def Razer_callback_handler(update, context):
                      InlineKeyboardButton(text="➕ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ➕", callback_data="help_back"),
                     ],                           
                     [InlineKeyboardButton(text="ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ ❓", callback_data="Razer_help")],
-                    [InlineKeyboardButton(text="🔙 ʙᴀᴄᴋ", callback_data="Razer_back"),
-                     InlineKeyboardButton(text="ɪɴʟɪɴᴇ 🔗", switch_inline_query_current_chat="")],
+                    [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="Razer_back"),
+                     InlineKeyboardButton(text="ɪɴʟɪɴᴇ", switch_inline_query_current_chat="")],
                 ]
             ),
         )
@@ -395,9 +393,9 @@ def Razer_callback_handler(update, context):
 Cʟɪᴄᴋ  Bᴇʟᴏᴡ  Bᴜᴛᴛᴏɴ  Tᴏ  Aᴅᴅ  Bᴏᴛ  Iɴ  Yᴏᴜʀ  Gʀᴏᴜᴘ. Bᴀsɪᴄ  Tᴏᴜʀ  Sᴛᴀʀᴛᴇᴅ  Tᴏ  Kɴᴏᴡ  Aʙᴏᴜᴛ  Hᴏᴡ  Tᴏ  Usᴇ  Mᴇ*""",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
-              [[InlineKeyboardButton(text="sᴇᴛᴜᴘ ᴛᴜᴛᴏʀɪᴀʟ 🎥", callback_data="Razer_vida")],
+              [[InlineKeyboardButton(text="sᴇᴛᴜᴘ ᴛᴜᴛᴏʀɪᴀʟ", callback_data="Razer_vida")],
                [InlineKeyboardButton(text="➕️ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],       
-                [InlineKeyboardButton(text="🔙 ʙᴀᴄᴋ", callback_data="Razer_"),
+                [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="Razer_"),
                  InlineKeyboardButton(text="➡️", callback_data="Razer_helpa")]
               ]
             ),
@@ -497,9 +495,9 @@ Nᴏᴛᴇ-  ɴɪɢʜᴛ  ᴍᴏᴅᴇ  ᴄʜᴀᴛs  ɢᴇᴛ  ᴀᴜᴛᴏᴍ�
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
-              [InlineKeyboardButton(text="𝙐𝙥𝙙𝙖𝙩𝙚", url=f"https://t.me/{UPDATE_CHANNEL}"),       
-              InlineKeyboardButton(text="𝙎𝙪𝙥𝙥𝙤𝙧𝙩", url=f"https://t.me/{SUPPORT_CHAT}")],       
-              [InlineKeyboardButton(text="🔙 𝘽𝙖𝙘𝙠", callback_data="about_")]]
+              [InlineKeyboardButton(text="ᴜᴘᴅᴀᴛᴇ", url=f"https://t.me/{UPDATE_CHANNEL}"),       
+              InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}")],       
+              [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_")]]
             ),
         )
     elif query.data == "Razer_helpe":
@@ -544,7 +542,7 @@ Support
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="🔙 ʙᴀᴄᴋ", callback_data="about_")]]
+                [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_")]]
             ),
         )
     elif query.data == "Razer_support":
@@ -561,7 +559,7 @@ Support
                     InlineKeyboardButton(text="ᴜᴘᴅᴀᴛᴇs", url=f"https://t.me/{UPDATE_CHANNEL}"),
                  ],
                  [
-                    InlineKeyboardButton(text="🔙 ʙᴀᴄᴋ", callback_data="about_"),
+                    InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_"),
                  
                  ]
                 ]
@@ -600,18 +598,18 @@ def Razer_about_callback(update: Update, context: CallbackContext):
             reply_markup=InlineKeyboardMarkup(
                [
                  [
-                     InlineKeyboardButton(text="❗️ᴀʙᴏᴜᴛ", callback_data="Razer_about"),
-                     InlineKeyboardButton(text="📄 sᴏᴜʀᴄᴇ", callback_data="Razer_source"),
+                     InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="Razer_about"),
+                     InlineKeyboardButton(text="sᴏᴜʀᴄᴇ", callback_data="Razer_source"),
                  ],
                  [  
-                    InlineKeyboardButton(text="🫂 sᴜᴘᴘᴏʀᴛ", callback_data="Razer_support"),
-                    InlineKeyboardButton(text="👨‍✈️ ᴏᴡɴᴇʀ", url=f"t.me/{OWNER_USERNAME}"),
+                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="Razer_support"),
+                    InlineKeyboardButton(text="ᴏᴡɴᴇʀ", url=f"t.me/{OWNER_USERNAME}"),
                  ],
                  [
                      InlineKeyboardButton(text="ᴛᴇʀᴍs & ᴄᴏɴᴅɪᴛɪᴏɴs❗️", callback_data="Razer_term"),
                  ],
                  [
-                     InlineKeyboardButton(text="🔙 ʙᴀᴄᴋ", callback_data="about_back"),
+                     InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_back"),
                  ]    
                ]
             ),
@@ -642,12 +640,12 @@ def get_help(update: Update, context: CallbackContext):
         if len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
             module = args[1].lower()
             update.effective_message.reply_text(
-                f"Contact me in PM to get help of {module.capitalize()}",
+                f"ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ ɪɴ ᴘᴍ ᴛᴏ ɢᴇᴛ ʜᴇʟᴘ ᴏꜰ {module.capitalize()}",
                 reply_markup=InlineKeyboardMarkup(
                     [
                         [
                             InlineKeyboardButton(
-                                text="Help",
+                                text="ʜᴇʟᴘ",
                                 url="t.me/{}?start=ghelp_{}".format(
                                     context.bot.username, module
                                 ),
@@ -658,12 +656,12 @@ def get_help(update: Update, context: CallbackContext):
             )
             return
         update.effective_message.reply_text(
-            "Contact me in PM to get the list of possible commands.",
+            "ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ ɪɴ ᴘᴍ ᴛᴏ ɢᴇᴛ ᴛʜᴇ ʟɪsᴛ ᴏꜰ ᴘᴏssɪʙʟᴇ ᴄᴏᴍᴍᴀɴᴅs.",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton(
-                            text="Help",
+                            text="ʜᴇʟᴘ",
                             url="t.me/{}?start=help".format(context.bot.username),
                         )
                     ]
@@ -675,7 +673,7 @@ def get_help(update: Update, context: CallbackContext):
     elif len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
         module = args[1].lower()
         text = (
-            "Here is the available help for the *{}* module:\n".format(
+            "ʜᴇʀᴇ ɪs ᴛʜᴇ ᴀᴠᴀɪʟᴀʙʟᴇ ʜᴇʟᴘ ꜰᴏʀ ᴛʜᴇ {} ᴍᴏᴅᴜʟᴇ:\n".format(
                 HELPABLE[module].__mod_name__
             )
             + HELPABLE[module].__help__
@@ -684,7 +682,7 @@ def get_help(update: Update, context: CallbackContext):
             chat.id,
             text,
             InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="Back", callback_data="Razer_")]]
+                [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="Razer_")]]
             ),
         )
 
@@ -701,14 +699,14 @@ def send_settings(chat_id, user_id, user=False):
             )
             dispatcher.bot.send_message(
                 user_id,
-                "These are your current settings:" + "\n\n" + settings,
+                "ᴛʜᴇsᴇ ᴀʀᴇ ʏᴏᴜʀ ᴄᴜʀʀᴇɴᴛ sᴇᴛᴛɪɴɢs:" + "\n\n" + settings,
                 parse_mode=ParseMode.MARKDOWN,
             )
 
         else:
             dispatcher.bot.send_message(
                 user_id,
-                "Seems like there aren't any user specific settings available :'(",
+                "sᴇᴇᴍs ʟɪᴋᴇ ᴛʜᴇʀᴇ ᴀʀᴇɴ'ᴛ ᴀɴʏ ᴜsᴇʀ sᴘᴇᴄɪꜰɪᴄ sᴇᴛᴛɪɴɢs ᴀᴠᴀɪʟᴀʙʟᴇ :'(",
                 parse_mode=ParseMode.MARKDOWN,
             )
 
@@ -717,7 +715,7 @@ def send_settings(chat_id, user_id, user=False):
             chat_name = dispatcher.bot.getChat(chat_id).title
             dispatcher.bot.send_message(
                 user_id,
-                text="Which module would you like to check {}'s settings for?".format(
+                text="ᴡʜɪᴄʜ ᴍᴏᴅᴜʟᴇ ᴡᴏᴜʟᴅ ʏᴏᴜ ʟɪᴋᴇ ᴛᴏ ᴄʜᴇᴄᴋ {}'s sᴇᴛᴛɪɴɢs ꜰᴏʀ?".format(
                     chat_name
                 ),
                 reply_markup=InlineKeyboardMarkup(
@@ -727,8 +725,8 @@ def send_settings(chat_id, user_id, user=False):
         else:
             dispatcher.bot.send_message(
                 user_id,
-                "Seems like there aren't any chat settings available :'(\nSend this "
-                "in a group chat you're admin in to find its current settings!",
+                "sᴇᴇᴍs ʟɪᴋᴇ ᴛʜᴇʀᴇ ᴀʀᴇɴ'ᴛ ᴀɴʏ ᴄʜᴀᴛ sᴇᴛᴛɪɴɢs ᴀᴠᴀɪʟᴀʙʟᴇ :'(\nsᴇɴᴅ ᴛʜɪs "
+                "ɪɴ ᴀ ɢʀᴏᴜᴘ ᴄʜᴀᴛ ʏᴏᴜ'ʀᴇ ᴀᴅᴍɪɴ ɪɴ ᴛᴏ ꜰɪɴᴅ ɪᴛs ᴄᴜʀʀᴇɴᴛ sᴇᴛᴛɪɴɢs!",
                 parse_mode=ParseMode.MARKDOWN,
             )
 
