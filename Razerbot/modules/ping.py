@@ -81,8 +81,8 @@ def ping(update: Update, context: CallbackContext):
 
     message.edit_text(
         "ᴘᴏɴɢ!!\n"
-        "<b>ᴛɪᴍᴇ ᴛᴀᴋᴇɴ:</b> <code>{}</code>\n"
-        "<b>sᴇʀᴠɪᴄᴇ ᴜᴘᴛɪᴍᴇ:</b> <code>{}</code>".format(telegram_ping, uptime),
+        "ᴛɪᴍᴇ ᴛᴀᴋᴇɴ: <code>{}</code>\n"
+        "sᴇʀᴠɪᴄᴇ ᴜᴘᴛɪᴍᴇ: <code>{}</code>".format(telegram_ping, uptime),
         parse_mode=ParseMode.HTML,
     )
 
@@ -97,7 +97,7 @@ def pingall(update: Update, context: CallbackContext):
 
     reply_msg = "⏱ᴘɪɴɢ ʀᴇsᴜʟᴛs ᴀʀᴇ:\n"
     reply_msg += "\n".join(pinged_list)
-    reply_msg += "\n<b>sᴇʀᴠɪᴄᴇ ᴜᴘᴛɪᴍᴇ:</b> <code>{}</code>".format(uptime)
+    reply_msg += "\nsᴇʀᴠɪᴄᴇ ᴜᴘᴛɪᴍᴇ: <code>{}</code>".format(uptime)
 
     update.effective_message.reply_text(
         reply_msg, parse_mode=ParseMode.HTML, disable_web_page_preview=True

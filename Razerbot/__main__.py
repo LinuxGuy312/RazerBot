@@ -79,18 +79,18 @@ def get_readable_time(seconds: int) -> str:
 
 
 PM_START_TEXT = """
-*Hᴇʟʟᴏ {} * [!]({})
+Hᴇʟʟᴏ {} ! []({})
 ───────────────────────
-× *I'ᴍ A Pᴏᴡᴇʀꜰᴜʟ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ*
-× *I'ᴍ Vᴇʀʏ Fᴀꜱᴛ Aɴᴅ Eꜰꜰɪᴄɪᴇɴᴛ. I Pʀᴏᴠɪᴅᴇ Aᴡᴇꜱᴏᴍᴇ Fᴇᴀᴛᴜʀᴇꜱ!*
+× I'ᴍ A Pᴏᴡᴇʀꜰᴜʟ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ
+× I'ᴍ Vᴇʀʏ Fᴀꜱᴛ Aɴᴅ Eꜰꜰɪᴄɪᴇɴᴛ. I Pʀᴏᴠɪᴅᴇ Aᴡᴇꜱᴏᴍᴇ Fᴇᴀᴛᴜʀᴇꜱ!
 ───────────────────────
-× *Uᴘᴛɪᴍᴇ:* `{}`
-× `{}` *Uꜱᴇʀ, Aᴄʀᴏꜱꜱ* `{}` *Cʜᴀᴛꜱ.*
+× Uᴘᴛɪᴍᴇ: `{}`
+× `{}` Uꜱᴇʀ, Aᴄʀᴏꜱꜱ `{}` Cʜᴀᴛꜱ.
 ───────────────────────"""
 
 buttons = [
     [
-        InlineKeyboardButton(text="❓ᴄᴏᴍᴍᴀɴᴅ ʜᴇʟᴘ❗️", callback_data="Razer_"),
+        InlineKeyboardButton(text="ᴄᴏᴍᴍᴀɴᴅ ʜᴇʟᴘ", callback_data="Razer_"),
     ],
     [
         InlineKeyboardButton(text="ɪɴꜰᴏ", callback_data="about_"),
@@ -109,7 +109,7 @@ buttons = [
 Razer_IMG = f"{START_IMG}"
 Razer_VIDA = f"{BOT_TUT}"
 
-HELP_STRINGS = """*Click on the Buttons Bellow to get Documention about Specific Modules*"""
+HELP_STRINGS = "ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ᴅᴏᴄᴜᴍᴇɴᴛɪᴏɴ ᴀʙᴏᴜᴛ sᴘᴇᴄɪꜰɪᴄ ᴍᴏᴅᴜʟᴇs"
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -227,13 +227,13 @@ def start(update: Update, context: CallbackContext):
     else:
           first_name = update.effective_user.first_name
           update.effective_message.reply_photo(
-                Razer_IMG, caption="""*Hᴇʟʟᴏ {} !*
+                Razer_IMG, caption="""Hᴇʟʟᴏ {} !
 ───────────────────
-× *I'ᴍ A Pᴏᴡᴇʀꜰᴜʟ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ*
-× *I'ᴍ Vᴇʀʏ Fᴀꜱᴛ Aɴᴅ Eꜰꜰɪᴄɪᴇɴᴛ. I Pʀᴏᴠɪᴅᴇ Aᴡᴇꜱᴏᴍᴇ Fᴇᴀᴛᴜʀᴇꜱ!*
+× I'ᴍ A Pᴏᴡᴇʀꜰᴜʟ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ
+× I'ᴍ Vᴇʀʏ Fᴀꜱᴛ Aɴᴅ Eꜰꜰɪᴄɪᴇɴᴛ. I Pʀᴏᴠɪᴅᴇ Aᴡᴇꜱᴏᴍᴇ Fᴇᴀᴛᴜʀᴇꜱ!
 ───────────────────
-× *Uᴘᴛɪᴍᴇ:* `{}`
-× `{}` *Uꜱᴇʀ, Aᴄʀᴏꜱꜱ* `{}` *Cʜᴀᴛꜱ.*
+× Uᴘᴛɪᴍᴇ: `{}`
+× `{}` Uꜱᴇʀ, Aᴄʀᴏꜱꜱ `{}` Cʜᴀᴛꜱ.
 ───────────────────""".format(
                     escape_markdown(first_name),
                     escape_markdown(uptime),
@@ -319,7 +319,7 @@ def help_button(update, context):
         if mod_match:
             module = mod_match.group(1)
             text = (
-                "「 Hᴇʟᴘ ᴏғ *{}* 」:\n".format(
+                "「 Hᴇʟᴘ ᴏғ {} 」:\n".format(
                     HELPABLE[module].__mod_name__
                 )
                 + HELPABLE[module].__help__
@@ -357,7 +357,7 @@ def Razer_callback_handler(update, context):
         query.message.edit_text(
             text="""𝖜𝖊𝖑𝖈𝖔𝖒𝖊 𝖙𝖔 𝖍𝖊𝖑𝖕 𝖒𝖊𝖓𝖚. 
 ────────────────────────
-*sᴇʟᴇᴄᴛ  ᴀʟʟ  ᴄᴏᴍᴍᴀɴᴅs  ꜰᴏʀ  ꜰᴜʟʟ  ʜᴇʟᴘ  ᴏʀ  sᴇʟᴇᴄᴛ  ᴄᴀᴛᴇɢᴏʀʏ  ꜰᴏʀ  ᴍᴏʀᴇ  ʜᴇʟᴘ  ᴅᴏᴄᴜᴍᴇɴᴛᴀᴛɪᴏɴ  ᴏɴ  sᴇʟᴇᴄᴛᴇᴅ  ꜰɪᴇʟᴅs*""",
+sᴇʟᴇᴄᴛ  ᴀʟʟ  ᴄᴏᴍᴍᴀɴᴅs  ꜰᴏʀ  ꜰᴜʟʟ  ʜᴇʟᴘ  ᴏʀ  sᴇʟᴇᴄᴛ  ᴄᴀᴛᴇɢᴏʀʏ  ꜰᴏʀ  ᴍᴏʀᴇ  ʜᴇʟᴘ  ᴅᴏᴄᴜᴍᴇɴᴛᴀᴛɪᴏɴ  ᴏɴ  sᴇʟᴇᴄᴛᴇᴅ  ꜰɪᴇʟᴅs""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -388,9 +388,9 @@ def Razer_callback_handler(update, context):
         )
     elif query.data == "Razer_help":
         query.message.edit_text(
-            text=f"""*Nᴇᴡ  Tᴏ  {BOT_NAME}!  Hᴇʀᴇ  Is  Tʜᴇ  Qᴜɪᴄᴋ  Sᴛᴀʀᴛ  Gᴜɪᴅᴇ  Wʜɪᴄʜ  Wɪʟʟ  Hᴇʟᴘ  Yᴏᴜ  Tᴏ  Uɴᴅᴇʀsᴛᴀɴᴅ  Wʜᴀᴛ  Is  {BOT_NAME}  Aɴᴅ  Hᴏᴡ  Tᴏ  Usᴇ  Iᴛ.
+            text=f"""Nᴇᴡ  Tᴏ  {BOT_NAME}!  Hᴇʀᴇ  Is  Tʜᴇ  Qᴜɪᴄᴋ  Sᴛᴀʀᴛ  Gᴜɪᴅᴇ  Wʜɪᴄʜ  Wɪʟʟ  Hᴇʟᴘ  Yᴏᴜ  Tᴏ  Uɴᴅᴇʀsᴛᴀɴᴅ  Wʜᴀᴛ  Is  {BOT_NAME}  Aɴᴅ  Hᴏᴡ  Tᴏ  Usᴇ  Iᴛ.
 
-Cʟɪᴄᴋ  Bᴇʟᴏᴡ  Bᴜᴛᴛᴏɴ  Tᴏ  Aᴅᴅ  Bᴏᴛ  Iɴ  Yᴏᴜʀ  Gʀᴏᴜᴘ. Bᴀsɪᴄ  Tᴏᴜʀ  Sᴛᴀʀᴛᴇᴅ  Tᴏ  Kɴᴏᴡ  Aʙᴏᴜᴛ  Hᴏᴡ  Tᴏ  Usᴇ  Mᴇ*""",
+Cʟɪᴄᴋ  Bᴇʟᴏᴡ  Bᴜᴛᴛᴏɴ  Tᴏ  Aᴅᴅ  Bᴏᴛ  Iɴ  Yᴏᴜʀ  Gʀᴏᴜᴘ. Bᴀsɪᴄ  Tᴏᴜʀ  Sᴛᴀʀᴛᴇᴅ  Tᴏ  Kɴᴏᴡ  Aʙᴏᴜᴛ  Hᴏᴡ  Tᴏ  Usᴇ  Mᴇ""",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
               [[InlineKeyboardButton(text="sᴇᴛᴜᴘ ᴛᴜᴛᴏʀɪᴀʟ", callback_data="Razer_vida")],
@@ -417,7 +417,7 @@ Bᴇғᴏʀᴇ  Wᴇ  Gᴏ,  I  Nᴇᴇᴅ  Aᴅᴍɪɴ  Pᴇʀᴍɪssɪᴏɴs  
         )
     elif query.data == "Razer_helpb":
         query.message.edit_text(
-            text="""*Cᴏɴɢʀᴀɢᴜʟᴀᴛɪᴏɴs,  Tʜɪꜱ  Bᴏᴛ  Nᴏᴡ  Rᴇᴀᴅʏ  Tᴏ  Mᴀɴᴀɢᴇ  Yᴏᴜʀ  Gʀᴏᴜᴘ
+            text="""Cᴏɴɢʀᴀɢᴜʟᴀᴛɪᴏɴs,  Tʜɪꜱ  Bᴏᴛ  Nᴏᴡ  Rᴇᴀᴅʏ  Tᴏ  Mᴀɴᴀɢᴇ  Yᴏᴜʀ  Gʀᴏᴜᴘ
 
 Hᴇʀᴇ  Aʀᴇ  Sᴏᴍᴇ  Essᴇɴᴛɪᴀʟs  Tᴏ  Tʀʏ  Oɴ  RΛZΞR.
 
@@ -430,7 +430,7 @@ Hᴇʀᴇ  Aʀᴇ  Sᴏᴍᴇ  Essᴇɴᴛɪᴀʟs  Tᴏ  Tʀʏ  Oɴ  RΛZΞR.
 sᴇɴᴅ  /setwelcome  [ᴍᴇssᴀɢᴇ]  ᴛᴏ  sᴇᴛ  ᴀ  ᴡᴇʟᴄᴏᴍᴇ  ᴍᴇssᴀɢᴇ
 ᴀʟsᴏ  ʏᴏᴜ  ᴄᴀɴ  sᴛᴏᴘ  ᴇɴᴛᴇʀɪɴɢ  ʀᴏʙᴏᴛs  ᴏʀ  sᴘᴀᴍᴍᴇʀs  ᴛᴏ  ʏᴏᴜʀ  ᴄʜᴀᴛ  ʙʏ  sᴇᴛᴛɪɴɢ  ᴡᴇʟᴄᴏᴍᴇ  ᴄᴀᴘᴛᴄʜᴀ  
 
-Rᴇғᴇʀ  Hᴇʟᴘ  Mᴇɴᴜ  Tᴏ  Sᴇᴇ  Eᴠᴇʀʏᴛʜɪɴɢ  Iɴ  Dᴇᴛᴀɪʟ*""",
+Rᴇғᴇʀ  Hᴇʟᴘ  Mᴇɴᴜ  Tᴏ  Sᴇᴇ  Eᴠᴇʀʏᴛʜɪɴɢ  Iɴ  Dᴇᴛᴀɪʟ""",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
               [
@@ -441,7 +441,7 @@ Rᴇғᴇʀ  Hᴇʟᴘ  Mᴇɴᴜ  Tᴏ  Sᴇᴇ  Eᴠᴇʀʏᴛʜɪɴɢ  Iɴ  D
         )
     elif query.data == "Razer_helpc":
         query.message.edit_text(
-            text="""*× Fɪʟᴛᴇʀs
+            text="""× Fɪʟᴛᴇʀs
 ғɪʟᴛᴇʀs  ᴄᴀɴ  ʙᴇ  ᴜsᴇᴅ  ᴀs  ᴀᴜᴛᴏᴍᴀᴛᴇᴅ  ʀᴇᴘʟɪᴇs/ʙᴀɴ/ᴅᴇʟᴇᴛᴇ  ᴡʜᴇɴ  sᴏᴍᴇᴏɴᴇ  ᴜsᴇ  ᴀ  ᴡᴏʀᴅ  ᴏʀ  sᴇɴᴛᴇɴᴄᴇ
 ғᴏʀ  ᴇxᴀᴍᴘʟᴇ  ɪғ  ɪ  ғɪʟᴛᴇʀ  ᴡᴏʀᴅ  'ʜᴇʟʟᴏ'  ᴀɴᴅ  sᴇᴛ  ʀᴇᴘʟʏ  ᴀs  'ʜɪ'
 ʙᴏᴛ  ᴡɪʟʟ  ʀᴇᴘʟʏ  ᴀs  'ʜɪ'  ᴡʜᴇɴ  sᴏᴍᴇᴏɴᴇ  sᴀʏ  'ʜᴇʟʟᴏ'
@@ -451,7 +451,7 @@ Rᴇғᴇʀ  Hᴇʟᴘ  Mᴇɴᴜ  Tᴏ  Sᴇᴇ  Eᴠᴇʀʏᴛʜɪɴɢ  Iɴ  D
 ᴡᴀɴᴛ  sᴏᴍᴇᴏɴᴇ  ᴛᴏ  ᴄʜᴀᴛ  ɪɴ  ɢʀᴏᴜᴘ?
 RΛZΞR  ʜᴀs  ᴀɴ  ɪɴᴛᴇʟʟɪɢᴇɴᴛ  ᴄʜᴀᴛʙᴏᴛ  ᴡɪᴛʜ  ᴍᴜʟᴛɪʟᴀɴɢ  sᴜᴘᴘᴏʀᴛ
 ʟᴇᴛ's  ᴛʀʏ  ɪᴛ,
-Sᴇɴᴅ  /chatbot  Oɴ  Aɴᴅ  Rᴇᴘʟʏ  Tᴏ  Aɴʏ  Oғ  Mʏ  Mᴇssᴀɢᴇs  Tᴏ  Sᴇᴇ  Tʜᴇ  Mᴀɢɪᴄ*""",
+Sᴇɴᴅ  /chatbot  Oɴ  Aɴᴅ  Rᴇᴘʟʏ  Tᴏ  Aɴʏ  Oғ  Mʏ  Mᴇssᴀɢᴇs  Tᴏ  Sᴇᴇ  Tʜᴇ  Mᴀɢɪᴄ""",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
               [
@@ -462,7 +462,7 @@ Sᴇɴᴅ  /chatbot  Oɴ  Aɴᴅ  Rᴇᴘʟʏ  Tᴏ  Aɴʏ  Oғ  Mʏ  Mᴇssᴀ�
         )
     elif query.data == "Razer_helpd":
         query.message.edit_text(
-            text="""*× Sᴇᴛᴛɪɴɢ  Uᴘ  Nᴏᴛᴇs
+            text="""× Sᴇᴛᴛɪɴɢ  Uᴘ  Nᴏᴛᴇs
 ʏᴏᴜ  ᴄᴀɴ  sᴀᴠᴇ  ᴍᴇssᴀɢᴇ/ᴍᴇᴅɪᴀ/ᴀᴜᴅɪᴏ  ᴏʀ  ᴀɴʏᴛʜɪɴɢ  ᴀs  ɴᴏᴛᴇs ᴜsɪɴɢ /notes
 ᴛᴏ  ɢᴇᴛ  ᴀ  ɴᴏᴛᴇ  sɪᴍᴘʟʏ  ᴜsᴇ  #  ᴀᴛ  ᴛʜᴇ  ʙᴇɢɪɴɴɪɴɢ  ᴏғ  ᴀ  ᴡᴏʀᴅ
 sᴇᴇ  ᴛʜᴇ  ɪᴍᴀɢᴇ..
@@ -471,7 +471,7 @@ sᴇᴇ  ᴛʜᴇ  ɪᴍᴀɢᴇ..
 ʏᴏᴜ  ᴄᴀɴ  sᴇᴛ  ᴜᴘ  ɴɪɢʜᴛᴍᴏᴅᴇ  ᴜsɪɴɢ  /nightmode  ᴏɴ/ᴏғғ  ᴄᴏᴍᴍᴀɴᴅ.
 
 Nᴏᴛᴇ-  ɴɪɢʜᴛ  ᴍᴏᴅᴇ  ᴄʜᴀᴛs  ɢᴇᴛ  ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ  ᴄʟᴏsᴇᴅ  ᴀᴛ  12ᴘᴍ(ɪsᴛ)
-ᴀɴᴅ  ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ  ᴏᴘᴇɴɴᴇᴅ  ᴀᴛ  6ᴀᴍ(ɪsᴛ)  ᴛᴏ  ᴘʀᴇᴠᴇɴᴛ  ɴɪɢʜᴛ  sᴘᴀᴍs.*""",
+ᴀɴᴅ  ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ  ᴏᴘᴇɴɴᴇᴅ  ᴀᴛ  6ᴀᴍ(ɪsᴛ)  ᴛᴏ  ᴘʀᴇᴠᴇɴᴛ  ɴɪɢʜᴛ  sᴘᴀᴍs.""",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
               [
@@ -482,7 +482,7 @@ Nᴏᴛᴇ-  ɴɪɢʜᴛ  ᴍᴏᴅᴇ  ᴄʜᴀᴛs  ɢᴇᴛ  ᴀᴜᴛᴏᴍ�
         )
     elif query.data == "Razer_term":
         query.message.edit_text(
-            text=f"""✗ *Terms and Conditions:*
+            text=f"""✗ Terms and Conditions:
 
 - Only your first name, last name (if any) and username (if any) is stored for a convenient communication!
 - No group ID or it's messages are stored, we respect everyone's privacy.
@@ -490,7 +490,7 @@ Nᴏᴛᴇ-  ɴɪɢʜᴛ  ᴍᴏᴅᴇ  ᴄʜᴀᴛs  ɢᴇᴛ  ᴀᴜᴛᴏᴍ�
 - Watch your group, if someone is spamming your group, you can use the report feature of your Telegram Client.
 - Do not spam commands, buttons, or anything in bot PM.
 
-*NOTE:* Terms and Conditions might change anytime""",
+NOTE: Terms and Conditions might change anytime""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -502,7 +502,7 @@ Nᴏᴛᴇ-  ɴɪɢʜᴛ  ᴍᴏᴅᴇ  ᴄʜᴀᴛs  ɢᴇᴛ  ᴀᴜᴛᴏᴍ�
         )
     elif query.data == "Razer_helpe":
         query.message.edit_text(
-            text="""*× Sᴏ  Nᴏᴡ  Yᴏᴜ  Aʀᴇ  Aᴛ  Tʜᴇ  Eɴᴅ  Oғ  Bᴀsɪᴄ  Tᴏᴜʀ.  Bᴜᴛ  Tʜɪs  Is  Nᴏᴛ  Aʟʟ  I  Cᴀɴ  Dᴏ.
+            text="""× Sᴏ  Nᴏᴡ  Yᴏᴜ  Aʀᴇ  Aᴛ  Tʜᴇ  Eɴᴅ  Oғ  Bᴀsɪᴄ  Tᴏᴜʀ.  Bᴜᴛ  Tʜɪs  Is  Nᴏᴛ  Aʟʟ  I  Cᴀɴ  Dᴏ.
 
 Sᴇɴᴅ  /help  Iɴ  Bᴏᴛ  Pᴍ  Tᴏ  Aᴄᴄᴇss  Hᴇʟᴘ  Mᴇɴᴜ
 
@@ -511,7 +511,7 @@ Aɴᴅ  Aʟsᴏ  Iғ  Yᴏᴜ  Hᴀᴠᴇ  Aɴʏ  Sᴜɢɢᴇssɪᴏɴs  Aʙᴏ�
 
 Aɢᴀɪɴ  Tʜᴀɴᴋs  Fᴏʀ  Usɪɴɢ  Mᴇ
 
-× Bʏ  Usɪɴɢ  Tʜɪꜱ  Bᴏᴛ  Yᴏᴜ  Aʀᴇ  Aɢʀᴇᴇᴅ  Tᴏ  Oᴜʀ  Tᴇʀᴍs  &  Cᴏɴᴅɪᴛɪᴏɴs*""",
+× Bʏ  Usɪɴɢ  Tʜɪꜱ  Bᴏᴛ  Yᴏᴜ  Aʀᴇ  Aɢʀᴇᴇᴅ  Tᴏ  Oᴜʀ  Tᴇʀᴍs  &  Cᴏɴᴅɪᴛɪᴏɴs""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
@@ -547,7 +547,7 @@ Support
         )
     elif query.data == "Razer_support":
         query.message.edit_text(
-            text=f"*{BOT_NAME} Support Chats*",
+            text=f"{BOT_NAME} Support Chats",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
@@ -567,9 +567,9 @@ Support
         )
     elif query.data == "Razer_source":
         query.message.edit_text(
-            text="""*RazerBot is An Open Source Bot Project.*
+            text="""RazerBot is An Open Source Bot Project.
 
-*Click below Button to Get Source Code.*""",
+Click below Button to Get Source Code.""",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
@@ -694,7 +694,7 @@ def send_settings(chat_id, user_id, user=False):
     if user:
         if USER_SETTINGS:
             settings = "\n\n".join(
-                "*{}*:\n{}".format(mod.__mod_name__, mod.__user_settings__(user_id))
+                "{}:\n{}".format(mod.__mod_name__, mod.__user_settings__(user_id))
                 for mod in USER_SETTINGS.values()
             )
             dispatcher.bot.send_message(
@@ -745,7 +745,7 @@ def settings_button(update: Update, context: CallbackContext):
             chat_id = mod_match.group(1)
             module = mod_match.group(2)
             chat = bot.get_chat(chat_id)
-            text = "*{}* has the following settings for the *{}* module:\n\n".format(
+            text = "{} has the following settings for the {} module:\n\n".format(
                 escape_markdown(chat.title), CHAT_SETTINGS[module].__mod_name__
             ) + CHAT_SETTINGS[module].__chat_settings__(chat_id, user.id)
             query.message.reply_text(
