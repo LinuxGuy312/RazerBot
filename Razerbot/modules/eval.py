@@ -67,7 +67,7 @@ def do(func, bot, update):
     env = namespace_of(update.message.chat_id, update, bot)
     os.chdir(os.getcwd())
     with open(
-        os.path.join(os.getcwd(), "scenario/modules/helper_funcs/temp.txt"),
+        os.path.join(os.getcwd(), "Razerbot/modules/helper_funcs/temp.txt"),
         "w",
     ) as temp:
         temp.write(body)
