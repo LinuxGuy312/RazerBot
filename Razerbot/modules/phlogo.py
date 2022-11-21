@@ -23,6 +23,6 @@ async def ph(event):
 	result = generate(f"{p}",f"{h}")
 	pic = "ph.png"
 	result.save(pic, "png")
-	await event.delete()
-	await tbot.send_file(event.chat_id, pic, reply_to=event.reply_to_msg_id, forcedocument=False)
+	await pro.delete()
+	await tbot.send_file(event.chat_id, pic, reply_to=event.message.id, forcedocument=False)
 	os.remove(pic)
