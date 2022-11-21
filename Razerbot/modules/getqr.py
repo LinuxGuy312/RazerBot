@@ -52,11 +52,7 @@ async def is_register_admin(chat, user):
 
 @register(pattern=r"^/getqr$")
 async def parseqr(qr_e):
-<<<<<<< HEAD
-    """ ꜰᴏʀ /getqr ᴄᴏᴍᴍᴀɴᴅ, ɢᴇᴛ ǫʀ ᴄᴏᴅᴇ ᴄᴏɴᴛᴇɴᴛ ꜰʀᴏᴍ ᴛʜᴇ ʀᴇᴘʟɪᴇᴅ ᴘʜᴏᴛᴏ. """
-=======
     """ For /getqr command, get QR Code content from the replied photo. """
->>>>>>> 0e0fd44 (#1.2)
     if qr_e.fwd_from:
         return
 
@@ -87,11 +83,7 @@ async def parseqr(qr_e):
     end = datetime.now()
     duration = (end - start).seconds
     await qr_e.reply(
-<<<<<<< HEAD
-        "ᴏʙᴛᴀɪɴᴇᴅ ǫʀᴄᴏᴅᴇ ᴄᴏɴᴛᴇɴᴛs ɪɴ `{}` sᴇᴄᴏɴᴅs.\n{}".format(duration, qr_contents)
-=======
         "ᴏʙᴛᴀɪɴᴇᴅ ǫʀᴄᴏᴅᴇ ᴄᴏɴᴛᴇɴᴛs ɪɴ {} sᴇᴄᴏɴᴅs.\n{}".format(duration, qr_contents)
->>>>>>> 0e0fd44 (#1.2)
     )
 
 
