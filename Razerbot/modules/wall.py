@@ -88,7 +88,7 @@ async def wall(event):
             event.chat_id,
             piclist,
             caption=captionlist,
-            reply_to=event.reply_to_msg_id,
+            reply_to=event.message.id,
             force_document=True,
         )
         await sear.delete()
