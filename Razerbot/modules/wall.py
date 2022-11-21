@@ -27,7 +27,6 @@ async def wall_download(piclink, query):
 @register(pattern="^/wall ?(.*)")
 async def wall(event):
     query = event.pattern_match.group(1)
-    reply_to_id = event.reply_to_msg_id
     limit = 1
     if not query:
         return await event.reply("ᴡʜᴀᴛ sʜᴏᴜʟᴅ ɪ sᴇᴀʀᴄʜ?")
@@ -89,7 +88,7 @@ async def wall(event):
             event.chat_id,
             piclist,
             caption=captionlist,
-            reply_to=reply_to_id,
+            reply_to=event.reply_to_msg_id,
             force_document=True,
         )
         await sear.delete()
