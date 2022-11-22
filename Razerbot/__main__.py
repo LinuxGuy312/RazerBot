@@ -90,7 +90,7 @@ Hᴇʟʟᴏ {} ![ ]({})
 
 buttons = [
     [
-        InlineKeyboardButton(text="ᴄᴏᴍᴍᴀɴᴅ ʜᴇʟᴘ", callback_data="Razer_"),
+        InlineKeyboardButton(text="ᴄᴏᴍᴍᴀɴᴅ ʜᴇʟᴘ", callback_data="razer_"),
     ],
     [
         InlineKeyboardButton(text="ɪɴꜰᴏ", callback_data="about_"),
@@ -106,8 +106,8 @@ buttons = [
     
 ]
 
-Razer_IMG = f"{START_IMG}"
-Razer_VIDA = f"{BOT_TUT}"
+razer_IMG = f"{START_IMG}"
+razer_VIDA = f"{BOT_TUT}"
 
 HELP_STRINGS = "ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ᴅᴏᴄᴜᴍᴇɴᴛɪᴏɴ ᴀʙᴏᴜᴛ sᴘᴇᴄɪꜰɪᴄ ᴍᴏᴅᴜʟᴇs"
 
@@ -227,7 +227,7 @@ def start(update: Update, context: CallbackContext):
     else:
           first_name = update.effective_user.first_name
           update.effective_message.reply_photo(
-                Razer_IMG, caption="""Hᴇʟʟᴏ {} !
+                razer_IMG, caption="""Hᴇʟʟᴏ {} !
 ───────────────────
 × I'ᴍ A Pᴏᴡᴇʀꜰᴜʟ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ
 × I'ᴍ Vᴇʀʏ Fᴀꜱᴛ Aɴᴅ Eꜰꜰɪᴄɪᴇɴᴛ. I Pʀᴏᴠɪᴅᴇ Aᴡᴇꜱᴏᴍᴇ Fᴇᴀᴛᴜʀᴇꜱ!
@@ -351,9 +351,9 @@ def help_button(update, context):
 
 
 @run_async
-def Razer_callback_handler(update, context):
+def razer_callback_handler(update, context):
     query = update.callback_query
-    if query.data == "Razer_":
+    if query.data == "razer_":
         query.message.edit_text(
             text="""𝖜𝖊𝖑𝖈𝖔𝖒𝖊 𝖙𝖔 𝖍𝖊𝖑𝖕 𝖒𝖊𝖓𝖚. 
 ────────────────────────
@@ -365,13 +365,13 @@ sᴇʟᴇᴄᴛ  ᴀʟʟ  ᴄᴏᴍᴍᴀɴᴅs  ꜰᴏʀ  ꜰᴜʟʟ  ʜᴇʟ�
                     [
                      InlineKeyboardButton(text="➕ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ➕", callback_data="help_back"),
                     ],                           
-                    [InlineKeyboardButton(text="ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ ❓", callback_data="Razer_help")],
-                    [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="Razer_back"),
+                    [InlineKeyboardButton(text="ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ", callback_data="razer_help")],
+                    [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="razer_back"),
                      InlineKeyboardButton(text="ɪɴʟɪɴᴇ", switch_inline_query_current_chat="")],
                 ]
             ),
         )
-    elif query.data == "Razer_back":
+    elif query.data == "razer_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
@@ -386,21 +386,21 @@ sᴇʟᴇᴄᴛ  ᴀʟʟ  ᴄᴏᴍᴍᴀɴᴅs  ꜰᴏʀ  ꜰᴜʟʟ  ʜᴇʟ�
                 timeout=60,
                 disable_web_page_preview=False,
         )
-    elif query.data == "Razer_help":
+    elif query.data == "razer_help":
         query.message.edit_text(
             text=f"""Nᴇᴡ  Tᴏ  {BOT_NAME}!  Hᴇʀᴇ  Is  Tʜᴇ  Qᴜɪᴄᴋ  Sᴛᴀʀᴛ  Gᴜɪᴅᴇ  Wʜɪᴄʜ  Wɪʟʟ  Hᴇʟᴘ  Yᴏᴜ  Tᴏ  Uɴᴅᴇʀsᴛᴀɴᴅ  Wʜᴀᴛ  Is  {BOT_NAME}  Aɴᴅ  Hᴏᴡ  Tᴏ  Usᴇ  Iᴛ.
 
 Cʟɪᴄᴋ  Bᴇʟᴏᴡ  Bᴜᴛᴛᴏɴ  Tᴏ  Aᴅᴅ  Bᴏᴛ  Iɴ  Yᴏᴜʀ  Gʀᴏᴜᴘ. Bᴀsɪᴄ  Tᴏᴜʀ  Sᴛᴀʀᴛᴇᴅ  Tᴏ  Kɴᴏᴡ  Aʙᴏᴜᴛ  Hᴏᴡ  Tᴏ  Usᴇ  Mᴇ""",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
-              [[InlineKeyboardButton(text="sᴇᴛᴜᴘ ᴛᴜᴛᴏʀɪᴀʟ", callback_data="Razer_vida")],
+              [[InlineKeyboardButton(text="sᴇᴛᴜᴘ ᴛᴜᴛᴏʀɪᴀʟ", callback_data="razer_vida")],
                [InlineKeyboardButton(text="➕️ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],       
-                [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="Razer_"),
-                 InlineKeyboardButton(text="➡️", callback_data="Razer_helpa")]
+                [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="razer_"),
+                 InlineKeyboardButton(text="➡️", callback_data="razer_helpa")]
               ]
             ),
         )
-    elif query.data == "Razer_helpa":
+    elif query.data == "razer_helpa":
         query.message.edit_text(
             text=f"""<b>Hᴇʏ,  Wᴇʟᴄᴏᴍᴇ  Tᴏ  Cᴏɴғɪɢᴜʀᴀᴛɪᴏɴ  Tᴜᴛᴏʀɪᴀʟ
 
@@ -410,12 +410,12 @@ Bᴇғᴏʀᴇ  Wᴇ  Gᴏ,  I  Nᴇᴇᴅ  Aᴅᴍɪɴ  Pᴇʀᴍɪssɪᴏɴs  
 3). Gɪᴠɪɴɢ  Fᴜʟʟ  Pᴇʀᴍɪssɪᴏɴs  Mᴀᴋᴇ  RΛZΞR  Fᴜʟʟʏ  Usᴇғᴜʟ</b>""",
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
-              [[InlineKeyboardButton(text="⬅️", callback_data="Razer_help"),
-                InlineKeyboardButton(text="➡️", callback_data="Razer_helpb")],               
+              [[InlineKeyboardButton(text="⬅️", callback_data="razer_help"),
+                InlineKeyboardButton(text="➡️", callback_data="razer_helpb")],               
               ]
             ),
         )
-    elif query.data == "Razer_helpb":
+    elif query.data == "razer_helpb":
         query.message.edit_text(
             text="""Cᴏɴɢʀᴀɢᴜʟᴀᴛɪᴏɴs,  Tʜɪꜱ  Bᴏᴛ  Nᴏᴡ  Rᴇᴀᴅʏ  Tᴏ  Mᴀɴᴀɢᴇ  Yᴏᴜʀ  Gʀᴏᴜᴘ
 
@@ -434,12 +434,12 @@ Rᴇғᴇʀ  Hᴇʟᴘ  Mᴇɴᴜ  Tᴏ  Sᴇᴇ  Eᴠᴇʀʏᴛʜɪɴɢ  Iɴ  D
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
               [
-                [InlineKeyboardButton(text="⬅️", callback_data="Razer_helpa"),
-                 InlineKeyboardButton(text="➡️", callback_data="Razer_helpc")]
+                [InlineKeyboardButton(text="⬅️", callback_data="razer_helpa"),
+                 InlineKeyboardButton(text="➡️", callback_data="razer_helpc")]
                 ]
             ),
         )
-    elif query.data == "Razer_helpc":
+    elif query.data == "razer_helpc":
         query.message.edit_text(
             text="""× Fɪʟᴛᴇʀs
 ғɪʟᴛᴇʀs  ᴄᴀɴ  ʙᴇ  ᴜsᴇᴅ  ᴀs  ᴀᴜᴛᴏᴍᴀᴛᴇᴅ  ʀᴇᴘʟɪᴇs/ʙᴀɴ/ᴅᴇʟᴇᴛᴇ  ᴡʜᴇɴ  sᴏᴍᴇᴏɴᴇ  ᴜsᴇ  ᴀ  ᴡᴏʀᴅ  ᴏʀ  sᴇɴᴛᴇɴᴄᴇ
@@ -455,12 +455,12 @@ Sᴇɴᴅ  /chatbot  Oɴ  Aɴᴅ  Rᴇᴘʟʏ  Tᴏ  Aɴʏ  Oғ  Mʏ  Mᴇssᴀ�
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
               [
-                [InlineKeyboardButton(text="⬅️", callback_data="Razer_helpb"),
-                 InlineKeyboardButton(text="➡️", callback_data="Razer_helpd")]
+                [InlineKeyboardButton(text="⬅️", callback_data="razer_helpb"),
+                 InlineKeyboardButton(text="➡️", callback_data="razer_helpd")]
                 ]
             ),
         )
-    elif query.data == "Razer_helpd":
+    elif query.data == "razer_helpd":
         query.message.edit_text(
             text="""× Sᴇᴛᴛɪɴɢ  Uᴘ  Nᴏᴛᴇs
 ʏᴏᴜ  ᴄᴀɴ  sᴀᴠᴇ  ᴍᴇssᴀɢᴇ/ᴍᴇᴅɪᴀ/ᴀᴜᴅɪᴏ  ᴏʀ  ᴀɴʏᴛʜɪɴɢ  ᴀs  ɴᴏᴛᴇs ᴜsɪɴɢ /notes
@@ -475,12 +475,12 @@ Nᴏᴛᴇ-  ɴɪɢʜᴛ  ᴍᴏᴅᴇ  ᴄʜᴀᴛs  ɢᴇᴛ  ᴀᴜᴛᴏᴍ�
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
               [
-                [InlineKeyboardButton(text="⬅️", callback_data="Razer_helpc"),
-                 InlineKeyboardButton(text="➡️", callback_data="Razer_helpe")]
+                [InlineKeyboardButton(text="⬅️", callback_data="razer_helpc"),
+                 InlineKeyboardButton(text="➡️", callback_data="razer_helpe")]
                 ]
             ),
         )
-    elif query.data == "Razer_term":
+    elif query.data == "razer_term":
         query.message.edit_text(
             text=f"""✗ Terms and Conditions:
 
@@ -500,7 +500,7 @@ NOTE: Terms and Conditions might change anytime""",
               [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_")]]
             ),
         )
-    elif query.data == "Razer_helpe":
+    elif query.data == "razer_helpe":
         query.message.edit_text(
             text="""× Sᴏ  Nᴏᴡ  Yᴏᴜ  Aʀᴇ  Aᴛ  Tʜᴇ  Eɴᴅ  Oғ  Bᴀsɪᴄ  Tᴏᴜʀ.  Bᴜᴛ  Tʜɪs  Is  Nᴏᴛ  Aʟʟ  I  Cᴀɴ  Dᴏ.
 
@@ -516,11 +516,11 @@ Aɢᴀɪɴ  Tʜᴀɴᴋs  Fᴏʀ  Usɪɴɢ  Mᴇ
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton(text="➕ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ➕", callback_data="help_back")],
-                [InlineKeyboardButton(text="⬅️", callback_data="Razer_helpd"),
-                InlineKeyboardButton(text="ᴍᴀɪɴ ᴍᴇɴᴜ", callback_data="Razer_")]]
+                [InlineKeyboardButton(text="⬅️", callback_data="razer_helpd"),
+                InlineKeyboardButton(text="ᴍᴀɪɴ ᴍᴇɴᴜ", callback_data="razer_")]]
             ),
         )
-    elif query.data == "Razer_about":
+    elif query.data == "razer_about":
         query.message.edit_text(
             text=f"""{BOT_NAME} it's online since January 2022 and it's constantly updated!
             
@@ -545,7 +545,7 @@ Support
                 [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_")]]
             ),
         )
-    elif query.data == "Razer_support":
+    elif query.data == "razer_support":
         query.message.edit_text(
             text=f"{BOT_NAME} Support Chats",
             parse_mode=ParseMode.MARKDOWN,
@@ -565,30 +565,30 @@ Support
                 ]
             ),
         )
-    elif query.data == "Razer_source":
+    elif query.data == "razer_source":
         query.message.edit_text(
-            text="""RazerBot is An Open Source Bot Project.
+            text="""ʀᴀᴢᴇʀʙᴏᴛ ɪs ᴀɴ ᴏᴘᴇɴ sᴏᴜʀᴄᴇ ʙᴏᴛ ᴘʀᴏᴊᴇᴄᴛ.
 
-Click below Button to Get Source Code.""",
+ᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ.""",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
                  [
-                    InlineKeyboardButton(text="📄 sᴏᴜʀᴄᴇ", url="github.com/LinuxGuy312/RazerBot"),                 
-                    InlineKeyboardButton(text="🔙 ʙᴀᴄᴋ", callback_data="about_"),
+                    InlineKeyboardButton(text="sᴏᴜʀᴄᴇ", url="github.com/LinuxGuy312/RazerBot"),                 
+                    InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_"),
                  ]    
                 ]
             ),
         )
-    elif query.data == "Razer_vida":
+    elif query.data == "razer_vida":
         query.message.reply_video(
-            Razer_VIDA,
+            razer_VIDA,
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,           
         )
         
 @run_async
-def Razer_about_callback(update: Update, context: CallbackContext):
+def razer_about_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "about_":
         query.message.edit_text(
@@ -598,15 +598,15 @@ def Razer_about_callback(update: Update, context: CallbackContext):
             reply_markup=InlineKeyboardMarkup(
                [
                  [
-                     InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="Razer_about"),
-                     InlineKeyboardButton(text="sᴏᴜʀᴄᴇ", callback_data="Razer_source"),
+                     InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="razer_about"),
+                     InlineKeyboardButton(text="sᴏᴜʀᴄᴇ", callback_data="razer_source"),
                  ],
                  [  
-                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="Razer_support"),
+                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="razer_support"),
                     InlineKeyboardButton(text="ᴏᴡɴᴇʀ", url=f"t.me/{OWNER_USERNAME}"),
                  ],
                  [
-                     InlineKeyboardButton(text="ᴛᴇʀᴍs & ᴄᴏɴᴅɪᴛɪᴏɴs❗️", callback_data="Razer_term"),
+                     InlineKeyboardButton(text="ᴛᴇʀᴍs & ᴄᴏɴᴅɪᴛɪᴏɴs❗️", callback_data="razer_term"),
                  ],
                  [
                      InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_back"),
@@ -682,7 +682,7 @@ def get_help(update: Update, context: CallbackContext):
             chat.id,
             text,
             InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="Razer_")]]
+                [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="razer_")]]
             ),
         )
 
@@ -887,8 +887,8 @@ def main():
     settings_handler = CommandHandler("settings", get_settings)
     settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_")
 
-    Razer_callback_handler = CallbackQueryHandler(Razer_about_callback, pattern=r"about_")
-    about_callback_handler = CallbackQueryHandler(Razer_callback_handler, pattern=r"Razer_")
+    razer_callback_handler = CallbackQueryHandler(razer_about_callback, pattern=r"about_")
+    about_callback_handler = CallbackQueryHandler(razer_callback_handler, pattern=r"razer_")
   
     migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)
 
@@ -896,7 +896,7 @@ def main():
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(about_callback_handler)
-    dispatcher.add_handler(Razer_callback_handler)
+    dispatcher.add_handler(razer_callback_handler)
     dispatcher.add_handler(settings_handler)
     dispatcher.add_handler(help_callback_handler)
     dispatcher.add_handler(settings_callback_handler)

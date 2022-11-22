@@ -11,22 +11,22 @@ from Razerbot import pbot, START_IMG, SUPPORT_CHAT, BOT_NAME, OWNER_USERNAME
 async def repo(_, message):
     await message.reply_photo(
         photo=START_IMG,
-        caption=f"""✨ **Hey I'm** {BOT_NAME}
+        caption=f"""ʜᴇʏ ɪ'ᴍ {BOT_NAME}
 
-**Owner : [Click Here](https://t.me/{OWNER_USERNAME})**
-**Python Version :** `{y()}`
-**Library Version :** `{o}`
-**Telethon Version :** `{s}`
-**Pyrogram Version :** `{z}`
+⥤ ᴏᴡɴᴇʀ : @{OWNER_USERNAME}
+⥤ ᴘʏᴛʜᴏɴ ᴠᴇʀsɪᴏɴ : `{y()}`
+⥤ ʟɪʙʀᴀʀʏ ᴠᴇʀsɪᴏɴ : `{o}`
+⥤ ᴛᴇʟᴇᴛʜᴏɴ ᴠᴇʀsɪᴏɴ : `{s}`
+⥤ ᴘʏʀᴏɢʀᴀᴍ ᴠᴇʀsɪᴏɴ : `{z}`
 
-**Click on Button Bellow For More**
+ʀᴀᴢᴇʀʙᴏᴛ ɪs ᴀɴ ᴏᴘᴇɴ sᴏᴜʀᴄᴇ ʙᴏᴛ ᴘʀᴏᴊᴇᴄᴛ.
+ᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ.
 """,
         reply_markup=InlineKeyboardMarkup(
             [
                 [
-                    InlineKeyboardButton(text="📄 Source", url="https://github.com/LinuxGuy312/RazerBot"), 
-                    InlineKeyboardButton(
-                        "🫂 Support", url=f"https://t.me/{SUPPORT_CHAT}")
+                    InlineKeyboardButton(text="sᴏᴜʀᴄᴇ", url="https://github.com/LinuxGuy312/RazerBot"), 
+                    InlineKeyboardButton(text="ᴏᴡɴᴇʀ", url=f"https://t.me/{OWNER_USERNAME}")
                 ]
             ]
         )
