@@ -46,8 +46,8 @@ async def _(event):
         input_str = f"http://{input_str}"
     sample_url = f"https://da.gd/s?url={input_str}"
     if response_api := requests.get(sample_url).text:
-        url = f"{response_api}"
-        await event.reply(f"sʜᴏʀᴛᴇɴᴇᴅ ᴜʀʟ:\n\n`{response_api}`", buttons=[Button.url('ᴠɪsɪᴛ', url)])
+        resurl = f"{response_api}"
+        await event.reply(f"sʜᴏʀᴛᴇɴᴇᴅ ᴜʀʟ:\n\n`{response_api}`", buttons=[Button.url('ᴠɪsɪᴛ', resurl)])
     else:
         await event.reply("sᴏᴍᴇᴛʜɪɴɢ ɪs ᴡʀᴏɴɢ, ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ.")
 
