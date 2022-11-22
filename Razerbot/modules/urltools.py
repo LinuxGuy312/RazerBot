@@ -29,7 +29,7 @@ async def _(event):
 @register(pattern="^/short(?:\s|$)([\s\S]*)")
 async def _(event):
     #shortens the given link
-    msg = update.effective_message
+    msg = event.effective_message
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     reply = await event.get_reply_message()
     if not input_str and reply:
@@ -55,7 +55,7 @@ async def _(event):
 @register(pattern="^/unshort(?:\s|$)([\s\S]*)")
 async def _(event):
     #To unshort the given dagb shorten url.
-    msg = update.effective_message
+    msg = event.effective_message
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     reply = await event.get_reply_message()
     if not input_str and reply:
