@@ -2,7 +2,7 @@ import requests
 from validators.url import url
 from Razerbot import telethn as tbot
 from Razerbot.events import register
-
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 
 @register(pattern="^/dns(?:\s|$)([\s\S]*)")
 async def _(event):
@@ -45,8 +45,8 @@ async def _(event):
         input_str = f"http://{input_str}"
     sample_url = f"https://da.gd/s?url={input_str}"
     if response_api := requests.get(sample_url).text:
-        resurl = f"{response_api}"
-        await event.reply(f"sʜᴏʀᴛᴇɴᴇᴅ ᴜʀʟ:\n\n`{response_api}`")
+        button = [InlineKeyboardButton(text="ᴠɪsɪᴛ", url=f"{response_api}")]
+        await event.reply(f"sʜᴏʀᴛᴇɴᴇᴅ ᴜʀʟ:\n\n`{response_api}`", reply_markup=InlineKeyboardMarkup(button))
     else:
         await event.reply("sᴏᴍᴇᴛʜɪɴɢ ɪs ᴡʀᴏɴɢ, ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ.")
 
@@ -70,8 +70,8 @@ async def _(event):
         input_str = f"http://{input_str}"
     r = requests.get(input_str, allow_redirects=False)
     if str(r.status_code).startswith("3"):
-        redurl = f"{r.headers['Location']}"
-        await event.reply(f"ʀᴇᴅɪʀᴇᴄᴛᴇᴅ ᴜʀʟ:\n\n`{r.headers['Location']}`")
+        button = [InlineKeyboardButton(text="ᴠɪsɪᴛ", url=f"{r.headers['Location']}")]
+        await event.reply(f"ʀᴇᴅɪʀᴇᴄᴛᴇᴅ ᴜʀʟ:\n\n`{r.headers['Location']}`", reply_markup=InlineKeyboardMarkup(button))
     else:
         await event.reply(f"ɪɴᴘᴜᴛ ᴜʀʟ {input_str} ʀᴇᴛᴜʀɴᴇᴅ sᴛᴀᴛᴜs_ᴄᴏᴅᴇ {r.status_code}")
 
