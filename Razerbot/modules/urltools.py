@@ -2,7 +2,6 @@ import requests
 from validators.url import url
 from Razerbot import telethn as tbot
 from Razerbot.events import register
-from telegram import InlineKeyboardMarkup, InlineKeyboardButton, Update
 
 @register(pattern="^/dns(?:\s|$)([\s\S]*)")
 async def _(event):
@@ -29,7 +28,6 @@ async def _(event):
 @register(pattern="^/short(?:\s|$)([\s\S]*)")
 async def _(event):
     #shortens the given link
-    msg = event.effective_message
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     reply = await event.get_reply_message()
     if not input_str and reply:
@@ -46,8 +44,7 @@ async def _(event):
         input_str = f"http://{input_str}"
     sample_url = f"https://da.gd/s?url={input_str}"
     if response_api := requests.get(sample_url).text:
-        butres = InlineKeyboardMarkup(InlineKeyboardButton(text="ᴠɪsɪᴛ", url=f"{response_api}"))
-        await msg.reply_text(f"sʜᴏʀᴛᴇɴᴇᴅ ᴜʀʟ:\n\n`{response_api}`", reply_markup=butres)
+        await event.reply(f"sʜᴏʀᴛᴇɴᴇᴅ ᴜʀʟ:\n\n`{response_api}`")
     else:
         await event.reply("sᴏᴍᴇᴛʜɪɴɢ ɪs ᴡʀᴏɴɢ, ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ.")
 
@@ -55,7 +52,6 @@ async def _(event):
 @register(pattern="^/unshort(?:\s|$)([\s\S]*)")
 async def _(event):
     #To unshort the given dagb shorten url.
-    msg = event.effective_message
     input_str = "".join(event.text.split(maxsplit=1)[1:])
     reply = await event.get_reply_message()
     if not input_str and reply:
@@ -72,8 +68,7 @@ async def _(event):
         input_str = f"http://{input_str}"
     r = requests.get(input_str, allow_redirects=False)
     if str(r.status_code).startswith("3"):
-        butres = InlineKeyboardMarkup(InlineKeyboardButton(text="ᴠɪsɪᴛ", url=f"{r.headers['Location']}"))
-        await msg.reply_text(f"ʀᴇᴅɪʀᴇᴄᴛᴇᴅ ᴜʀʟ:\n\n`{r.headers['Location']}`", reply_markup=butres)
+        await event.reply(f"ʀᴇᴅɪʀᴇᴄᴛᴇᴅ ᴜʀʟ:\n\n`{r.headers['Location']}`")
     else:
         await event.reply(f"ɪɴᴘᴜᴛ ᴜʀʟ {input_str} ʀᴇᴛᴜʀɴᴇᴅ sᴛᴀᴛᴜs_ᴄᴏᴅᴇ {r.status_code}")
 
