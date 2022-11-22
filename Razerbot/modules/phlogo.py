@@ -11,18 +11,18 @@ except ModuleNotFoundError:
 async def ph(event):
 	query = event.pattern_match.group(1)
 	if query == "":
-		await event.reply("Give some text bruh, e.g.: `/phlogo Razer Bot`")
+		await event.reply("ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ʙʀᴜʜ, ᴇ.ɢ.: `/phlogo Razer Bot`")
 		return
 	try:
 		p = query.split(" ", 1)[0]
 		h = query.split(" ", 1)[1]
 	except:
-		await event.reply("Something went wrong, try giving two words. e.g.: `/phlogo Razer Bot`")
+		await event.reply("sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ, ᴛʀʏ ɢɪᴠɪɴɢ ᴛᴡᴏ ᴡᴏʀᴅs. ᴇ.ɢ.: `/phlogo Razer Bot`")
 		return
 	result = generate(f"{p}",f"{h}")
 	pic = "ph.png"
 	result.save(pic, "png")
-	await tbot.send_file(event.chat_id, pic, reply_to=event.message.id, forcedocument=False)
+	await tbot.send_file(event.chat_id, pic, reply_to=event.reply_to_msg_id, forcedocument=False)
 	os.remove(pic)
 
 
@@ -30,16 +30,16 @@ async def ph(event):
 async def ph(event):
 	query = event.pattern_match.group(1)
 	if query == "":
-		await event.reply("Give some text bruh, e.g.: `/phst Razer Bot`")
+		await event.reply("ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ʙʀᴜʜ, ᴇ.ɢ.: `/phst Razer Bot`")
 		return
 	try:
 		p = query.split(" ", 1)[0]
 		h = query.split(" ", 1)[1]
 	except:
-		await event.reply("Something went wrong, try giving two words. e.g.: `/phst Razer Bot`")
+		await event.reply("sᴏᴍᴇᴛʜɪɴɢ ᴡᴇɴᴛ ᴡʀᴏɴɢ, ᴛʀʏ ɢɪᴠɪɴɢ ᴛᴡᴏ ᴡᴏʀᴅs. ᴇ.ɢ.: `/phst Razer Bot`")
 		return
 	result = generate(f"{p}",f"{h}")
-	pic = "ph.webp"
+	stc = "ph.webp"
 	result.save(pic, "webp")
-	await tbot.send_file(event.chat_id, pic, reply_to=event.message.id, forcedocument=False)
-	os.remove(pic)
+	await tbot.send_file(event.chat_id, pic, reply_to=event.reply_to_msg_id, forcedocument=False)
+	os.remove(stc)
