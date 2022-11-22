@@ -47,7 +47,7 @@ async def _(event):
     sample_url = f"https://da.gd/s?url={input_str}"
     if response_api := requests.get(sample_url).text:
         resurl = f"{response_api}"
-        await event.reply(f"sʜᴏʀᴛᴇɴᴇᴅ ᴜʀʟ:\n\n`{response_api}`", buttons=[Button.url('ᴠɪsɪᴛ', resurl)])
+        await event.reply(f"sʜᴏʀᴛᴇɴᴇᴅ ᴜʀʟ:\n\n`{response_api}`", buttons=[Button.inline('ᴠɪsɪᴛ', url=resurl)])
     else:
         await event.reply("sᴏᴍᴇᴛʜɪɴɢ ɪs ᴡʀᴏɴɢ, ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ.")
 
@@ -72,7 +72,7 @@ async def _(event):
     r = requests.get(input_str, allow_redirects=False)
     if str(r.status_code).startswith("3"):
         redurl = f"{r.headers['Location']}"
-        await event.reply(f"ʀᴇᴅɪʀᴇᴄᴛᴇᴅ ᴜʀʟ:\n\n`{r.headers['Location']}`", buttons=[Button.url('ᴠɪsɪᴛ', redurl)])
+        await event.reply(f"ʀᴇᴅɪʀᴇᴄᴛᴇᴅ ᴜʀʟ:\n\n`{r.headers['Location']}`", buttons=[Button.inline('ᴠɪsɪᴛ', url=redurl)])
     else:
         await event.reply(f"ɪɴᴘᴜᴛ ᴜʀʟ {input_str} ʀᴇᴛᴜʀɴᴇᴅ sᴛᴀᴛᴜs_ᴄᴏᴅᴇ {r.status_code}")
 
