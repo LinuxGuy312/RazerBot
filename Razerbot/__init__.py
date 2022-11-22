@@ -118,7 +118,7 @@ if ENV:
     IBM_WATSON_CRED_URL = os.environ.get("IBM_WATSON_CRED_URL", None)
     IBM_WATSON_CRED_PASSWORD = os.environ.get("IBM_WATSON_CRED_PASSWORD", None)
     ARQ_API_URL = "https://arq.hamker.in"
-    ARQ_API_KEY = "CIIUHX-TKZMEQ-LPZFEQ-ZUUFJO-ARQ"    
+    ARQ_API_KEY = "YTDRVD-WKAMWB-GYTPJK-LQUIQU-ARQ"    
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
     SUPPORT_GROUP = SUPPORT_CHAT
     try:
@@ -241,5 +241,3 @@ from Razerbot.modules.helper_funcs.handlers import (
 tg.RegexHandler = CustomRegexHandler
 tg.CommandHandler = CustomCommandHandler
 tg.MessageHandler = CustomMessageHandler
-
-quotly = Quotly()
