@@ -40,6 +40,6 @@ async def ph(event):
 		return
 	result = generate(f"{p}",f"{h}")
 	stc = "ph.webp"
-	result.save(pic, "webp")
+	result.save(stc, "webp")
 	await tbot.send_file(event.chat_id, pic, reply_to=event.reply_to_msg_id, forcedocument=False)
 	os.remove(stc)
