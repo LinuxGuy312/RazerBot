@@ -76,8 +76,7 @@ async def _(event):
     final_output = (
         f"**•  Eval : **\n```{cmd}``` \n\n**•  Result : **\n```{evaluation}``` \n"
     )
-    await edit_or_reply(
-        razevent,
+    await razevent.edit(
         text=final_output,
         aslink=True,
         linktext=f"**•  Eval : **\n```{cmd}``` \n\n**•  Result : **\n",
