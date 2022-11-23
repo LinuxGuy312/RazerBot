@@ -31,7 +31,8 @@ async def _(event):
     else:
         cresult = f"```{curruser}:~$``` ```{cmd}```\n```{result}```"
     await razevent.edit(text=cresult,)
-    await tbot.send_message(EVENT_LOGS, f"#RAZEXEC\nᴛᴇʀᴍɪɴᴀʟ ᴄᴏᴍᴍᴀɴᴅ `{cmd}` ᴡᴀs ᴇxᴇᴄᴜᴛᴇᴅ sᴜᴄᴇssꜰᴜʟʟʏ ɪɴ `{event.chat_id}`")
+    if EVENT_LOGS:
+        await event.client.send_message(EVENT_LOGS, f"#RAZEXEC\nᴛᴇʀᴍɪɴᴀʟ ᴄᴏᴍᴍᴀɴᴅ `{cmd}` ᴡᴀs ᴇxᴇᴄᴜᴛᴇᴅ sᴜᴄᴇssꜰᴜʟʟʏ ɪɴ `{event.chat_id}`")
 
 
 @register(pattern="^/razeval(?:\s|$)([\s\S]*)")
@@ -73,7 +74,8 @@ async def _(event):
         f"⥤ ᴇᴠᴀʟ : \n```{cmd}``` \n\n⥤ ʀᴇsᴜʟᴛ : \n```{evaluation}``` \n"
     )
     await razevent.edit(text=final_output)
-    await tbot.send_message(EVENT_LOGS, f"#RAZEVAL\nᴇᴠᴀʟ ᴄᴏᴍᴍᴀɴᴅ `{cmd}` ᴡᴀs ᴇxᴇᴄᴜᴛᴇᴅ sᴜᴄᴇssꜰᴜʟʟʏ ɪɴ `{event.chat_id}`")
+    if EVENT_LOGS:
+        await event.client.send_message(EVENT_LOGS, f"#RAZEVAL\nᴇᴠᴀʟ ᴄᴏᴍᴍᴀɴᴅ `{cmd}` ᴡᴀs ᴇxᴇᴄᴜᴛᴇᴅ sᴜᴄᴇssꜰᴜʟʟʏ ɪɴ `{event.chat_id}`")
 
 
 async def aexec(code, smessatatus):
