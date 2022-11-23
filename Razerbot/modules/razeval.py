@@ -16,8 +16,8 @@ async def _(event):
         return await event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if not cmd:
-        return await event.reply("What should i execute?")
-    razevent = await event.reply("Executing...")
+        return await event.reply("ᴡʜᴀᴛ sʜᴏᴜʟᴅ ɪ ᴇxᴇᴄᴜᴛᴇ?")
+    razevent = await event.reply("ᴇxᴇᴄᴜᴛɪɴɢ...")
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
     )
@@ -31,8 +31,7 @@ async def _(event):
     else:
         cresult = f"```{curruser}:~$``` ```{cmd}```\n```{result}```"
     await razevent.edit(text=cresult,)
-    if EVENT_LOGS:
-        await tbot.send_message(EVENT_LOGS, f"#RAZEXEC\nTerminal command {cmd} was executed sucessfully.")
+    await tbot.send_message(EVENT_LOGS, f"#RAZEXEC\nᴛᴇʀᴍɪɴᴀʟ ᴄᴏᴍᴍᴀɴᴅ `{cmd}` ᴡᴀs ᴇxᴇᴄᴜᴛᴇᴅ sᴜᴄᴇssꜰᴜʟʟʏ ɪɴ `{event.chat_id}`")
 
 
 @register(pattern="^/razeval(?:\s|$)([\s\S]*)")
@@ -41,13 +40,13 @@ async def _(event):
         return await event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if not cmd:
-        return await event.reply("What should i run ?")
+        return await event.reply("ᴡʜᴀᴛ sʜᴏᴜʟᴅ ɪ ʀᴜɴ?")
     cmd = (
         cmd.replace("send_message", "send_message")
         .replace("send_file", "send_file")
         .replace("edit_message", "edit_message")
     )
-    razevent = await event.reply("Running...")
+    razevent = await event.reply("ʀᴜɴɴɪɴɢ...")
     old_stderr = sys.stderr
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
@@ -69,15 +68,12 @@ async def _(event):
     elif stdout:
         evaluation = stdout
     else:
-        evaluation = "Success"
+        evaluation = "sᴜᴄᴄᴇss"
     final_output = (
-        f"•  Eval : \n```{cmd}``` \n\n•  Result : \n```{evaluation}``` \n"
+        f"⥤ ᴇᴠᴀʟ : \n```{cmd}``` \n\n⥤ ʀᴇsᴜʟᴛ : \n```{evaluation}``` \n"
     )
     await razevent.edit(text=final_output)
-    if EVENT_LOGS:
-        await tbot.send_message(
-            EVENT_LOGS, f"#RAZEVAL\nEval command {cmd} was executed sucessfully."
-        )
+    await tbot.send_message(EVENT_LOGS, f"#RAZEVAL\nᴇᴠᴀʟ ᴄᴏᴍᴍᴀɴᴅ `{cmd}` ᴡᴀs ᴇxᴇᴄᴜᴛᴇᴅ sᴜᴄᴇssꜰᴜʟʟʏ ɪɴ `{event.chat_id}`")
 
 
 async def aexec(code, smessatatus):
