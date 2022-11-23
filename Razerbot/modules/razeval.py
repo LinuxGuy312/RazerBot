@@ -4,6 +4,7 @@ import os
 import sys
 import traceback
 
+from Razerbot.utils import format as _format
 from Razerbot import telethn as tbot
 from Razerbot.events import register
 from Razerbot import *
