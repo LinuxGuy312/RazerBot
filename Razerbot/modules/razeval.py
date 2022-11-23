@@ -32,7 +32,7 @@ async def _(event):
         cresult = f"```{curruser}:~$``` ```{cmd}```\n```{result}```"
     await razevent.edit(text=cresult,)
     if EVENT_LOGS:
-        await event.client.send_message(EVENT_LOGS, f"#RAZEXEC\nᴛᴇʀᴍɪɴᴀʟ ᴄᴏᴍᴍᴀɴᴅ `{cmd}` ᴡᴀs ᴇxᴇᴄᴜᴛᴇᴅ sᴜᴄᴇssꜰᴜʟʟʏ ɪɴ `{event.chat_id}`")
+        await event.client.send_message(int(EVENT_LOGS), f"#RAZEXEC\nᴛᴇʀᴍɪɴᴀʟ ᴄᴏᴍᴍᴀɴᴅ `{cmd}` ᴡᴀs ᴇxᴇᴄᴜᴛᴇᴅ sᴜᴄᴇssꜰᴜʟʟʏ ɪɴ `{event.chat_id}`")
 
 
 @register(pattern="^/razeval(?:\s|$)([\s\S]*)")
@@ -75,7 +75,7 @@ async def _(event):
     )
     await razevent.edit(text=final_output)
     if EVENT_LOGS:
-        await event.client.send_message(EVENT_LOGS, f"#RAZEVAL\nᴇᴠᴀʟ ᴄᴏᴍᴍᴀɴᴅ `{cmd}` ᴡᴀs ᴇxᴇᴄᴜᴛᴇᴅ sᴜᴄᴇssꜰᴜʟʟʏ ɪɴ `{event.chat_id}`")
+        await event.client.send_message(int(EVENT_LOGS), f"#RAZEVAL\nᴇᴠᴀʟ ᴄᴏᴍᴍᴀɴᴅ `{cmd}` ᴡᴀs ᴇxᴇᴄᴜᴛᴇᴅ sᴜᴄᴇssꜰᴜʟʟʏ ɪɴ `{event.chat_id}`")
 
 
 async def aexec(code, smessatatus):
