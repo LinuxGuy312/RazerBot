@@ -5,7 +5,7 @@ import os
 import heroku3
 import requests
 
-from Razerbot import telethn as borg, HEROKU_APP_NAME, HEROKU_API_KEY, OWNER_ID
+from Razerbot import telethn as borg, HEROKU_APP_NAME, HEROKU_API_KEY, OWNER_ID, BOT_NAME
 from Razerbot.events import register
 
 heroku_api = "https://api.heroku.com"
@@ -191,7 +191,7 @@ async def _(dyno):
         dyno.chat_id,
         "logs.txt",
         reply_to=dyno.id,
-        caption="DaisyX Bot Logz.",
+        caption=f"{BOT_NAME}'s Logs.",
     )
 
     await asyncio.sleep(5)

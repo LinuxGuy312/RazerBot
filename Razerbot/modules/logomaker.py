@@ -15,7 +15,7 @@ from Razerbot import OWNER_ID
 from Razerbot.events import register
 from Razerbot import telethn
 from PIL import Image, ImageDraw, ImageFont
-from Razerbot import SUPPORT_GROUP
+from Razerbot import SUPPORT_GROUP, BOT_NAME, BOT_USERNAME
 
 LOGO_LINKS            = ["https://telegra.ph/file/d1838efdafce9fe611d0c.jpg",
                          "https://telegra.ph/file/c1ff2d5ec5e1b5bd1b200.jpg",
@@ -276,7 +276,7 @@ async def lego(event):
     draw.text((x, y), text, font=font, fill="white", stroke_width=1, stroke_fill="black")
     fname = "Razer.png"
     img.save(fname, "png")
-    await telethn.send_file(event.chat_id, file=fname, caption = f"Made by [R Λ Z Ξ R](@Razer312bot)")         
+    await telethn.send_file(event.chat_id, file=fname, caption = f"Made by [{BOT_NAME}](@{BOT_USERNAME})")         
     await pesan.delete()
     if os.path.exists(fname):
             os.remove(fname)

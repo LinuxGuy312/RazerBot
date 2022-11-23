@@ -5,7 +5,7 @@ from telethon.utils import get_input_location
 import flag
 import html, os
 from countryinfo import CountryInfo
-from Razerbot import telethn as borg
+from Razerbot import telethn as borg, BOT_USERNAME
 from Razerbot.events import register
 
 
@@ -19,7 +19,7 @@ async def msg(event):
     try:
 	    a = country.info()
     except:
-	    await event.reply("Country Not Avaiable Currently")
+	    await event.reply("ᴄᴏᴜɴᴛʀʏ ɴᴏᴛ ᴀᴠᴀɪᴀʙʟᴇ ᴄᴜʀʀᴇɴᴛʟʏ")
     name = a.get("name")
     bb= a.get("altSpellings")
     hu = ''
@@ -79,29 +79,29 @@ async def msg(event):
 
     wiki = a.get("wiki")
 
-    caption = f"""<b><u>Information Gathered Successfully</b></u>
-<b>
-Country Name:- {name}
-Alternative Spellings:- {hu}
-Country Area:- {area} square kilometers
-Borders:- {borders}
-Calling Codes:- {call}
-Country's Capital:- {capital}
-Country's currency:- {currencies}
-Country's Flag:- {okie}
-Demonym:- {HmM}
-Country Type:- {EsCoBaR}
-ISO Names:- {iso}
-Languages:- {lMAO}
-Native Name:- {nonive}
-population:- {waste}
-Region:- {reg}
-Sub Region:- {sub}
-Time Zones:- {tom}
-Top Level Domain:- {lanester}
-wikipedia:- {wiki}</b>
+    caption = f"""<u>ɪɴꜰᴏʀᴍᴀᴛɪᴏɴ ɢᴀᴛʜᴇʀᴇᴅ sᴜᴄᴄᴇssꜰᴜʟʟʏ:</u>
 
-Gathered By @Razer_PRINCE_BOT.</b>
+ᴄᴏᴜɴᴛʀʏ ɴᴀᴍᴇ: {name}
+ᴀʟᴛᴇʀɴᴀᴛɪᴠᴇ sᴘᴇʟʟɪɴɢs: {hu}
+ᴄᴏᴜɴᴛʀʏ ᴀʀᴇᴀ: {area} square kilometers
+ʙᴏʀᴅᴇʀs: {borders}
+ᴄᴀʟʟɪɴɢ ᴄᴏᴅᴇ: +{call}
+ᴄᴏᴜɴᴛʀʏ's ᴄᴀᴘɪᴛᴀʟ: {capital}
+ᴄᴏᴜɴᴛʀʏ's ᴄᴜʀʀᴇɴᴄʏ: {currencies}
+ᴄᴏᴜɴᴛʀʏ's ꜰʟᴀɢ: {okie}
+ᴅᴇᴍᴏɴʏᴍ: {HmM}
+ᴄᴏᴜɴᴛʀʏ ᴛʏᴘᴇ: {EsCoBaR}
+ɪsᴏ ɴᴀᴍᴇs: {iso}
+ʟᴀɴɢᴜᴀɢᴇs: {lMAO}
+ɴᴀᴛɪᴠᴇ ɴᴀᴍᴇ: {nonive}
+ᴘᴏᴘᴜʟᴀᴛɪᴏɴ: {waste}
+ʀᴇɢɪᴏɴ: {reg}
+sᴜʙ ʀᴇɢɪᴏɴ: {sub}
+ᴛɪᴍᴇ ᴢᴏɴᴇs: {tom}
+ᴛᴏᴘ ʟᴇᴠᴇʟ ᴅᴏᴍᴀɪɴ: {lanester}
+ᴡɪᴋɪᴘᴇᴅɪᴀ: {wiki}
+
+ɢᴀᴛʜᴇʀᴇᴅ ʙʏ @{BOT_USERNAME}.
 """
     
     

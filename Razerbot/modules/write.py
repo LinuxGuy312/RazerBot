@@ -1,6 +1,6 @@
 from pyrogram import filters
 
-from Razerbot import pbot
+from Razerbot import pbot, BOT_NAME, BOT_USERNAME
 
 
 @pbot.on_message(filters.command("write"))
@@ -16,4 +16,4 @@ async def handwriting(_, message):
     hand = "https://apis.xditya.me/write?text=" + name
     await m.edit("Uᴩʟᴏᴀᴅɪɴɢ...")
     await pbot.send_chat_action(message.chat.id, "upload_photo")
-    await message.reply_photo(hand, caption="Wʀɪᴛᴛᴇɴ Wɪᴛʜ 🖊 Bʏ [R Λ Z Ξ R](t.me/Razer312bot)")
+    await message.reply_photo(hand, caption=f"Wʀɪᴛᴛᴇɴ Wɪᴛʜ 🖊 Bʏ [{BOT_NAME}](t.me/{BOT_USERNAME})")
