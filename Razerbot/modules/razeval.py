@@ -15,7 +15,7 @@ async def _(event):
         return event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if not cmd:
-        return await event.reply("What should i execute?..")
+        return await event.reply("What should i execute?")
     razevent = await event.reply("Executing...")
     process = await asyncio.create_subprocess_shell(
         cmd, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
@@ -29,11 +29,7 @@ async def _(event):
         cresult = f"```{curruser}:~#``` ```{cmd}```\n```{result}```"
     else:
         cresult = f"```{curruser}:~$``` ```{cmd}```\n```{result}```"
-    await razevent.edit(
-        text=cresult,
-        aslink=True,
-        linktext=f"**•  Exec : **\n```{cmd}``` \n\n**•  Result : **\n",
-    )
+    await razevent.edit(text=cresult,)
     if EVENT_LOGS:
         await tbot.send_message(EVENT_LOGS, f"#RAZEXEC\nTerminal command {cmd} was executed sucessfully.")
 
@@ -74,13 +70,9 @@ async def _(event):
     else:
         evaluation = "Success"
     final_output = (
-        f"**•  Eval : **\n```{cmd}``` \n\n**•  Result : **\n```{evaluation}``` \n"
+        f"•  Eval : \n```{cmd}``` \n\n•  Result : \n```{evaluation}``` \n"
     )
-    await razevent.edit(
-        text=final_output,
-        aslink=True,
-        linktext=f"**•  Eval : **\n```{cmd}``` \n\n**•  Result : **\n",
-    )
+    await razevent.edit(text=final_output)
     if EVENT_LOGS:
         await tbot.send_message(
             EVENT_LOGS, f"#RAZEVAL\nEval command {cmd} was executed sucessfully."
