@@ -15,6 +15,7 @@ from pyrogram.types import Message
 from pyrogram.errors.exceptions.bad_request_400 import PeerIdInvalid, ChannelInvalid
 from pyrogram.types import Chat, User
 from inspect import getfullargspec
+from Razerbot.modules.quotstuff.quotapi import Quotly
 
 StartTime = time.time()
 
