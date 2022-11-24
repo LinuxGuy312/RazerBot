@@ -11,15 +11,11 @@ from Razerbot.__main__ import DATA_IMPORT
 from Razerbot.modules.helper_funcs.chat_status import user_admin
 from Razerbot.modules.helper_funcs.alternate import typing_action
 
-# from Razerbot.modules.rules import get_rules
 import Razerbot.modules.sql.rules_sql as rulessql
 
-# from Razerbot.modules.sql import warns_sql as warnssql
 import Razerbot.modules.sql.blacklist_sql as blacklistsql
 from Razerbot.modules.sql import disable_sql as disabledsql
 
-# from Razerbot.modules.sql import cust_filters_sql as filtersql
-# import Razerbot.modules.sql.welcome_sql as welcsql
 import Razerbot.modules.sql.locks_sql as locksql
 from Razerbot.modules.connection import connected
 
@@ -31,8 +27,6 @@ def import_data(update, context):
     msg = update.effective_message
     chat = update.effective_chat
     user = update.effective_user
-    # TODO: allow uploading doc with command, not just as reply
-    # only work with a doc
 
     conn = connected(context.bot, update, chat, user.id, need_admin=True)
     if conn:
@@ -233,42 +227,7 @@ def export_data(update, context):
     bl = list(blacklistsql.get_chat_blacklist(chat_id))
     # Disabled command
     disabledcmd = list(disabledsql.get_all_disabled(chat_id))
-    # Filters (TODO)
-    """
-	all_filters = list(filtersql.get_chat_triggers(chat_id))
-	export_filters = {}
-	for filters in all_filters:
-		filt = filtersql.get_filter(chat_id, filters)
-		# print(vars(filt))
-		if filt.is_sticker:
-			tipefilt = "sticker"
-		elif filt.is_document:
-			tipefilt = "doc"
-		elif filt.is_image:
-			tipefilt = "img"
-		elif filt.is_audio:
-			tipefilt = "audio"
-		elif filt.is_voice:
-			tipefilt = "voice"
-		elif filt.is_video:
-			tipefilt = "video"
-		elif filt.has_buttons:
-			tipefilt = "button"
-			buttons = filtersql.get_buttons(chat.id, filt.keyword)
-			print(vars(buttons))
-		elif filt.has_markdown:
-			tipefilt = "text"
-		if tipefilt == "button":
-			content = "{}#=#{}|btn|{}".format(tipefilt, filt.reply, buttons)
-		else:
-			content = "{}#=#{}".format(tipefilt, filt.reply)
-		print(content)
-		export_filters[filters] = content
-	print(export_filters)
-	"""
-    # Welcome (TODO)
-    # welc = welcsql.get_welc_pref(chat_id)
-    # Locked
+
     curr_locks = locksql.get_locks(chat_id)
     curr_restr = locksql.get_restr(chat_id)
 
