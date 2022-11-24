@@ -96,11 +96,6 @@
          "value": "https://telegra.ph/file/c5a49f2efa04dea8a66b2.jpg",
          "required": true
       },
-      "BOT_TUT": {
-         "description": "Enter Your Bot Setup Video Tutorial Telegraph Link Leave As it is If You Dont Have",
-         "value": "",
-         "required": false
-      },
       "MONGO_DB_URI": {
          "description": "Required for database connections.",
          "value": "",
@@ -117,33 +112,13 @@
          "required": true
       },      
       "DEV_USERS": {
-         "description": "ID of users who are Devs of your bot (can use /py etc.). If you are a noob and would come and bother Masha support then keep the current ID's here at they are and add yours.",
+         "description": "ID of users who are Devs of your bot (can use /sh /eval etc.).",
          "value": "",
          "required": true
       },
       "STRICT_GBAN": {
          "description": "Enforce gbans across new groups as well as old groups. When a gbanned user talks, he will be banned.",
          "value": "True"
-      },
-      "DRAGONS": {
-         "description": "A space separated list of user IDs who you want to assign as sudo users.",
-         "value": "",
-         "required": false
-      },
-      "DEMONS": {
-         "description": "A space separated list of user IDs who you wanna assign as support users(gban perms only).",
-         "value": "",
-         "required": false
-      },
-      "TIGERS": {
-         "description": "A space separated list of user IDs who you wanna assign as tiger users.",
-         "value": "",
-         "required": false
-      },
-      "WOLVES": {
-         "description": "A space separated list of user IDs who you want to assign as whitelisted - can't be banned with your bot.",
-         "value": "",
-         "required": false
       },
       "ENV": {
          "description": "Setting this to ANYTHING will enable environment variables. Leave it as it is",

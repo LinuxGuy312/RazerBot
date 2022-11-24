@@ -87,7 +87,7 @@ if ENV:
     BOT_USERNAME = os.environ.get("BOT_USERNAME", "")
     OWNER_USERNAME = os.environ.get("OWNER_USERNAME", "")
     BOT_NAME = os.environ.get("BOT_NAME", "")
-    START_IMG = os.environ.get("START_IMG", "https://telegra.ph/file/8edbffafac3e7f3e8ad10.jpg")
+    START_IMG = os.environ.get("START_IMG", "https://telegra.ph/file/c5a49f2efa04dea8a66b2.jpg")
     BOT_TUT = os.environ.get("BOT_TUT", "https://telegra.ph/file/b5867666921079ba427c4.mp4")
     PORT = int(os.environ.get("PORT", 5000))
     CERT_PATH = os.environ.get("CERT_PATH")
@@ -112,14 +112,11 @@ if ENV:
     CASH_API_KEY = os.environ.get("CASH_API_KEY", None)
     TIME_API_KEY = os.environ.get("TIME_API_KEY", None)
     AI_API_KEY = os.environ.get("AI_API_KEY", None)
-    WALL_API = os.environ.get("WALL_API", None)
     SUPPORT_CHAT = os.environ.get("SUPPORT_CHAT", "Razer312Support")
     SPAMWATCH_SUPPORT_CHAT = os.environ.get("SPAMWATCH_SUPPORT_CHAT", None)
     SPAMWATCH_API = os.environ.get("SPAMWATCH_API", None)
     IBM_WATSON_CRED_URL = os.environ.get("IBM_WATSON_CRED_URL", None)
-    IBM_WATSON_CRED_PASSWORD = os.environ.get("IBM_WATSON_CRED_PASSWORD", None)
-    ARQ_API_URL = "https://arq.hamker.dev"
-    ARQ_API_KEY = "YTDRVD-WKAMWB-GYTPJK-LQUIQU-ARQ"    
+    IBM_WATSON_CRED_PASSWORD = os.environ.get("IBM_WATSON_CRED_PASSWORD", None)   
     ALLOW_CHATS = os.environ.get("ALLOW_CHATS", True)
     SUPPORT_GROUP = SUPPORT_CHAT
     try:
@@ -188,9 +185,6 @@ else:
     ALLOW_EXCL = Config.ALLOW_EXCL
     CASH_API_KEY = Config.CASH_API_KEY
     TIME_API_KEY = Config.TIME_API_KEY
-    ARQ_API_KEY = Config.ARQ_API_KEY
-    AI_API_KEY = Config.AI_API_KEY
-    WALL_API = Config.WALL_API
     SUPPORT_CHAT = Config.SUPPORT_CHAT
     SPAMWATCH_SUPPORT_CHAT = Config.SPAMWATCH_SUPPORT_CHAT
     SPAMWATCH_API = Config.SPAMWATCH_API

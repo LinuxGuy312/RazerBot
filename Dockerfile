@@ -1,6 +1,6 @@
 # We're using Debian Slim Buster image
 FROM python:3.8.5-slim-buster
-USER root
+
 ENV PIP_NO_CACHE_DIR 1
 
 RUN sed -i.bak 's/us-west-2\.ec2\.//' /etc/apt/sources.list
@@ -63,10 +63,6 @@ RUN apt update && apt upgrade -y && \
 
 # Pypi package Repo upgrade
 RUN pip3 install --upgrade pip setuptools
-
-# Copy Python Requirements to /root/Razerbot
-RUN git clone -b shiken https://github.com/teamofdevil-x/tiana /root/Razerbot
-WORKDIR /root/Razerbot
 
 #Copy config file to /root/Razerbot
 COPY ./Razerbot/sample_config.py ./Razerbot/config.py* /root/Razerbot/Razerbot/

@@ -89,8 +89,6 @@ __help__ = """
  ❍ /paste*:* Saves replied content to `nekobin.com` and replies with a url
 *Gps:*
  ❍ /gps <location>*:* Get gps location.
-*Github:* 
- ❍ /github <username>*:* Get information about a GitHub user.
 *Country:*
  ❍ /country <country name>: Gathering info about given country.
 *React:*

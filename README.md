@@ -65,7 +65,7 @@ Read [Docs] for Detailed Description and Setup Guide on deploying Bot.
 
 
 ```console
-$ git clone https://github.com/LinuxGuy312/RazerBot
+$ git clone https://github.com/LinuxGuy312/RazerBot.git
 $ cd RazerBot
 $ pip3 install -U -r requirements.txt
 $ cp sample.env .env
