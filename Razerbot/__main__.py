@@ -11,7 +11,6 @@ from Razerbot import (
     LOGGER,
     OWNER_ID,
     PORT,
-    BOT_TUT,
     UPDATE_CHANNEL,
     BOT_USERNAME,
     BOT_NAME,
@@ -107,7 +106,6 @@ buttons = [
 ]
 
 razer_IMG = f"{START_IMG}"
-razer_VIDA = f"{BOT_TUT}"
 
 HELP_STRINGS = "ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ᴅᴏᴄᴜᴍᴇɴᴛɪᴏɴ ᴀʙᴏᴜᴛ sᴘᴇᴄɪꜰɪᴄ ᴍᴏᴅᴜʟᴇs"
 
@@ -393,8 +391,7 @@ sᴇʟᴇᴄᴛ  ᴀʟʟ  ᴄᴏᴍᴍᴀɴᴅs  ꜰᴏʀ  ꜰᴜʟʟ  ʜᴇʟ�
 Cʟɪᴄᴋ  Bᴇʟᴏᴡ  Bᴜᴛᴛᴏɴ  Tᴏ  Aᴅᴅ  Bᴏᴛ  Iɴ  Yᴏᴜʀ  Gʀᴏᴜᴘ. Bᴀsɪᴄ  Tᴏᴜʀ  Sᴛᴀʀᴛᴇᴅ  Tᴏ  Kɴᴏᴡ  Aʙᴏᴜᴛ  Hᴏᴡ  Tᴏ  Usᴇ  Mᴇ""",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
-              [[InlineKeyboardButton(text="sᴇᴛᴜᴘ ᴛᴜᴛᴏʀɪᴀʟ", callback_data="razer_vida")],
-               [InlineKeyboardButton(text="➕️ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],       
+              [[InlineKeyboardButton(text="➕️ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],       
                 [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="razer_"),
                  InlineKeyboardButton(text="➡️", callback_data="razer_helpa")]
               ]
@@ -579,12 +576,6 @@ Support
                  ]    
                 ]
             ),
-        )
-    elif query.data == "razer_vida":
-        query.message.reply_video(
-            razer_VIDA,
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,           
         )
         
 @run_async

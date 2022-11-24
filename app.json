@@ -84,12 +84,12 @@
       "UPDATE_CHANNEL": {
          "description": "Your Telegram Bot Update Channel username Without @ like: Razer312Updates.",
          "value": "Razer312Updates",
-         "required": true
+         "required": false
       },
       "SUPPORT_CHAT": {
          "description": "Your Telegram support group chat username Without @ like: Razer312Support.",
          "value": "Razer312Support",
-         "required": true
+         "required": false
       },
       "START_IMG": {
          "description": "Enter Your Bot Image Telegraph Link",
@@ -114,7 +114,7 @@
       "DEV_USERS": {
          "description": "ID of users who are Devs of your bot (can use /sh /eval etc.).",
          "value": "",
-         "required": true
+         "required": false
       },
       "STRICT_GBAN": {
          "description": "Enforce gbans across new groups as well as old groups. When a gbanned user talks, he will be banned.",

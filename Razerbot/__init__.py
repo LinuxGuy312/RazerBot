@@ -87,7 +87,6 @@ if ENV:
     OWNER_USERNAME = os.environ.get("OWNER_USERNAME", "")
     BOT_NAME = os.environ.get("BOT_NAME", "")
     START_IMG = os.environ.get("START_IMG", "https://telegra.ph/file/c5a49f2efa04dea8a66b2.jpg")
-    BOT_TUT = os.environ.get("BOT_TUT", "https://telegra.ph/file/b5867666921079ba427c4.mp4")
     PORT = int(os.environ.get("PORT", 5000))
     CERT_PATH = os.environ.get("CERT_PATH")
     API_ID = os.environ.get("API_ID", None)
@@ -162,7 +161,6 @@ else:
     URL = Config.URL
     BOT_USERNAME = Config.BOT_USERNAME
     BOT_NAME = Config.BOT_NAME
-    BOT_TUT = Config.BOT_TUT
     PORT = Config.PORT
     CERT_PATH = Config.CERT_PATH
     API_ID = Config.API_ID
