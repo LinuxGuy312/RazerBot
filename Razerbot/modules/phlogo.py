@@ -10,6 +10,7 @@ except ModuleNotFoundError:
 @register(pattern="^/phlogo ?(.*)")
 async def ph(event):
 	query = event.pattern_match.group(1)
+	await event.message.delete()
 	if query == "":
 		await event.reply("ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ʙʀᴜʜ, ᴇ.ɢ.: `/phlogo Razer Bot`")
 		return
@@ -29,6 +30,7 @@ async def ph(event):
 @register(pattern="^/phst ?(.*)")
 async def ph(event):
 	query = event.pattern_match.group(1)
+	await event.message.delete()
 	if query == "":
 		await event.reply("ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ʙʀᴜʜ, ᴇ.ɢ.: `/phst Razer Bot`")
 		return

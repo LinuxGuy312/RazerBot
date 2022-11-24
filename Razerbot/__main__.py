@@ -96,7 +96,7 @@ buttons = [
         InlineKeyboardButton(text="ɪɴꜰᴏ", callback_data="about_"),
         InlineKeyboardButton(text="ᴏᴡɴᴇʀ", url=f"https://t.me/{OWNER_USERNAME}"),
     ],
-   [
+    [
         InlineKeyboardButton(text="ᴜᴘᴅᴀᴛᴇs", url=f"http://t.me/{UPDATE_CHANNEL}"),
         InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"),
     ],
