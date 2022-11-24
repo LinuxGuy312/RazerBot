@@ -1,3 +1,4 @@
+import time
 from pyrogram import filters
 from pyrogram.types import Message
 
@@ -17,6 +18,7 @@ async def take_ss(_, message: Message):
         url = message.text.split(None, 1)[1]
         m = await message.reply_text("ᴛᴀᴋɪɴɢ sᴄʀᴇᴇɴsʜᴏᴛ..")
         await m.edit("ᴜᴘʟᴏᴀᴅɪɴɢ..")
+        time.sleep(2)
         try:
             await message.reply_photo(
                 photo=f"https://webshot.amanoteam.com/print?q={url}",
