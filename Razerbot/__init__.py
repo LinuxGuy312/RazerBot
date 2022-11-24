@@ -9,7 +9,6 @@ from pyrogram import Client, errors
 from pymongo import MongoClient
 from telethon import TelegramClient
 from telethon.sessions import MemorySession
-from Python_ARQ import ARQ
 from aiohttp import ClientSession
 from pyrogram.types import Message
 from pyrogram.errors.exceptions.bad_request_400 import PeerIdInvalid, ChannelInvalid
@@ -218,7 +217,6 @@ pbot = Client("mashapbot", api_id=API_ID, api_hash=API_HASH, bot_token=TOKEN)
 mongo_client = MongoClient(MONGO_DB_URI)
 db = mongo_client.SaitamaRobot
 dispatcher = updater.dispatcher
-arq = ARQ(ARQ_API_URL, ARQ_API_KEY, aiohttpsession)
 DRAGONS = list(DRAGONS) + list(DEV_USERS)
 DEV_USERS = list(DEV_USERS)
 WOLVES = list(WOLVES)
