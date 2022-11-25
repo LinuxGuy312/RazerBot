@@ -147,7 +147,7 @@ class Quotly:
         if OQAPI:
             url = Quotly._API
         if not bg:
-            bg = "#1b1429"
+            bg = "#000000"
         content = {
             "type": "quote",
             "format": "webp",
