@@ -1,7 +1,7 @@
 from pyrogram import filters
 from pyrogram.types import Message
 
-from Razerbot import pgram as app
+from Razerbot import pbot as app
 from Razerbot.utils.errors import capture_err
 
 __mod_name__ = "WebSS"
