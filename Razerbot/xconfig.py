@@ -13,6 +13,9 @@ class Config(object):
     API_ID = 123456  # integer value, dont use ""
     API_HASH = "API_HASH"
     TOKEN = "BOT_TOKEN"  # This var used to be API_KEY but it is now TOKEN, adjust accordingly.
+    BOT_USERNAME = "BOT_USERNAME"
+    BOT_NAME = ""
+    BOT_ID = ""
     OWNER_ID = Your_Id  # If you dont know, run the bot and do /id in your private chat with it, also an integer
     OWNER_USERNAME = "YourUsername"
     UPDATE_CHANNEL = "<channel-username>" # Your own channel for updates, do not add the @
