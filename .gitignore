@@ -10,7 +10,7 @@ updates.txt
 # Session files
 Razerbot/*.session
 Razerbot/*.session-journal
-Masha.session-journal
+Razer.session-journal
 *.session
 
 # Byte-compiled / optimized / DLL files

@@ -1,6 +1,6 @@
 from typing import Dict, List
 
-from Razerbot import NO_LOAD
+from Razerbot import NO_LOAD, UPDATE_CHANNEL, SUPPORT_CHAT
 from telegram import MAX_MESSAGE_LENGTH, Bot, InlineKeyboardButton, ParseMode
 from telegram.error import TelegramError
 
@@ -74,9 +74,9 @@ def paginate_modules(page_n: int, module_dict: Dict, prefix, chat=None) -> List:
     else:
         pairs += [
                   [
-                    EqInlineKeyboardButton("╰✰ Cʜᴀɴɴᴇʟ", url="t.me/RazerxUpdates"), 
+                    EqInlineKeyboardButton("「 Cʜᴀɴɴᴇʟ 」", url=f"t.me/{UPDATE_CHANNEL}"), 
                     EqInlineKeyboardButton("「 Bᴀᴄᴋ 」", callback_data="Razer_"), 
-                    EqInlineKeyboardButton("Sᴜᴘᴘᴏʀᴛ ✰╮", url="t.me/RazerxSupport")
+                    EqInlineKeyboardButton("「 Sᴜᴘᴘᴏʀᴛ 」", url=f"t.me/{SUPPORT_CHAT}")
                   ]
                  ]
 

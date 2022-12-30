@@ -284,7 +284,7 @@ def export_data(update, context):
         },
     }
     baccinfo = json.dumps(backup, indent=4)
-    with open("MashaRoBot{}.backup".format(chat_id), "w") as f:
+    with open("RazerBot{}.backup".format(chat_id), "w") as f:
         f.write(str(baccinfo))
     context.bot.sendChatAction(current_chat_id, "upload_document")
     tgl = time.strftime("%H:%M:%S - %d/%m/%Y", time.localtime(time.time()))
@@ -300,15 +300,15 @@ def export_data(update, context):
         pass
     context.bot.sendDocument(
         current_chat_id,
-        document=open("MashaRoBot{}.backup".format(chat_id), "rb"),
-        caption="💾*Successfully Exported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`\n\nNote: This `MashaRoBot-Backup` was specially made for notes 📚.".format(
+        document=open("RazerBot{}.backup".format(chat_id), "rb"),
+        caption="💾*Successfully Exported backup:*\nChat: `{}`\nChat ID: `{}`\nOn: `{}`\n\nNote: This `RazerBot-Backup` was specially made for notes 📚.".format(
             chat.title, chat_id, tgl
         ),
         timeout=360,
         reply_to_message_id=msg.message_id,
         parse_mode=ParseMode.MARKDOWN,
     )
-    os.remove("MashaRoBot{}.backup".format(chat_id))  # Cleaning file
+    os.remove("RazerBot{}.backup".format(chat_id))  # Cleaning file
 
 
 # Temporary data
