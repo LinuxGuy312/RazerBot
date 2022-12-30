@@ -54,6 +54,7 @@ class Config(object):
     TIME_API_KEY = None  # Get your API key from https://timezonedb.com/api
     AI_API_KEY = "awoo"  # For chatbot, get one from https://coffeehouse.intellivoid.net/dashboard
     BL_CHATS = []  # List of groups that you want blacklisted.
+    ALLOW_CHATS = []
     SPAMMERS = None
 
 class Production(Config):
