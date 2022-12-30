@@ -15,7 +15,8 @@ class Config(object):
     TOKEN = "BOT_TOKEN"  # This var used to be API_KEY but it is now TOKEN, adjust accordingly.
     OWNER_ID = Your_Id  # If you dont know, run the bot and do /id in your private chat with it, also an integer
     OWNER_USERNAME = "YourUsername"
-    SUPPORT_CHAT = "<your-bot>Support"  # Your own group for support, do not add the @
+    UPDATE_CHANNEL = "<channel-username>" # Your own channel for updates, do not add the @
+    SUPPORT_CHAT = "<support-chat-username>"  # Your own group for support, do not add the @
     JOIN_LOGGER = (-10012345678)  # A new channel ID To log who started the bot. Starting with "-100", Put inside braces
     EVENT_LOGS = (-10012345678)  # Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit
 
