@@ -21,6 +21,7 @@ class Config(object):
     EVENT_LOGS = (-10012345678)  # Prints information like gbans, sudo promotes, AI enabled disable states that may help in debugging and shit
 
     # RECOMMENDED
+    MONGO_DB_URI = "" 
     SQLALCHEMY_DATABASE_URI = ""  # needed for any database module
     LOAD = []
     NO_LOAD = ["rss", "cleaner", "connection", "math"]
