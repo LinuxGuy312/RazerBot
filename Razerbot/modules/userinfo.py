@@ -345,7 +345,7 @@ def info(update: Update, context: CallbackContext):
             _file.download(f"{user.id}.png")
 
             message.reply_photo(
-                document=open(f"{user.id}.png", "rb"),
+                photo=open(f"{user.id}.png", "rb"),
                 caption=(text),
                 reply_markup=InlineKeyboardMarkup(
                     [
