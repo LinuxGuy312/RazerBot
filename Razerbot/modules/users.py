@@ -157,12 +157,10 @@ def chat_checker(update: Update, context: CallbackContext):
 
 
 def __user_info__(user_id):
-    if user_id in [777000, 1087968824]:
-        return """╘══「 Groups count: <code>???</code> 」"""
     if user_id == dispatcher.bot.id:
-        return """╘══「 Groups count: <code>???</code> 」"""
+        return """⋗ ɢʀᴏᴜᴘs ᴄᴏᴜɴᴛ: <code>???</code>"""
     num_chats = sql.get_user_num_chats(user_id)
-    return f"""╘══「 Groups count: <code>{num_chats}</code> 」"""
+    return f"""⋗ ɢʀᴏᴜᴘs ᴄᴏᴜɴᴛ: <code>{num_chats}</code>"""
 
 
 def __stats__():

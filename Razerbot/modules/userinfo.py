@@ -255,7 +255,7 @@ def info(update: Update, context: CallbackContext):
     rep = message.reply_text("ɢᴇᴛᴛɪɴɢ ɪɴꜰᴏ...")
 
     text = (
-        f"⩘<b>Usᴇʀ Iɴꜰᴏ</b>⩗\n"
+        f"⩘ <b>Usᴇʀ Iɴꜰᴏ</b> ⩗\n"
         f"⋗ ᴜsᴇʀ ɪᴅ: <code>{user.id}</code>\n"
         f"⋗ ꜰɪʀsᴛ ɴᴀᴍᴇ: {html.escape(user.first_name)}"
     )
@@ -326,7 +326,7 @@ def info(update: Update, context: CallbackContext):
             result = result.json()["result"]
             if "custom_title" in result.keys():
                 custom_title = result["custom_title"]
-                text += f"\n\nᴛɪᴛʟᴇ:\n<b>{custom_title}</b>"
+                text += f"\n\n<b>⋗ ᴛɪᴛʟᴇ:</b> <code>{custom_title}</code>"
     except BadRequest:
         pass
 
