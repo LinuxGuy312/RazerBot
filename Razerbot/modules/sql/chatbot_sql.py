@@ -2,8 +2,6 @@ import threading
 
 from sqlalchemy import Column, String
 
-from Razerbot import BOT_NAME
-
 from Razerbot.modules.sql import BASE, SESSION
 
 

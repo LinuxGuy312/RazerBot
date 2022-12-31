@@ -24,7 +24,7 @@ from telegram.ext import (
 from telegram.utils.helpers import mention_html
 
 import Razerbot.modules.sql.chatbot_sql as sql
-from Razerbot import dispatcher
+from Razerbot import dispatcher, BOT_NAME
 from Razerbot.modules.helper_funcs.chat_status import user_admin, user_admin_no_reply
 from Razerbot.modules.helper_funcs.filters import CustomFilters
 from Razerbot.modules.log_channel import gloggable
