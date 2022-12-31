@@ -52,8 +52,12 @@ class Config(object):
     STRICT_GBAN = True
     WORKERS = (8)  # Number of subthreads to use. Set as number of threads your processor uses
     BAN_STICKER = ""  # banhammer marie sticker id, the bot will send this sticker before banning or kicking a user in chat.
+    START_IMG = "https://graph.org/file/644fddccf30ac191fc895.jpg"
+    OPENWEATHERMAP_ID = None
     ALLOW_EXCL = True  # Allow ! commands as well as / (Leave this to true so that blacklist can work)
     CASH_API_KEY = (None)  # Get your API key from https://www.alphavantage.co/support/#api-key
+    IBM_WATSON_CRED_URL = None
+    IBM_WATSON_CRED_PASSWORD = None
     TIME_API_KEY = None  # Get your API key from https://timezonedb.com/api
     AI_API_KEY = "awoo"  # For chatbot, get one from https://coffeehouse.intellivoid.net/dashboard
     BL_CHATS = []  # List of groups that you want blacklisted.

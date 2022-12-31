@@ -34,24 +34,24 @@ tr = Translator()
 
 @user_admin_no_reply
 @gloggable
-def merissarm(update: Update, context: CallbackContext) -> str:
+def razerrm(update: Update, context: CallbackContext) -> str:
     query: Optional[CallbackQuery] = update.callback_query
     user: Optional[User] = update.effective_user
     match = re.match(r"rm_chat\((.+?)\)", query.data)
     if match:
         user_id = match.group(1)
         chat: Optional[Chat] = update.effective_chat
-        is_merissa = sql.rem_merissa(chat.id)
-        if is_merissa:
-            is_merissa = sql.rem_merissa(user_id)
+        is_razer = sql.rem_razer(chat.id)
+        if is_razer:
+            is_razer = sql.rem_razer(user_id)
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
-                f"Merissa Chatbot Disable\n"
+                f"Razer Chatbot Disable\n"
                 f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
             )
         else:
             update.effective_message.edit_text(
-                "Merissa Chatbot disable by {}.".format(
+                "Razer Chatbot disable by {}.".format(
                     mention_html(user.id, user.first_name)
                 ),
                 parse_mode=ParseMode.HTML,
@@ -62,24 +62,24 @@ def merissarm(update: Update, context: CallbackContext) -> str:
 
 @user_admin_no_reply
 @gloggable
-def merissaadd(update: Update, context: CallbackContext) -> str:
+def razeradd(update: Update, context: CallbackContext) -> str:
     query: Optional[CallbackQuery] = update.callback_query
     user: Optional[User] = update.effective_user
     match = re.match(r"add_chat\((.+?)\)", query.data)
     if match:
         user_id = match.group(1)
         chat: Optional[Chat] = update.effective_chat
-        is_merissa = sql.set_merissa(chat.id)
-        if is_merissa:
-            is_merissa = sql.set_merissa(user_id)
+        is_razer = sql.set_razer(chat.id)
+        if is_razer:
+            is_razer = sql.set_razer(user_id)
             return (
                 f"<b>{html.escape(chat.title)}:</b>\n"
-                f"Merissa Chatbot Enable\n"
+                f"Razer Chatbot Enable\n"
                 f"<b>Admin:</b> {mention_html(user.id, html.escape(user.first_name))}\n"
             )
         else:
             update.effective_message.edit_text(
-                "Merissa Chatbot enable by {}.".format(
+                "Razer Chatbot enable by {}.".format(
                     mention_html(user.id, user.first_name)
                 ),
                 parse_mode=ParseMode.HTML,
@@ -90,10 +90,10 @@ def merissaadd(update: Update, context: CallbackContext) -> str:
 
 @user_admin
 @gloggable
-def merissa(update: Update, context: CallbackContext):
+def razer(update: Update, context: CallbackContext):
     update.effective_user
     message = update.effective_message
-    msg = """**Welcome To Control Panal Of Merissa ChatBot**
+    msg = """**Welcome To Control Panal Of Razer ChatBot**
 
 **Here You Will Find Two Buttons Select AnyOne Of Them**"""
     keyboard = InlineKeyboardMarkup(
@@ -111,9 +111,9 @@ def merissa(update: Update, context: CallbackContext):
     )
 
 
-def merissa_message(context: CallbackContext, message):
+def razer_message(context: CallbackContext, message):
     reply_message = message.reply_to_message
-    if message.text.lower() == "merissa":
+    if message.text.lower() == "razer":
         return True
     if reply_message:
         if reply_message.from_user.id == context.bot.get_me().id:
@@ -126,37 +126,31 @@ def chatbot(update: Update, context: CallbackContext):
     message = update.effective_message
     chat_id = update.effective_chat.id
     bot = context.bot
-    is_merissa = sql.is_merissa(chat_id)
-    if not is_merissa:
+    is_razer = sql.is_razer(chat_id)
+    if not is_razer:
         return
 
     if message.text and not message.document:
-        if not merissa_message(context, message):
+        if not razer_message(context, message):
             return
         bot.send_chat_action(chat_id, action="typing")
-        lang = tr.translate(message.text).src
-        trtoen = (
-            message.text if lang == "en" else tr.translate(message.text, dest="en").text
-        ).replace(" ", "%20")
-        text = trtoen.replace(" ", "%20") if len(message.text) < 2 else trtoen
-        Merissa = requests.get(
-            f"https://merissachatbot.tk/api/apikey=5541274045-MERISSArC8rNQ0SK9/Merissa/Prince/message={text}"
-        ).json()
-        merissa = Merissa["reply"]
-        msg = tr.translate(merissa, src="en", dest="hi")
-        message.reply_text(msg.text)
+        url = f"https://kora-api.vercel.app/chatbot/2d94e37d-937f-4d28-9196-bd5552cac68b/{BOT_NAME}/Razer/message={message.text}"
+        request = requests.get(url)
+        results = json.loads(request.text)
+        sleep(0.5)
+        message.reply_text(results["reply"])
 
 
 def list_all_chats(update: Update, context: CallbackContext):
-    chats = sql.get_all_merissa_chats()
-    text = "<b>Merissa-Enabled Chats</b>\n"
+    chats = sql.get_all_razer_chats()
+    text = "<b>Razer-Enabled Chats</b>\n"
     for chat in chats:
         try:
             x = context.bot.get_chat(int(*chat))
             name = x.title or x.first_name
             text += f"• <code>{name}</code>\n"
         except (BadRequest, Unauthorized):
-            sql.rem_merissa(*chat)
+            sql.rem_razer(*chat)
         except RetryAfter as e:
             sleep(e.retry_after)
     update.effective_message.reply_text(text, parse_mode="HTML")
@@ -164,17 +158,17 @@ def list_all_chats(update: Update, context: CallbackContext):
 
 __mod_name__ = "Chatbot 🤖"
 __help__ = """
-Merissa AI ChatBot is the only ai system which can detect & reply upto 200 language's
+Razer AI ChatBot is the only ai system which can detect & reply upto 200 language's
 
-❂ `/token` : To get your Merissa Chatbot Token.
+❂ `/token` : To get your Razer Chatbot Token.
 ❂ `/chatbot`: To On Or Off ChatBot In Your Chat.
 
-*Reports bugs at*: @MerissaxSupport
-*Powered by* @MerissaRobot"""
+*Reports bugs at*: @Razer312Support
+*Powered by* @Razer312bot"""
 
-CHATBOTK_HANDLER = CommandHandler("chatbot", merissa)
-ADD_CHAT_HANDLER = CallbackQueryHandler(merissaadd, pattern=r"add_chat")
-RM_CHAT_HANDLER = CallbackQueryHandler(merissarm, pattern=r"rm_chat")
+CHATBOTK_HANDLER = CommandHandler("chatbot", razer)
+ADD_CHAT_HANDLER = CallbackQueryHandler(razeradd, pattern=r"add_chat")
+RM_CHAT_HANDLER = CallbackQueryHandler(razerrm, pattern=r"rm_chat")
 CHATBOT_HANDLER = MessageHandler(
     Filters.text
     & (~Filters.regex(r"^#[^\s]+") & ~Filters.regex(r"^!") & ~Filters.regex(r"^\/")),
