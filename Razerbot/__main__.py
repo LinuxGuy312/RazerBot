@@ -89,7 +89,7 @@ Hᴇʟʟᴏ {} ![ ]({})
 
 buttons = [
     [
-        InlineKeyboardButton(text="ᴄᴏᴍᴍᴀɴᴅ ʜᴇʟᴘ", callback_data="razer_"),
+        InlineKeyboardButton(text="ᴄᴏᴍᴍᴀɴᴅ ʜᴇʟᴘ", callback_data="razer_comm_"),
     ],
     [
         InlineKeyboardButton(text="ɪɴꜰᴏ", callback_data="about_"),
@@ -351,7 +351,7 @@ def help_button(update, context):
 @run_async
 def razer_callback_handler(update, context):
     query = update.callback_query
-    if query.data == "razer_":
+    if query.data == "razer_comm_":
         query.message.edit_text(
             text="""𝖜𝖊𝖑𝖈𝖔𝖒𝖊 𝖙𝖔 𝖍𝖊𝖑𝖕 𝖒𝖊𝖓𝖚. 
 ────────────────────────
@@ -363,13 +363,13 @@ sᴇʟᴇᴄᴛ  ᴀʟʟ  ᴄᴏᴍᴍᴀɴᴅs  ꜰᴏʀ  ꜰᴜʟʟ  ʜᴇʟ�
                     [
                      InlineKeyboardButton(text="➕ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ➕", callback_data="help_back"),
                     ],                           
-                    [InlineKeyboardButton(text="ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ", callback_data="razer_help")],
-                    [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="razer_back"),
+                    [InlineKeyboardButton(text="ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ", callback_data="razer_help_")],
+                    [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="razer_back_"),
                      InlineKeyboardButton(text="ɪɴʟɪɴᴇ", switch_inline_query_current_chat="")],
                 ]
             ),
         )
-    elif query.data == "razer_back":
+    elif query.data == "razer_back_":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
@@ -384,7 +384,7 @@ sᴇʟᴇᴄᴛ  ᴀʟʟ  ᴄᴏᴍᴍᴀɴᴅs  ꜰᴏʀ  ꜰᴜʟʟ  ʜᴇʟ�
                 timeout=60,
                 disable_web_page_preview=False,
         )
-    elif query.data == "razer_help":
+    elif query.data == "razer_help_":
         query.message.edit_text(
             text=f"""Nᴇᴡ  Tᴏ  {BOT_NAME}!  Hᴇʀᴇ  Is  Tʜᴇ  Qᴜɪᴄᴋ  Sᴛᴀʀᴛ  Gᴜɪᴅᴇ  Wʜɪᴄʜ  Wɪʟʟ  Hᴇʟᴘ  Yᴏᴜ  Tᴏ  Uɴᴅᴇʀsᴛᴀɴᴅ  Wʜᴀᴛ  Is  {BOT_NAME}  Aɴᴅ  Hᴏᴡ  Tᴏ  Usᴇ  Iᴛ.
 
@@ -393,11 +393,11 @@ Cʟɪᴄᴋ  Bᴇʟᴏᴡ  Bᴜᴛᴛᴏɴ  Tᴏ  Aᴅᴅ  Bᴏᴛ  Iɴ  Yᴏᴜ
             reply_markup=InlineKeyboardMarkup(
               [[InlineKeyboardButton(text="➕️ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],       
                 [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="razer_"),
-                 InlineKeyboardButton(text="➡️", callback_data="razer_helpa")]
+                 InlineKeyboardButton(text="➡️", callback_data="razer_help_a")]
               ]
             ),
         )
-    elif query.data == "razer_helpa":
+    elif query.data == "razer_help_a":
         query.message.edit_text(
             text=f"""<b>Hᴇʏ,  Wᴇʟᴄᴏᴍᴇ  Tᴏ  Cᴏɴғɪɢᴜʀᴀᴛɪᴏɴ  Tᴜᴛᴏʀɪᴀʟ
 
@@ -407,12 +407,12 @@ Bᴇғᴏʀᴇ  Wᴇ  Gᴏ,  I  Nᴇᴇᴅ  Aᴅᴍɪɴ  Pᴇʀᴍɪssɪᴏɴs  
 3). Gɪᴠɪɴɢ  Fᴜʟʟ  Pᴇʀᴍɪssɪᴏɴs  Mᴀᴋᴇ  RΛZΞR  Fᴜʟʟʏ  Usᴇғᴜʟ</b>""",
             parse_mode=ParseMode.HTML,
             reply_markup=InlineKeyboardMarkup(
-              [[InlineKeyboardButton(text="⬅️", callback_data="razer_help"),
-                InlineKeyboardButton(text="➡️", callback_data="razer_helpb")],               
+              [[InlineKeyboardButton(text="⬅️", callback_data="razer_help_"),
+                InlineKeyboardButton(text="➡️", callback_data="razer_help_b")],               
               ]
             ),
         )
-    elif query.data == "razer_helpb":
+    elif query.data == "razer_help_b":
         query.message.edit_text(
             text="""Cᴏɴɢʀᴀɢᴜʟᴀᴛɪᴏɴs,  Tʜɪꜱ  Bᴏᴛ  Nᴏᴡ  Rᴇᴀᴅʏ  Tᴏ  Mᴀɴᴀɢᴇ  Yᴏᴜʀ  Gʀᴏᴜᴘ
 
@@ -431,12 +431,12 @@ Rᴇғᴇʀ  Hᴇʟᴘ  Mᴇɴᴜ  Tᴏ  Sᴇᴇ  Eᴠᴇʀʏᴛʜɪɴɢ  Iɴ  D
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
               [
-                [InlineKeyboardButton(text="⬅️", callback_data="razer_helpa"),
-                 InlineKeyboardButton(text="➡️", callback_data="razer_helpc")]
+                [InlineKeyboardButton(text="⬅️", callback_data="razer_help_a"),
+                 InlineKeyboardButton(text="➡️", callback_data="razer_help_c")]
                 ]
             ),
         )
-    elif query.data == "razer_helpc":
+    elif query.data == "razer_help_c":
         query.message.edit_text(
             text="""× Fɪʟᴛᴇʀs
 ғɪʟᴛᴇʀs  ᴄᴀɴ  ʙᴇ  ᴜsᴇᴅ  ᴀs  ᴀᴜᴛᴏᴍᴀᴛᴇᴅ  ʀᴇᴘʟɪᴇs/ʙᴀɴ/ᴅᴇʟᴇᴛᴇ  ᴡʜᴇɴ  sᴏᴍᴇᴏɴᴇ  ᴜsᴇ  ᴀ  ᴡᴏʀᴅ  ᴏʀ  sᴇɴᴛᴇɴᴄᴇ
@@ -452,12 +452,12 @@ Sᴇɴᴅ  /chatbot  Oɴ  Aɴᴅ  Rᴇᴘʟʏ  Tᴏ  Aɴʏ  Oғ  Mʏ  Mᴇssᴀ�
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
               [
-                [InlineKeyboardButton(text="⬅️", callback_data="razer_helpb"),
-                 InlineKeyboardButton(text="➡️", callback_data="razer_helpd")]
+                [InlineKeyboardButton(text="⬅️", callback_data="razer_help_b"),
+                 InlineKeyboardButton(text="➡️", callback_data="razer_help_d")]
                 ]
             ),
         )
-    elif query.data == "razer_helpd":
+    elif query.data == "razer_help_d":
         query.message.edit_text(
             text="""× Sᴇᴛᴛɪɴɢ  Uᴘ  Nᴏᴛᴇs
 ʏᴏᴜ  ᴄᴀɴ  sᴀᴠᴇ  ᴍᴇssᴀɢᴇ/ᴍᴇᴅɪᴀ/ᴀᴜᴅɪᴏ  ᴏʀ  ᴀɴʏᴛʜɪɴɢ  ᴀs  ɴᴏᴛᴇs ᴜsɪɴɢ /notes
@@ -472,12 +472,12 @@ Nᴏᴛᴇ-  ɴɪɢʜᴛ  ᴍᴏᴅᴇ  ᴄʜᴀᴛs  ɢᴇᴛ  ᴀᴜᴛᴏᴍ�
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
               [
-                [InlineKeyboardButton(text="⬅️", callback_data="razer_helpc"),
-                 InlineKeyboardButton(text="➡️", callback_data="razer_helpe")]
+                [InlineKeyboardButton(text="⬅️", callback_data="razer_help_c"),
+                 InlineKeyboardButton(text="➡️", callback_data="razer_help_e")]
                 ]
             ),
         )
-    elif query.data == "razer_term":
+    elif query.data == "razer_terms_":
         query.message.edit_text(
             text=f"""✗ Terms and Conditions:
 
@@ -497,7 +497,7 @@ NOTE: Terms and Conditions might change anytime""",
               [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_")]]
             ),
         )
-    elif query.data == "razer_helpe":
+    elif query.data == "razer_help_e":
         query.message.edit_text(
             text="""× Sᴏ  Nᴏᴡ  Yᴏᴜ  Aʀᴇ  Aᴛ  Tʜᴇ  Eɴᴅ  Oғ  Bᴀsɪᴄ  Tᴏᴜʀ.  Bᴜᴛ  Tʜɪs  Is  Nᴏᴛ  Aʟʟ  I  Cᴀɴ  Dᴏ.
 
@@ -513,11 +513,11 @@ Aɢᴀɪɴ  Tʜᴀɴᴋs  Fᴏʀ  Usɪɴɢ  Mᴇ
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton(text="➕ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ➕", callback_data="help_back")],
-                [InlineKeyboardButton(text="⬅️", callback_data="razer_helpd"),
+                [InlineKeyboardButton(text="⬅️", callback_data="razer_help_d"),
                 InlineKeyboardButton(text="ᴍᴀɪɴ ᴍᴇɴᴜ", callback_data="razer_")]]
             ),
         )
-    elif query.data == "razer_about":
+    elif query.data == "razer_about_":
         query.message.edit_text(
             text=f"""{BOT_NAME} it's online since January 2022 and it's constantly updated!
             
@@ -533,16 +533,14 @@ Support
             
 • [Click here](https://t.me/{SUPPORT_CHAT}) to consult the updated list of Official Supporters of the bot.
             
-• Thanks to all our donors for supporting server and development expenses and all those who have reported bugs or suggested new features.
-            
-• We also thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!""",
+• We thank all the groups who rely on our Bot for this service, we hope you will always like it: we are constantly working to improve it!""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_")]]
             ),
         )
-    elif query.data == "razer_support":
+    elif query.data == "razer_support_":
         query.message.edit_text(
             text=f"{BOT_NAME} Support Chats",
             parse_mode=ParseMode.MARKDOWN,
@@ -562,7 +560,7 @@ Support
                 ]
             ),
         )
-    elif query.data == "razer_source":
+    elif query.data == "razer_source_":
         query.message.edit_text(
             text="""ʀᴀᴢᴇʀʙᴏᴛ ɪs ᴀɴ ᴏᴘᴇɴ sᴏᴜʀᴄᴇ ʙᴏᴛ ᴘʀᴏᴊᴇᴄᴛ.
 
@@ -589,23 +587,23 @@ def razer_about_callback(update: Update, context: CallbackContext):
             reply_markup=InlineKeyboardMarkup(
                [
                  [
-                     InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="razer_about"),
-                     InlineKeyboardButton(text="sᴏᴜʀᴄᴇ", callback_data="razer_source"),
+                     InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="razer_about_"),
+                     InlineKeyboardButton(text="sᴏᴜʀᴄᴇ", callback_data="razer_source_"),
                  ],
                  [  
-                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="razer_support"),
+                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="razer_support_"),
                     InlineKeyboardButton(text="ᴏᴡɴᴇʀ", url=f"t.me/{OWNER_USERNAME}"),
                  ],
                  [
-                     InlineKeyboardButton(text="ᴛᴇʀᴍs & ᴄᴏɴᴅɪᴛɪᴏɴs❗️", callback_data="razer_term"),
+                     InlineKeyboardButton(text="ᴛᴇʀᴍs & ᴄᴏɴᴅɪᴛɪᴏɴs❗️", callback_data="razer_terms_"),
                  ],
                  [
-                     InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_back"),
+                     InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_back_"),
                  ]    
                ]
             ),
         )
-    elif query.data == "about_back":
+    elif query.data == "about_back_":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
@@ -861,7 +859,7 @@ def main():
 
     if SUPPORT_CHAT is not None and isinstance(SUPPORT_CHAT, str):
         try:
-            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", "R Λ Z Ξ R ᴜᴘᴅᴀᴛᴇᴅ sᴜᴄᴄᴇssꜰᴜʟʟʏ✅")
+            dispatcher.bot.sendMessage(f"@{SUPPORT_CHAT}", f"{BOT_NAME} ᴜᴘᴅᴀᴛᴇᴅ sᴜᴄᴄᴇssꜰᴜʟʟʏ✅")
         except Unauthorized:
             LOGGER.warning(
                 "Bot isnt able to send message to support_chat, go and check!"
