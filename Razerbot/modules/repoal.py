@@ -31,3 +31,33 @@ async def repo(_, message):
             ]
         )
     )
+
+
+@pbot.on_message(filters.command("alive"))
+async def repo(_, message):
+    ALIVE_PIC = "https://graph.org/file/36c17c0f22aeea9c99895.jpg"
+    ALIVE_TEXT = f"""
+Hᴇʟʟᴏ {message.sender.first_name}!
+───────────────────────
+× I'ᴍ {BOT_NAME}, A Pᴏᴡᴇʀꜰᴜʟ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ.
+× I'ᴍ Aʟɪᴠᴇ ᴀɴᴅ Wᴏʀᴋɪɴɢ Hᴀʀᴅ!!
+───────────────────────
+× Oᴡɴᴇʀ : @{OWNER_USERNAME}
+× Pʏᴛʜᴏɴ Vᴇʀsɪᴏɴ : `{y()}`
+× Lɪʙʀᴀʀʏ Vᴇʀsɪᴏɴ : `{o}`
+× Tᴇʟᴇᴛʜᴏɴ Vᴇʀsɪᴏɴ : `{s}`
+× Pʏʀᴏɢʀᴀᴍ Vᴇʀsɪᴏɴ : `{z}`
+───────────────────────"""
+
+    await message.reply_photo(
+        photo=ALIVE_PIC,
+        caption=ALIVE_TEXT,
+        reply_markup=InlineKeyboardMarkup(
+            [
+                [
+                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"), 
+                    InlineKeyboardButton(text="ᴏᴡɴᴇʀ", url=f"https://t.me/{OWNER_USERNAME}")
+                ]
+            ]
+        )
+    )
