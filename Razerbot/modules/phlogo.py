@@ -1,13 +1,13 @@
 import os
 from Razerbot import telethn as tbot
-from Razerbot.events import register
+from telethon import events
 try:
 	from phlogo import generate
 except ModuleNotFoundError:
 	os.system("pip install phlogo")
 	from phlogo import generate
 
-@register(pattern="^/phlogo ?(.*)")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]phlogo ?(.*)"))
 async def ph(event):
 	query = event.pattern_match.group(1)
 	await event.message.delete()
@@ -27,7 +27,7 @@ async def ph(event):
 	os.remove(pic)
 
 
-@register(pattern="^/phst ?(.*)")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]phst ?(.*)"))
 async def ph(event):
 	query = event.pattern_match.group(1)
 	await event.message.delete()

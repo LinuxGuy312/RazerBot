@@ -42,7 +42,7 @@ async def eor(msg: Message, **kwargs):
     return await func(**{k: v for k, v in kwargs.items() if k in spec})
 
 
-@app.on_message(filters.command(["webss", "ss", "webshot"]))
+@app.on_message(filters.command(["webss", "ss", "webshot"], prefixes=["/", ".", "!"]))
 async def take_ss(_, message: Message):
     if len(message.command) < 2:
         return await eor(message, text="ɢɪᴠᴇ ᴀ ᴜʀʟ ᴛᴏ ғᴇᴛᴄʜ sᴄʀᴇᴇɴsʜᴏᴛ.")

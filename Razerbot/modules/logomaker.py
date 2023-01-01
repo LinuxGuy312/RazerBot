@@ -10,9 +10,8 @@ import time
 from io import BytesIO
 from requests import get
 from telethon.tl.types import InputMessagesFilterPhotos
-
+from telethon import events
 from Razerbot import OWNER_ID
-from Razerbot.events import register
 from Razerbot import telethn
 from PIL import Image, ImageDraw, ImageFont
 from Razerbot import SUPPORT_GROUP, BOT_NAME, BOT_USERNAME
@@ -248,7 +247,7 @@ LOGO_LINKS            = ["https://telegra.ph/file/d1838efdafce9fe611d0c.jpg",
                          "https://telegra.ph/file/9849b3940f063b065f4e3.jpg"
                          ]
 
-@register(pattern="^/logo ?(.*)")
+@telethn.on(events.NewMessage(incoming=True, pattern="^[!/.]logo ?(.*)"))
 async def lego(event):
  quew = event.pattern_match.group(1)
  if event.sender_id != OWNER_ID and not quew:

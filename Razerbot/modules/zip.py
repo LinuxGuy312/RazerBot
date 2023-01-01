@@ -2,12 +2,11 @@ import os
 import time
 import zipfile
 
-from telethon import types
+from telethon import types, events
 from telethon.tl import functions
 
 from Razerbot import TEMP_DOWNLOAD_DIRECTORY
 from Razerbot import telethn as client
-from Razerbot.events import register
 
 
 async def is_register_admin(chat, user):
@@ -32,7 +31,7 @@ async def is_register_admin(chat, user):
     return None
 
 
-@register(pattern="^/zip")
+@client.on(events.NewMessage(incoming=True, pattern="^[!/.]zip"))
 async def _(event):
     if event.fwd_from:
         return
@@ -114,7 +113,7 @@ async def is_register_admin(chat, user):
     return None
 
 
-@register(pattern="^/unzip")
+@client.on(events.NewMessage(incoming=True, pattern="^[!/.]unzip"))
 async def _(event):
     if event.fwd_from:
         return

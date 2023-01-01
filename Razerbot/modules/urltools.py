@@ -1,9 +1,9 @@
 import requests
 from validators.url import url
 from Razerbot import telethn as tbot
-from Razerbot.events import register
+from telethon import events
 
-@register(pattern="^/dns(?:\s|$)([\s\S]*)")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]dns(?:\s|$)([\s\S]*)"))
 async def _(event):
     #To get Domain Name System(dns) of the given link.
     input_str = "".join(event.text.split(maxsplit=1)[1:])
@@ -25,7 +25,7 @@ async def _(event):
         await event.reply(f"__ɪ ᴄᴀɴ'ᴛ sᴇᴇᴍ ᴛᴏ ꜰɪɴᴅ `{input_str}` ᴏɴ ᴛʜᴇ ɪɴᴛᴇʀɴᴇᴛ__")
 
 
-@register(pattern="^/short(?:\s|$)([\s\S]*)")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]short(?:\s|$)([\s\S]*)"))
 async def _(event):
     #shortens the given link
     input_str = "".join(event.text.split(maxsplit=1)[1:])
@@ -49,7 +49,7 @@ async def _(event):
         await event.reply("sᴏᴍᴇᴛʜɪɴɢ ɪs ᴡʀᴏɴɢ, ᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ʟᴀᴛᴇʀ.")
 
 
-@register(pattern="^/unshort(?:\s|$)([\s\S]*)")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]unshort(?:\s|$)([\s\S]*)"))
 async def _(event):
     #To unshort the given dagb shorten url.
     input_str = "".join(event.text.split(maxsplit=1)[1:])
@@ -73,7 +73,7 @@ async def _(event):
         await event.reply(f"ɪɴᴘᴜᴛ ᴜʀʟ {input_str} ʀᴇᴛᴜʀɴᴇᴅ sᴛᴀᴛᴜs_ᴄᴏᴅᴇ {r.status_code}")
 
 
-@register(pattern="^/hl(?:\s|$)([\s\S]*)")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]hl(?:\s|$)([\s\S]*)"))
 async def _(event):
     #To hide the url with white spaces using hyperlink.
     input_str = "".join(event.text.split(maxsplit=1)[1:])

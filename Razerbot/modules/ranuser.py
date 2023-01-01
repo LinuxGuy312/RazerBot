@@ -2,10 +2,10 @@ import requests
 import os
 import json
 from datetime import date
-from Razerbot import telethn
-from Razerbot.events import register
+from Razerbot import telethn as tbot
+from telethon import events
 
-@register(pattern="^[/!.]ranuser")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]ranuser"))
 async def gen(event):
 	bhurr = await event.edit("ɢᴇɴᴇʀᴀᴛɪɴɢ ɪɴꜰᴏ...")
 	yr = date.today().year
@@ -41,4 +41,4 @@ async def gen(event):
 	dob = f"{dyr}{dfm}"
 	capt = f"**ɴᴀᴍᴇ:** {name}\n**ᴅᴏʙ:** {dob}\n**sᴛʀᴇᴇᴛ:** {street}\n**ᴄɪᴛʏ:** {city}\n**sᴛᴀᴛᴇ:** {state}\n**ᴄᴏᴜɴᴛʀʏ:** {country}\n**ᴘᴏsᴛᴀʟ ᴄᴏᴅᴇ:** {pscd}\n**ᴇᴍᴀɪʟ:** {email}\n**ᴘʜᴏɴᴇ:** {cell}\n\n**ᴄᴄ ɪɴꜰᴏ:**\n    **ᴄᴄ ɴᴜᴍʙᴇʀ:** {ccnum}\n    **ᴇxᴘɪʀʏ:** {ccexp}\n    **ᴄᴠᴠ:** {cvv}"
 	await bhurr.delete()
-	await telethn.send_file(event.chat_id, poto, caption=capt, reply_to=event.reply_to_msg_id, force_document=False)
+	await tbot.send_file(event.chat_id, poto, caption=capt, reply_to=event.reply_to_msg_id, force_document=False)

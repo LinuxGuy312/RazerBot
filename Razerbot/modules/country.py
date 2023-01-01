@@ -6,10 +6,10 @@ import flag
 import html, os
 from countryinfo import CountryInfo
 from Razerbot import telethn as borg, BOT_USERNAME
-from Razerbot.events import register
+from telethon import events
 
 
-@register(pattern="^/country (.*)")
+@borg.on(events.NewMessage(incoming=True, pattern="^[!/.]country (.*)"))
 async def msg(event):
     if event.fwd_from:
         return

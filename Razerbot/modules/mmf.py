@@ -1,11 +1,11 @@
 import textwrap
 import os
 from PIL import Image, ImageFont, ImageDraw
-from Razerbot.events import register
+from telethon import events
 from Razerbot import LOGGER, TEMP_DOWNLOAD_DIRECTORY, telethn as bot
 
 
-@register(pattern="^/mmf ?(.*)")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]mmf ?(.*)"))
 async def handler(event):
     if event.fwd_from:
         return

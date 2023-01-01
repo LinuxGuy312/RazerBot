@@ -20,7 +20,7 @@ async def is_register_admin(chat, user):
         return True
 
 
-@register(pattern="^/json$")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]json$"))
 async def _(event):
     if event.fwd_from:
         return

@@ -23,14 +23,12 @@ from telethon.tl.types import *
 
 from Razerbot import *
 
-from Razerbot.events import register
-
 opener = urllib.request.build_opener()
 useragent = "Mozilla/5.0 (Linux; Android 9; SM-G960F Build/PPR1.180610.011; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/74.0.3729.157 Mobile Safari/537.36"
 opener.addheaders = [("User-agent", useragent)]
 
 
-@register(pattern="^/google (.*)")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]google (.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -60,7 +58,7 @@ async def _(event):
         "**Search Query:**\n`" + match + "`\n\n**Results:**\n" + msg, link_preview=False
     )
 
-@register(pattern="^/img (.*)")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]img (.*)"))
 async def img_sampler(event):
     if event.fwd_from:
         return
@@ -90,7 +88,7 @@ useragent = "Mozilla/5.0 (Linux; Android 9; SM-G960F Build/PPR1.180610.011; wv) 
 opener.addheaders = [("User-agent", useragent)]
 
 
-@register(pattern=r"^/reverse(?: |$)(\d*)")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]reverse(?: |$)(\d*)"))
 async def okgoogle(img):
     """ For .reverse command, Google search images and stickers. """
     if os.path.isfile("okgoogle.png"):
@@ -206,7 +204,7 @@ async def scam(results, lim):
     return imglinks
 
 
-@register(pattern="^/app (.*)")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]app (.*)"))
 async def apk(e):
     
     try:

@@ -1,7 +1,6 @@
 import os
 
-from Razerbot.events import register
-from Razerbot import telethn as Client
+from Razerbot import telethn as tbot
 from telethon import events, Button, types
 
 TMP_DOWNLOAD_DIRECTORY = "./"
@@ -17,7 +16,7 @@ data = telegraph.create_account(short_name=wibu)
 auth_url = data["auth_url"]
 
 
-@register(pattern="^/t(m|xt) ?(.*)")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]t(m|xt) ?(.*)"))
 async def telegrap(event):
     optional_title = event.pattern_match.group(2)
     if event.reply_to_msg_id:
@@ -25,14 +24,14 @@ async def telegrap(event):
         reply_msg = await event.get_reply_message()
         input_str = event.pattern_match.group(1)
         if input_str == "gm":
-            downloaded_file_name = await Client.download_media(
+            downloaded_file_name = await tbot.download_media(
                 reply_msg,
                 TMP_DOWNLOAD_DIRECTORY
             )
             end = datetime.now()
             ms = (end - start).seconds
             if not downloaded_file_name:
-                await Client.send_message(
+                await tbot.send_message(
                     event.chat_id,
                     "Not Supported Format Media!"
                 )
@@ -50,7 +49,7 @@ async def telegrap(event):
                     end = datetime.now()
                     ms_two = (end - start).seconds
                     os.remove(downloaded_file_name)
-                    await Client.send_message(
+                    await tbot.send_message(
                         event.chat_id,
                         "Your telegraph is complete uploaded!",
                         buttons=[
@@ -62,7 +61,7 @@ async def telegrap(event):
                         ]
                     )
         elif input_str == "xt":
-            user_object = await Client.get_entity(reply_msg.sender_id)
+            user_object = await tbot.get_entity(reply_msg.sender_id)
             title_of_page = user_object.first_name # + " " + user_object.last_name
             # apparently, all Users do not have last_name field
             if optional_title:
@@ -72,11 +71,11 @@ async def telegrap(event):
                 if page_content != "":
                     title_of_page = page_content
                 else:
-                    await Client.send_message(
+                    await tbot.send_message(
                         event.chat_id,
                         "Not Supported Format Text!"
                     )
-                downloaded_file_name = await Client.download_media(
+                downloaded_file_name = await tbot.download_media(
                     reply_msg,
                     TMP_DOWNLOAD_DIRECTORY
                 )
@@ -93,12 +92,12 @@ async def telegrap(event):
             )
             end = datetime.now()
             ms = (end - start).seconds
-            await Client.send_message(
+            await tbot.send_message(
                     event.chat_id,
                     "Your telegraph is complete uploaded!",
                     buttons=[
                         [
-                            types.KeyboardButtonUrl(
+                            Button.url(
                                 "➡ View Telegraph", "https://telegra.ph/{}".format(response["path"], ms)
                             )
                         ]

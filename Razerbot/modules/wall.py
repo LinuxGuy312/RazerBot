@@ -3,9 +3,8 @@ import random
 
 import requests
 from bs4 import BeautifulSoup
-
+from telethon import events
 from Razerbot import telethn, SUPPORT_GROUP
-from Razerbot.events import register
 
 async def wall_download(piclink, query):
     try:
@@ -24,7 +23,7 @@ async def wall_download(piclink, query):
         event.reply(f'ᴇʀʀᴏʀ, ʀᴇᴘᴏʀᴛ @{SUPPORT_GROUP}, {e}')
         return None
 
-@register(pattern="^/wall ?(.*)")
+@telethn.on(events.NewMessage(incoming=True, pattern="^[.!/]wall ?(.*)"))
 async def wall(event):
     query = event.pattern_match.group(1)
     limit = 1

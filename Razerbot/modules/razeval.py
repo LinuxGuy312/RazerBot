@@ -6,11 +6,11 @@ import traceback
 
 from Razerbot.utils import format as _format
 from Razerbot import telethn as tbot
-from Razerbot.events import register
+from telethon import events
 from Razerbot import *
 
 
-@register(pattern="^/razexec(?:\s|$)([\s\S]*)")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]razexec(?:\s|$)([\s\S]*)"))
 async def _(event):
     if event.sender.id not in DEV_USERS:
         return await event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
@@ -35,7 +35,7 @@ async def _(event):
         await event.client.send_message(int(EVENT_LOGS), f"#RAZEXEC\nᴛᴇʀᴍɪɴᴀʟ ᴄᴏᴍᴍᴀɴᴅ `{cmd}` ᴡᴀs ᴇxᴇᴄᴜᴛᴇᴅ sᴜᴄᴇssꜰᴜʟʟʏ ɪɴ `{event.chat_id}`")
 
 
-@register(pattern="^/razeval(?:\s|$)([\s\S]*)")
+@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]razeval(?:\s|$)([\s\S]*)"))
 async def _(event):
     if event.sender.id not in DEV_USERS:
         return await event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
