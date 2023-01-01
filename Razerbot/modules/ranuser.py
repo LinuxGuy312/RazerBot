@@ -2,12 +2,12 @@ import requests
 import os
 import json
 from datetime import date
-from Razerbot import telethn, eor
+from Razerbot import telethn
 from Razerbot.events import register
 
 @register(pattern="^[/!.]ranuser")
 async def gen(event):
-	bhurr = await eor(event, "ɢᴇɴᴇʀᴀᴛɪɴɢ ɪɴꜰᴏ...")
+	bhurr = await event.edit("ɢᴇɴᴇʀᴀᴛɪɴɢ ɪɴꜰᴏ...")
 	yr = date.today().year
 	cyr = int(yr)
 	inf = "https://randomuser.me/api"
