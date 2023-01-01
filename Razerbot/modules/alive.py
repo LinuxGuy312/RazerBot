@@ -1,34 +1,35 @@
-from platform import python_version as y
-from telegram import __version__ as o
-from pyrogram import __version__ as z
-from telethon import __version__ as s
-from telethon import Button
-from Razerbot import telethn, SUPPORT_CHAT, BOT_NAME, OWNER_USERNAME
-from Razerbot.events import register
+from platform import python_version as pyver
+from telegram import __version__ as libver
+from pyrogram import __version__ as pyrover
+from telethon import __version__ as telthnver
+from pyrogram import filters
+from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
+from Razerbot import pbot, SUPPORT_CHAT, BOT_NAME, OWNER_ID, OWNER_USERNAME
 
-@register(pattern="^[./!]alive")
-async def alive(event):
+@pbot.on_message(filters.command("alive", prefixes=["/", ".", "!"]))
+async def alive(_, message):
     ALIVE_PIC = "https://graph.org/file/36c17c0f22aeea9c99895.jpg"
     ALIVE_TEXT = f"""
-Hᴇʟʟᴏ {event.sender.first_name}!
+Hᴇʟʟᴏ {message.from_user.mention}!
 ───────────────────────
 × I'ᴍ {BOT_NAME}, A Pᴏᴡᴇʀꜰᴜʟ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ.
 × I'ᴍ Aʟɪᴠᴇ ᴀɴᴅ Wᴏʀᴋɪɴɢ Hᴀʀᴅ!!
 ───────────────────────
 × Oᴡɴᴇʀ : @{OWNER_USERNAME}
-× Pʏᴛʜᴏɴ Vᴇʀsɪᴏɴ : `{y()}`
-× Lɪʙʀᴀʀʏ Vᴇʀsɪᴏɴ : `{o}`
-× Tᴇʟᴇᴛʜᴏɴ Vᴇʀsɪᴏɴ : `{s}`
-× Pʏʀᴏɢʀᴀᴍ Vᴇʀsɪᴏɴ : `{z}`
+× Pʏᴛʜᴏɴ Vᴇʀsɪᴏɴ : `{pyver()}`
+× Lɪʙʀᴀʀʏ Vᴇʀsɪᴏɴ : `{libver}`
+× Tᴇʟᴇᴛʜᴏɴ Vᴇʀsɪᴏɴ : `{telthnver}`
+× Pʏʀᴏɢʀᴀᴍ Vᴇʀsɪᴏɴ : `{pyrover}`
 ───────────────────────"""
     buttons = [
-        Button.url("sᴜᴘᴘᴏʀᴛ", f"https://t.me/{SUPPORT_CHAT}"),
-        Button.url("ᴏᴡɴᴇʀ", f"https://t.me/{OWNER_USERNAME}")
-    ]
-    await telethn.send_file(
-        event.chat_id,
-        ALIVE_PIC,
+                [
+                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"), 
+                    InlineKeyboardButton(text="oᴡɴᴇʀ", user_id=OWNER_ID)
+                ]
+            ]
+        
+    await message.reply_photo(
+        photo=ALIVE_PIC,
         caption=ALIVE_TEXT,
-        reply_to=event.sender.id,
-        buttons=buttons
+        reply_markup=InlineKeyboardMarkup(buttons)
     )

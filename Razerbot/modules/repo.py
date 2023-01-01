@@ -4,16 +4,15 @@ from pyrogram import __version__ as z
 from telethon import __version__ as s
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram import filters
-from Razerbot import pbot, START_IMG, SUPPORT_CHAT, BOT_NAME, OWNER_USERNAME
+from Razerbot import pbot, START_IMG
 
-
-@pbot.on_message(filters.command("repo"))
+@pbot.on_message(filters.command("repo", prefixes=["/", ".", "!"]))
 async def repo(_, message):
     await message.reply_photo(
         photo=START_IMG,
-        caption=f"""ʜᴇʏ ɪ'ᴍ {BOT_NAME}
+        caption=f"""ʜᴇʏ ɪ'ᴍ RΛZΞR
 
-⥤ ᴏᴡɴᴇʀ : @{OWNER_USERNAME}
+⥤ ᴅᴇᴠᴇʟᴏᴘᴇʀ : @WH0907
 ⥤ ᴘʏᴛʜᴏɴ ᴠᴇʀsɪᴏɴ : `{y()}`
 ⥤ ʟɪʙʀᴀʀʏ ᴠᴇʀsɪᴏɴ : `{o}`
 ⥤ ᴛᴇʟᴇᴛʜᴏɴ ᴠᴇʀsɪᴏɴ : `{s}`
@@ -26,7 +25,7 @@ async def repo(_, message):
             [
                 [
                     InlineKeyboardButton(text="sᴏᴜʀᴄᴇ", url="https://github.com/LinuxGuy312/RazerBot"), 
-                    InlineKeyboardButton(text="ᴏᴡɴᴇʀ", url=f"https://t.me/{OWNER_USERNAME}")
+                    InlineKeyboardButton(text="ᴅᴇᴠᴇʟᴏᴘᴇʀ", url=f"https://t.me/WH0907")
                 ]
             ]
         )
