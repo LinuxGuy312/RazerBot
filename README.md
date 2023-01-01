@@ -68,11 +68,11 @@ Read [Docs] for Detailed Description and Setup Guide on deploying Bot.
 $ git clone https://github.com/LinuxGuy312/RazerBot.git
 $ cd RazerBot
 $ pip3 install -U -r requirements.txt
-$ cp sample.env .env
+$ cp xconfig.py config.py
 ```
-> Edit .env with your values and then start bot with
+> Edit config.py with your values and then start bot with
 ```console
-$ bash start
+$ python3 -m Razerbot
 ```
 </details>
 

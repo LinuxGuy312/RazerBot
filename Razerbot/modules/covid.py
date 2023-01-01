@@ -5,7 +5,7 @@ from Razerbot.pyrogramee.fetch import fetch
 from pyrogram import filters
 
 
-@app.on_message(filters.command("covid") & ~filters.edited)
+@app.on_message(filters.command("covid"))
 @capture_err
 async def covid(_, message):
     if len(message.command) == 1:
