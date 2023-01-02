@@ -62,7 +62,6 @@ async def active_afk(_, message: Message):
                 f"**{message.from_user.first_name}** is back online",
                 disable_web_page_preview=True,
             )
-        await put_cleanmode(message.chat.id, send.message_id)
         return
     if len(message.command) == 1 and not message.reply_to_message:
         details = {
@@ -176,7 +175,6 @@ async def active_afk(_, message: Message):
     send = await message.reply_text(
         f"{message.from_user.first_name} is now afk!"
     )
-    await put_cleanmode(message.chat.id, send.message_id)
 
 
 @app.on_message(filters.command("afksettings") & filters.group)
@@ -193,7 +191,6 @@ async def on_start(_, message: Message):
     )
     image = random.choice(RANDOM)
     send = await message.reply_photo(image, caption=f"Settings for AFK.", reply_markup=upl)
-    await put_cleanmode(message.chat.id, send.message_id)
     
         
 @app.on_callback_query(filters.regex("close"))
@@ -454,7 +451,4 @@ async def chat_watcher_func(_, message):
             )
         except:
             return
-    try:
-        await put_cleanmode(message.chat.id, send.message_id)
-    except:
-        return
+    return

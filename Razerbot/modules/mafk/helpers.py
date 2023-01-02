@@ -32,16 +32,6 @@ def get_readable_time(seconds: int) -> str:
     return ping_time
 
 
-async def put_cleanmode(chat_id, message_id):
-    if chat_id not in cleanmode:
-        cleanmode[chat_id] = []
-    time_now = datetime.now()
-    put = {
-        "msg_id": message_id,
-        "timer_after": time_now + timedelta(minutes=5),
-    }
-    cleanmode[chat_id].append(put)
-
 
 RANDOM = [
     "https://telegra.ph//file/0879fbdb307005c1fa8ab.jpg",
