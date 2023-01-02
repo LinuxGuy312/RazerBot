@@ -1,7 +1,8 @@
 import os
 
 from Razerbot import telethn as tbot
-from telethon import events, Button, types
+from Razerbot.events import register
+from telethon import Button, types
 
 TMP_DOWNLOAD_DIRECTORY = "./"
 
