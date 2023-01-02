@@ -33,7 +33,7 @@ tomorrow = str(dt_tom())
 @app.on_message(filters.command(["couples", "shippering"]))
 @capture_err
 async def couple(_, message):
-    if message.chat.type == enums.ChatType.PRIVATE":
+    if message.chat.type == enums.ChatType.PRIVATE:
         return await message.reply_text("This command only works in groups.")
     try:
         chat_id = message.chat.id
