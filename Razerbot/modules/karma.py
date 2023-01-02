@@ -4,7 +4,7 @@ from pyrogram import filters
 
 from Razerbot import OWNER_ID, pbot
 from Razerbot.utils.errors import capture_err
-from Razerbot.utils.dbfunctions import (
+from Razerbot.utils.mongo import (
     alpha_to_int,
     get_karma,
     get_karmas,

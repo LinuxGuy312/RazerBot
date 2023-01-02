@@ -15,12 +15,7 @@ from Razerbot.modules.helper_funcs.chat_status import (
     user_admin,
     ADMIN_CACHE,
 )
-from Razerbot.helper_extra.admin_rights import (
-    user_can_pin,
-    user_can_promote,
-    user_can_changeinfo,
-)
-
+from Razerbot.modules.helper_funcs.admin_rights import user_can_changeinfo import user_can_changeinfo
 from Razerbot.modules.helper_funcs.extraction import (
     extract_user,
     extract_user_and_text,
