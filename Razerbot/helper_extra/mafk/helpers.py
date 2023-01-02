@@ -43,29 +43,6 @@ async def put_cleanmode(chat_id, message_id):
     cleanmode[chat_id].append(put)
 
 
-async def auto_clean():
-    while not await asyncio.sleep(30):
-        try:
-            for chat_id in cleanmode:
-                if not await is_cleanmode_on(chat_id):
-                    continue
-                for x in cleanmode[chat_id]:
-                    if datetime.now() > x["timer_after"]:
-                        try:
-                            await app.delete_messages(chat_id, x["msg_id"])
-                        except FloodWait as e:
-                            await asyncio.sleep(e.x)
-                        except:
-                            continue
-                    else:
-                        continue
-        except:
-            continue
-
-
-asyncio.create_task(auto_clean())
-
-
 RANDOM = [
     "https://telegra.ph//file/0879fbdb307005c1fa8ab.jpg",
     "https://telegra.ph//file/19e3a9d5c0985702497fb.jpg",
