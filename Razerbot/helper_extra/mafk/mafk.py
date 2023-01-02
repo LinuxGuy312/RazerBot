@@ -1,4 +1,4 @@
-from Razerbot import db
+from Razerbot.mongo import db
 
 chatsdb = db.chatsdb
 usersdb = db.users
