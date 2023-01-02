@@ -7,8 +7,8 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import MessageNotModified
 
 from Razerbot import pbot as app, BOT_USERNAME
-from Razerbot.mafk.mafk import *
-from Razerbot.mafk.helpers import *
+from Razerbot.modules.mafk.mafk import *
+from Razerbot.modules.mafk.helpers import *
 
 
 @app.on_message(filters.command("yafk"))
