@@ -3,7 +3,7 @@ import asyncio
 from typing import Union
 from datetime import datetime, timedelta
 from Razerbot import pbot as app
-from Razerbot.helper_extra.mafk.mafk import *
+from Razerbot.modules.mafk.mafk import *
 from pyrogram.errors import FloodWait
 from pyrogram.types import InlineKeyboardButton
 
