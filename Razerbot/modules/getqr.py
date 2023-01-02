@@ -8,6 +8,7 @@ from requests import get
 from requests import post
 from telethon import types, events
 from telethon.tl import functions
+from Razerbot.events import register
 from Razerbot import MONGO_DB_URI
 from pymongo import MongoClient
 
@@ -49,7 +50,7 @@ async def is_register_admin(chat, user):
     return None
 
 
-@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]getqr$"))
+@register(pattern="^[!/.]getqr$")
 async def parseqr(qr_e):
     """ For /getqr command, get QR Code content from the replied photo. """
     if qr_e.fwd_from:
@@ -86,7 +87,7 @@ async def parseqr(qr_e):
     )
 
 
-@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]makeqr(?: |$)([\s\S]*)"))
+@register(pattern="^[!/.]makeqr(?: |$)([\s\S]*)")
 async def makeqr(qrcode):
     """ For /makeqr command, make a QR Code containing the given content. """
     if qrcode.fwd_from:

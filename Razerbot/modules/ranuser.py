@@ -3,9 +3,9 @@ import os
 import json
 from datetime import date
 from Razerbot import telethn as tbot
-from telethon import events
+from Razerbot.events import register
 
-@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]ranuser"))
+@register(pattern="^[!/.]ranuser")
 async def gen(event):
 	bhurr = await event.edit("ɢᴇɴᴇʀᴀᴛɪɴɢ ɪɴꜰᴏ...")
 	yr = date.today().year

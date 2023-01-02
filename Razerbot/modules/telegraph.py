@@ -16,7 +16,7 @@ data = telegraph.create_account(short_name=razer)
 auth_url = data["auth_url"]
 
 
-@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]tg(m|t) ?(.*)"))
+@register(pattern="^[!/.]tg(m|t) ?(.*)")
 async def tgph(event):
     if event.fwd_from:
         return

@@ -9,7 +9,7 @@ from telethon.tl import *
 GMAPS_LOC = "https://maps.googleapis.com/maps/api/geocode/json"
 
 
-@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]gps (.*)"))
+@register(pattern="^[!/.]gps (.*)")
 async def _(event):
     args = event.pattern_match.group(1)
 

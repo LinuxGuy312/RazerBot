@@ -3,9 +3,10 @@ import os
 from PIL import Image, ImageFont, ImageDraw
 from telethon import events
 from Razerbot import LOGGER, TEMP_DOWNLOAD_DIRECTORY, telethn as bot
+from Razerbot.events import register
 
 
-@bot.on(events.NewMessage(incoming=True, pattern="^[!/.]mmf ?(.*)"))
+@register(pattern="^[!/.]mmf ?(.*)")
 async def handler(event):
     if event.fwd_from:
         return

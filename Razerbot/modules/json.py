@@ -1,6 +1,5 @@
 import io
 from Razerbot.events import register
-from Razerbot import telethn as borg
 from Razerbot import telethn as tbot
 from telethon import types
 from telethon import events
@@ -20,7 +19,7 @@ async def is_register_admin(chat, user):
         return True
 
 
-@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]json$"))
+@register(pattern="^[!/.]json$")
 async def _(event):
     if event.fwd_from:
         return
