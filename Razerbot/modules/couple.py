@@ -1,7 +1,8 @@
 from Razerbot import pbot as app
 from Razerbot.utils.errors import capture_err
-from Razerbot.utils.dbfunctions import get_couple, save_couple
-from pyrogram import filters
+from Razerbot.utils.mongo import get_couple, save_couple
+
+from pyrogram import filters, enums
 import random
 from datetime import datetime
 
@@ -29,23 +30,21 @@ today = str(dt()[0])
 tomorrow = str(dt_tom())
 
 
-@app.on_message(filters.command("couples"))
+@app.on_message(filters.command(["couples", "shippering"]))
 @capture_err
 async def couple(_, message):
-    if message.chat.type == "private":
-        await message.reply_text("This command only works in groups.")
-        return
+    if message.chat.type == enums.ChatType.PRIVATE":
+        return await message.reply_text("This command only works in groups.")
     try:
         chat_id = message.chat.id
         is_selected = await get_couple(chat_id, today)
         if not is_selected:
             list_of_users = []
-            async for i in app.get_chat_members(message.chat.id):
+            async for i in app.get_chat_members(message.chat.id, limit=50):
                 if not i.user.is_bot:
                     list_of_users.append(i.user.id)
             if len(list_of_users) < 2:
-                await message.reply_text("Not enough users")
-                return
+                return await message.reply_text("Not enough users")
             c1_id = random.choice(list_of_users)
             c2_id = random.choice(list_of_users)
             while c1_id == c2_id:
