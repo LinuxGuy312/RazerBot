@@ -5,7 +5,7 @@ from telethon import events
 from Razerbot import LOGGER, TEMP_DOWNLOAD_DIRECTORY, telethn as bot
 
 
-@tbot.on(events.NewMessage(incoming=True, pattern="^[!/.]mmf ?(.*)"))
+@bot.on(events.NewMessage(incoming=True, pattern="^[!/.]mmf ?(.*)"))
 async def handler(event):
     if event.fwd_from:
         return
