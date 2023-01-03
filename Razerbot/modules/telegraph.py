@@ -23,6 +23,7 @@ async def tgph(event):
         return
     optional_title = event.pattern_match.group(2)
     if event.reply_to_msg_id:
+        jadu = await event.reply("ᴘʀᴏᴄᴇssɪɴɢ...")
         start = datetime.now()
         r_message = await event.get_reply_message()
         input_str = event.pattern_match.group(1)
@@ -33,7 +34,7 @@ async def tgph(event):
             end = datetime.now()
             ms = (end - start).seconds
             h = await event.reply(
-                "Downloaded to {} in {} seconds.".format(downloaded_file_name, ms)
+                "ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ ᴛᴏ {} ɪɴ {} sᴇᴄᴏɴᴅs.".format(downloaded_file_name, ms)
             )
             if downloaded_file_name.endswith((".webp")):
                 resize_image(downloaded_file_name)
@@ -48,15 +49,13 @@ async def tgph(event):
                 (end - start).seconds
                 os.remove(downloaded_file_name)
                 await h.delete()
-                buttons = [
-                    Button.url("View Telegraph", f"https://te.legra.ph{media_urls[0]}")
-                ]
+                buttons = [Button.url("ᴠɪᴇᴡ ᴛᴇʟᴇɢʀᴀᴘʜ", f"https://te.legra.ph{media_urls[0]}")]
                 await tbot.send_message(
                     event.chat_id,
-                    "Uploaded to https://te.legra.ph{})".format(media_urls[0]),
+                    f"ᴜᴘʟᴏᴀᴅᴇᴅ ᴛᴏ [ᴛᴇʟᴇɢʀᴀᴘʜ](https://te.legra.ph{media_urls[0]})",
                     link_preview=True,
                     buttons=buttons,
-                    reply_to=event.reply_to_msg_id
+                    reply_to=event.sender.id
                 )
         elif input_str == "t":
             user_object = await tbot.get_entity(r_message.sender_id)
@@ -82,16 +81,16 @@ async def tgph(event):
             ms = (end - start).seconds
             await event.delete()
             buttons = [
-                Button.url("View Telegraph", f"https://telegra.ph/{response['path']}")
+                Button.url("ᴠɪᴇᴡ ᴛᴇʟᴇɢʀᴀᴘʜ", f"https://telegra.ph/{response['path']}")
             ]
             await tbot.send_message(
                 event.chat_id,
-                "Pasted to https://telegra.ph/{} in {} seconds.".format(
+                "ᴘᴀsᴛᴇᴅ ᴛᴏ [ᴛᴇʟᴇɢʀᴀᴘʜ](https://telegra.ph/{}) in {} seconds.".format(
                     response["path"], ms
                 ),
                 link_preview=True,
                 buttons=buttons,
-                reply_to=event.reply_to_msg_id
+                reply_to=event.sender.id
             )
     else:
         await event.reply("Reply to a message to get a permanent telegra.ph link.")
