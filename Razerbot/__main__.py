@@ -306,7 +306,7 @@ def error_callback(update: Update, context: CallbackContext):
 
 
 @run_async
-def help_button(update, context):
+def help_button(update: Update, context: CallbackContext):
     query = update.callback_query
     mod_match = re.match(r"help_module\((.+?)\)", query.data)
     back_match = re.match(r"help_back", query.data)
@@ -349,7 +349,7 @@ def help_button(update, context):
 
 
 @run_async
-def razer_callback_handler(update, context):
+def razer_callback_handler(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "razer_comm_":
         query.message.edit_text(
