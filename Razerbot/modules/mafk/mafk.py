@@ -2,8 +2,6 @@ from Razerbot.utils.mongo import db
 
 chatsdb = db.chatsdb
 usersdb = db.users
-cleandb = db.cleanmode
-cleanmode = {}
 
 async def get_served_chats() -> list:
     chats = chatsdb.find({"chat_id": {"$lt": 0}})
@@ -34,31 +32,6 @@ async def remove_served_chat(chat_id: int):
     if not is_served:
         return
     return await chatsdb.delete_one({"chat_id": chat_id})
-
-
-async def is_cleanmode_on(chat_id: int) -> bool:
-    mode = cleanmode.get(chat_id)
-    if not mode:
-        user = await cleandb.find_one({"chat_id": chat_id})
-        if not user:
-            cleanmode[chat_id] = True
-            return True
-        cleanmode[chat_id] = False
-        return False
-    return mode
-
-async def cleanmode_on(chat_id: int):
-    cleanmode[chat_id] = True
-    user = await cleandb.find_one({"chat_id": chat_id})
-    if user:
-        return await cleandb.delete_one({"chat_id": chat_id})
-
-
-async def cleanmode_off(chat_id: int):
-    cleanmode[chat_id] = False
-    user = await cleandb.find_one({"chat_id": chat_id})
-    if not user:
-        return await cleandb.insert_one({"chat_id": chat_id})
 
 
 async def is_afk(user_id: int) -> bool:
