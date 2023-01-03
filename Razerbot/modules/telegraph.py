@@ -55,7 +55,7 @@ async def tgph(event):
                     f"ᴜᴘʟᴏᴀᴅᴇᴅ ᴛᴏ ᴛᴇʟᴇɢʀᴀᴘʜ : https://te.legra.ph{media_urls[0]}",
                     link_preview=True,
                     buttons=buttons,
-                    reply_to=r_message.id
+                    reply_to=event.id
                 )
         elif input_str == "t":
             user_object = await tbot.get_entity(r_message.sender_id)
@@ -90,7 +90,7 @@ async def tgph(event):
                 ),
                 link_preview=True,
                 buttons=buttons,
-                reply_to=r_message.id
+                reply_to=event.id
             )
     else:
         await event.reply("ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴛᴏ ɢᴇᴛ ᴀ ᴘᴇʀᴍᴀɴᴇɴᴛ ᴛᴇʟᴇɢʀᴀᴘʜ ʟɪɴᴋ!")
@@ -99,6 +99,15 @@ async def tgph(event):
 def resize_image(image):
     im = Image.open(image)
     im.save(image, "PNG")
+
+__help__ = """
+I can upload files to Telegraph
+ ❍ /tgm :Get Telegraph Link Of Replied Media
+ ❍ /tgt :Get Telegraph Link of Replied Text
+ ❍ /tgt [custom name]: Get telegraph link of replied text with custom name.
+"""
+
+__mod_name__ = "T-Gʀᴀᴘʜ"
 
 file_help = os.path.basename(__file__)
 file_help = file_help.replace(".py", "")

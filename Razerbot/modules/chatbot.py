@@ -94,14 +94,12 @@ def razeradd(update: Update, context: CallbackContext) -> str:
 def razer(update: Update, context: CallbackContext):
     update.effective_user
     message = update.effective_message
-    msg = """**Welcome To Control Panal Of Razer ChatBot**
-
-**Here You Will Find Two Buttons Select AnyOne Of Them**"""
+    msg = "ᴄʜᴏᴏsᴇ ᴛᴏ ᴇɴᴀʙʟᴇ/ᴅɪsᴀʙʟᴇ ᴄʜᴀᴛʙᴏᴛ ɪɴ ᴄᴜʀʀᴇɴᴛ ᴄʜᴀᴛ"
     keyboard = InlineKeyboardMarkup(
         [
             [
-                InlineKeyboardButton(text="On", callback_data="add_chat({})"),
-                InlineKeyboardButton(text="Off", callback_data="rm_chat({})"),
+                InlineKeyboardButton(text="ᴇɴᴀʙʟᴇ", callback_data="add_chat({})"),
+                InlineKeyboardButton(text="ᴅɪsᴀʙʟᴇ", callback_data="rm_chat({})"),
             ]
         ]
     )
@@ -144,7 +142,7 @@ def chatbot(update: Update, context: CallbackContext):
 
 def list_all_chats(update: Update, context: CallbackContext):
     chats = sql.get_all_razer_chats()
-    text = "<b>Razer-Enabled Chats</b>\n"
+    text = "<b>ᴄʜᴀᴛʙᴏᴛ ᴇɴᴀʙʟᴇᴅ ᴄʜᴀᴛs:</b>\n"
     for chat in chats:
         try:
             x = context.bot.get_chat(int(*chat))
@@ -157,11 +155,8 @@ def list_all_chats(update: Update, context: CallbackContext):
     update.effective_message.reply_text(text, parse_mode="HTML")
 
 
-__mod_name__ = "Chatbot 🤖"
+__mod_name__ = "CʜᴀᴛBᴏᴛ"
 __help__ = """
-Razer AI ChatBot is the only ai system which can detect & reply upto 200 language's
-
-❂ `/token` : To get your Razer Chatbot Token.
 ❂ `/chatbot`: To On Or Off ChatBot In Your Chat.
 
 *Reports bugs at*: @Razer312Support
