@@ -1,6 +1,5 @@
 import time
 import re
-import random
 
 from pyrogram import filters
 from pyrogram.types import Message
@@ -8,8 +7,8 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from pyrogram.errors import MessageNotModified
 
 from Razerbot import pbot as app, BOT_USERNAME
-from Razerbot.modules.mafk.mafk import *
-from Razerbot.modules.mafk.helpers import *
+from Rzerbot.utils.mongo import is_afk, add_afk, remove_afk
+from Razerbot.modules.ping import get_readable_time
 
 
 @app.on_message(filters.command("yafk"))
