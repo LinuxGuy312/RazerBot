@@ -52,7 +52,7 @@ async def tgph(event):
                 buttons = [Button.url("ᴠɪᴇᴡ ᴛᴇʟᴇɢʀᴀᴘʜ", f"https://te.legra.ph{media_urls[0]}")]
                 await tbot.send_message(
                     event.chat_id,
-                    f"ᴜᴘʟᴏᴀᴅᴇᴅ ᴛᴏ [ᴛᴇʟᴇɢʀᴀᴘʜ](https://te.legra.ph{media_urls[0]})",
+                    f"ᴜᴘʟᴏᴀᴅᴇᴅ ᴛᴏ ᴛᴇʟᴇɢʀᴀᴘʜ : https://te.legra.ph{media_urls[0]}",
                     link_preview=True,
                     buttons=buttons,
                     reply_to=r_message.id
@@ -85,7 +85,7 @@ async def tgph(event):
             ]
             await tbot.send_message(
                 event.chat_id,
-                "ᴘᴀsᴛᴇᴅ ᴛᴏ [ᴛᴇʟᴇɢʀᴀᴘʜ](https://telegra.ph/{}) in {} seconds.".format(
+                "ᴘᴀsᴛᴇᴅ ᴛᴏ ᴛᴇʟᴇɢʀᴀᴘʜ : https://telegra.ph/{} in {} seconds.".format(
                     response["path"], ms
                 ),
                 link_preview=True,
