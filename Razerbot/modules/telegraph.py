@@ -33,7 +33,7 @@ async def tgph(event):
             )
             end = datetime.now()
             ms = (end - start).seconds
-            h = await event.reply(
+            h = await jadu.edit(
                 "ᴅᴏᴡɴʟᴏᴀᴅᴇᴅ ᴛᴏ {} ɪɴ {} sᴇᴄᴏɴᴅs.".format(downloaded_file_name, ms)
             )
             if downloaded_file_name.endswith((".webp")):
@@ -55,7 +55,7 @@ async def tgph(event):
                     f"ᴜᴘʟᴏᴀᴅᴇᴅ ᴛᴏ [ᴛᴇʟᴇɢʀᴀᴘʜ](https://te.legra.ph{media_urls[0]})",
                     link_preview=True,
                     buttons=buttons,
-                    reply_to=event.sender.id
+                    reply_to=r_message.id
                 )
         elif input_str == "t":
             user_object = await tbot.get_entity(r_message.sender_id)
@@ -79,7 +79,7 @@ async def tgph(event):
             response = telegraph.create_page(title_of_page, html_content=page_content)
             end = datetime.now()
             ms = (end - start).seconds
-            await event.delete()
+            await jadu.delete()
             buttons = [
                 Button.url("ᴠɪᴇᴡ ᴛᴇʟᴇɢʀᴀᴘʜ", f"https://telegra.ph/{response['path']}")
             ]
@@ -90,10 +90,10 @@ async def tgph(event):
                 ),
                 link_preview=True,
                 buttons=buttons,
-                reply_to=event.sender.id
+                reply_to=r_message.id
             )
     else:
-        await event.reply("Reply to a message to get a permanent telegra.ph link.")
+        await event.reply("ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴛᴏ ɢᴇᴛ ᴀ ᴘᴇʀᴍᴀɴᴇɴᴛ ᴛᴇʟᴇɢʀᴀᴘʜ ʟɪɴᴋ!")
 
 
 def resize_image(image):
