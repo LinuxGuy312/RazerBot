@@ -230,7 +230,7 @@ async def on_cleanmode_change(client, CallbackQuery):
         return
 
 
-chat_watcher_group = 1
+chat_watcher_group = 9
 
 @app.on_message(
     ~filters.me & ~filters.bot & ~filters.via_bot,
