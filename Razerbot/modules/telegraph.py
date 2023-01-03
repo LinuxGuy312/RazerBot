@@ -55,7 +55,7 @@ async def tgph(event):
                     f"ᴜᴘʟᴏᴀᴅᴇᴅ ᴛᴏ ᴛᴇʟᴇɢʀᴀᴘʜ : https://te.legra.ph{media_urls[0]}",
                     link_preview=True,
                     buttons=buttons,
-                    reply_to=r_message.id
+                    reply_to=event.sender.id
                 )
         elif input_str == "t":
             user_object = await tbot.get_entity(r_message.sender_id)
@@ -90,7 +90,7 @@ async def tgph(event):
                 ),
                 link_preview=True,
                 buttons=buttons,
-                reply_to=r_message.id
+                reply_to=event.sender.id
             )
     else:
         await event.reply("ʀᴇᴘʟʏ ᴛᴏ ᴀ ᴍᴇssᴀɢᴇ ᴛᴏ ɢᴇᴛ ᴀ ᴘᴇʀᴍᴀɴᴇɴᴛ ᴛᴇʟᴇɢʀᴀᴘʜ ʟɪɴᴋ!")
