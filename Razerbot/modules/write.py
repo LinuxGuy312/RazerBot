@@ -1,4 +1,4 @@
-from pyrogram import filters
+from pyrogram import filters, enums
 
 from Razerbot import pbot, BOT_NAME, BOT_USERNAME
 
@@ -15,5 +15,5 @@ async def handwriting(_, message):
     )
     hand = "https://apis.xditya.me/write?text=" + name
     await m.edit("Uᴩʟᴏᴀᴅɪɴɢ...")
-    await pbot.send_chat_action(message.chat.id, "upload_photo")
+    await pbot.send_chat_action(message.chat.id, enums.ChatAction.UPLOAD_PHOTO)
     await message.reply_photo(hand, caption=f"Wʀɪᴛᴛᴇɴ Wɪᴛʜ 🖊 Bʏ [{BOT_NAME}](t.me/{BOT_USERNAME})")
