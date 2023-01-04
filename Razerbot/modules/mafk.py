@@ -8,7 +8,7 @@ from Razerbot.utils.mongo import add_afk, is_afk, remove_afk
 from Razerbot.pyrogramee.pluginshelper import get_readable_time
 
 
-@app.on_message(filters.command(["mafk", f"mafk@{botusername}"]))
+@app.on_message(filters.command("mafk"))
 async def active_afk(_, message: Message):
     if message.sender_chat:
         return
@@ -186,7 +186,7 @@ async def chat_watcher_func(_, message):
     userid = message.from_user.id
     user_name = message.from_user.first_name
     if message.entities:
-        possible = ["/mafk", f"/mafk@{botusername}"]
+        possible = ["/mafk", f"/mafk@{BOT_USERNAME}"]
         message_text = message.text or message.caption
         for entity in message.entities:
             if entity.type == "bot_command":
