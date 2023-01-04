@@ -14,7 +14,6 @@ from Razerbot import (
     UPDATE_CHANNEL,
     BOT_USERNAME,
     BOT_NAME,
-    ASS_USERNAME,
     START_IMG,
     TOKEN,
     URL,
