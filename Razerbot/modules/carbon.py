@@ -26,3 +26,11 @@ async def carbon_func(_, message):
     await app.send_photo(message.chat.id, carbon)
     await m.delete()
     carbon.close()
+
+__mod_name__ = "Cᴀʀʙᴏɴ"
+
+__help__ = """
+Generate a carbon of given text 
+
+ ❍ /carbon <text>
+"""

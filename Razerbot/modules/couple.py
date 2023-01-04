@@ -29,10 +29,16 @@ def dt_tom():
 today = str(dt()[0])
 tomorrow = str(dt_tom())
 
-
 @app.on_message(filters.command(["couples", "shipping"]))
 @capture_err
 async def couple(_, message):
+    now = datetime.now()
+    mnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
+    seconds = (mnight - now).seconds
+    hms = str(datetime.timedelta(seconds=seconds))
+    rem_hrs = f"{hms.split(':')[0]} hours"
+    rem_min = f"{hms.split(':')[1]} minutes"
+    rem_sec = f"{hms.split(':')[2]} seconds"
     if message.chat.type == enums.ChatType.PRIVATE:
         return await message.reply_text("This command only works in groups.")
     try:
@@ -52,9 +58,10 @@ async def couple(_, message):
             c1_mention = (await app.get_users(c1_id)).mention
             c2_mention = (await app.get_users(c2_id)).mention
 
-            couple_selection_message = f"""**Couple of the day:**
+            couple_selection_message = f"""Couple of the day:
 {c1_mention} + {c2_mention} = ❤️
-__New couple of the day may be chosen at 12AM On {tomorrow}__"""
+
+New couple of the day may be chosen in {rem_hrs} {rem_min} {rem_sec}"""
             await app.send_message(message.chat.id, text=couple_selection_message)
             couple = {"c1_id": c1_id, "c2_id": c2_id}
             await save_couple(chat_id, today, couple)
@@ -62,11 +69,12 @@ __New couple of the day may be chosen at 12AM On {tomorrow}__"""
         elif is_selected:
             c1_id = int(is_selected["c1_id"])
             c2_id = int(is_selected["c2_id"])
-            c1_name = (await app.get_users(c1_id)).first_name
-            c2_name = (await app.get_users(c2_id)).first_name
-            couple_selection_message = f"""Couple of the day:
-[{c1_name}](tg://openmessage?user_id={c1_id}) + [{c2_name}](tg://openmessage?user_id={c2_id}) = ❤️
-__New couple of the day may be chosen at 12AM {tomorrow}__"""
+            c1_ment = (await app.get_users(c1_id)).mention
+            c2_ment = (await app.get_users(c2_id)).mention
+            couple_selection_message = f"""Couple of the day has been chosen:
+{c1_ment} + {c2_ment} = ❤️
+
+New couple of the day may be chosen in {rem_hrs} {rem_min} {rem_sec}"""
             await app.send_message(message.chat.id, text=couple_selection_message)
     except Exception as e:
         print(e)
