@@ -4,11 +4,10 @@ from pyrogram import __version__ as pyrover
 from telethon import __version__ as telthnver
 from pyrogram import filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
-from Razerbot import pbot, SUPPORT_CHAT, BOT_NAME, OWNER_ID, OWNER_USERNAME
+from Razerbot import pbot, SUPPORT_CHAT, BOT_NAME, OWNER_ID, OWNER_USERNAME, ALIVE_IMG
 
 @pbot.on_message(filters.command("alive", prefixes=["/", ".", "!"]))
 async def alive(_, message):
-    ALIVE_PIC = "https://graph.org/file/36c17c0f22aeea9c99895.jpg"
     ALIVE_TEXT = f"""
 Hᴇʟʟᴏ {message.from_user.mention}!
 ───────────────────────

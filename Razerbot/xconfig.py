@@ -18,6 +18,8 @@ class Config(object):
     BOT_ID = ""
     OWNER_ID = Your_Id  # If you dont know, run the bot and do /id in your private chat with it, also an integer
     OWNER_USERNAME = "YourUsername"
+    START_IMG = "https://graph.org/file/644fddccf30ac191fc895.jpg"
+    ALIVE_IMG = "https://graph.org/file/36c17c0f22aeea9c99895.jpg"
     UPDATE_CHANNEL = "<channel-username>" # Your own channel for updates, do not add the @
     SUPPORT_CHAT = "<support-chat-username>"  # Your own group for support, do not add the @
     JOIN_LOGGER = (-10012345678)  # A new channel ID To log who started the bot. Starting with "-100", Put inside braces
@@ -36,33 +38,27 @@ class Config(object):
     TEMP_DOWNLOAD_DIRECTORY = "./"
     
     # OPTIONAL
-    ##List of id's -  (not usernames) for users which have sudo access to the bot.
-    DRAGONS = get_user_list("elevated_users.json", "sudos")
-    ##List of id's - (not usernames) for developers who will have the same perms as the owner
-    DEV_USERS = get_user_list("elevated_users.json", "devs")
-    ##List of id's (not usernames) for users which are allowed to gban, but can also be banned.
-    DEMONS = get_user_list("elevated_users.json", "supports")
-    # List of id's (not usernames) for users which WONT be banned/kicked by the bot.
-    TIGERS = get_user_list("elevated_users.json", "tigers")
-    WOLVES = get_user_list("elevated_users.json", "whitelists")
-    DONATION_LINK = None  # EG, paypal
+    DRAGONS = []  ##List of integer ids separated by "," for users which have sudo access to the bot.
+    DEV_USERS = [] ##List of integer ids separated by ","  for developers who will have the same perms as the owner
+    DEMONS = [] ##List of integer ids separated by ","  for users which are allowed to gban, but can also be banned.
+    TIGERS = [] ##List of integer ids separated by ","  for users which WONT be banned/kicked by the bot.
+    WOLVES = []
     CERT_PATH = None
     PORT = 5000
     DEL_CMDS = True  # Delete commands that users dont have access to, like delete /ban if a non admin uses it.
     STRICT_GBAN = True
     WORKERS = (8)  # Number of subthreads to use. Set as number of threads your processor uses
     BAN_STICKER = ""  # banhammer marie sticker id, the bot will send this sticker before banning or kicking a user in chat.
-    START_IMG = "https://graph.org/file/644fddccf30ac191fc895.jpg"
-    OPENWEATHERMAP_ID = None
+    OPENWEATHERMAP_ID = ""
     ALLOW_EXCL = True  # Allow ! commands as well as / (Leave this to true so that blacklist can work)
-    CASH_API_KEY = (None)  # Get your API key from https://www.alphavantage.co/support/#api-key
-    IBM_WATSON_CRED_URL = None
-    IBM_WATSON_CRED_PASSWORD = None
-    TIME_API_KEY = None  # Get your API key from https://timezonedb.com/api
-    AI_API_KEY = "awoo"  # For chatbot, get one from https://coffeehouse.intellivoid.net/dashboard
+    CASH_API_KEY = ""  # Get your API key from https://www.alphavantage.co/support/#api-key
+    IBM_WATSON_CRED_URL = ""
+    IBM_WATSON_CRED_PASSWORD = ""
+    TIME_API_KEY = ""  # Get your API key from https://timezonedb.com/api
+    AI_API_KEY = ""  # For chatbot, get one from https://coffeehouse.intellivoid.net/dashboard
     BL_CHATS = []  # List of groups that you want blacklisted.
     ALLOW_CHATS = []
-    SPAMMERS = None
+    SPAMMERS = []
 
 class Production(Config):
     LOGGER = True
