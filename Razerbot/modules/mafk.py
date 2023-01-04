@@ -1,17 +1,14 @@
 import time
-import re
 
 from pyrogram import filters
 from pyrogram.types import Message
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from pyrogram.errors import MessageNotModified
 
 from Razerbot import pbot as app, BOT_USERNAME
-from Razerbot.utils.mongo import is_afk, add_afk, remove_afk
-from Razerbot.modules.ping import get_readable_time
+from Razerbot.utils.mongo import add_afk, is_afk, remove_afk
+from Razerbot.pyrogramee.pluginshelper import get_readable_time
 
 
-@app.on_message(filters.command("yafk"))
+@app.on_message(filters.command(["mafk", f"mafk@{botusername}"]))
 async def active_afk(_, message: Message):
     if message.sender_chat:
         return
@@ -176,7 +173,8 @@ async def active_afk(_, message: Message):
         f"{message.from_user.first_name} is now afk!"
     )
 
-chat_watcher_group = 50
+
+chat_watcher_group = 1
 
 @app.on_message(
     ~filters.me & ~filters.bot & ~filters.via_bot,
@@ -188,7 +186,7 @@ async def chat_watcher_func(_, message):
     userid = message.from_user.id
     user_name = message.from_user.first_name
     if message.entities:
-        possible = ["/yafk", f"/yafk@{BOT_USERNAME}"]
+        possible = ["/mafk", f"/mafk@{botusername}"]
         message_text = message.text or message.caption
         for entity in message.entities:
             if entity.type == "bot_command":
