@@ -6,7 +6,7 @@ from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from pyrogram import filters
 from Razerbot import pbot, START_IMG
 
-@pbot.on_message(filters.command("repo", prefixes=["/", ".", "!"]))
+@pbot.on_message(filters.command(["repo", "source"]))
 async def repo(_, message):
     await message.reply_photo(
         photo=START_IMG,
@@ -25,7 +25,7 @@ async def repo(_, message):
             [
                 [
                     InlineKeyboardButton(text="sᴏᴜʀᴄᴇ", url="https://github.com/LinuxGuy312/RazerBot"), 
-                    InlineKeyboardButton(text="ᴅᴇᴠᴇʟᴏᴘᴇʀ", url=f"https://t.me/WH0907")
+                    InlineKeyboardButton(text="ᴅᴇᴠᴇʟᴏᴘᴇʀ", user_id=1413518510)
                 ]
             ]
         )
