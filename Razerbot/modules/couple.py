@@ -4,12 +4,12 @@ from Razerbot.utils.mongo import get_couple, save_couple
 
 from pyrogram import filters, enums
 import random
-from datetime import datetime
+import datetime
 
 
 # Date and time
 def dt():
-    now = datetime.now()
+    now = datetime.datetime.now()
     dt_string = now.strftime("%d/%m/%Y %H:%M")
     dt_list = dt_string.split(" ")
     return dt_list
@@ -32,7 +32,7 @@ tomorrow = str(dt_tom())
 @app.on_message(filters.command(["couples", "shipping"]))
 @capture_err
 async def couple(_, message):
-    now = datetime.now()
+    now = datetime.datetime.now()
     mnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
     seconds = (mnight - now).seconds
     hms = str(datetime.timedelta(seconds=seconds))
