@@ -28,7 +28,7 @@ Hᴇʟʟᴏ {message.from_user.mention}!
             ]
         
     await message.reply_photo(
-        photo=ALIVE_PIC,
+        photo=ALIVE_IMG,
         caption=ALIVE_TEXT,
         reply_markup=InlineKeyboardMarkup(buttons)
     )
