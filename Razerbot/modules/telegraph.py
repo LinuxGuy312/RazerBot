@@ -1,6 +1,6 @@
 import os
 
-from Razerbot import pbot as tbot
+from Razerbot import telethn as tbot
 from Razerbot.events import register
 from telethon import Button, types
 
