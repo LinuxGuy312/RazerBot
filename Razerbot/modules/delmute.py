@@ -119,7 +119,7 @@ async def delmute(event):
     mute(user.id, event.chat_id)
     if reason:
         await event.reply(
-            f"{_format.mentionuser(user.first_name ,user.id)} `is muted in {event.chat.title}`\n"
+            f"[{user.first_name}](tg://user?id={user.id}) `is muted in {event.chat.title}`\n"
             f"`Reason:`{reason}"
         )
     else:
