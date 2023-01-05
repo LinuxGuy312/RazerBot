@@ -6,29 +6,6 @@ from pyrogram import filters, enums
 import random
 import datetime
 
-
-# Date and time
-def dt():
-    now = datetime.datetime.now()
-    dt_string = now.strftime("%d/%m/%Y %H:%M")
-    dt_list = dt_string.split(" ")
-    return dt_list
-
-
-def dt_tom():
-    a = (
-        str(int(dt()[0].split("/")[0]) + 1)
-        + "/"
-        + dt()[0].split("/")[1]
-        + "/"
-        + dt()[0].split("/")[2]
-    )
-    return a
-
-
-today = str(dt()[0])
-tomorrow = str(dt_tom())
-
 @app.on_message(filters.command(["couples", "shipping"]))
 @capture_err
 async def couple(_, message):
@@ -36,9 +13,10 @@ async def couple(_, message):
     mnight = now.replace(hour=0, minute=0, second=0, microsecond=0)
     seconds = (mnight - now).seconds
     hms = str(datetime.timedelta(seconds=seconds))
-    rem_hrs = f"{hms.split(':')[0]} hours"
-    rem_min = f"{hms.split(':')[1]} minutes"
-    rem_sec = f"{hms.split(':')[2]} seconds"
+    remtime = hms.split(':')
+    rem_hrs = f"{remtime[0]} hours"
+    rem_min = f"{remtime[1]} minutes"
+    rem_sec = f"{remtime[2]} seconds"
     if message.chat.type == enums.ChatType.PRIVATE:
         return await message.reply_text("This command only works in groups.")
     try:
@@ -69,10 +47,10 @@ New couple of the day may be chosen in {rem_hrs} {rem_min} {rem_sec}"""
         elif is_selected:
             c1_id = int(is_selected["c1_id"])
             c2_id = int(is_selected["c2_id"])
-            c1_ment = (await app.get_users(c1_id)).mention
-            c2_ment = (await app.get_users(c2_id)).mention
+            c1_firnam = (await app.get_users(c1_id)).first_name
+            c2_firnam = (await app.get_users(c2_id)).first_name
             couple_selection_message = f"""Couple of the day has been chosen:
-{c1_ment} + {c2_ment} = ❤️
+[{c1_firnam}](tg://user?id={c1_id}) + [{c2_firnam}](tg://user?id={c2_id}) = ❤️
 
 New couple of the day may be chosen in {rem_hrs} {rem_min} {rem_sec}"""
             await app.send_message(message.chat.id, text=couple_selection_message)
