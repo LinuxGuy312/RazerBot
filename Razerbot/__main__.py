@@ -220,7 +220,7 @@ def start(update: Update, context: CallbackContext):
           update.effective_message.reply_photo(
                 RAZER_IMG, caption="""Hᴇʟʟᴏ {} !
 ───────────────────
-× I'ᴍ Aɴɪᴍᴇ-Tʜᴇᴍᴇ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ
+× I'ᴍ A Mɪɴɪᴍᴀʟʟʏ Tʜᴇᴍᴇᴅ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ
 × I'ᴍ Vᴇʀʏ Fᴀꜱᴛ Aɴᴅ Mᴏʀᴇ Eꜰꜰɪᴄɪᴇɴᴛ I Pʀᴏᴠɪᴅᴇ Aᴡᴇꜱᴏᴍᴇ Fᴇᴀᴛᴜʀᴇꜱ!
 ───────────────────
 × Uᴘᴛɪᴍᴇ: `{}`
@@ -232,7 +232,7 @@ def start(update: Update, context: CallbackContext):
                     sql.num_chats()),
                 reply_markup=InlineKeyboardMarkup(
                  [
-                  [InlineKeyboardButton(text="sᴏᴜʀᴄᴇ", url="https://github.com/LinuxGuy312/RazerBot"), 
+                  [InlineKeyboardButton(text="ᴏᴡɴᴇʀ", url=f"https://t.me/{OWNER_USERNAME}"), 
                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}")]
                  ]
               ),
