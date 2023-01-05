@@ -1,4 +1,5 @@
 import time
+import re
 
 from pyrogram import filters
 from pyrogram.types import Message
@@ -174,11 +175,9 @@ async def active_afk(_, message: Message):
     )
 
 
-chat_watcher_group = 1
-
 @app.on_message(
     ~filters.me & ~filters.bot & ~filters.via_bot,
-    group=chat_watcher_group,
+    group=1,
 )
 async def chat_watcher_func(_, message):
     if message.sender_chat:
@@ -186,7 +185,7 @@ async def chat_watcher_func(_, message):
     userid = message.from_user.id
     user_name = message.from_user.first_name
     if message.entities:
-        possible = ["/mafk", f"/mafk@{BOT_USERNAME}"]
+        possible = ["/afk", f"/afk@{botusername}"]
         message_text = message.text or message.caption
         for entity in message.entities:
             if entity.type == "bot_command":
