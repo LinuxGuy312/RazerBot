@@ -6,6 +6,8 @@ from pyrogram import filters, enums
 import random
 import datetime
 
+today = datetime.datetime.today()
+
 @app.on_message(filters.command(["couples", "shipping"]))
 @capture_err
 async def couple(_, message):
