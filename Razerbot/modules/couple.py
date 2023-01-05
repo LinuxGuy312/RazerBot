@@ -6,7 +6,13 @@ from pyrogram import filters, enums
 import random
 import datetime
 
-today = datetime.datetime.today()
+def dt():
+    now = datetime.datetime.now()
+    dt_string = now.strftime("%d/%m/%Y %H:%M")
+    dt_list = dt_string.split(" ")
+    return dt_list
+
+today = str(dt()[0])
 
 @app.on_message(filters.command(["couples", "shipping"]))
 @capture_err
