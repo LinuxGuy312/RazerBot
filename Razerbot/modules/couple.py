@@ -14,7 +14,7 @@ def dt():
 
 today = str(dt()[0])
 
-@app.on_message(filters.command(["couples", "shipping"]))
+@app.on_message(filters.command(["couple", "shipping"]))
 @capture_err
 async def couple(_, message):
     now = datetime.datetime.now()
