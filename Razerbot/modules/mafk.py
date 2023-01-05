@@ -184,7 +184,7 @@ async def active_afk(_, message: Message):
 
 @app.on_message(
     ~filters.me & ~filters.bot & ~filters.via_bot,
-    group=chat_watcher_group,
+    group=1,
 )
 async def chat_watcher_func(_, message):
     if not message.from_user:
