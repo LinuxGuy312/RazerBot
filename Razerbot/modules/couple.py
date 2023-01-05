@@ -98,4 +98,6 @@ async def couple(_, message):
             couple_selection_message = f"""Couple of the day:
 {c1_mention} + {c2_mention} = ❤️"""
             await app.send_message(message.chat.id, text=couple_selection_message)
-
+    except Exception as e:
+        print(e)
+        await message.reply_text(e)
