@@ -64,30 +64,3 @@ New couple of the day may be chosen in {rem_hrs} {rem_min} {rem_sec}"""
     except Exception as e:
         print(e)
         await message.reply_text(e)
-
-@app.on_message(filters.command(["newcouple", "newshipping"]))
-@capture_err
-async def coupl(_, message):
-    if message.chat.type == enums.ChatType.PRIVATE:
-        return await message.reply_text("This command only works in groups.")
-    try:
-        chat_id = message.chat.id
-        list_of_users = []
-        async for i in app.get_chat_members(message.chat.id, limit=50):
-            if not i.user.is_bot:
-                list_of_users.append(i.user.id)
-        if len(list_of_users) < 2:
-            return await message.reply_text("Not enough users")
-        c1_id = random.choice(list_of_users)
-        c2_id = random.choice(list_of_users)
-        while c1_id == c2_id:
-            c1_id = random.choice(list_of_users)
-        c1_mention = (await app.get_users(int(c1_id))).mention
-        c2_mention = (await app.get_users(int(c2_id))).mention
-        couple_selection_message = f"New Couple of the day: \n{c1_mention} + {c2_mention} = ❤️"
-        await app.send_message(message.chat.id, text=couple_selection_message)
-        couple = {"c1_id": c1_id, "c2_id": c2_id}
-        await save_couple(chat_id, today, couple)
-    except Exception as e:
-        print(e)
-        await message.reply_text(e)
