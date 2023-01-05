@@ -89,7 +89,7 @@ async def get_user_from_event(
     return None, None
 
 
-@register(pattern="^[!/]delmute")
+@register(pattern="^[!/]delmute(?:\s|$)([\s\S]*)")
 async def delmute(event):
     if event.is_private:
         return await event.reply("How can you be so noob? :/")
@@ -140,7 +140,7 @@ async def delmute(event):
             f"**Chat :** {event.chat.title}(`{event.chat_id}`)",
         )
 
-@register(pattern="^[!/]undelmute")
+@register(pattern="^[!/]undelmute(?:\s|$)([\s\S]*)")
 async def undelmute(event):
     if event.is_private:
         return await event.reply("How can you be so noob? :/")
