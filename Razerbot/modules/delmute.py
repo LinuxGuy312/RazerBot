@@ -2,14 +2,9 @@ import asyncio
 from Razerbot.modules.sql.mute_sql import *
 from Razerbot.events import register
 from Razerbot import telethn as tbot, EVENT_LOGS, LOGGER, OWNER_ID
-from telethon.tl.types import ChatAdminRights, ChatBannedRights, MessageEntityMentionName
-from telethon.errors.rpcerrorlist import UserAdminInvalidError, UserIdInvalidError
-from telethon.tl.functions.channels import GetFullChannelRequest, EditAdminRequest, EditBannedRequest
-from telethon.tl.functions.messages import GetFullChatRequest, ImportChatInviteRequest as Get
+from telethon.tl.types import MessageEntityMentionName
 from telethon import events
 
-MUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=True)
-UNMUTE_RIGHTS = ChatBannedRights(until_date=None, send_messages=False)
 EVENT_LOGGER = True
 
 @tbot.on(events.NewMessage(incoming=True))
@@ -116,17 +111,12 @@ async def delmute(event):
         pass
     except Exception as e:
         return await event.reply(f"**Error : **`{e}`")
-    try:
-        await event.client(EditBannedRequest(event.chat_id, user.id, MUTE_RIGHTS))
-    except UserAdminInvalidError:
-        if "admin_rights" in vars(chat) and vars(chat)["admin_rights"] is not None:
-            if chat.admin_rights.delete_messages is not True:
-                return await event.reply("`I can't mute a person if I dont have delete messages permission. ಥ﹏ಥ`")
-        elif "creator" not in vars(chat):
-            return await event.reply("`I can't mute a person without having admin rights.` ಥ﹏ಥ  ")
-        mute(user.id, event.chat_id)
-    except Exception as e:
-        return await event.reply(f"**Error : **`{e}`")
+    if "admin_rights" in vars(chat) and vars(chat)["admin_rights"] is not None:
+        if chat.admin_rights.delete_messages is not True:
+            return await event.reply("`I can't mute a person if I dont have delete messages permission. ಥ﹏ಥ`")
+    elif "creator" not in vars(chat):
+        return await event.reply("`I can't mute a person without having admin rights.` ಥ﹏ಥ  ")
+    mute(user.id, event.chat_id)
     if reason:
         await event.reply(
             f"{_format.mentionuser(user.first_name ,user.id)} `is muted in {event.chat.title}`\n"
@@ -152,10 +142,6 @@ async def undelmute(event):
     try:
         if is_muted(user.id, event.chat_id):
             unmute(user.id, event.chat_id)
-        else:
-            result = await event.client.get_permissions(event.chat_id, user.id)
-            if result.participant.banned_rights.send_messages:
-                await event.client(EditBannedRequest(event.chat_id, user.id, UNMUTE_RIGHTS))
     except AttributeError:
         return await event.reply("`This user can already speak freely in this chat`")
     except Exception as e:
