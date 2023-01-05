@@ -70,7 +70,7 @@ async def _(event):
     r = requests.get(input_str, allow_redirects=False)
     if str(r.status_code).startswith("3"):
         button = [Button.url("ʀᴇᴅɪʀᴇᴄᴛᴇᴅ ᴜʀʟ", f"{r.headers['Location']}")]
-        await event.reply(f"ʀᴇᴅɪʀᴇᴄᴛᴇᴅ ᴜʀʟ:\n\n`{r.headers['Location']}`", buttons=button)
+        await event.reply(f"Cʟɪᴄᴋ Bᴜᴛᴛᴏɴ Bᴇʟᴏᴡ", buttons=button)
     else:
         await event.reply(f"ɪɴᴘᴜᴛ ᴜʀʟ {input_str} ʀᴇᴛᴜʀɴᴇᴅ sᴛᴀᴛᴜs_ᴄᴏᴅᴇ {r.status_code}")
 
