@@ -41,8 +41,8 @@ async def couple(_, message):
             c2_id = random.choice(list_of_users)
             while c1_id == c2_id:
                 c1_id = random.choice(list_of_users)
-            c1_mention = (await app.get_users(c1_id)).mention
-            c2_mention = (await app.get_users(c2_id)).mention
+            c1_mention = (await app.get_users(int(c1_id))).mention
+            c2_mention = (await app.get_users(int(c2_id))).mention
             couple_selection_message = f"""Couple of the day:
 {c1_mention} + {c2_mention} = ❤️
 
@@ -54,8 +54,8 @@ New couple of the day may be chosen in {rem_hrs} {rem_min} {rem_sec}"""
         elif is_selected:
             c1_id = int(is_selected["c1_id"])
             c2_id = int(is_selected["c2_id"])
-            c1_mention = f"[{(await app.get_users(c1_id)).first_name}](tg://user?id={c1_id})"
-            c2_mention = f"[{(await app.get_users(c2_id)).first_name}](tg://user?id={c2_id})"
+            c1_mention = f"[{(await app.get_users(int(c1_id))).first_name}](tg://user?id={c1_id})"
+            c2_mention = f"[{(await app.get_users(int(c2_id))).first_name}](tg://user?id={c2_id})"
             couple_selection_message = f"""Couple of the day has been chosen:
 {c1_mention} + {c2_mention} = ❤️
 
