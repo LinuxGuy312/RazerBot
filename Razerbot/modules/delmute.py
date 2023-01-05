@@ -119,17 +119,17 @@ async def delmute(event):
     mute(user.id, event.chat_id)
     if reason:
         await event.reply(
-            f"[{user.first_name}](tg://user?id={user.id}) `is muted in {event.chat.title}`\n"
+            f"[{user.first_name}](tg://user?id={user.id}) is muted in {event.chat.title}\n"
             f"`Reason:`{reason}"
         )
     else:
-        await event.reply(f"{_format.mentionuser(user.first_name ,user.id)} `is muted in {event.chat.title}`\n")
+        await event.reply(f"[{user.first_name}](tg://user?id={user.id}) is muted in {event.chat.title}")
     if EVENT_LOGGER:
         await tbot.send_message(
             EVENT_LOGS,
             "#MUTE\n"
-            f"**User :** [{user.first_name}](tg://user?id={user.id})\n"
-            f"**Chat :** {event.chat.title}(`{event.chat_id}`)",
+            f"**User :** {user.first_name} with id `{user.id}`\n"
+            f"**Chat :** [{event.chat.title}](tg://chat?id={event.chat_id})",
         )
 
 @register(pattern="^[!/]undelmute(?:\s|$)([\s\S]*)")
@@ -142,17 +142,17 @@ async def undelmute(event):
     try:
         if is_muted(user.id, event.chat_id):
             unmute(user.id, event.chat_id)
-    except AttributeError:
-        return await event.reply("`This user can already speak freely in this chat`")
+            await event.reply(f"[{user.first_name}](tg://user?id={user.id}) is unmuted in {event.chat.title}")
+        else:
+            return await event.reply("`This user can already speak freely in this chat`")
     except Exception as e:
         return await event.reply(f"**Error : **`{e}`")
-    await event.reply(f"[{user.first_name}](tg://user?id={user.id}) `is unmuted in {event.chat.title}\n乁( ◔ ౪◔)「    ┑(￣Д ￣)┍`")
     if EVENT_LOGGER:
         await tbot.send_message(
             EVENT_LOGS,
             "#UNMUTE\n"
-            f"**User :** [{user.first_name}](tg://user?id={user.id})\n"
-            f"**Chat :** {event.chat.title}(`{event.chat_id}`)"
+            f"**User :** {user.first_name} with id `{user.id}`\n"
+            f"**Chat :** [{event.chat.title}](tg://chat?id={event.chat_id})"
         )
 
 __mod_name__ = "Delmute"
