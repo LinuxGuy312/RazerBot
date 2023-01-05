@@ -2,7 +2,7 @@ import time
 import re
 
 from pyrogram import filters
-from pyrogram.types import message
+from pyrogram.types import Message
 from pyrogram.enums import MessageEntityType
 
 from Razerbot import pbot as app, BOT_USERNAME
