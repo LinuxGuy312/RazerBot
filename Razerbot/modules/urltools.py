@@ -88,4 +88,5 @@ async def _(event):
         check = url(catstr)
     if not check:
         return await event.reply("ᴛʜᴇ ɢɪᴠᴇɴ ʟɪɴᴋ ɪs ɴᴏᴛ sᴜᴘᴘᴏʀᴛᴇᴅ")
+    await event.delete()
     await event.reply(f"[ㅤㅤㅤㅤㅤㅤㅤ]({input_str})", link_preview=False)
