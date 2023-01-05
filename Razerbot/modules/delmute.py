@@ -1,10 +1,10 @@
 import asyncio
 from Razerbot.modules.sql.mute_sql import *
 from Razerbot.events import register
-from Razerbot import telethn as tbot, EVENT_LOGS, LOGGER
+from Razerbot import telethn as tbot, EVENT_LOGS, LOGGER, OWNER_ID
 from telethon.tl.types import ChatAdminRights, ChatBannedRights, MessageEntityMentionName
 from telethon.errors.rpcerrorlist import UserAdminInvalidError, UserIdInvalidError
-from telethon.tl.functions.channels import GetFullChannelRequest
+from telethon.tl.functions.channels import GetFullChannelRequest, EditAdminRequest, EditBannedRequest
 from telethon.tl.functions.messages import GetFullChatRequest, ImportChatInviteRequest as Get
 from telethon import events
 
@@ -104,6 +104,8 @@ async def delmute(event):
         return
     if user.id == myid:
         return await event.reply("`Sorry, I can't mute myself`")
+    if user.id == OWNER_ID:
+        return await event.reply("`Nice Try Muting my owner right there.`")
     if is_muted(user.id, event.chat_id):
         return await event.reply("`This user is already muted in this chat ~~lmfao sed rip~~`")
     result = await tbot.get_permissions(event.chat_id, user.id)
