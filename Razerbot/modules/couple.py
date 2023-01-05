@@ -82,7 +82,7 @@ async def coupl(_, message):
         c2_id = random.choice(list_of_users)
         while c1_id == c2_id:
             c1_id = random.choice(list_of_users)
-        c1_mention = c1_mention = (await app.get_users(int(c1_id))).mention
+        c1_mention = (await app.get_users(int(c1_id))).mention
         c2_mention = (await app.get_users(int(c2_id))).mention
         couple_selection_message = f"New Couple of the day: \n{c1_mention} + {c2_mention} = ❤️"
         await app.send_message(message.chat.id, text=couple_selection_message)
