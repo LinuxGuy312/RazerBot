@@ -84,8 +84,10 @@ async def coupl(_, message):
             c1_id = random.choice(list_of_users)
         c1_mention = c1_mention = (await app.get_users(int(c1_id))).mention
         c2_mention = (await app.get_users(int(c2_id))).mention
-        couple_selection_message = f"New Couple: {c1_mention} + {c2_mention} = ❤️"
+        couple_selection_message = f"New Couple of the day: \n{c1_mention} + {c2_mention} = ❤️"
         await app.send_message(message.chat.id, text=couple_selection_message)
+        couple = {"c1_id": c1_id, "c2_id": c2_id}
+        await save_couple(chat_id, today, couple)
     except Exception as e:
         print(e)
         await message.reply_text(e)
