@@ -1,6 +1,5 @@
 import asyncio
 from Razerbot.modules.sql.mute_sql import *
-from Razerbot.modules.helper_funcs.chat_status import is_user_admin
 from Razerbot.events import register
 from Razerbot import telethn as tbot, EVENT_LOGS, LOGGER, OWNER_ID
 from telethon.tl.types import MessageEntityMentionName
@@ -87,11 +86,13 @@ async def get_user_from_event(
 
 @register(pattern="^[!/]dmute(?:\s|$)([\s\S]*)")
 async def delmute(event):
+    user = event.sender.id
+    perm = await tbot.get_permissions(event.chat_id, user)
+    if not perm.is_admin or user != OWNER_ID:
+        return await event.reply("This command is only for admins.")
     if event.is_private:
         return await event.reply("How can you be so noob? :/")
     chat = await event.get_chat()
-    if not is_user_admin(chat, event.sender.id):
-        return await event.reply("This command is only for admins.")
     admin = chat.admin_rights
     creator = chat.creator
     if not admin and not creator:
@@ -137,7 +138,9 @@ async def delmute(event):
 
 @register(pattern="^[!/]undmute(?:\s|$)([\s\S]*)")
 async def undelmute(event):
-    if not is_user_admin(event.chat_id, event.sender.id):
+    user = event.sender.id
+    perm = await tbot.get_permissions(event.chat_id, user) 
+    if not perm.is_admin or user != OWNER_ID:
         return await event.reply("This command is only for admins.")
     if event.is_private:
         return await event.reply("How can you be so noob? :/")
