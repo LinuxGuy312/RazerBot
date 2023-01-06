@@ -84,7 +84,7 @@ async def get_user_from_event(
     return None, None
 
 
-@register(pattern="^[!/]dmute(?:\s|$)([\s\S]*)")
+@register(pattern="^[!/]delmute(?:\s|$)([\s\S]*)")
 async def delmute(event):
     user = event.sender.id
     perm = await tbot.get_permissions(event.chat_id, user)
@@ -136,7 +136,7 @@ async def delmute(event):
             f"**Chat :** [{event.chat.title}](tg://chat?id={event.chat_id})",
         )
 
-@register(pattern="^[!/]undmute(?:\s|$)([\s\S]*)")
+@register(pattern="^[!/]undelmute(?:\s|$)([\s\S]*)")
 async def undelmute(event):
     user = event.sender.id
     perm = await tbot.get_permissions(event.chat_id, user) 
@@ -167,7 +167,7 @@ __mod_name__ = "Delmute"
 __help__ = """Delmute
 
 Usage:
-> /dmute <reply to anyone> or <user id>
-> /undmute <reply to muted user> or <user id>
+> /delmute <reply to anyone> or <user id>
+> /undelmute <reply to muted user> or <user id>
 
 Will delete any incoming message from the muted user (even admin)."""
