@@ -86,9 +86,9 @@ async def get_user_from_event(
 
 @register(pattern="^[!/]delmute(?:\s|$)([\s\S]*)")
 async def delmute(event):
-    user = event.sender.id
-    perm = await tbot.get_permissions(event.chat_id, user)
-    if not perm.is_admin or user != OWNER_ID:
+    userid = event.sender.id
+    perm = await tbot.get_permissions(event.chat_id, userid)
+    if not perm.is_admin or userid != OWNER_ID:
         return await event.reply("This command is only for admins.")
     if event.is_private:
         return await event.reply("How can you be so noob? :/")
@@ -115,6 +115,7 @@ async def delmute(event):
         pass
     except Exception as e:
         return await event.reply(f"**Error : **`{e}`")
+    unid = f"@{user.username}" if user.username is not None else f"tg://user?id={user.id}"
     if "admin_rights" in vars(chat) and vars(chat)["admin_rights"] is not None:
         if chat.admin_rights.delete_messages is not True:
             return await event.reply("`I can't mute a person if I dont have delete messages permission. ಥ﹏ಥ`")
@@ -123,24 +124,24 @@ async def delmute(event):
     mute(user.id, event.chat_id)
     if reason:
         await event.reply(
-            f"[{user.first_name}](tg://user?id={user.id}) is muted in {event.chat.title}\n"
+            f"[{user.first_name}]({unid}) is muted in {event.chat.title}\n"
             f"Reason: {reason}`"
         )
     else:
-        await event.reply(f"[{user.first_name}](tg://user?id={user.id}) is muted in {event.chat.title}")
+        await event.reply(f"[{user.first_name}]({unid}) is muted in {event.chat.title}")
     if EVENT_LOGGER:
         await tbot.send_message(
             EVENT_LOGS,
             "#MUTED\n"
             f"**User :** {user.first_name} with id `{user.id}`\n"
-            f"**Chat :** [{event.chat.title}](tg://chat?id={event.chat_id})",
+            f"**Chat :** {event.chat.title}(`{event.chat_id}`)",
         )
 
 @register(pattern="^[!/]undelmute(?:\s|$)([\s\S]*)")
 async def undelmute(event):
-    user = event.sender.id
-    perm = await tbot.get_permissions(event.chat_id, user) 
-    if not perm.is_admin or user != OWNER_ID:
+    userid = event.sender.id
+    perm = await tbot.get_permissions(event.chat_id, userid) 
+    if not perm.is_admin or userid != OWNER_ID:
         return await event.reply("This command is only for admins.")
     if event.is_private:
         return await event.reply("How can you be so noob? :/")
@@ -148,9 +149,10 @@ async def undelmute(event):
     if not user:
         return
     try:
+        unid = f"@{user.username}" if user.username is not None else f"tg://user?id={user.id}"
         if is_muted(user.id, event.chat_id):
             unmute(user.id, event.chat_id)
-            await event.reply(f"[{user.first_name}](tg://user?id={user.id}) is unmuted in {event.chat.title}")
+            await event.reply(f"[{user.first_name}]({unid}) is unmuted in {event.chat.title}")
         else:
             return await event.reply("`This user can already speak freely in this chat`")
     except Exception as e:
@@ -160,7 +162,7 @@ async def undelmute(event):
             EVENT_LOGS,
             "#UNMUTED\n"
             f"**User :** {user.first_name} with id `{user.id}`\n"
-            f"**Chat :** [{event.chat.title}](tg://chat?id={event.chat_id})"
+            f"**Chat :** {event.chat.title}(`{event.chat_id}`)"
         )
 
 __mod_name__ = "Delmute"
