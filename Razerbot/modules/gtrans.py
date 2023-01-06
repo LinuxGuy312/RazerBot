@@ -68,11 +68,11 @@ async def translate(_, message: Message) -> None:
         dest = "en"
     translation = await trans(to_translate, sourcelang=source, targetlang=dest)
     reply = (
-        f"<b>Translated from {source} to {dest}</b>:\n"
-        f"<code>{translation.text}</code>"
+        f"**Translated from {source} to {dest}**:\n"
+        f"`{translation.text}`"
     )
 
-    await message.reply_text(reply, parse_mode="html")
+    await message.reply_text(reply)
 
 
 def languages(update: Update, context: CallbackContext) -> None:

@@ -1,5 +1,6 @@
 import asyncio
 from Razerbot.modules.sql.mute_sql import *
+from Razerbot.modules.helper_funcs.chat_status import is_user_admin
 from Razerbot.events import register
 from Razerbot import telethn as tbot, EVENT_LOGS, LOGGER, OWNER_ID
 from telethon.tl.types import MessageEntityMentionName
@@ -84,8 +85,10 @@ async def get_user_from_event(
     return None, None
 
 
-@register(pattern="^[!/]delmute(?:\s|$)([\s\S]*)")
+@register(pattern="^[!/]dmute(?:\s|$)([\s\S]*)")
 async def delmute(event):
+    if not is_user_admin(event.chat_id, event.sender.id):
+        return await event.reply("This command is only for admins.")
     if event.is_private:
         return await event.reply("How can you be so noob? :/")
     chat = await event.get_chat()
@@ -98,9 +101,9 @@ async def delmute(event):
     if not user:
         return
     if user.id == myid:
-        return await event.reply("`Sorry, I can't mute myself`")
+        return await event.reply("Sorry, I can't mute myself.")
     if user.id == OWNER_ID:
-        return await event.reply("`Nice Try Muting my owner right there.`")
+        return await event.reply("Nice Try Muting my owner right there XD")
     if is_muted(user.id, event.chat_id):
         return await event.reply("`This user is already muted in this chat ~~lmfao sed rip~~`")
     result = await tbot.get_permissions(event.chat_id, user.id)
@@ -120,20 +123,22 @@ async def delmute(event):
     if reason:
         await event.reply(
             f"[{user.first_name}](tg://user?id={user.id}) is muted in {event.chat.title}\n"
-            f"`Reason:`{reason}"
+            f"Reason: {reason}`"
         )
     else:
         await event.reply(f"[{user.first_name}](tg://user?id={user.id}) is muted in {event.chat.title}")
     if EVENT_LOGGER:
         await tbot.send_message(
             EVENT_LOGS,
-            "#MUTE\n"
+            "#MUTED\n"
             f"**User :** {user.first_name} with id `{user.id}`\n"
             f"**Chat :** [{event.chat.title}](tg://chat?id={event.chat_id})",
         )
 
-@register(pattern="^[!/]undelmute(?:\s|$)([\s\S]*)")
+@register(pattern="^[!/]undmute(?:\s|$)([\s\S]*)")
 async def undelmute(event):
+    if not is_user_admin(event.chat_id, event.sender.id):
+        return await event.reply("This command is only for admins.")
     if event.is_private:
         return await event.reply("How can you be so noob? :/")
     user, _ = await get_user_from_event(event)
@@ -150,7 +155,7 @@ async def undelmute(event):
     if EVENT_LOGGER:
         await tbot.send_message(
             EVENT_LOGS,
-            "#UNMUTE\n"
+            "#UNMUTED\n"
             f"**User :** {user.first_name} with id `{user.id}`\n"
             f"**Chat :** [{event.chat.title}](tg://chat?id={event.chat_id})"
         )
@@ -159,6 +164,7 @@ __mod_name__ = "Delmute"
 __help__ = """Delmute
 
 Usage:
-> /delmute <reply to anyone>
+> /dmute <reply to anyone> or <user id>
+> /undmute <reply to muted user> or <user id>
 
-Will delete any incoming message from the muted user."""
+Will delete any incoming message from the muted user (even admin)."""

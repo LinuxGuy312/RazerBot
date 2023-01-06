@@ -10,11 +10,13 @@ from Razerbot.events import register
 from Razerbot import *
 
 
-@register(pattern="^[!/.]razexec(?:\s|$)([\s\S]*)")
+@register(pattern="^[!/.]rexec(?:\s|$)([\s\S]*)")
 async def _(event):
     if event.sender.id not in DEV_USERS:
         return await event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
+    if "config.py" in cmd:
+        return await event.edit(f"`{BOT_USERNAME}:~# {cmd}`\n`chumtiya nahi hu mai`")
     if not cmd:
         return await event.reply("ᴡʜᴀᴛ sʜᴏᴜʟᴅ ɪ ᴇxᴇᴄᴜᴛᴇ?")
     razevent = await event.reply("ᴇxᴇᴄᴜᴛɪɴɢ...")
@@ -35,7 +37,7 @@ async def _(event):
         await event.client.send_message(int(EVENT_LOGS), f"#RAZEXEC\nᴛᴇʀᴍɪɴᴀʟ ᴄᴏᴍᴍᴀɴᴅ `{cmd}` ᴡᴀs ᴇxᴇᴄᴜᴛᴇᴅ sᴜᴄᴇssꜰᴜʟʟʏ ɪɴ `{event.chat_id}`")
 
 
-@register(pattern="^[!/.]razeval(?:\s|$)([\s\S]*)")
+@register(pattern="^[!/.]reval(?:\s|$)([\s\S]*)")
 async def _(event):
     if event.sender.id not in DEV_USERS:
         return await event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
