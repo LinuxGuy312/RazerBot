@@ -87,11 +87,11 @@ async def get_user_from_event(
 
 @register(pattern="^[!/]dmute(?:\s|$)([\s\S]*)")
 async def delmute(event):
-    if not is_user_admin(event.chat_id, event.sender.id):
-        return await event.reply("This command is only for admins.")
     if event.is_private:
         return await event.reply("How can you be so noob? :/")
     chat = await event.get_chat()
+    if not is_user_admin(chat, event.sender.id):
+        return await event.reply("This command is only for admins.")
     admin = chat.admin_rights
     creator = chat.creator
     if not admin and not creator:
