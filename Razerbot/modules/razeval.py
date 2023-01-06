@@ -16,7 +16,7 @@ async def _(event):
         return await event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
     if "config.py" in cmd:
-        return await event.edit(f"`{BOT_USERNAME}:~# {cmd}`\n`chumtiya nahi hu mai`")
+        return await event.reply(f"`{BOT_USERNAME}:~# {cmd}`\n`chumtiya nahi hu mai`")
     if not cmd:
         return await event.reply("ᴡʜᴀᴛ sʜᴏᴜʟᴅ ɪ ᴇxᴇᴄᴜᴛᴇ?")
     razevent = await event.reply("ᴇxᴇᴄᴜᴛɪɴɢ...")

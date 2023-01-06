@@ -1,8 +1,15 @@
 import datetime
-
+import time
 from telethon.tl.tlobject import TLObject
 from telethon.tl.types import MessageEntityPre
 from telethon.utils import add_surrogate
+
+
+def utc_to_local(utc_datetime):
+    now_timestamp = time.time()
+    offset = datetime.datetime.fromtimestamp(now_timestamp) - datetime.datetime.utcfromtimestamp(now_timestamp)
+    return utc_datetime + offset
+
 
 def yaml_format(obj, indent=0, max_str_len=256, max_byte_len=64):
     result = []
