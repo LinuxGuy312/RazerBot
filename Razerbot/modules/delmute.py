@@ -9,7 +9,7 @@ EVENT_LOGGER = True
 
 @register(incoming=True, pattern="(?:\s|$)([\s\S]*)")
 async def watcher(event):
-    if is_muted(event.sender_id, event.chat_id):
+    if is_muted(event.sender.id, event.chat_id):
         await event.delete()
 
 
@@ -26,7 +26,7 @@ async def delmute(event):
     creator = chat.creator
     if not admin and not creator:
         return await event.reply("`I can't mute a person without having admin rights` ಥ﹏ಥ")
-    user, reason = event.reply_to_message.from_user
+    user, reason = await event.get_reply.sender
     myid = (await tbot.get_me()).id
     if not user:
         return
@@ -76,7 +76,7 @@ async def undelmute(event, message):
         return await event.reply("This command is only for admins.")
     if event.is_private:
         return await event.reply("How can you be so noob? :/")
-    user, _ = event.reply_to_message.from_user
+    user, _ = await event.get_reply.sender
     if not user:
         return
     try:
