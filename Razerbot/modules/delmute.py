@@ -7,7 +7,7 @@ from telethon import events
 
 EVENT_LOGGER = True
 
-@register(incoming=True)
+@register(incoming=True, pattern="(?:\s|$)([\s\S]*)")
 async def watcher(event):
     if is_muted(event.sender_id, event.chat_id):
         await event.delete()
