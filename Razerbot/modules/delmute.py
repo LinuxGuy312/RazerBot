@@ -26,7 +26,7 @@ async def delmute(event):
     creator = chat.creator
     if not admin and not creator:
         return await event.reply("`I can't mute a person without having admin rights` ಥ﹏ಥ")
-    user, reason = (await event.get_reply()).sender
+    user, reason = (await event.get_reply_message()).sender
     myid = (await tbot.get_me()).id
     if not user:
         return
@@ -76,7 +76,7 @@ async def undelmute(event, message):
         return await event.reply("This command is only for admins.")
     if event.is_private:
         return await event.reply("How can you be so noob? :/")
-    user, _ = (await event.get_reply()).sender
+    user, _ = (await event.get_reply_message()).sender
     if not user:
         return
     try:
