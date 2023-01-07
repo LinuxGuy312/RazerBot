@@ -15,6 +15,74 @@ async def watcher(_, message):
         await message.delete()
 
 
+async def get_user_from_event(
+    event,
+    razevent=None,
+    secondgroup=None,
+    thirdgroup=None,
+    nogroup=False,
+    noedits=False,
+):
+    if razevent is None:
+        razevent = event
+    if nogroup is False:
+        if secondgroup:
+            args = event.pattern_match.group(2).split(" ", 1)
+        elif thirdgroup:
+            args = event.pattern_match.group(3).split(" ", 1)
+        else:
+            args = event.pattern_match.group(1).split(" ", 1)
+    extra = None
+    try:
+        if args:
+            user = args[0]
+            if len(args) > 1:
+                extra = "".join(args[1:])
+            if user.isnumeric() or (user.startswith("-") and user[1:].isnumeric()):
+                user = int(user)
+            if event.message.entities:
+                probable_user_mention_entity = event.message.entities[0]
+                if isinstance(probable_user_mention_entity, MessageEntityMentionName):
+                    user_id = probable_user_mention_entity.user_id
+                    user_obj = await tbot.get_entity(user_id)
+                    return user_obj, extra
+            if isinstance(user, int) or user.startswith("@"):
+                user_obj = await tbot.get_entity(user)
+                return user_obj, extra
+    except Exception as e:
+        LOGGER.error(str(e))
+    try:
+        if nogroup is False:
+            if secondgroup:
+                extra = event.pattern_match.group(2)
+            else:
+                extra = event.pattern_match.group(1)
+        if event.is_private:
+            user_obj = await event.get_chat()
+            return user_obj, extra
+        if event.reply_to_msg_id:
+            previous_message = await event.get_reply_message()
+            if previous_message.from_id is None:
+                if not noedits:
+                    await edit_delete(razevent, "`Well that's an anonymous admin !`")
+                return None, None
+            user_obj = await event.client.get_entity(previous_message.sender_id)
+            return user_obj, extra
+        if not args:
+            if not noedits:
+                await razevent.edit("`Pass the user's username, id or reply!`")
+                await asyncio.sleep(5)
+                await razevent.delete()
+            return None, None
+    except Exception as e:
+        LOGGER.error(str(e))
+    if not noedits:
+        await razevent.edit("__Couldn't fetch user to proceed further.__")
+        await asyncio.sleep(5)
+        await razevent.delete()
+    return None, None
+
+
 @register(pattern="^[!/]delmute(?:\s|$)([\s\S]*)")
 async def delmute(event):
     userid = event.sender.id
@@ -28,17 +96,17 @@ async def delmute(event):
     creator = chat.creator
     if not admin and not creator:
         return await event.reply("`I can't mute a person without having admin rights` ಥ﹏ಥ")
-    user, reason = await tbot.get_entity(event.sender.id)
+    user, reason = await get_user_from_event(event)
     myid = (await tbot.get_me()).id
     if not user:
         return
-    if userid == myid:
+    if user.id == myid:
         return await event.reply("Sorry, I can't mute myself.")
-    if userid == userid:
+    if user.id == userid:
         return await event.reply("Trying to mute yourself? Not gonna happen")
-    if userid == OWNER_ID:
+    if user.id == OWNER_ID:
         return await event.reply("Nice Try Muting my owner right there XD")
-    if userid in DMUTE_LIST:
+    if user.id in DMUTE_LIST:
         return await event.reply("`This user is already muted in this chat ~~lmfao sed rip~~`")
     result = await tbot.get_permissions(event.chat_id, user.id)
     try:
@@ -78,7 +146,7 @@ async def undelmute(event):
         return await event.reply("This command is only for admins.")
     if event.is_private:
         return await event.reply("How can you be so noob? :/")
-    user, _ = await tbot.get_entity(event.sender.id)
+    user, _ = await get_user_from_event(event)
     if not user:
         return
     try:
