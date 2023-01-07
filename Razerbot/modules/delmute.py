@@ -14,7 +14,7 @@ async def watcher(event):
 
 
 @register(pattern="^[!/]delmute(?:\s|$)([\s\S]*)")
-async def delmute(event, message):
+async def delmute(event):
     userid = event.sender.id
     perm = await tbot.get_permissions(event.chat_id, userid)
     if not (perm.is_admin or userid == OWNER_ID):
@@ -26,7 +26,7 @@ async def delmute(event, message):
     creator = chat.creator
     if not admin and not creator:
         return await event.reply("`I can't mute a person without having admin rights` ಥ﹏ಥ")
-    user, reason = message.reply_to_message.from_user
+    user, reason = event.reply_to_message.from_user
     myid = (await tbot.get_me()).id
     if not user:
         return
@@ -76,7 +76,7 @@ async def undelmute(event, message):
         return await event.reply("This command is only for admins.")
     if event.is_private:
         return await event.reply("How can you be so noob? :/")
-    user, _ = message.reply_to_message.from_user
+    user, _ = event.reply_to_message.from_user
     if not user:
         return
     try:
