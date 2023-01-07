@@ -1,17 +1,15 @@
 import asyncio
 from Razerbot.events import register
+from Razerbot.modules.sql.mute_sql import *
 from Razerbot import telethn as tbot, pbot, EVENT_LOGS, LOGGER, OWNER_ID
 from telethon.tl.types import MessageEntityMentionName
 from telethon import events
 
 EVENT_LOGGER = True
-DMUTE_LIST = []
 
 @pbot.on_message(group=1)
-async def watcher(_, message):
-    if len(DMUTE_LIST)==0:
-        return
-    if message.from_user.id in DMUTE_LIST:
+async def watcher(_, m):
+    if is_muted(message.from_user.id, message.chat.id):
         await message.delete()
 
 
@@ -106,7 +104,7 @@ async def delmute(event):
         return await event.reply("Trying to mute yourself? Not gonna happen")
     if user.id == OWNER_ID:
         return await event.reply("Nice Try Muting my owner right there XD")
-    if user.id in DMUTE_LIST:
+    if is_muted(user.id, event.chat_id):
         return await event.reply("`This user is already muted in this chat ~~lmfao sed rip~~`")
     result = await tbot.get_permissions(event.chat_id, user.id)
     try:
@@ -122,7 +120,7 @@ async def delmute(event):
             return await event.reply("`I can't mute a person if I dont have delete messages permission. ಥ﹏ಥ`")
     elif "creator" not in vars(chat):
         return await event.reply("`I can't mute a person without having admin rights.` ಥ﹏ಥ  ")
-    DMUTE_LIST.append[int(user.id)]
+    mute(user.id, event.chat_id)
     if reason:
         await event.reply(
             f"[{user.first_name}]({unid}) is muted in {event.chat.title}\n"
@@ -151,8 +149,8 @@ async def undelmute(event):
         return
     try:
         unid = f"@{user.username}" if user.username is not None else f"tg://user?id={user.id}"
-        if user.id in DMUTE_LIST:
-            DMUTE.remove(int(user.id))
+        if is_muted(user.id, event.chat_id):
+            unmute(user.id, event.chat_id)
             await event.reply(f"[{user.first_name}]({unid}) is unmuted in {event.chat.title}")
         else:
             return await event.reply("`This user can already speak freely in this chat`")
