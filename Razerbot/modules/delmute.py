@@ -13,7 +13,7 @@ async def watcher(_, m):
 
 
 @register(pattern="[./!]delmute(?:\s|$)([\s\S]*)")
-async def delmute(_, m):
+async def delmute(m):
     jadu = m.pattern_match.group(1)
     userid = m.from_user.id
     mem = await pbot.get_chat_member(m.chat_id, userid)
@@ -66,7 +66,7 @@ async def delmute(_, m):
         )
 
 @register(pattern="[./!]undelmute(?:\s|$)([\s\S]*)")
-async def undelmute(_, m):
+async def undelmute(m):
     jadu = m.pattern_match.group(1)
     userid = m.from_user.id
     mem = await pbot.get_chat_member(m.chat_id, userid)
