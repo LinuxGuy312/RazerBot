@@ -14,7 +14,10 @@ async def watcher(_, m):
 
 @pbot.on_message(filters.command("delmute", prefixes=["/", ".", "!"]))
 async def delmute(_, m):
-    jadu = m.matches[0].group(1) if not None else None
+    try:
+        jadu = m.text.split(" ")[1]
+    except IndexError:
+        jadu = None
     userid = m.from_user.id
     mem = await pbot.get_chat_member(m.chat.id, userid)
     myid = (await pbot.get_me()).id
@@ -67,7 +70,10 @@ async def delmute(_, m):
 
 @pbot.on_message(filters.command("undelmute", prefixes=["/", ".", "!"]))
 async def undelmute(_, m):
-    jadu = m.matches[0].group(1) if not None else None
+    try:
+        jadu = m.text.split(" ")[1]
+    except IndexError:
+        jadu = None
     userid = m.from_user.id
     mem = await pbot.get_chat_member(m.chat.id, userid)
     if not ((mem.status == ChatMemberStatus.ADMINISTRATOR) or (userid == OWNER_ID)):
