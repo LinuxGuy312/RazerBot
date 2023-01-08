@@ -1,7 +1,7 @@
 import asyncio
 from Razerbot.modules.sql.mute_sql import *
 from Razerbot import pbot, EVENT_LOGS, LOGGER, OWNER_ID
-from pyrogram.enums import *
+from pyrogram.enums import ChatMemberStatus, ChatType
 from pyrogram import filters
 
 EVENT_LOGGER = True
