@@ -7,13 +7,13 @@ from pyrogram.enums import *
 EVENT_LOGGER = True
 
 @register(incoming=True, pattern="(?:\s|$)([\s\S]*)")
-async def watcher(_, m):
+async def watcher(bot, m):
     if is_muted(m.from_user.id, m.chat_id):
         await m.delete()
 
 
 @register(pattern="[./!]delmute(?:\s|$)([\s\S]*)")
-async def delmute(m):
+async def delmute(bot, m):
     jadu = m.pattern_match.group(1)
     userid = m.from_user.id
     mem = await pbot.get_chat_member(m.chat_id, userid)
@@ -66,7 +66,7 @@ async def delmute(m):
         )
 
 @register(pattern="[./!]undelmute(?:\s|$)([\s\S]*)")
-async def undelmute(m):
+async def undelmute(bot, m):
     jadu = m.pattern_match.group(1)
     userid = m.from_user.id
     mem = await pbot.get_chat_member(m.chat_id, userid)
