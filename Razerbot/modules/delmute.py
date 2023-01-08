@@ -24,13 +24,15 @@ async def delmute(_, m):
         if m.reply_to_message:
             jadu = m.reply_to_message.from_user.id
             try:
-                reason = m.text.split(" ")[1:]
+                lst = m.text.split(" ")[1:]
+                reason = " ".join(lst)
             except:
                 reason = None
         else:
             jadu = m.text.split(" ")[1]
             try:
-                reason = m.text.split(" ")[2:]
+                lst = m.text.split(" ")[2:]
+                reason = " ".join(lst)
             except:
                 reason = None
     except Exception as e:
@@ -65,9 +67,9 @@ async def delmute(_, m):
     except Exception as e:
         return await m.reply_text(f"**Error : **`{e}`")
     mute(user.id, m.chat.id)
-    msg = f"{user.mention} [`{user.id}`] is now muted in {m.chat.title} by {m.from_user.mention}." if reason is None else f"{user.mention} [`{user.id}`] is now muted in {m.chat.title} by {m.from_user.mention}.\nReason: `{reason}`"
+    msg = f"{user.mention} [`{user.id}`] is now muted in {m.chat.title} by {m.from_user.mention}.\nReason: `{reason}`" if reason is not None else f"{user.mention} [`{user.id}`] is now muted in {m.chat.title} by {m.from_user.mention}."
     await m.reply_text(msg)
-    evt_msg = f"#MUTED\n**User :** {user.mention} with id `{user.id}`\n**Chat :** {m.chat.title}(`{m.chat.id}`)" if reason is None else f"#MUTED\n**User :** {user.mention} with id `{user.id}`\n**Chat :** {m.chat.title}(`{m.chat.id}`)\n**Reason :** `{reason}`"
+    evt_msg = f"#MUTED\n**User :** {user.mention} with id `{user.id}`\n**Chat :** {m.chat.title}(`{m.chat.id}`)\n**Reason :** `{reason}`" if reason is not None else f"#MUTED\n**User :** {user.mention} with id `{user.id}`\n**Chat :** {m.chat.title}(`{m.chat.id}`)"
     if EVENT_LOGGER:
         await pbot.send_message(EVENT_LOGS, evt_msg)
 
