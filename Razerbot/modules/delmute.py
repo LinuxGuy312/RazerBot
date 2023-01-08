@@ -28,7 +28,12 @@ async def delmute(_, m):
     stat = await pbot.get_chat_member(m.chat.id, myid)
     if stat.status not in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]:
         return await m.reply("`I can't mute a person without having admin rights` ಥ﹏ಥ")
-    user, reason = m.reply_to_message.from_user or await pbot.get_users(jadu)
+    try:
+        user, reason = m.reply_to_message.from_user
+    except AttributeError:
+        user, reason = await pbot.get_users(jadu)
+    except Exception as e:
+        return await m.reply(f"Error : {e}")
     if not user:
         return
     if user.id == myid:
@@ -80,7 +85,12 @@ async def undelmute(_, m):
         return await m.reply("This command is only for admins.")
     if m.chat.type == ChatType.PRIVATE:
         return await m.reply("How can you be so noob? :/")
-    user = m.reply_to_message.from_user or await pbot.get_users(jadu)
+    try:
+        user = m.reply_to_message.from_user
+    except AttributeError:
+        user = await pbot.get_users(jadu)
+    except Exception as e:
+        return await m.reply(f"Error : {e}")
     if not user:
         return
     try:
