@@ -50,6 +50,7 @@ from telegram.ext import (
 )
 from telegram.ext.dispatcher import DispatcherHandlerStop, run_async
 from telegram.utils.helpers import escape_markdown
+from telegram.errors.rpcerrorlist import FloodWaitError
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -899,6 +900,11 @@ def main():
 
 if __name__ == "__main__":
     LOGGER.info("Successfully loaded modules: " + str(ALL_MODULES))
-    telethn.start(bot_token=TOKEN)
+    try:
+        telethn.start(bot_token=TOKEN)
+    except FloodWaitError as e:
+        LOGGER.info(f"Have to wait {e.seconds} seconds.")
+        time.sleep(e.seconds)
+        telethn.start(bot_token=TOKEN)
     pbot.start()
     main()
