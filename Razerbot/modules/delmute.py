@@ -8,7 +8,7 @@ from pyrogram import filters
 EVENT_LOGGER = True
 
 
-@pbot.on_message(group=69)
+@pbot.on_message(group=7)
 async def watcher(_, m):
     if is_muted(m.from_user.id, m.chat.id):
         await m.delete()
