@@ -8,7 +8,7 @@ EVENT_LOGGER = True
 
 @pbot.on_message(group=1)
 async def watcher(_, m):
-    if is_muted(m.from_user.id, m.chat_id):
+    if is_muted(m.from_user.id, m.chat.id):
         await m.delete()
 
 
