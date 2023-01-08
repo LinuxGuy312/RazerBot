@@ -903,7 +903,7 @@ if __name__ == "__main__":
     try:
         telethn.start(bot_token=TOKEN)
     except FloodWaitError as e:
-        LOGGER.info(f"Have to wait {e.seconds} seconds.")
+        LOGGER.info(f"[FloodWaitError] Have to wait {e.seconds} seconds due to FloodWait.")
         time.sleep(e.seconds)
         telethn.start(bot_token=TOKEN)
     pbot.start()
