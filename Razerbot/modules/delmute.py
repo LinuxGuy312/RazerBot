@@ -19,12 +19,20 @@ async def delmute(_, m):
     if not m.from_user:
         return
     if m.chat.type == ChatType.PRIVATE:
-        return
+        return await m.reply_text("How can you be so noob? :/")
     try:
         if m.reply_to_message:
             jadu = m.reply_to_message.from_user.id
+            try:
+                reason = m.text.split(" ")[1:]
+            except:
+                reason = None
         else:
             jadu = m.text.split(" ")[1]
+            try:
+                reason = m.text.split(" ")[2:]
+            except:
+                reason = None
     except Exception as e:
         return await m.reply_text(f"**Error:** {e}")
     userid = m.from_user.id
@@ -56,42 +64,38 @@ async def delmute(_, m):
         pass
     except Exception as e:
         return await m.reply_text(f"**Error : **`{e}`")
-
     mute(user.id, m.chat.id)
-    await m.reply_text(f"{user.mention} [`{user.id}`] is now muted in {m.chat.title} by {m.from_user.mention}.")
+    msg = f"{user.mention} [`{user.id}`] is now muted in {m.chat.title} by {m.from_user.mention}." if reason is None else f"{user.mention} [`{user.id}`] is now muted in {m.chat.title} by {m.from_user.mention}.\nReason: `{reason}`"
+    await m.reply_text(msg)
+    evt_msg = f"#MUTED\n**User :** {user.mention} with id `{user.id}`\n**Chat :** {m.chat.title}(`{m.chat.id}`)" if reason is None else f"#MUTED\n**User :** {user.mention} with id `{user.id}`\n**Chat :** {m.chat.title}(`{m.chat.id}`)\n**Reason :** `{reason}`"
     if EVENT_LOGGER:
-        await pbot.send_message(
-            EVENT_LOGS,
-            "#DEL-MUTED\n"
-            f"**User :** {user.mention} with id `{user.id}`\n"
-            f"**Chat :** {m.chat.title}(`{m.chat.id}`)",
-        )
+        await pbot.send_message(EVENT_LOGS, evt_msg)
 
 @pbot.on_message(filters.command("undelmute", prefixes=["/", ".", "!"]))
 async def undelmute(_, m):
+    if not m.from_user:
+        return
+    if m.chat.type == ChatType.PRIVATE:
+        return await m.reply_text("How can you be so noob? :/")
     try:
-        jadu = m.text.split(" ")[1]
-    except IndexError:
-        jadu = None
+        if m.reply_to_message:
+            jadu = m.reply_to_message.from_user.id
+        else:
+            jadu = m.text.split(" ")[1]
+    except Exception as e:
+        return await m.reply_text(f"**Error:** {e}")
     userid = m.from_user.id
     mem = await pbot.get_chat_member(m.chat.id, userid)
-    if not ((mem.status == ChatMemberStatus.ADMINISTRATOR) or (userid == OWNER_ID)):
-        return await m.reply("This command is only for admins.")
-    if m.chat.type == ChatType.PRIVATE:
-        return await m.reply("How can you be so noob? :/")
+    if not ((mem.status in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]) or (userid == OWNER_ID)):
+        return await m.reply_text("This command is only for admins.")
     try:
-        user = m.reply_to_message.from_user
-    except AttributeError:
         user = await pbot.get_users(jadu)
-    except Exception as e:
-        return await m.reply(f"Error : {e}")
-    if not user:
+    except:
         return
     try:
-        unid = f"@{user.username}" if user.username is not None else f"tg://user?id={user.id}"
         if is_muted(user.id, m.chat.id):
             unmute(user.id, m.chat.id)
-            await m.reply(f"[{user.first_name}]({unid}) is unmuted in {m.chat.title}")
+            await m.reply(f"{user.mention} [`{user.id}`] is unmuted in {m.chat.title} by {m.from_user.mention}")
         else:
             return await m.reply("`This user can already speak freely in this chat`")
     except Exception as e:
@@ -100,7 +104,7 @@ async def undelmute(_, m):
         await pbot.send_message(
             EVENT_LOGS,
             "#UNMUTED\n"
-            f"**User :** {user.first_name} with id `{user.id}`\n"
+            f"**User :** {user.mention} with id `{user.id}`\n"
             f"**Chat :** {m.chat.title}(`{m.chat.id}`)"
         )
 
