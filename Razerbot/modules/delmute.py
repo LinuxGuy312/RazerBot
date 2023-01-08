@@ -16,7 +16,7 @@ async def watcher(_, m):
 async def delmute(_, m):
     jadu = m.pattern_match.group(1)
     userid = m.from_user.id
-    mem = await pbot.get_chat_member(m.chat_id, userid)
+    mem = await pbot.get_chat_member(m.chat.id, userid)
     myid = (await pbot.get_me()).id
     if not ((mem.status == ChatMemberStatus.ADMINISTRATOR) or (userid == OWNER_ID)):
         return await m.reply("This command is only for admins.")
@@ -69,7 +69,7 @@ async def delmute(_, m):
 async def undelmute(_, m):
     jadu = m.pattern_match.group(1)
     userid = m.from_user.id
-    mem = await pbot.get_chat_member(m.chat_id, userid)
+    mem = await pbot.get_chat_member(m.chat.id, userid)
     if not ((mem.status == ChatMemberStatus.ADMINISTRATOR) or (userid == OWNER_ID)):
         return await m.reply("This command is only for admins.")
     if m.chat.type == ChatType.PRIVATE:
@@ -79,8 +79,8 @@ async def undelmute(_, m):
         return
     try:
         unid = f"@{user.username}" if user.username is not None else f"tg://user?id={user.id}"
-        if is_muted(user.id, m.chat_id):
-            unmute(user.id, m.chat_id)
+        if is_muted(user.id, m.chat.id):
+            unmute(user.id, m.chat.id)
             await m.reply(f"[{user.first_name}]({unid}) is unmuted in {m.chat.title}")
         else:
             return await m.reply("`This user can already speak freely in this chat`")
