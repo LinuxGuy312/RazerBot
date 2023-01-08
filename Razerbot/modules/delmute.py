@@ -27,11 +27,14 @@ async def delmute(_, m):
             jadu = m.text.split()[1]
     userid = m.from_user.id
     mem = await pbot.get_chat_member(m.chat.id, userid)
-    if not ((mem.status == ChatMemberStatus.ADMINISTRATOR or ChatMemberStatus.OWNER) or (userid == OWNER_ID)):
+    if not ((mem.status in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]) or (userid == OWNER_ID)):
         return await m.reply_text("This command is only for admins.")
     stat = await pbot.get_chat_member(m.chat.id, BOT_ID)
     if stat.status not in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]:
         return await m.reply_text("`I can't mute a person without having admin rights` ಥ﹏ಥ")
+    if "privileges" in vars(stat) and vars(stat)["privileges"] is not None:
+        if stat.privileges.can_delete_messages is False:
+            return await m.reply_text("`I can't mute a person if I dont have delete messages permission. ಥ﹏ಥ`")
     try:
         user = await pbot.get_users(jadu)
     except:
