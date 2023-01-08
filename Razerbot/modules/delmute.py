@@ -1,12 +1,12 @@
 import asyncio
 from Razerbot.modules.sql.mute_sql import *
-from Razerbot import pbot, EVENT_LOGS, LOGGER, OWNER_ID
+from Razerbot import pbot, EVENT_LOGS, LOGGER, BOT_ID, OWNER_ID
+
 from pyrogram.enums import ChatMemberStatus, ChatType
 from pyrogram import filters
 
-EVENT_LOGGER = True
 
-@pbot.on_message(group=1)
+@pbot.on_message(group=69)
 async def watcher(_, m):
     if is_muted(m.from_user.id, m.chat.id):
         await m.delete()
@@ -14,62 +14,49 @@ async def watcher(_, m):
 
 @pbot.on_message(filters.command("delmute", prefixes=["/", ".", "!"]))
 async def delmute(_, m):
+    if not m.from_user:
+        return
+    if m.chat.type == ChatType.PRIVATE:
+        return
     try:
-        jadu = m.text.split(" ")[1]
-    except IndexError:
-        jadu = None
+        if m.reply_to_message:
+            jadu = m.reply_to_message.from_user.id
+        else:
+            jadu = m.text.split()[1]
     userid = m.from_user.id
     mem = await pbot.get_chat_member(m.chat.id, userid)
-    myid = (await pbot.get_me()).id
-    if not ((mem.status == ChatMemberStatus.ADMINISTRATOR) or (userid == OWNER_ID)):
-        return await m.reply("This command is only for admins.")
-    if m.chat.type == ChatType.PRIVATE:
-        return await m.reply("How can you be so noob? :/")
-    stat = await pbot.get_chat_member(m.chat.id, myid)
+    if not ((mem.status == ChatMemberStatus.ADMINISTRATOR or ChatMemberStatus.OWNER) or (userid == OWNER_ID)):
+        return await m.reply_text("This command is only for admins.")
+    stat = await pbot.get_chat_member(m.chat.id, BOT_ID)
     if stat.status not in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]:
-        return await m.reply("`I can't mute a person without having admin rights` ಥ﹏ಥ")
+        return await m.reply_text("`I can't mute a person without having admin rights` ಥ﹏ಥ")
     try:
-        user, reason = m.reply_to_message.from_user
-    except AttributeError:
-        user, reason = await pbot.get_users(jadu)
-    except Exception as e:
-        return await m.reply(f"Error : {e}")
-    if not user:
+        user = await pbot.get_users(jadu)
+    except:
         return
-    if user.id == myid:
-        return await m.reply("Sorry, I can't mute myself.")
+    if user.id == BOT_ID:
+        return await m.reply_text("Sorry, I can't mute myself.")
     if user.id == userid:
-        return await m.reply("Trying to mute yourself? Not gonna happen")
+        return await m.reply_text("Trying to mute yourself? Not gonna happen")
     if user.id == OWNER_ID:
-        return await m.reply("Nice Try Muting my owner right there XD")
+        return await m.reply_text("Nice Try Muting my owner right there XD")
     if is_muted(user.id, m.chat.id):
-        return await m.reply("This user is already muted in this chat ~~lmfao sed rip~~")
+        return await m.reply_text("This user is already muted in this chat ~~lmfao sed rip~~")
     try:
         if not mem.permissions.can_send_messages:
-            return await m.reply("This user is already muted in this chat ~~lmfao sed rip~~")
+            return await m.reply_text("This user is already muted in this chat ~~lmfao sed rip~~")
     except AttributeError:
         pass
     except Exception as e:
-        return await m.reply(f"**Error : **`{e}`")
-    unid = f"@{user.username}" if user.username is not None else f"tg://user?id={user.id}"
-    if "privileges" in vars(stat) and vars(stat)["privileges"] is not None:
-        if stat.privileges.can_delete_messages is not True:
-            return await m.reply("`I can't mute a person if I dont have delete messages permission. ಥ﹏ಥ`")
-    elif vars(stat)["privileges"] is None:
-        return await m.reply("`I can't mute a person without having admin rights.` ಥ﹏ಥ")
+        return await m.reply_text(f"**Error : **`{e}`")
+
     mute(user.id, m.chat.id)
-    if reason:
-        await map(func, iter1).reply(
-            f"[{user.first_name}]({unid}) is muted in {m.chat.title}\n"
-            f"Reason: `{reason}`"
-        )
-    else:
-        await m.reply(f"[{user.first_name}]({unid}) is muted in {m.chat.title}")
-    if EVENT_LOGGER:
+    await m.reply_text(f"{user.mention} [`{user.id}`] is now muted in {m.chat.title} by {m.from_user.mention}.")
+    if EVENT_LOGS:
         await pbot.send_message(
             EVENT_LOGS,
-            "#MUTED\n"
-            f"**User :** {user.first_name} with id `{user.id}`\n"
+            "#DEL-MUTED\n"
+            f"**User :** {user.mention} with id `{user.id}`\n"
             f"**Chat :** {m.chat.title}(`{m.chat.id}`)",
         )
 
