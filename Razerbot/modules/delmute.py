@@ -1,19 +1,18 @@
 import asyncio
-from Razerbot.events import register
 from Razerbot.modules.sql.mute_sql import *
 from Razerbot import pbot, EVENT_LOGS, LOGGER, OWNER_ID
 from pyrogram.enums import *
 
 EVENT_LOGGER = True
 
-@register(incoming=True, pattern="(?:\s|$)([\s\S]*)")
-async def watcher(bot, m):
+@pbot.on_message(group=1)
+async def watcher(_, m):
     if is_muted(m.from_user.id, m.chat_id):
         await m.delete()
 
 
-@register(pattern="[./!]delmute(?:\s|$)([\s\S]*)")
-async def delmute(bot, m):
+@pbot.on_message(filters.command("delmute", prefixes=["/", ".", "!"]))
+async def delmute(_, m):
     jadu = m.pattern_match.group(1)
     userid = m.from_user.id
     mem = await pbot.get_chat_member(m.chat_id, userid)
@@ -65,8 +64,8 @@ async def delmute(bot, m):
             f"**Chat :** {m.chat.title}(`{m.chat.id}`)",
         )
 
-@register(pattern="[./!]undelmute(?:\s|$)([\s\S]*)")
-async def undelmute(bot, m):
+@pbot.on_message(filters.command("undelmute", prefixes=["/", ".", "!"]))
+async def undelmute(_, m):
     jadu = m.pattern_match.group(1)
     userid = m.from_user.id
     mem = await pbot.get_chat_member(m.chat_id, userid)
