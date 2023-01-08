@@ -24,7 +24,9 @@ async def delmute(_, m):
         if m.reply_to_message:
             jadu = m.reply_to_message.from_user.id
         else:
-            jadu = m.text.split()[1]
+            jadu = m.text.split(" ")[1]
+    except Exception as e:
+        return await m.reply_text(f"**Error:** {e}")
     userid = m.from_user.id
     mem = await pbot.get_chat_member(m.chat.id, userid)
     if not ((mem.status in [ChatMemberStatus.ADMINISTRATOR, ChatMemberStatus.OWNER]) or (userid == OWNER_ID)):
