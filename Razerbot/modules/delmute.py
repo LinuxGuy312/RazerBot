@@ -67,9 +67,13 @@ async def delmute(_, m):
     except Exception as e:
         return await m.reply_text(f"**Error : **`{e}`")
     mute(user.id, m.chat.id)
-    msg = f"{user.mention} [`{user.id}`] is now muted in {m.chat.title} by {m.from_user.mention}.\nReason: `{reason}`" if reason is not None else f"{user.mention} [`{user.id}`] is now muted in {m.chat.title} by {m.from_user.mention}."
-    await m.reply_text(msg)
-    evt_msg = f"#MUTED\n**User :** {user.mention} with id `{user.id}`\n**Chat :** {m.chat.title}(`{m.chat.id}`)\n**Reason :** `{reason}`" if reason is not None else f"#MUTED\n**User :** {user.mention} with id `{user.id}`\n**Chat :** {m.chat.title}(`{m.chat.id}`)"
+    if reason is None:
+        msg =  f"{user.mention} [`{user.id}`] is now muted in {m.chat.title} by {m.from_user.mention}."
+        evt_msg = f"#MUTED\n**User :** {user.mention} with id `{user.id}`\n**Chat :** {m.chat.title}(`{m.chat.id}`)"
+    else:
+        msg = f"{user.mention} [`{user.id}`] is now muted in {m.chat.title} by {m.from_user.mention}.\nReason: `{reason}`"
+        evt_msg = f"#MUTED\n**User :** {user.mention} with id `{user.id}`\n**Chat :** {m.chat.title}(`{m.chat.id}`)\n**Reason :** `{reason}`"
+    await m.reply_text(msg) 
     if EVENT_LOGGER:
         await pbot.send_message(EVENT_LOGS, evt_msg)
 
@@ -94,6 +98,12 @@ async def undelmute(_, m):
         user = await pbot.get_users(jadu)
     except:
         return
+    if user.id == BOT_ID:
+        return await m.reply_text("I am the one who mutes lol XD")
+    if user.id == userid:
+        return await m.reply_text("Hey! You can't unmute yourself! That's cheating XD")
+    if user.id == OWNER_ID:
+        return await m.reply_text("How can I unmute my owner when I can't even mute him LOL XD")
     try:
         if is_muted(user.id, m.chat.id):
             unmute(user.id, m.chat.id)
