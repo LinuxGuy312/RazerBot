@@ -23,18 +23,12 @@ async def delmute(_, m):
     try:
         if m.reply_to_message:
             jadu = m.reply_to_message.from_user.id
-            try:
-                lst = m.text.split(" ")[1:]
-                reason = " ".join(lst)
-            except:
-                reason = None
+            lst = m.text.split(" ")[1:]
+            reason = " ".join(lst)
         else:
             jadu = m.text.split(" ")[1]
-            try:
-                lst = m.text.split(" ")[2:]
-                reason = " ".join(lst)
-            except:
-                reason = None
+            lst = m.text.split(" ")[2:]
+            reason = " ".join(lst)
     except Exception as e:
         return await m.reply_text(f"**Error:** {e}")
     userid = m.from_user.id
@@ -67,7 +61,7 @@ async def delmute(_, m):
     except Exception as e:
         return await m.reply_text(f"**Error : **`{e}`")
     mute(user.id, m.chat.id)
-    if reason is None:
+    if reason == '':
         msg =  f"{user.mention} [`{user.id}`] is now muted in {m.chat.title} by {m.from_user.mention}."
         evt_msg = f"#MUTED\n**User :** {user.mention} with id `{user.id}`\n**Chat :** {m.chat.title}(`{m.chat.id}`)"
     else:
