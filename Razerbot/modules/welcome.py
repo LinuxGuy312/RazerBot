@@ -17,7 +17,8 @@ from Razerbot import (
     WOLVES,
     sw,
     dispatcher,
-    JOIN_LOGGER
+    JOIN_LOGGER,
+    OWNER_USERNAME
 )
 from Razerbot.modules.helper_funcs.chat_status import (
     is_user_ban_protected,
@@ -191,7 +192,7 @@ def new_member(update: Update, context: CallbackContext):
             if new_mem.id == OWNER_ID:
                 update.effective_message.reply_photo(
                     OWNER_JOINED,
-                    caption="⌁ Bᴇᴡᴀʀᴇ! Mʏ Oᴡɴᴇʀ Jᴜsᴛ ɪᴏɪɴᴇᴅ ʜᴇʀᴇ! ⌁",
+                    caption=f"⌁ Bᴇᴡᴀʀᴇ! Mʏ Oᴡɴᴇʀ @{OWNER_USERNAME} Jᴜsᴛ ɪᴏɪɴᴇᴅ ʜᴇʀᴇ! ⌁",
                     reply_to_message_id=reply
                 )
                 welcome_log = (
