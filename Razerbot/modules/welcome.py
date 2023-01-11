@@ -72,7 +72,7 @@ ENUM_FUNC_MAP = {
 }
 
 VERIFIED_USER_WAITLIST = {}
-
+OWNER_JOINED = "https://te.legra.ph/file/e07b2c9608553e78535c8.jpg"
 
 # do not async
 def send(update, message, keyboard, backup_message):
@@ -189,8 +189,10 @@ def new_member(update: Update, context: CallbackContext):
 
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
-                update.effective_message.reply_text(
-                    "Stay Alert, My Owner just joined Here.", reply_to_message_id=reply
+                update.effective_message.reply_photo(
+                    OWNER_JOINED,
+                    caption="⌁ Bᴇᴡᴀʀᴇ! Mʏ Oᴡɴᴇʀ Jᴜsᴛ ɪᴏɪɴᴇᴅ ʜᴇʀᴇ! ⌁",
+                    reply_to_message_id=reply
                 )
                 welcome_log = (
                     f"{html.escape(chat.title)}\n"

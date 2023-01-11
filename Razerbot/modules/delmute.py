@@ -7,6 +7,7 @@ from pyrogram import filters
 
 EVENT_LOGGER = True
 
+DMUTE = []
 
 @pbot.on_message(group=7)
 async def watcher(_, m):
@@ -71,7 +72,7 @@ async def delmute(_, m):
     if EVENT_LOGGER:
         await pbot.send_message(EVENT_LOGS, evt_msg)
 
-@pbot.on_message(filters.command("undelmute", prefixes=["/", ".", "!"]))
+@pbot.on_message(filters.command(["undelmute", "delunmute"], prefixes=["/", ".", "!"]))
 async def undelmute(_, m):
     if not m.from_user:
         return
