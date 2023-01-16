@@ -6,7 +6,7 @@ from pyrogram.enums import MessageEntityType
 
 from Razerbot import BOT_USERNAME, pbot as app
 from Razerbot.pyrogramee.pluginshelper import get_readable_time
-from Razerbot.modules.sql.mongo.afk_db import is_afk, remove_afk
+from Razerbot.utils.mongo.afk_db import is_afk, remove_afk
 
 chat_watcher_group = 1
 

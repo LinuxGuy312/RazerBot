@@ -5,7 +5,7 @@ from pyrogram.types import Message
 
 from Razerbot import BOT_USERNAME, pbot as app
 from Razerbot.pyrogramee.pluginshelper import get_readable_time
-from Razerbot.modules.sql.mongo.afk_db import add_afk, is_afk, remove_afk
+from Razerbot.utils.mongo.afk_db import add_afk, is_afk, remove_afk
 
 
 # bug :- /afk with bot username afk back in 2 sec.
