@@ -4,7 +4,7 @@ from pyrogram import filters
 from pyrogram.types import Message
 
 from Razerbot import BOT_USERNAME, pbot as app
-from Razerbot.modules.helper_funcs import get_readable_time
+from Razerbot.pyrogramee.pluginshelper import get_readable_time
 from Razerbot.modules.sql.mongo.afk_db import add_afk, is_afk, remove_afk
 
 
