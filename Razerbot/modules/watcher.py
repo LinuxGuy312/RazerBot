@@ -18,7 +18,7 @@ chat_watcher_group = 1
 async def chat_watcher_func(_, message):
     if message.sender_chat:
         return
-    if message.text.startswith("#afk"):
+    if str(message.text).startswith("#afk"):
         return
     userid = message.from_user.id
     user_name = message.from_user.first_name
