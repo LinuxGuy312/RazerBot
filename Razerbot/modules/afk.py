@@ -9,7 +9,7 @@ from Razerbot.utils.mongo import add_afk, is_afk, remove_afk
 
 
 # bug :- /afk with bot username afk back in 2 sec.
-@app.on_message(filters.command("afk") | filters.regex('brb'))
+@app.on_message(filters.command("afk") | filters.regex('^brb'))
 async def active_afk(_, message: Message):
     if message.sender_chat:
         return
