@@ -11,6 +11,8 @@ DMUTE = []
 
 @pbot.on_message(group=7)
 async def watcher(_, m):
+    if not m.from_user:
+        return
     if is_muted(m.from_user.id, m.chat.id):
         await m.delete()
 
