@@ -10,7 +10,7 @@ from telegram.ext import (
     MessageHandler,
     run_async,
 )
-from telegram.ext.dispatcher import DispatcherHandlerStop, run_async
+
 import Razerbot.modules.sql.users_sql as sql
 from Razerbot import DEV_USERS, LOGGER, OWNER_ID, dispatcher
 from Razerbot.modules.helper_funcs.chat_status import dev_plus, sudo_plus
@@ -20,7 +20,7 @@ USERS_GROUP = 4
 CHAT_GROUP = 5
 DEV_AND_MORE = DEV_USERS.append(int(OWNER_ID))
 
-@run_async
+
 def get_user_id(username):
     # ensure valid userid
     if len(username) <= 5:
@@ -34,21 +34,24 @@ def get_user_id(username):
     if not users:
         return None
 
-    if len(users) == 1:
+    elif len(users) == 1:
         return users[0].user_id
-    for user_obj in users:
-        try:
-            userdat = dispatcher.bot.get_chat(user_obj.user_id)
-            if userdat.username == username:
-                return userdat.id
 
-        except BadRequest as excp:
-            if excp.message == "Chat not found":
-                pass
-            else:
-                LOGGER.exception("Error extracting user ID")
+    else:
+        for user_obj in users:
+            try:
+                userdat = dispatcher.bot.get_chat(user_obj.user_id)
+                if userdat.username == username:
+                    return userdat.id
+
+            except BadRequest as excp:
+                if excp.message == "Chat not found":
+                    pass
+                else:
+                    LOGGER.exception("Error extracting user ID")
 
     return None
+
 
 @run_async
 @dev_plus
@@ -93,8 +96,9 @@ def broadcast(update: Update, context: CallbackContext):
                 except TelegramError:
                     failed_user += 1
         update.effective_message.reply_text(
-            f"Broadcast complete.\nGroups failed: {failed}.\nUsers failed: {failed_user}.",
+            f"Broadcast complete.\nGroups failed: {failed}.\nUsers failed: {failed_user}."
         )
+
 
 @run_async
 def log_user(update: Update, context: CallbackContext):
@@ -114,6 +118,7 @@ def log_user(update: Update, context: CallbackContext):
     if msg.forward_from:
         sql.update_user(msg.forward_from.id, msg.forward_from.username)
 
+
 @run_async
 @sudo_plus
 def chats(update: Update, context: CallbackContext):
@@ -123,13 +128,10 @@ def chats(update: Update, context: CallbackContext):
     for chat in all_chats:
         try:
             curr_chat = context.bot.getChat(chat.chat_id)
-            bot_member = curr_chat.get_member(context.bot.id)
-            chat_members = curr_chat.get_member_count(context.bot.id)
+            curr_chat.get_member(context.bot.id)
+            chat_members = curr_chat.get_members_count(context.bot.id)
             chatfile += "{}. {} | {} | {}\n".format(
-                P,
-                chat.chat_name,
-                chat.chat_id,
-                chat_members,
+                P, chat.chat_name, chat.chat_id, chat_members
             )
             P = P + 1
         except:
@@ -143,6 +145,7 @@ def chats(update: Update, context: CallbackContext):
             caption="Here be the list of groups in my database.",
         )
 
+
 @run_async
 def chat_checker(update: Update, context: CallbackContext):
     bot = context.bot
@@ -154,8 +157,6 @@ def chat_checker(update: Update, context: CallbackContext):
 
 
 def __user_info__(user_id):
-    if user_id in [777000, 1087968824]:
-        return """⋗ ᴄᴏᴍᴍᴏɴ ᴄʜᴀᴛs: <code>???</code>"""
     if user_id == dispatcher.bot.id:
         return """⋗ ᴄᴏᴍᴍᴏɴ ᴄʜᴀᴛs: <code>???</code>"""
     num_chats = sql.get_user_num_chats(user_id)
@@ -163,7 +164,7 @@ def __user_info__(user_id):
 
 
 def __stats__():
-    return f"× {sql.num_users()} users, across {sql.num_chats()} chats"
+    return f"• {sql.num_users()} users, across {sql.num_chats()} chats"
 
 
 def __migrate__(old_chat_id, new_chat_id):
@@ -173,15 +174,10 @@ def __migrate__(old_chat_id, new_chat_id):
 __help__ = ""  # no help string
 
 BROADCAST_HANDLER = CommandHandler(
-    ["broadcastall", "broadcastusers", "broadcastgroups"],
-    broadcast
+    ["broadcastall", "broadcastusers", "broadcastgroups"], broadcast
 )
-USER_HANDLER = MessageHandler(
-    Filters.all & Filters.chat_type.groups, log_user
-)
-CHAT_CHECKER_HANDLER = MessageHandler(
-    Filters.all & Filters.chat_type.groups, chat_checker
-)
+USER_HANDLER = MessageHandler(Filters.all & Filters.group, log_user)
+CHAT_CHECKER_HANDLER = MessageHandler(Filters.all & Filters.group, chat_checker)
 CHATLIST_HANDLER = CommandHandler("groups", chats)
 
 dispatcher.add_handler(USER_HANDLER, USERS_GROUP)
