@@ -11,7 +11,7 @@ from telethon.tl.types import DocumentAttributeAudio
 
 @register(pattern="^[/!]hbds(?: |$)([\s\S]*)")
 async def song(hbd):
-	dun = await hbd.edit('`Processing...`')
+	dun = await hbd.reply('`Processing...`')
 	oof = hbd.pattern_match.group(1)
 	jadu = await hbd.get_reply_message()
 	if not oof and jadu:
