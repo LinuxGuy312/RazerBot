@@ -1,27 +1,26 @@
+import asyncio
 from io import BytesIO
-from time import sleep
+from typing import Union
 
-from telegram import TelegramError, Update
-from telegram.error import BadRequest, Unauthorized
-from telegram.ext import (
-    CallbackContext,
-    CommandHandler,
-    Filters,
-    MessageHandler,
-    run_async,
-)
+from telegram import ChatMemberAdministrator, Update
+from telegram.constants import ParseMode
+from telegram.error import BadRequest, Forbidden, TelegramError
+from telegram.ext import CommandHandler, ContextTypes, MessageHandler, filters
+from telegram.helpers import escape_markdown
 
 import Razerbot.modules.sql.users_sql as sql
-from Razerbot import DEV_USERS, LOGGER, OWNER_ID, dispatcher
-from Razerbot.modules.helper_funcs.chat_status import dev_plus, sudo_plus
+from Razerbot import DEV_USERS, LOGGER, OWNER_ID, dispatcher as application
+from Razerbot.modules.helper_funcs.chat_status import check_admin
 from Razerbot.modules.sql.users_sql import get_all_users
+
+
 
 USERS_GROUP = 4
 CHAT_GROUP = 5
 DEV_AND_MORE = DEV_USERS.append(int(OWNER_ID))
 
 
-def get_user_id(username):
+async def get_user_id(username: str) -> Union[int, None]:
     # ensure valid userid
     if len(username) <= 5:
         return None
@@ -40,22 +39,21 @@ def get_user_id(username):
     else:
         for user_obj in users:
             try:
-                userdat = dispatcher.bot.get_chat(user_obj.user_id)
+                userdat = await application.bot.get_chat(user_obj.user_id)
                 if userdat.username == username:
                     return userdat.id
 
             except BadRequest as excp:
-                if excp.message == "Chat not found":
+                if excp.message == "ᴄʜᴀᴛ ɴᴏᴛ ғᴏᴜɴᴅ":
                     pass
                 else:
-                    LOGGER.exception("Error extracting user ID")
+                    LOGGER.exception("ᴇʀʀᴏʀ ᴇxᴛʀᴀᴄᴛɪɴɢ ᴜsᴇʀ ID")
 
     return None
 
 
-@run_async
-@dev_plus
-def broadcast(update: Update, context: CallbackContext):
+@check_admin(only_dev=True)
+async def broadcast(update: Update, context: ContextTypes.DEFAULT_TYPE):
     to_send = update.effective_message.text.split(None, 1)
 
     if len(to_send) >= 2:
@@ -74,34 +72,34 @@ def broadcast(update: Update, context: CallbackContext):
         if to_group:
             for chat in chats:
                 try:
-                    context.bot.sendMessage(
+                    # topic_chat = get_action_topic(chat.chat_id)
+                    await context.bot.sendMessage(
                         int(chat.chat_id),
-                        to_send[1],
-                        parse_mode="MARKDOWN",
+                        escape_markdown(to_send[1], 2),
+                        parse_mode=ParseMode.MARKDOWN_V2,
                         disable_web_page_preview=True,
                     )
-                    sleep(0.1)
+                    await asyncio.sleep(1)
                 except TelegramError:
                     failed += 1
         if to_user:
             for user in users:
                 try:
-                    context.bot.sendMessage(
+                    await context.bot.sendMessage(
                         int(user.user_id),
-                        to_send[1],
-                        parse_mode="MARKDOWN",
+                        escape_markdown(to_send[1], 2),
+                        parse_mode=ParseMode.MARKDOWN_V2,
                         disable_web_page_preview=True,
                     )
-                    sleep(0.1)
+                    await asyncio.sleep(1)
                 except TelegramError:
                     failed_user += 1
-        update.effective_message.reply_text(
-            f"Broadcast complete.\nGroups failed: {failed}.\nUsers failed: {failed_user}."
+        await update.effective_message.reply_text(
+            f"ʙʀᴏᴀᴅᴄᴀsᴛ ᴄᴏᴍᴘʟᴇᴛᴇ.\nɢʀᴏᴜᴘs ғᴀɪʟᴇᴅ: {failed}.\nᴜsᴇʀs ғᴀɪʟᴇᴅ: {failed_user}.",
         )
 
 
-@run_async
-def log_user(update: Update, context: CallbackContext):
+async def log_user(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat = update.effective_chat
     msg = update.effective_message
 
@@ -119,19 +117,21 @@ def log_user(update: Update, context: CallbackContext):
         sql.update_user(msg.forward_from.id, msg.forward_from.username)
 
 
-@run_async
-@dev_plus
-def chats(update: Update, context: CallbackContext):
+@check_admin(only_sudo=True)
+async def chats(update: Update, context: ContextTypes.DEFAULT_TYPE):
     all_chats = sql.get_all_chats() or []
-    chatfile = "List of chats.\n0. Chat name | Chat ID | Members count\n"
+    chatfile = "ʟɪsᴛ ᴏғ ᴄʜᴀᴛs.\n0. ᴄʜᴀᴛ ɴᴀᴍᴇ | ᴄʜᴀᴛ ɪᴅ | ᴍᴇᴍʙᴇʀs ᴄᴏᴜɴᴛ\n"
     P = 1
     for chat in all_chats:
         try:
-            curr_chat = context.bot.getChat(chat.chat_id)
-            bot_member = curr_chat.get_member(context.bot.id)
-            chat_members = curr_chat.get_members_count(context.bot.id)
+            curr_chat = await context.bot.getChat(chat.chat_id)
+            await curr_chat.get_member(context.bot.id)
+            chat_members = await curr_chat.get_member_count(context.bot.id)
             chatfile += "{}. {} | {} | {}\n".format(
-                P, chat.chat_name, chat.chat_id, chat_members
+                P,
+                chat.chat_name,
+                chat.chat_id,
+                chat_members,
             )
             P = P + 1
         except:
@@ -139,32 +139,33 @@ def chats(update: Update, context: CallbackContext):
 
     with BytesIO(str.encode(chatfile)) as output:
         output.name = "groups_list.txt"
-        update.effective_message.reply_document(
+        await update.effective_message.reply_document(
             document=output,
             filename="groups_list.txt",
-            caption="Here be the list of groups in my database.",
+            caption="ʜᴇʀᴇ ʙᴇ ᴛʜᴇ ʟɪsᴛ ᴏғ ɢʀᴏᴜᴘs ɪɴ ᴍʏ ᴅᴀᴛᴀʙᴀsᴇ.",
         )
 
 
-@run_async
-def chat_checker(update: Update, context: CallbackContext):
+async def chat_checker(update: Update, context: ContextTypes.DEFAULT_TYPE):
     bot = context.bot
     try:
-        if update.effective_message.chat.get_member(bot.id).can_send_messages is False:
-            bot.leaveChat(update.effective_message.chat.id)
-    except Unauthorized:
+        bot_admin = await update.effective_message.chat.get_member(bot.id)
+        if isinstance(bot_admin, ChatMemberAdministrator):
+            if bot_admin.can_post_messages is False:
+                await bot.leaveChat(update.effective_message.chat.id)
+    except Forbidden:
         pass
 
 
 def __user_info__(user_id):
-    if user_id == dispatcher.bot.id:
+    if user_id == application.bot.id:
         return """⋗ ɢʀᴏᴜᴘs ᴄᴏᴜɴᴛ: <code>???</code>"""
     num_chats = sql.get_user_num_chats(user_id)
     return f"""⋗ ɢʀᴏᴜᴘs ᴄᴏᴜɴᴛ: <code>{num_chats}</code>"""
 
 
 def __stats__():
-    return f"• {sql.num_users()} users, across {sql.num_chats()} chats"
+    return f"• {sql.num_users()} ᴜsᴇʀs, ᴀᴄʀᴏss {sql.num_chats()} ᴄʜᴀᴛs"
 
 
 def __migrate__(old_chat_id, new_chat_id):
@@ -174,16 +175,20 @@ def __migrate__(old_chat_id, new_chat_id):
 __help__ = ""  # no help string
 
 BROADCAST_HANDLER = CommandHandler(
-    ["broadcastall", "broadcastusers", "broadcastgroups"], broadcast
+    ["broadcastall", "broadcastusers", "broadcastgroups"], broadcast, block=False
 )
-USER_HANDLER = MessageHandler(Filters.all & Filters.group, log_user)
-CHAT_CHECKER_HANDLER = MessageHandler(Filters.all & Filters.group, chat_checker)
-CHATLIST_HANDLER = CommandHandler("groups", chats)
+USER_HANDLER = MessageHandler(
+    filters.ALL & filters.ChatType.GROUPS, log_user, allow_edit=True, block=False
+)
+CHAT_CHECKER_HANDLER = MessageHandler(
+    filters.ALL & filters.ChatType.GROUPS, chat_checker, allow_edit=True, block=False
+)
+CHATLIST_HANDLER = CommandHandler("groups", chats, block=False)
 
-dispatcher.add_handler(USER_HANDLER, USERS_GROUP)
-dispatcher.add_handler(BROADCAST_HANDLER)
-dispatcher.add_handler(CHATLIST_HANDLER)
-dispatcher.add_handler(CHAT_CHECKER_HANDLER, CHAT_GROUP)
+application.add_handler(USER_HANDLER, USERS_GROUP)
+application.add_handler(BROADCAST_HANDLER)
+application.add_handler(CHATLIST_HANDLER)
+application.add_handler(CHAT_CHECKER_HANDLER, CHAT_GROUP)
 
-__mod_name__ = "Users"
+__mod_name__ = "𝐔sᴇʀs"
 __handlers__ = [(USER_HANDLER, USERS_GROUP), BROADCAST_HANDLER, CHATLIST_HANDLER]
