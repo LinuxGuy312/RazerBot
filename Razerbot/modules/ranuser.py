@@ -28,8 +28,8 @@ async def gen(event):
 	email = injs['results'][0]['email'].replace("example", "email")
 	cell = injs['results'][0]['cell']
 	ccnum = fake.credit_card_number(card_type='visa16')
-	ccexp = fake.credit_card_expire(card_type='visa16')
-	cvv = fake.credit_card_security_code(card_type='visa16')
+	ccexp = fake.credit_card_expire()
+	cvv = fake.credit_card_security_code()
 	poli = f"https://fakeface.rest/face/json?gender={gender}&minimum_age=18&maximum_age=40"
 	rpoli = requests.get(poli)
 	poinjs = rpoli.json()
