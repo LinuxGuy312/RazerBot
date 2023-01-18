@@ -8,8 +8,9 @@ from telegram.ext import (
     CommandHandler,
     Filters,
     MessageHandler,
+    run_async,
 )
-
+from telegram.ext.dispatcher import DispatcherHandlerStop, run_async
 import Razerbot.modules.sql.users_sql as sql
 from Razerbot import DEV_USERS, LOGGER, OWNER_ID, dispatcher
 from Razerbot.modules.helper_funcs.chat_status import dev_plus, sudo_plus
@@ -19,7 +20,7 @@ USERS_GROUP = 4
 CHAT_GROUP = 5
 DEV_AND_MORE = DEV_USERS.append(int(OWNER_ID))
 
-
+@run_async
 def get_user_id(username):
     # ensure valid userid
     if len(username) <= 5:
@@ -49,7 +50,7 @@ def get_user_id(username):
 
     return None
 
-
+@run_async
 @dev_plus
 def broadcast(update: Update, context: CallbackContext):
     to_send = update.effective_message.text.split(None, 1)
@@ -95,7 +96,7 @@ def broadcast(update: Update, context: CallbackContext):
             f"Broadcast complete.\nGroups failed: {failed}.\nUsers failed: {failed_user}.",
         )
 
-
+@run_async
 def log_user(update: Update, context: CallbackContext):
     chat = update.effective_chat
     msg = update.effective_message
@@ -113,7 +114,7 @@ def log_user(update: Update, context: CallbackContext):
     if msg.forward_from:
         sql.update_user(msg.forward_from.id, msg.forward_from.username)
 
-
+@run_async
 @sudo_plus
 def chats(update: Update, context: CallbackContext):
     all_chats = sql.get_all_chats() or []
@@ -142,7 +143,7 @@ def chats(update: Update, context: CallbackContext):
             caption="Here be the list of groups in my database.",
         )
 
-
+@run_async
 def chat_checker(update: Update, context: CallbackContext):
     bot = context.bot
     try:
@@ -173,16 +174,15 @@ __help__ = ""  # no help string
 
 BROADCAST_HANDLER = CommandHandler(
     ["broadcastall", "broadcastusers", "broadcastgroups"],
-    broadcast,
-    run_async=True,
+    broadcast
 )
 USER_HANDLER = MessageHandler(
-    Filters.all & Filters.chat_type.groups, log_user, run_async=True
+    Filters.all & Filters.chat_type.groups, log_user
 )
 CHAT_CHECKER_HANDLER = MessageHandler(
-    Filters.all & Filters.chat_type.groups, chat_checker, run_async=True
+    Filters.all & Filters.chat_type.groups, chat_checker
 )
-CHATLIST_HANDLER = CommandHandler("groups", chats, run_async=True)
+CHATLIST_HANDLER = CommandHandler("groups", chats)
 
 dispatcher.add_handler(USER_HANDLER, USERS_GROUP)
 dispatcher.add_handler(BROADCAST_HANDLER)
