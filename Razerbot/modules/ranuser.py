@@ -7,7 +7,7 @@ from datetime import date
 from Razerbot import telethn as tbot
 from Razerbot.events import register
 
-@register(pattern="^[!/]ranuser")
+@register(pattern="^[!/.]ranuser")
 async def gen(event):
 	fake = Faker()
 	bhurr = await event.reply("ɢᴇɴᴇʀᴀᴛɪɴɢ ɪɴꜰᴏ...")
@@ -29,7 +29,7 @@ async def gen(event):
 	cell = injs['results'][0]['cell']
 	ccnum = fake.credit_card_number(card_type='visa16')
 	ccexp = fake.credit_card_expire()
-	cvv = fake.credit_card_security_code()
+	cvv = random.choice(range(100,999))
 	poli = f"https://fakeface.rest/face/json?gender={gender}&minimum_age=18&maximum_age=40"
 	rpoli = requests.get(poli)
 	poinjs = rpoli.json()
@@ -41,4 +41,4 @@ async def gen(event):
 	dob = f"{dyr}{dfm}"
 	capt = f"**ɴᴀᴍᴇ:** {name}\n**ᴅᴏʙ:** {dob}\n**sᴛʀᴇᴇᴛ:** {street}\n**ᴄɪᴛʏ:** {city}\n**sᴛᴀᴛᴇ:** {state}\n**ᴄᴏᴜɴᴛʀʏ:** {country}\n**ᴘᴏsᴛᴀʟ ᴄᴏᴅᴇ:** {pscd}\n**ᴇᴍᴀɪʟ:** {email}\n**ᴘʜᴏɴᴇ:** {cell}\n\n**ᴄᴄ ɪɴꜰᴏ:**\n    **ᴄᴄ ɴᴜᴍʙᴇʀ:** {ccnum}\n    **ᴇxᴘɪʀʏ:** {ccexp}\n    **ᴄᴠᴠ:** {cvv}"
 	await bhurr.delete()
-	await tbot.send_file(event.chat_id, poto, caption=capt, reply_to=event.id, force_document=False)
+	await tbot.send_file(event.chat_id, poto, caption=capt, reply_to=event.reply_to_msg_id, force_document=False)
