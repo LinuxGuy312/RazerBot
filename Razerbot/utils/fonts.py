@@ -54,9 +54,8 @@ class Fonts:
             "Y": "𝚈",
             "Z": "𝚉",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def outline(text):
@@ -124,9 +123,8 @@ class Fonts:
             "8": "𝟠",
             "9": "𝟡",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def serief(text):
@@ -194,9 +192,8 @@ class Fonts:
             "8": "𝟖",
             "9": "𝟗",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def bold_cool(text):
@@ -254,9 +251,8 @@ class Fonts:
             "Y": "𝒀",
             "Z": "𝒁",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def cool(text):
@@ -314,9 +310,8 @@ class Fonts:
             "Y": "𝑌",
             "Z": "𝑍",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def smallcap(text):
@@ -384,9 +379,8 @@ class Fonts:
             "8": "𝟾",
             "9": "𝟿",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def script(text):
@@ -444,9 +438,8 @@ class Fonts:
             "Y": "𝒴",
             "Z": "𝒵",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def bold_script(text):
@@ -504,9 +497,8 @@ class Fonts:
             "Y": "𝓨",
             "Z": "𝓩",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def tiny(text):
@@ -564,9 +556,8 @@ class Fonts:
             "Y": "ʸ",
             "Z": "ᶻ",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def comic(text):
@@ -624,9 +615,8 @@ class Fonts:
             "Y": "Y",
             "Z": "ᘔ",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def san(text):
@@ -694,9 +684,8 @@ class Fonts:
             "8": "𝟴",
             "9": "𝟵",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def slant_san(text):
@@ -754,9 +743,8 @@ class Fonts:
             "Y": "𝙔",
             "Z": "𝙕",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def slant(text):
@@ -814,9 +802,8 @@ class Fonts:
             "Y": "𝘠",
             "Z": "𝘡",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def sim(text):
@@ -874,9 +861,8 @@ class Fonts:
             "Y": "𝖸",
             "Z": "𝖹",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def circles(text):
@@ -944,9 +930,8 @@ class Fonts:
             "8": "⑧",
             "9": "⑨",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def dark_circle(text):
@@ -1014,9 +999,8 @@ class Fonts:
             "8": "➑",
             "9": "➒",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def gothic(text):
@@ -1074,9 +1058,8 @@ class Fonts:
             "Y": "𝔜",
             "Z": "ℨ",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def bold_gothic(text):
@@ -1134,9 +1117,8 @@ class Fonts:
             "Y": "𝖄",
             "Z": "𝖅",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def cloud(text):
@@ -1194,9 +1176,8 @@ class Fonts:
             "Y": "Y͜͡",
             "Z": "Z͜͡",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def happy(text):
@@ -1254,9 +1235,8 @@ class Fonts:
             "Y": "Y̆̈",
             "Z": "Z̆̈",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def sad(text):
@@ -1314,9 +1294,8 @@ class Fonts:
             "Y": "Y̑̈",
             "Z": "Z̑̈",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def special(text):
@@ -1374,9 +1353,8 @@ class Fonts:
             "Y": "🇾 ",
             "Z": "🇿 ",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def square(text):
@@ -1434,9 +1412,8 @@ class Fonts:
             "Y": "🅈",
             "Z": "🅉",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def dark_square(text):
@@ -1494,9 +1471,8 @@ class Fonts:
             "Y": "🆈︎",
             "Z": "🆉︎",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def andalucia(text):
@@ -1554,9 +1530,8 @@ class Fonts:
             "Y": "ꪗ",
             "Z": "ɀ",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def manga(text):
@@ -1614,9 +1589,8 @@ class Fonts:
             "Y": "ㄚ",
             "Z": "乙",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def stinky(text):
@@ -1674,9 +1648,8 @@ class Fonts:
             "Y": "Y̾",
             "Z": "Z̾",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def bubbles(text):
@@ -1734,9 +1707,8 @@ class Fonts:
             "Y": "Y̥ͦ",
             "Z": "Z̥ͦ",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def underline(text):
@@ -1794,9 +1766,8 @@ class Fonts:
             "Y": "Y͟",
             "Z": "Z͟",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def ladybug(text):
@@ -1854,9 +1825,8 @@ class Fonts:
             "Y": "ꌩ",
             "Z": "ꁴ",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def rays(text):
@@ -1914,9 +1884,8 @@ class Fonts:
             "Y": "Y҉",
             "Z": "Z҉",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def birds(text):
@@ -1974,9 +1943,8 @@ class Fonts:
             "Y": "Y҈",
             "Z": "Z҈",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def slash(text):
@@ -2034,9 +2002,8 @@ class Fonts:
             "Y": "Y̸",
             "Z": "Z̸",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def stop(text):
@@ -2094,9 +2061,8 @@ class Fonts:
             "Y": "Y⃠",
             "Z": "Z⃠",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def skyline(text):
@@ -2154,9 +2120,8 @@ class Fonts:
             "Y": "Y̺͆",
             "Z": "Z̺͆",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def arrows(text):
@@ -2214,9 +2179,8 @@ class Fonts:
             "Y": "Y͎",
             "Z": "Z͎",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def rvnes(text):
@@ -2274,9 +2238,8 @@ class Fonts:
             "Y": "ሃ",
             "Z": "ጊ",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def strike(text):
@@ -2334,9 +2297,8 @@ class Fonts:
             "Y": "Y̶",
             "Z": "Z̶",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
 
     def frozen(text):
@@ -2394,7 +2356,6 @@ class Fonts:
             "Y": "Y༙",
             "Z": "Z༙",
         }
-        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
-            text = txt.replace(i, j)
+            text = text.replace(i, j)
         return text
