@@ -7,6 +7,8 @@ from Razerbot.utils.fonts import Fonts
 
 @Client.on_message(filters.command(["font", "fonts"]))
 async def style_buttons(c, m, cb=False):
+    if " ".join(m.text.split(" ")[1:]) == "":
+        return await m.reply_text("ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ᴛᴏ ᴀᴘᴘʟʏ ғᴏɴᴛ")
     buttons = [
         [
             InlineKeyboardButton("𝚃𝚢𝚙𝚎𝚠𝚛𝚒𝚝𝚎𝚛", callback_data="style+typewriter"),
@@ -45,8 +47,6 @@ async def style_buttons(c, m, cb=False):
         ],
         [InlineKeyboardButton("ɴᴇxᴛ", callback_data="nxt")],
     ]
-    if " ".join(m.text.split(" ")[1:]) == "":
-        return await m.reply_text("ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ᴛᴏ ᴀᴘᴘʟʏ ғᴏɴᴛ")
     if not cb:
         await m.reply_text(
             " ".join(m.text.split(" ")[1:]), reply_markup=InlineKeyboardMarkup(buttons), quote=True

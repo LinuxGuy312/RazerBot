@@ -54,8 +54,7 @@ class Fonts:
             "Y": "𝚈",
             "Z": "𝚉",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
