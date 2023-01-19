@@ -1,4 +1,6 @@
+from math import ceil
 from typing import Dict, List
+from uuid import uuid4
 
 from Razerbot import NO_LOAD, UPDATE_CHANNEL, SUPPORT_CHAT
 from telegram import MAX_MESSAGE_LENGTH, Bot, InlineKeyboardButton, ParseMode
