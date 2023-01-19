@@ -31,7 +31,7 @@ from Razerbot import (
 # NOTE: Module order is not guaranteed, specify that in the config file!
 from Razerbot.modules import ALL_MODULES
 from Razerbot.modules.helper_funcs.chat_status import is_user_admin
-from Razerbot.modules.helper_funcs.misc import paginate_modules
+from Razerbot.modules.helper_funcs.misc import paginate_modules_f
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
 from telegram.error import (
     BadRequest,
@@ -161,7 +161,7 @@ for module_name in ALL_MODULES:
 # do not async
 def send_help(chat_id, text, keyboard=None):
     if not keyboard:
-        keyboard = InlineKeyboardMarkup(paginate_modules(0, HELPABLE, "help"))
+        keyboard = InlineKeyboardMarkup(paginate_modules_f(0, HELPABLE, "help"))
     dispatcher.bot.send_message(
         chat_id=chat_id,
         text=text,
@@ -330,7 +330,7 @@ def help_button(update, context):
                 text=HELP_STRINGS,
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
-                    paginate_modules(0, HELPABLE, "help")
+                    paginate_modules_f(0, HELPABLE, "help")
                 ),
             )
 
@@ -694,7 +694,7 @@ def send_settings(chat_id, user_id, user=False):
                     chat_name
                 ),
                 reply_markup=InlineKeyboardMarkup(
-                    paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)
+                    paginate_modules_f(0, CHAT_SETTINGS, "stngs", chat=chat_id)
                 ),
             )
         else:
@@ -746,7 +746,7 @@ def settings_button(update: Update, context: CallbackContext):
                 "ʜɪ ᴛʜᴇʀᴇ! ᴛʜᴇʀᴇ ᴀʀᴇ ǫᴜɪᴛᴇ ᴀ ꜰᴇᴡ sᴇᴛᴛɪɴɢs ꜰᴏʀ {} - ɢᴏ ᴀʜᴇᴀᴅ ᴀɴᴅ ᴘɪᴄᴋ ᴡʜᴀᴛ "
                 "ʏᴏᴜ'ʀᴇ ɪɴᴛᴇʀᴇsᴛᴇᴅ ɪɴ.".format(chat.title),
                 reply_markup=InlineKeyboardMarkup(
-                    paginate_modules(
+                    paginate_modules_f(
                         curr_page - 1, CHAT_SETTINGS, "stngs", chat=chat_id
                     )
                 ),
@@ -760,7 +760,7 @@ def settings_button(update: Update, context: CallbackContext):
                 "ʜɪ ᴛʜᴇʀᴇ! ᴛʜᴇʀᴇ ᴀʀᴇ ǫᴜɪᴛᴇ ᴀ ꜰᴇᴡ sᴇᴛᴛɪɴɢs ꜰᴏʀ {} - ɢᴏ ᴀʜᴇᴀᴅ ᴀɴᴅ ᴘɪᴄᴋ ᴡʜᴀᴛ "
                 "ʏᴏᴜ'ʀᴇ ɪɴᴛᴇʀᴇsᴛᴇᴅ ɪɴ.".format(chat.title),
                 reply_markup=InlineKeyboardMarkup(
-                    paginate_modules(
+                    paginate_modules_f(
                         next_page + 1, CHAT_SETTINGS, "stngs", chat=chat_id
                     )
                 ),
@@ -774,7 +774,7 @@ def settings_button(update: Update, context: CallbackContext):
                 "ʏᴏᴜ'ʀᴇ ɪɴᴛᴇʀᴇsᴛᴇᴅ ɪɴ.".format(escape_markdown(chat.title)),
                 parse_mode=ParseMode.MARKDOWN,
                 reply_markup=InlineKeyboardMarkup(
-                    paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)
+                    paginate_modules_f(0, CHAT_SETTINGS, "stngs", chat=chat_id)
                 ),
             )
 
