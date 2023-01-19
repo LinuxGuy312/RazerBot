@@ -1,38 +1,12 @@
 import importlib
-import time
 import re
+import time
+from platform import python_version as y
 from sys import argv
-from typing import Optional
-import Razerbot.modules.sql.users_sql as sql
 
-from Razerbot import (
-    ALLOW_EXCL,
-    CERT_PATH,
-    LOGGER,
-    OWNER_ID,
-    PORT,
-    UPDATE_CHANNEL,
-    BOT_USERNAME,
-    BOT_NAME,
-    START_IMG,
-    TOKEN,
-    URL,
-    OWNER_USERNAME,
-    WEBHOOK,
-    SUPPORT_CHAT,
-    dispatcher,
-    StartTime,
-    telethn,
-    pbot,
-    updater,
-)
-
-# needed to dynamically load modules
-# NOTE: Module order is not guaranteed, specify that in the config file!
-from Razerbot.modules import ALL_MODULES
-from Razerbot.modules.helper_funcs.chat_status import is_user_admin
-from Razerbot.modules.helper_funcs.misc import paginate_modules_f
+from pyrogram import __version__ as pyrover
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, ParseMode, Update
+from telegram import __version__ as telever
 from telegram.error import (
     BadRequest,
     ChatMigrated,
@@ -50,7 +24,27 @@ from telegram.ext import (
 )
 from telegram.ext.dispatcher import DispatcherHandlerStop, run_async
 from telegram.utils.helpers import escape_markdown
-from telethon.errors.rpcerrorlist import FloodWaitError
+from telethon import __version__ as tlhver
+
+import Razerbot.modules.sql.users_sql as sql
+from Razerbot import (
+    BOT_NAME,
+    BOT_USERNAME,
+    LOGGER,
+    OWNER_ID,
+    START_IMG,
+    SUPPORT_CHAT,
+    TOKEN,
+    StartTime,
+    dispatcher,
+    pbot,
+    telethn,
+    updater,
+)
+from Razerbot.modules import ALL_MODULES
+from Razerbot.modules.helper_funcs.chat_status import is_user_admin
+from Razerbot.modules.helper_funcs.misc import paginate_modules_f
+
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -75,7 +69,6 @@ def get_readable_time(seconds: int) -> str:
     ping_time += ":".join(time_list)
 
     return ping_time
-
 
 
 PM_START_TEXT = """
@@ -107,7 +100,13 @@ buttons = [
 
 RAZER_IMG = f"{START_IMG}"
 
-HELP_STRINGS = "ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ʜᴇʟᴘ ᴀʙᴏᴜᴛ sᴘᴇᴄɪꜰɪᴄ ᴍᴏᴅᴜʟᴇs"
+HELP_STRINGS = f"""
+*» {BOT_NAME}'s ᴇxᴄʟᴜsɪᴠᴇ ꜰᴇᴀᴛᴜʀᴇs*
+
+➲ /start : ꜱᴛᴀʀᴛꜱ ᴍᴇ | ᴀᴄᴄᴏʀᴅɪɴɢ ᴛᴏ ᴍᴇ ʏᴏᴜ'ᴠᴇ ᴀʟʀᴇᴀᴅʏ ᴅᴏɴᴇ ɪᴛ.
+➲ /help  : ᴀᴠᴀɪʟᴀʙʟᴇ ᴄᴏᴍᴍᴀɴᴅꜱ ꜱᴇᴄᴛɪᴏɴ.
+  ‣ ɪɴ ᴘᴍ : ᴡɪʟʟ ꜱᴇɴᴅ ʏᴏᴜ ʜᴇʟᴘ ꜰᴏʀ ᴀʟʟ ꜱᴜᴘᴘᴏʀᴛᴇᴅ ᴍᴏᴅᴜʟᴇꜱ.
+  ‣ ɪɴ ɢʀᴏᴜᴘ : ᴡɪʟʟ ʀᴇᴅɪʀᴇᴄᴛ ʏᴏᴜ ᴛᴏ ᴘᴍ, ᴡɪᴛʜ ᴀʟʟ ᴛʜᴀᴛ ʜᴇʟᴘ ᴍᴏᴅᴜʟᴇꜱ."""
 
 IMPORTED = {}
 MIGRATEABLE = []
@@ -127,13 +126,10 @@ for module_name in ALL_MODULES:
     if imported_module.__mod_name__.lower() not in IMPORTED:
         IMPORTED[imported_module.__mod_name__.lower()] = imported_module
     else:
-        raise Exception("ᴄᴀɴ'ᴛ ʜᴀᴠᴇ ᴛᴡᴏ ᴍᴏᴅᴜʟᴇs ᴡɪᴛʜ ᴛʜᴇ sᴀᴍᴇ ɴᴀᴍᴇ! ᴘʟᴇᴀsᴇ ᴄʜᴀɴɢᴇ ᴏɴᴇ")
+        raise Exception("Can't have two modules with the same name! Please change one")
 
     if hasattr(imported_module, "__help__") and imported_module.__help__:
         HELPABLE[imported_module.__mod_name__.lower()] = imported_module
-
-    if hasattr(imported_module, "__sub_mod__") and imported_module.__sub_mod__:
-        SUB_MODE[imported_module.__mod_name__.lower()] = imported_module
 
     # Chats to migrate on chat_migrated events
     if hasattr(imported_module, "__migrate__"):
@@ -192,7 +188,7 @@ def start(update: Update, context: CallbackContext):
                 )
 
             elif args[0].lower().startswith("stngs_"):
-                match = re.match("stngs_(.)", args[0].lower())
+                match = re.match("stngs_(.*)", args[0].lower())
                 chat = dispatcher.bot.getChat(match.group(1))
 
                 if is_user_admin(chat, update.effective_user.id):
@@ -200,10 +196,10 @@ def start(update: Update, context: CallbackContext):
                 else:
                     send_settings(match.group(1), update.effective_user.id, True)
 
-            elif args[0][1:].isdigit() and "rules" in IMPORTED:
-                IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
+            elif args[0][1:].isdigit() and "rᴜʟᴇs" in IMPORTED:
+                IMPORTED["rᴜʟᴇs"].send_rules(update, args[0], from_pm=True)
 
-        else:    
+        else:
             first_name = update.effective_user.first_name
             update.effective_message.reply_text(
                 PM_START_TEXT.format(
@@ -217,8 +213,8 @@ def start(update: Update, context: CallbackContext):
                 timeout=60,
             )
     else:
-          first_name = update.effective_user.first_name
-          update.effective_message.reply_photo(
+        first_name = update.effective_user.first_name
+        update.effective_message.reply_photo(
                 RAZER_IMG, caption="""Hᴇʟʟᴏ {} !
 ───────────────────
 × I'ᴍ A Mɪɴɪᴍᴀʟʟʏ Tʜᴇᴍᴇᴅ Gʀᴏᴜᴘ Mᴀɴᴀɢᴇᴍᴇɴᴛ Bᴏᴛ
@@ -303,6 +299,8 @@ def error_callback(update: Update, context: CallbackContext):
 def help_button(update, context):
     query = update.callback_query
     mod_match = re.match(r"help_module\((.+?)\)", query.data)
+    prev_match = re.match(r"help_prev\((.+?)\)", query.data)
+    next_match = re.match(r"help_next\((.+?)\)", query.data)
     back_match = re.match(r"help_back", query.data)
 
     print(query.message.chat.id)
@@ -311,7 +309,7 @@ def help_button(update, context):
         if mod_match:
             module = mod_match.group(1)
             text = (
-                "「 Hᴇʟᴘ ᴏғ {} 」:\n".format(
+                "» *ᴀᴠᴀɪʟᴀʙʟᴇ ᴄᴏᴍᴍᴀɴᴅs ꜰᴏʀ* *{}* :\n".format(
                     HELPABLE[module].__mod_name__
                 )
                 + HELPABLE[module].__help__
@@ -321,7 +319,27 @@ def help_button(update, context):
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton(text="「 Bᴀᴄᴋ 」", callback_data="help_back")]]
+                    [[InlineKeyboardButton(text="◁", callback_data="help_back")]]
+                ),
+            )
+
+        elif prev_match:
+            curr_page = int(prev_match.group(1))
+            query.message.edit_text(
+                text=HELP_STRINGS,
+                parse_mode=ParseMode.MARKDOWN,
+                reply_markup=InlineKeyboardMarkup(
+                    paginate_modules_f(curr_page - 1, HELPABLE, "help")
+                ),
+            )
+
+        elif next_match:
+            next_page = int(next_match.group(1))
+            query.message.edit_text(
+                text=HELP_STRINGS,
+                parse_mode=ParseMode.MARKDOWN,
+                reply_markup=InlineKeyboardMarkup(
+                    paginate_modules_f(next_page + 1, HELPABLE, "help")
                 ),
             )
 
@@ -334,31 +352,86 @@ def help_button(update, context):
                 ),
             )
 
-        # ensure no spinny white circle
         context.bot.answer_callback_query(query.id)
-        # query.message.delete()
 
     except BadRequest:
         pass
 
 
 @run_async
-def razer_callback_handler(update, context):
+def Fallen_about_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "razer_":
+        uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
-            text="""𝔴𝔢𝔩𝔠𝔬𝔪𝔢 𝔱𝔬 𝔥𝔢𝔩𝔭 𝔪𝔢𝔫𝔲. 
-────────────────────────
-Sᴇʟᴇᴄᴛ Aʟʟ Cᴏᴍᴍᴀɴᴅs Fᴏʀ Fᴜʟʟ Hᴇʟᴘ Oʀ Sᴇʟᴇᴄᴛ Cᴀᴛᴇɢᴏʀʏ Fᴏʀ Mᴏʀᴇ Hᴇʟᴘ Dᴏᴄᴜᴍᴇɴᴛᴀᴛɪᴏɴ Oɴ Sᴇʟᴇᴄᴛᴇᴅ Fɪᴇʟᴅs""",
+            text=f"*ʜᴇʏ,*🥀\n  *ᴛʜɪs ɪs {BOT_NAME}*"
+            "\n*ᴀ ᴘᴏᴡᴇʀꜰᴜʟ ɢʀᴏᴜᴘ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ ʙᴜɪʟᴛ ᴛᴏ ʜᴇʟᴘ ʏᴏᴜ ᴍᴀɴᴀɢᴇ ʏᴏᴜʀ ɢʀᴏᴜᴘ ᴇᴀꜱɪʟʏ ᴀɴᴅ ᴛᴏ ᴘʀᴏᴛᴇᴄᴛ ʏᴏᴜʀ ɢʀᴏᴜᴘ ꜰʀᴏᴍ ꜱᴄᴀᴍᴍᴇʀꜱ ᴀɴᴅ ꜱᴘᴀᴍᴍᴇʀꜱ.*"
+            "\n*ᴡʀɪᴛᴛᴇɴ ɪɴ ᴩʏᴛʜᴏɴ ᴡɪᴛʜ sǫʟᴀʟᴄʜᴇᴍʏ ᴀɴᴅ ᴍᴏɴɢᴏᴅʙ ᴀs ᴅᴀᴛᴀʙᴀsᴇ.*"
+            "\n\n────────────────────"
+            f"\n*➻ ᴜᴩᴛɪᴍᴇ »* {uptime}"
+            f"\n*➻ ᴜsᴇʀs »* {sql.num_users()}"
+            f"\n*➻ ᴄʜᴀᴛs »* {sql.num_chats()}"
+            "\n────────────────────"
+            "\n\n➲  ɪ ᴄᴀɴ ʀᴇꜱᴛʀɪᴄᴛ ᴜꜱᴇʀꜱ."
+            "\n➲  ɪ ʜᴀᴠᴇ ᴀɴ ᴀᴅᴠᴀɴᴄᴇᴅ ᴀɴᴛɪ-ꜰʟᴏᴏᴅ ꜱʏꜱᴛᴇᴍ."
+            "\n➲  ɪ ᴄᴀɴ ɢʀᴇᴇᴛ ᴜꜱᴇʀꜱ ᴡɪᴛʜ ᴄᴜꜱᴛᴏᴍɪᴢᴀʙʟᴇ ᴡᴇʟᴄᴏᴍᴇ ᴍᴇꜱꜱᴀɢᴇꜱ ᴀɴᴅ ᴇᴠᴇɴ ꜱᴇᴛ ᴀ ɢʀᴏᴜᴘ'ꜱ ʀᴜʟᴇꜱ."
+            "\n➲  ɪ ᴄᴀɴ ᴡᴀʀɴ ᴜꜱᴇʀꜱ ᴜɴᴛɪʟ ᴛʜᴇʏ ʀᴇᴀᴄʜ ᴍᴀx ᴡᴀʀɴꜱ, ᴡɪᴛʜ ᴇᴀᴄʜ ᴘʀᴇᴅᴇꜰɪɴᴇᴅ ᴀᴄᴛɪᴏɴꜱ ꜱᴜᴄʜ ᴀꜱ ʙᴀɴ, ᴍᴜᴛᴇ, ᴋɪᴄᴋ, ᴇᴛᴄ."
+            "\n➲  ɪ ʜᴀᴠᴇ ᴀ ɴᴏᴛᴇ ᴋᴇᴇᴘɪɴɢ ꜱʏꜱᴛᴇᴍ, ʙʟᴀᴄᴋʟɪꜱᴛꜱ, ᴀɴᴅ ᴇᴠᴇɴ ᴘʀᴇᴅᴇᴛᴇʀᴍɪɴᴇᴅ ʀᴇᴘʟɪᴇꜱ ᴏɴ ᴄᴇʀᴛᴀɪɴ ᴋᴇʏᴡᴏʀᴅꜱ."
+            f"\n\n➻ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ғᴏʀ ɢᴇᴛᴛɪɴɢ ʙᴀsɪᴄ ʜᴇʟᴩ ᴀɴᴅ ɪɴғᴏ ᴀʙᴏᴜᴛ {BOT_NAME}.",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
-                     InlineKeyboardButton(text="➕ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ➕", callback_data="help_back"),
-                    ],                           
-                    [InlineKeyboardButton(text="ʜᴏᴡ ᴛᴏ ᴜsᴇ ᴍᴇ?", callback_data="razer_help")],
-                    [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="razer_back")],
+                        InlineKeyboardButton(
+                            text="sᴜᴩᴩᴏʀᴛ", callback_data="razer_support"
+                        ),
+                        InlineKeyboardButton(
+                            text="ᴄᴏᴍᴍᴀɴᴅs", callback_data="help_back"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="ᴅᴇᴠᴇʟᴏᴩᴇʀ", url=f"tg://user?id={OWNER_ID}"
+                        ),
+                        InlineKeyboardButton(
+                            text="sᴏᴜʀᴄᴇ",
+                            callback_data="source_",
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(text="◁", callback_data="razer_back"),
+                    ],
+                ]
+            ),
+        )
+    elif query.data == "razer_support":
+        query.message.edit_text(
+            text="*๏ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ʜᴇʟᴩ ᴀɴᴅ ᴍᴏʀᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴍᴇ.*"
+            f"\n\nɪғ ʏᴏᴜ ғᴏᴜɴᴅ ᴀɴʏ ʙᴜɢ ɪɴ {BOT_NAME} ᴏʀ ɪғ ʏᴏᴜ ᴡᴀɴɴᴀ ɢɪᴠᴇ ғᴇᴇᴅʙᴀᴄᴋ ᴀʙᴏᴜᴛ ᴛʜᴇ {BOT_NAME}, ᴩʟᴇᴀsᴇ ʀᴇᴩᴏʀᴛ ɪᴛ ᴀᴛ sᴜᴩᴩᴏʀᴛ ᴄʜᴀᴛ.",
+            parse_mode=ParseMode.MARKDOWN,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton(
+                            text="sᴜᴩᴩᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"
+                        ),
+                        InlineKeyboardButton(
+                            text="ᴜᴩᴅᴀᴛᴇs", url=f"https://t.me/{SUPPORT_CHAT}"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="ᴅᴇᴠᴇʟᴏᴩᴇʀ", url=f"tg://user?id={OWNER_ID}"
+                        ),
+                        InlineKeyboardButton(
+                            text="ɢɪᴛʜᴜʙ",
+                            url="https://github.com/LinuxGuy312",
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(text="◁", callback_data="razer_"),
+                    ],
                 ]
             ),
         )
@@ -377,219 +450,37 @@ Sᴇʟᴇᴄᴛ Aʟʟ Cᴏᴍᴍᴀɴᴅs Fᴏʀ Fᴜʟʟ Hᴇʟᴘ Oʀ Sᴇʟ�
                 timeout=60,
                 disable_web_page_preview=False,
         )
-    elif query.data == "razer_help":
-        query.message.edit_text(
-            text=f"""Nᴇᴡ Tᴏ {BOT_NAME}? Hᴇʀᴇ Is Tʜᴇ Qᴜɪᴄᴋ Sᴛᴀʀᴛ Gᴜɪᴅᴇ Wʜɪᴄʜ Wɪʟʟ Hᴇʟᴘ Yᴏᴜ Tᴏ Uɴᴅᴇʀsᴛᴀɴᴅ Wʜᴀᴛ Is {BOT_NAME} Aɴᴅ Hᴏᴡ Tᴏ Usᴇ Iᴛ.
 
-Cʟɪᴄᴋ Bᴇʟᴏᴡ Bᴜᴛᴛᴏɴ Tᴏ Aᴅᴅ Bᴏᴛ Iɴ Yᴏᴜʀ Gʀᴏᴜᴘ. Bᴀsɪᴄ Tᴏᴜʀ Sᴛᴀʀᴛᴇᴅ Tᴏ Kɴᴏᴡ Aʙᴏᴜᴛ Hᴏᴡ Tᴏ Usᴇ Mᴇ""",
-            parse_mode=ParseMode.MARKDOWN,
-            reply_markup=InlineKeyboardMarkup(
-              [[InlineKeyboardButton(text="➕️ ᴀᴅᴅ ᴍᴇ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ ➕️", url=f"https://t.me/{BOT_USERNAME}?startgroup=true")],       
-                [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="razer_"),
-                 InlineKeyboardButton(text="⇛", callback_data="razer_helpa")]
-              ]
-            ),
-        )
-    elif query.data == "razer_helpa":
-        query.message.edit_text(
-            text=f"""Hᴇʏ, Wᴇʟᴄᴏᴍᴇ Tᴏ Cᴏɴғɪɢᴜʀᴀᴛɪᴏɴ Tᴜᴛᴏʀɪᴀʟ
 
-Bᴇғᴏʀᴇ Wᴇ Gᴏ Fᴜʀᴛʜᴇʀ, I Nᴇᴇᴅ Aᴅᴍɪɴ Pᴇʀᴍɪssɪᴏɴs Iɴ Tʜɪs Cʜᴀᴛ Tᴏ Wᴏʀᴋ Pʀᴏᴘᴇʀʟʏ.
-1. Cʟɪᴄᴋ Mᴀɴᴀɢᴇ Gʀᴏᴜᴘ.
-2. Gᴏ Tᴏ Aᴅᴍɪɴɪsᴛʀᴀᴛᴏʀs Aɴᴅ Aᴅᴅ @{BOT_USERNAME} As Aᴅᴍɪɴ.
-3. Gɪᴠᴇ Fᴜʟʟ Pᴇʀᴍɪssɪᴏɴs Mᴀᴋᴇ @{BOT_USERNAME} Fᴜʟʟʏ Usᴇғᴜʟ""",
-            parse_mode=ParseMode.HTML,
-            reply_markup=InlineKeyboardMarkup(
-              [[InlineKeyboardButton(text="⇚", callback_data="razer_help"),
-                InlineKeyboardButton(text="⇛", callback_data="razer_helpb")],               
-              ]
-            ),
-        )
-    elif query.data == "razer_helpb":
-        query.message.edit_text(
-            text=f"""Cᴏɴɢʀᴀɢᴜʟᴀᴛɪᴏɴs, {BOT_NAME} Nᴏᴡ Rᴇᴀᴅʏ Tᴏ Mᴀɴᴀɢᴇ Yᴏᴜʀ Gʀᴏᴜᴘ
-
-Hᴇʀᴇ Aʀᴇ Sᴏᴍᴇ Essᴇɴᴛɪᴀʟs Tᴏ Tʀʏ Oɴ {BOT_NAME}.
-
-× Aᴅᴍɪɴ Tᴏᴏʟs
-ʙᴀsɪᴄ ᴀᴅᴍɪɴ ᴛᴏᴏʟs ʜᴇʟᴘ ʏᴏᴜ ᴛᴏ ᴘʀᴏᴛᴇᴄᴛ ᴀɴᴅ ᴘᴏᴡᴇʀᴜᴘ ʏᴏᴜʀ ɢʀᴏᴜᴘ
-ʏᴏᴜ ᴄᴀɴ ʙᴀɴ ᴍᴇᴍʙᴇʀs, ᴋɪᴄᴋ ᴍᴇᴍʙᴇʀs, ᴘʀᴏᴍᴏᴛᴇ sᴏᴍᴇᴏɴᴇ ᴀs ᴀᴅᴍɪɴ ᴛʜʀᴏᴜɢʜ ᴄᴏᴍᴍᴀɴᴅs ᴏғ ʙᴏᴛ
-
-× Wᴇʟᴄᴏᴍᴇs
-ʟᴇᴛs sᴇᴛ ᴀ ᴡᴇʟᴄᴏᴍᴇ ᴍᴇssᴀɢᴇ ᴛᴏ ᴡᴇʟᴄᴏᴍᴇ ɴᴇᴡ ᴜsᴇʀs ᴄᴏᴍɪɴɢ ᴛᴏ ʏᴏᴜʀ ɢʀᴏᴜᴘ
-sᴇɴᴅ /setwelcome [ᴍᴇssᴀɢᴇ] ᴛᴏ sᴇᴛ ᴀ ᴡᴇʟᴄᴏᴍᴇ ᴍᴇssᴀɢᴇ
-ᴀʟsᴏ ʏᴏᴜ ᴄᴀɴ sᴛᴏᴘ ᴇɴᴛᴇʀɪɴɢ ʀᴏʙᴏᴛs ᴏʀ sᴘᴀᴍᴍᴇʀs ᴛᴏ ʏᴏᴜʀ ᴄʜᴀᴛ ʙʏ sᴇᴛᴛɪɴɢ ᴡᴇʟᴄᴏᴍᴇ ᴄᴀᴘᴛᴄʜᴀ
-
-Rᴇғᴇʀ Hᴇʟᴘ Mᴇɴᴜ Tᴏ Sᴇᴇ Eᴠᴇʀʏᴛʜɪɴɢ Iɴ Dᴇᴛᴀɪʟ""",
-            parse_mode=ParseMode.MARKDOWN,
-            reply_markup=InlineKeyboardMarkup(
-              [
-                [InlineKeyboardButton(text="⇚", callback_data="razer_helpa"),
-                 InlineKeyboardButton(text="⇛", callback_data="razer_helpc")]
-                ]
-            ),
-        )
-    elif query.data == "razer_helpc":
-        query.message.edit_text(
-            text=f"""× Fɪʟᴛᴇʀs
-ғɪʟᴛᴇʀs ᴄᴀɴ ʙᴇ ᴜsᴇᴅ ᴀs ᴀᴜᴛᴏᴍᴀᴛᴇᴅ ʀᴇᴘʟɪᴇs/ʙᴀɴ/ᴅᴇʟᴇᴛᴇ ᴡʜᴇɴ sᴏᴍᴇᴏɴᴇ ᴜsᴇ ᴀ ᴡᴏʀᴅ ᴏʀ sᴇɴᴛᴇɴᴄᴇ
-ғᴏʀ  ᴇxᴀᴍᴘʟᴇ  ɪғ  ɪ  ғɪʟᴛᴇʀ  ᴡᴏʀᴅ  'ʜᴇʟʟᴏ'  ᴀɴᴅ  sᴇᴛ  ʀᴇᴘʟʏ  ᴀs  'ʜɪ'
-ʙᴏᴛ  ᴡɪʟʟ  ʀᴇᴘʟʏ  ᴀs  'ʜɪ'  ᴡʜᴇɴ  sᴏᴍᴇᴏɴᴇ  sᴀʏ  'ʜᴇʟʟᴏ'
-ʏᴏᴜ  ᴄᴀɴ  ᴀᴅᴅ  ғɪʟᴛᴇʀs  ʙʏ  sᴇɴᴅɪɴɢ  /filter  ғɪʟᴛᴇʀ  ɴᴀᴍᴇ
-
-× Aɪ CʜᴀᴛBᴏᴛ
-ᴡᴀɴᴛ sᴏᴍᴇᴏɴᴇ ᴛᴏ ᴄʜᴀᴛ ɪɴ ɢʀᴏᴜᴘ?
-{BOT_NAME} ʜᴀs ᴀɴ ɪɴᴛᴇʟʟɪɢᴇɴᴛ ᴄʜᴀᴛʙᴏᴛ ᴡɪᴛʜ ᴍᴜʟᴛɪʟᴀɴɢ sᴜᴘᴘᴏʀᴛ
-ʟᴇᴛ's ᴛʀʏ ɪᴛ,
-Sᴇɴᴅ /chatbot enable Aɴᴅ Rᴇᴘʟʏ Tᴏ Aɴʏ Oғ Mʏ Mᴇssᴀɢᴇs Tᴏ Sᴇᴇ Tʜᴇ Mᴀɢɪᴄ""",
-            parse_mode=ParseMode.MARKDOWN,
-            reply_markup=InlineKeyboardMarkup(
-              [
-                [InlineKeyboardButton(text="⇚", callback_data="razer_helpb"),
-                 InlineKeyboardButton(text="⇛", callback_data="razer_helpd")]
-                ]
-            ),
-        )
-    elif query.data == "razer_helpd":
-        query.message.edit_text(
-            text="""× Sᴇᴛᴛɪɴɢ Uᴘ Nᴏᴛᴇs
-ʏᴏᴜ ᴄᴀɴ sᴀᴠᴇ ᴍᴇssᴀɢᴇ/ᴍᴇᴅɪᴀ/ᴀᴜᴅɪᴏ ᴏʀ ᴀɴʏᴛʜɪɴɢ ᴀs ɴᴏᴛᴇs ᴜsɪɴɢ /notes
-ᴛᴏ ɢᴇᴛ ᴀ ɴᴏᴛᴇ sɪᴍᴘʟʏ ᴜsᴇ # ᴀᴛ ᴛʜᴇ ʙᴇɢɪɴɴɪɴɢ ᴏғ ᴀ ᴡᴏʀᴅ
-sᴇᴇ ᴛʜᴇ ɪᴍᴀɢᴇ.
-
-× Sᴇᴛᴛɪɴɢ Uᴘ Nɪɢʜᴛᴍᴏᴅᴇ
-ʏᴏᴜ ᴄᴀɴ sᴇᴛ ᴜᴘ ɴɪɢʜᴛᴍᴏᴅᴇ ᴜsɪɴɢ /nightmode ᴏɴ/ᴏғғ ᴄᴏᴍᴍᴀɴᴅ.
-
-Nᴏᴛᴇ- ɴɪɢʜᴛ ᴍᴏᴅᴇ ᴄʜᴀᴛs ɢᴇᴛ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴄʟᴏsᴇᴅ ᴀᴛ 12ᴘᴍ(ɪsᴛ)
-ᴀɴᴅ ᴀᴜᴛᴏᴍᴀᴛɪᴄᴀʟʟʏ ᴏᴘᴇɴɴᴇᴅ ᴀᴛ 6ᴀᴍ(ɪsᴛ) ᴛᴏ ᴘʀᴇᴠᴇɴᴛ ɴɪɢʜᴛ sᴘᴀᴍs.""",
-            parse_mode=ParseMode.MARKDOWN,
-            reply_markup=InlineKeyboardMarkup(
-              [
-                [InlineKeyboardButton(text="⇚", callback_data="razer_helpc"),
-                 InlineKeyboardButton(text="⇛", callback_data="razer_helpe")]
-                ]
-            ),
-        )
-    elif query.data == "razer_term":
-        query.message.edit_text(
-            text=f"""✗ Tᴇʀᴍs Aɴᴅ Cᴏɴᴅɪᴛɪᴏɴs:
-
-- ᴏɴʟʏ ʏᴏᴜʀ ꜰɪʀsᴛ ɴᴀᴍᴇ, ʟᴀsᴛ ɴᴀᴍᴇ (ɪꜰ ᴀɴʏ) ᴀɴᴅ ᴜsᴇʀɴᴀᴍᴇ (ɪꜰ ᴀɴʏ) ɪs sᴛᴏʀᴇᴅ ꜰᴏʀ ᴀ ᴄᴏɴᴠᴇɴɪᴇɴᴛ ᴄᴏᴍᴍᴜɴɪᴄᴀᴛɪᴏɴ!
-- ɴᴏ ɢʀᴏᴜᴘ ɪᴅ ᴏʀ ɪᴛ's ᴍᴇssᴀɢᴇs ᴀʀᴇ sᴛᴏʀᴇᴅ, ᴡᴇ ʀᴇsᴘᴇᴄᴛ ᴇᴠᴇʀʏᴏɴᴇ's ᴘʀɪᴠᴀᴄʏ.
-- ᴍᴇssᴀɢᴇs ʙᴇᴛᴡᴇᴇɴ ʙᴏᴛ ᴀɴᴅ ʏᴏᴜ ɪs ᴏɴʟʏ ɪɴꜰʀᴏɴᴛ ᴏꜰ ʏᴏᴜʀ ᴇʏᴇs ᴀɴᴅ ᴛʜᴇʀᴇ ɪs ɴᴏ ʙᴀᴄᴋᴜsᴇ ᴏꜰ ɪᴛ.
-- ᴡᴀᴛᴄʜ ʏᴏᴜʀ ɢʀᴏᴜᴘ, ɪꜰ sᴏᴍᴇᴏɴᴇ ɪs sᴘᴀᴍᴍɪɴɢ ʏᴏᴜʀ ɢʀᴏᴜᴘ, ʏᴏᴜ ᴄᴀɴ ᴜsᴇ ᴛʜᴇ ʀᴇᴘᴏʀᴛ ꜰᴇᴀᴛᴜʀᴇ ᴏꜰ ʏᴏᴜʀ ᴛᴇʟᴇɢʀᴀᴍ ᴄʟɪᴇɴᴛ.
-- ᴅᴏ ɴᴏᴛ sᴘᴀᴍ ᴄᴏᴍᴍᴀɴᴅs, ʙᴜᴛᴛᴏɴs, ᴏʀ ᴀɴʏᴛʜɪɴɢ ɪɴ ʙᴏᴛ ᴘᴍ.
-
-ɴᴏᴛᴇ: ᴛᴇʀᴍs ᴀɴᴅ ᴄᴏɴᴅɪᴛɪᴏɴs ᴍɪɢʜᴛ ᴄʜᴀɴɢᴇ ᴀɴʏᴛɪᴍᴇ""",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [
-              [InlineKeyboardButton(text="ᴜᴘᴅᴀᴛᴇs", url=f"https://t.me/{UPDATE_CHANNEL}"),       
-              InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}")],       
-              [InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_")]]
-            ),
-        )
-    elif query.data == "razer_helpe":
-        query.message.edit_text(
-            text="""× Sᴏ Nᴏᴡ Yᴏᴜ Aʀᴇ Aᴛ Tʜᴇ Eɴᴅ Oғ Bᴀsɪᴄ Tᴏᴜʀ. Bᴜᴛ Tʜɪs Is Nᴏᴛ Aʟʟ I Cᴀɴ Dᴏ.
-
-Sᴇɴᴅ /help Iɴ Bᴏᴛ Pᴍ Tᴏ Aᴄᴄᴇss Hᴇʟᴘ Mᴇɴᴜ
-
-Tʜᴇʀᴇ Aʀᴇ Mᴀɴʏ Hᴀɴᴅʏ Tᴏᴏʟs Tᴏ Tʀʏ Oᴜᴛ.  
-Aɴᴅ Aʟsᴏ Iғ Yᴏᴜ Hᴀᴠᴇ Aɴʏ Sᴜɢɢᴇssɪᴏɴs Aʙᴏᴜᴛ Mᴇ, Dᴏɴ'ᴛ Fᴏʀɢᴇᴛ Tᴏ Tᴇʟʟ Tʜᴇᴍ Tᴏ Dᴇᴠs
-
-Aɢᴀɪɴ Tʜᴀɴᴋs Fᴏʀ Usɪɴɢ Mᴇ
-
-× Bʏ Usɪɴɢ Tʜɪꜱ Bᴏᴛ Yᴏᴜ Aʀᴇ Aɢʀᴇᴇᴅ Tᴏ Oᴜʀ Tᴇʀᴍs & Cᴏɴᴅɪᴛɪᴏɴs""",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="➕ ᴀʟʟ ᴄᴏᴍᴍᴀɴᴅs ➕", callback_data="help_back")],
-                [InlineKeyboardButton(text="⇚", callback_data="razer_helpd"),
-                InlineKeyboardButton(text="ᴍᴀɪɴ ᴍᴇɴᴜ", callback_data="razer_")]]
-            ),
-        )
-    elif query.data == "razer_about":
-        query.message.edit_text(
-            text=f"""ꝛᴧᴢᴇʀ ɪs ᴏɴʟɪɴᴇ sɪɴᴄᴇ ᴀᴜɢᴜsᴛ 2022 ᴀɴᴅ ɪᴛ's ʙᴇɪɴɢ ᴄᴏɴsᴛᴀɴᴛʟʏ ᴜᴘᴅᴀᴛᴇᴅ!
-            
-
-⌁ @WH0907, ʙᴏᴛ ᴄʀᴇᴀᴛᴏʀ ᴀɴᴅ ᴍᴀɪɴ ᴅᴇᴠᴇʟᴏᴘᴇʀ.
-
-            
-× sᴜᴘᴘᴏʀᴛ
-            
-• [ᴄʟɪᴄᴋ ʜᴇʀᴇ](https://t.me/{SUPPORT_CHAT}) ᴛᴏ ɢᴏ ᴛᴏ ᴛʜᴇ sᴜᴘᴘᴏʀᴛ ɢʀᴏᴜᴘ.
-            
-• ɪ ᴛʜᴀɴᴋ ᴀʟʟ ᴛʜᴇ ɢʀᴏᴜᴘs ᴡʜᴏ ʀᴇʟʏ ᴏɴ ᴍʏ ʙᴏᴛ ꜰᴏʀ sᴇʀᴠɪᴄᴇ, ɪ ʜᴏᴘᴇ ʏᴏᴜ ᴡɪʟʟ ᴀʟᴡᴀʏs ʟɪᴋᴇ ɪᴛ. ɪ ᴀᴍ ᴄᴏɴsᴛᴀɴᴛʟʏ ᴡᴏʀᴋɪɴɢ ᴛᴏ ɪᴍᴘʀᴏᴠᴇ ɪᴛ!""",
-            parse_mode=ParseMode.MARKDOWN,
-            disable_web_page_preview=True,
-            reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_")]]
-            ),
-        )
-    elif query.data == "razer_support":
-        query.message.edit_text(
-            text=f"{BOT_NAME} sᴜᴘᴘᴏʀᴛ ᴄʜᴀᴛs",
-            parse_mode=ParseMode.MARKDOWN,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                 [
-                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"t.me/{SUPPORT_CHAT}"),
-                    InlineKeyboardButton(text="ᴜᴘᴅᴀᴛᴇꜱ", url=f"https://t.me/{UPDATE_CHANNEL}"),
-                 ],
-                 [
-                    InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_"),
-                 
-                 ]
-                ]
-            ),
-        )
-    elif query.data == "razer_source":
-        query.message.edit_text(
-            text="""ꝛᴧᴢᴇʀʙᴏᴛ ɪs ɴᴏᴡ ᴏᴘᴇɴ sᴏᴜʀᴄᴇ ʙᴏᴛ ᴘʀᴏᴊᴇᴄᴛ.
-
-ᴄʟɪᴄᴋ ʙᴇʟᴏᴡ ʙᴜᴛᴛᴏɴ ᴛᴏ ɢᴇᴛ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ.""",
-            parse_mode=ParseMode.MARKDOWN,
-            reply_markup=InlineKeyboardMarkup(
-                [
-                 [
-                    InlineKeyboardButton(text="sᴏᴜʀᴄᴇ", url="github.com/LinuxGuy312/RazerBot"),                 
-                    InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_"),
-                 ]    
-                ]
-            ),
-        )
-        
 @run_async
-def razer_about_callback(update: Update, context: CallbackContext):
+def Source_about_callback(update: Update, context: CallbackContext):
     query = update.callback_query
-    if query.data == "about_":
+    if query.data == "source_":
         query.message.edit_text(
-            text="𝔠𝔩𝔦𝔠𝔨 𝔟𝔢𝔩𝔬𝔴 𝔟𝔲𝔱𝔱𝔬𝔫 𝔱𝔬 𝔨𝔫𝔬𝔴 𝔪𝔬𝔯𝔢 𝔞𝔟𝔬𝔲𝔱 𝔪𝔢",
+            text=f"""
+*ʜᴇʏ,
+ ᴛʜɪs ɪs {BOT_NAME},
+ᴀɴ ᴏᴩᴇɴ sᴏᴜʀᴄᴇ ᴛᴇʟᴇɢʀᴀᴍ ɢʀᴏᴜᴩ ᴍᴀɴᴀɢᴇᴍᴇɴᴛ ʙᴏᴛ.*
+
+ᴡʀɪᴛᴛᴇɴ ɪɴ ᴩʏᴛʜᴏɴ ᴡɪᴛʜ ᴛʜᴇ ʜᴇʟᴩ ᴏғ : [ᴛᴇʟᴇᴛʜᴏɴ](https://github.com/LonamiWebs/Telethon)
+[ᴩʏʀᴏɢʀᴀᴍ](https://github.com/pyrogram/pyrogram)
+[ᴩʏᴛʜᴏɴ-ᴛᴇʟᴇɢʀᴀᴍ-ʙᴏᴛ](https://github.com/python-telegram-bot/python-telegram-bot)
+ᴀɴᴅ ᴜsɪɴɢ [sǫʟᴀʟᴄʜᴇᴍʏ](https://www.sqlalchemy.org) ᴀɴᴅ [ᴍᴏɴɢᴏ](https://cloud.mongodb.com) ᴀs ᴅᴀᴛᴀʙᴀsᴇ.
+
+
+*ʜᴇʀᴇ ɪs ᴍʏ sᴏᴜʀᴄᴇ ᴄᴏᴅᴇ :* [ɢɪᴛʜᴜʙ](https://github.com/LinuxGuy312/RazerBot)
+
+
+{BOT_NAME} ɪs ʟɪᴄᴇɴsᴇᴅ ᴜɴᴅᴇʀ ᴛʜᴇ [ᴍɪᴛ ʟɪᴄᴇɴsᴇ](https://github.com/LinuxGuy312/RazerBot/blob/master/LICENSE).
+© 2022 - 2023 [@ᴅᴇᴠɪʟsʜᴇᴀᴠᴇɴᴍғ](https://t.me/{SUPPORT_CHAT}), ᴀʟʟ ʀɪɢʜᴛs ʀᴇsᴇʀᴠᴇᴅ.
+""",
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-               [
-                 [
-                     InlineKeyboardButton(text="ᴀʙᴏᴜᴛ", callback_data="razer_about"),
-                     InlineKeyboardButton(text="sᴏᴜʀᴄᴇ", callback_data="razer_source"),
-                 ],
-                 [  
-                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="razer_support"),
-                    InlineKeyboardButton(text="ᴏᴡɴᴇʀ", url=f"t.me/{OWNER_USERNAME}"),
-                 ],
-                 [
-                     InlineKeyboardButton(text="ᴛᴇʀᴍs ᴀɴᴅ ᴄᴏɴᴅɪᴛɪᴏɴs", callback_data="razer_term"),
-                 ],
-                 [
-                     InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_back"),
-                 ]    
-               ]
+                [[InlineKeyboardButton(text="◁", callback_data="source_back")]]
             ),
         )
-    elif query.data == "about_back":
+    elif query.data == "source_back":
         first_name = update.effective_user.first_name
         uptime = get_readable_time((time.time() - StartTime))
         query.message.edit_text(
@@ -604,6 +495,7 @@ def razer_about_callback(update: Update, context: CallbackContext):
                 timeout=60,
                 disable_web_page_preview=False,
         )
+
 
 @run_async
 def get_help(update: Update, context: CallbackContext):
@@ -621,7 +513,7 @@ def get_help(update: Update, context: CallbackContext):
                         [
                             InlineKeyboardButton(
                                 text="ʜᴇʟᴘ",
-                                url="t.me/{}?start=ghelp_{}".format(
+                                url="https://t.me/{}?start=ghelp_{}".format(
                                     context.bot.username, module
                                 ),
                             )
@@ -631,15 +523,23 @@ def get_help(update: Update, context: CallbackContext):
             )
             return
         update.effective_message.reply_text(
-            "ᴄᴏɴᴛᴀᴄᴛ ᴍᴇ ɪɴ ᴘᴍ ᴛᴏ ɢᴇᴛ ᴛʜᴇ ʟɪsᴛ ᴏꜰ ᴘᴏssɪʙʟᴇ ᴄᴏᴍᴍᴀɴᴅs.",
+            "» ᴄʜᴏᴏsᴇ ᴀɴ ᴏᴩᴛɪᴏɴ ғᴏʀ ɢᴇᴛᴛɪɴɢ ʜᴇʟᴩ.",
             reply_markup=InlineKeyboardMarkup(
                 [
                     [
                         InlineKeyboardButton(
-                            text="ʜᴇʟᴘ",
-                            url="t.me/{}?start=help".format(context.bot.username),
+                            text="ᴏᴩᴇɴ ɪɴ ᴩʀɪᴠᴀᴛᴇ",
+                            url="https://t.me/{}?start=help".format(
+                                context.bot.username
+                            ),
                         )
-                    ]
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="ᴏᴩᴇɴ ʜᴇʀᴇ",
+                            callback_data="help_back",
+                        )
+                    ],
                 ]
             ),
         )
@@ -657,7 +557,7 @@ def get_help(update: Update, context: CallbackContext):
             chat.id,
             text,
             InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="razer_")]]
+                [[InlineKeyboardButton(text="◁", callback_data="help_back")]]
             ),
         )
 
@@ -669,7 +569,7 @@ def send_settings(chat_id, user_id, user=False):
     if user:
         if USER_SETTINGS:
             settings = "\n\n".join(
-                "{}:\n{}".format(mod.__mod_name__, mod.__user_settings__(user_id))
+                "*{}*:\n{}".format(mod.__mod_name__, mod.__user_settings__(user_id))
                 for mod in USER_SETTINGS.values()
             )
             dispatcher.bot.send_message(
@@ -730,7 +630,7 @@ def settings_button(update: Update, context: CallbackContext):
                     [
                         [
                             InlineKeyboardButton(
-                                text="ʙᴀᴄᴋ",
+                                text="◁",
                                 callback_data="stngs_back({})".format(chat_id),
                             )
                         ]
@@ -856,20 +756,24 @@ def main():
     start_handler = CommandHandler("start", start)
 
     help_handler = CommandHandler("help", get_help)
-    help_callback_handler = CallbackQueryHandler(help_button, pattern=r"help_.")
+    help_callback_handler = CallbackQueryHandler(help_button, pattern=r"help_.*")
 
     settings_handler = CommandHandler("settings", get_settings)
     settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_")
 
-    about_callback_handler = CallbackQueryHandler(razer_callback_handler, pattern=r"razer_")
-    Tiana_callback_handler = CallbackQueryHandler(razer_about_callback, pattern=r"about_")
-  
+    about_callback_handler = CallbackQueryHandler(
+        Fallen_about_callback, pattern=r"razer_"
+    )
+    source_callback_handler = CallbackQueryHandler(
+        Source_about_callback, pattern=r"source_"
+    )
+
     migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)
 
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(about_callback_handler)
-    dispatcher.add_handler(Tiana_callback_handler)
+    dispatcher.add_handler(source_callback_handler)
     dispatcher.add_handler(settings_handler)
     dispatcher.add_handler(help_callback_handler)
     dispatcher.add_handler(settings_callback_handler)
@@ -877,18 +781,8 @@ def main():
 
     dispatcher.add_error_handler(error_callback)
 
-    if WEBHOOK:
-        LOGGER.info("Using webhooks.")
-        updater.start_webhook(listen="0.0.0.0", port=PORT, url_path=TOKEN)
-
-        if CERT_PATH:
-            updater.bot.set_webhook(url=URL + TOKEN, certificate=open(CERT_PATH, "rb"))
-        else:
-            updater.bot.set_webhook(url=URL + TOKEN)
-
-    else:
-        LOGGER.info("Started Successfully")
-        updater.start_polling(timeout=15, read_latency=4, clean=True)
+    LOGGER.info("Started Successfully")
+    updater.start_polling(timeout=15, read_latency=4, clean=True)
 
     if len(argv) not in (1, 3, 4):
         telethn.disconnect()
