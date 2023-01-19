@@ -45,9 +45,11 @@ async def style_buttons(c, m, cb=False):
         ],
         [InlineKeyboardButton("ɴᴇxᴛ ➻", callback_data="nxt")],
     ]
+    if " ".join(m.text.split(" ")[1:]) == "":
+        return await m.reply_text("ɢɪᴠᴇ sᴏᴍᴇ ᴛᴇxᴛ ᴛᴏ ᴀᴘᴘʟʏ ғᴏɴᴛ")
     if not cb:
         await m.reply_text(
-            m.text, reply_markup=InlineKeyboardMarkup(buttons), quote=True
+            " ".join(m.text.split(" ")[1:]), reply_markup=InlineKeyboardMarkup(buttons), quote=True
         )
     else:
         await m.answer()
