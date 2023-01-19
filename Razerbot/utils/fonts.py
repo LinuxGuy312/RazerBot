@@ -124,8 +124,7 @@ class Fonts:
             "8": "𝟠",
             "9": "𝟡",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -195,8 +194,7 @@ class Fonts:
             "8": "𝟖",
             "9": "𝟗",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -256,8 +254,7 @@ class Fonts:
             "Y": "𝒀",
             "Z": "𝒁",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -317,8 +314,7 @@ class Fonts:
             "Y": "𝑌",
             "Z": "𝑍",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -388,8 +384,7 @@ class Fonts:
             "8": "𝟾",
             "9": "𝟿",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -449,8 +444,7 @@ class Fonts:
             "Y": "𝒴",
             "Z": "𝒵",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -510,8 +504,7 @@ class Fonts:
             "Y": "𝓨",
             "Z": "𝓩",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -571,8 +564,7 @@ class Fonts:
             "Y": "ʸ",
             "Z": "ᶻ",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -632,8 +624,7 @@ class Fonts:
             "Y": "Y",
             "Z": "ᘔ",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -703,8 +694,7 @@ class Fonts:
             "8": "𝟴",
             "9": "𝟵",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -764,8 +754,7 @@ class Fonts:
             "Y": "𝙔",
             "Z": "𝙕",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -825,8 +814,7 @@ class Fonts:
             "Y": "𝘠",
             "Z": "𝘡",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -886,8 +874,7 @@ class Fonts:
             "Y": "𝖸",
             "Z": "𝖹",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -957,8 +944,7 @@ class Fonts:
             "8": "⑧",
             "9": "⑨",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1028,8 +1014,7 @@ class Fonts:
             "8": "➑",
             "9": "➒",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1089,8 +1074,7 @@ class Fonts:
             "Y": "𝔜",
             "Z": "ℨ",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1150,8 +1134,7 @@ class Fonts:
             "Y": "𝖄",
             "Z": "𝖅",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1211,8 +1194,7 @@ class Fonts:
             "Y": "Y͜͡",
             "Z": "Z͜͡",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1272,8 +1254,7 @@ class Fonts:
             "Y": "Y̆̈",
             "Z": "Z̆̈",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1333,8 +1314,7 @@ class Fonts:
             "Y": "Y̑̈",
             "Z": "Z̑̈",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1394,8 +1374,7 @@ class Fonts:
             "Y": "🇾 ",
             "Z": "🇿 ",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1455,8 +1434,7 @@ class Fonts:
             "Y": "🅈",
             "Z": "🅉",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1516,8 +1494,7 @@ class Fonts:
             "Y": "🆈︎",
             "Z": "🆉︎",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1577,8 +1554,7 @@ class Fonts:
             "Y": "ꪗ",
             "Z": "ɀ",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1638,8 +1614,7 @@ class Fonts:
             "Y": "ㄚ",
             "Z": "乙",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1699,8 +1674,7 @@ class Fonts:
             "Y": "Y̾",
             "Z": "Z̾",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1760,8 +1734,7 @@ class Fonts:
             "Y": "Y̥ͦ",
             "Z": "Z̥ͦ",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1821,8 +1794,7 @@ class Fonts:
             "Y": "Y͟",
             "Z": "Z͟",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1882,8 +1854,7 @@ class Fonts:
             "Y": "ꌩ",
             "Z": "ꁴ",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -1943,8 +1914,7 @@ class Fonts:
             "Y": "Y҉",
             "Z": "Z҉",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -2004,8 +1974,7 @@ class Fonts:
             "Y": "Y҈",
             "Z": "Z҈",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -2065,8 +2034,7 @@ class Fonts:
             "Y": "Y̸",
             "Z": "Z̸",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -2126,8 +2094,7 @@ class Fonts:
             "Y": "Y⃠",
             "Z": "Z⃠",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -2187,8 +2154,7 @@ class Fonts:
             "Y": "Y̺͆",
             "Z": "Z̺͆",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -2248,8 +2214,7 @@ class Fonts:
             "Y": "Y͎",
             "Z": "Z͎",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -2309,8 +2274,7 @@ class Fonts:
             "Y": "ሃ",
             "Z": "ጊ",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -2370,8 +2334,7 @@ class Fonts:
             "Y": "Y̶",
             "Z": "Z̶",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
@@ -2431,8 +2394,7 @@ class Fonts:
             "Y": "Y༙",
             "Z": "Z༙",
         }
-        tt = text.split(" ")[1:]
-        txt = " ".join(tt)
+        txt = " ".join(text.split(" ")[1:])
         for i, j in style.items():
             text = txt.replace(i, j)
         return text
