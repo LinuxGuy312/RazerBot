@@ -326,7 +326,7 @@ def help_button(update, context):
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
                 reply_markup=InlineKeyboardMarkup(
-                    [[InlineKeyboardButton(text="⇚", callback_data="help_back")]]
+                    [[InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="help_back")]]
                 ),
             )
 
@@ -554,18 +554,31 @@ Aɢᴀɪɴ Tʜᴀɴᴋs Fᴏʀ Usɪɴɢ Mᴇ
         )
     elif query.data == "razer_support":
         query.message.edit_text(
-            text=f"{BOT_NAME} sᴜᴘᴘᴏʀᴛ ᴄʜᴀᴛs",
+            text="ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴs ɢɪᴠᴇɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ʜᴇʟᴩ ᴀɴᴅ ᴍᴏʀᴇ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴍᴇ."
+            f"\n\nɪғ ʏᴏᴜ ғᴏᴜɴᴅ ᴀɴʏ ʙᴜɢ ɪɴ {BOT_NAME} ᴏʀ ɪғ ʏᴏᴜ ᴡᴀɴɴᴀ ɢɪᴠᴇ ғᴇᴇᴅʙᴀᴄᴋ ᴀʙᴏᴜᴛ ᴛʜᴇ {BOT_NAME}, ᴩʟᴇᴀsᴇ ʀᴇᴩᴏʀᴛ ɪᴛ ᴀᴛ sᴜᴩᴩᴏʀᴛ ᴄʜᴀᴛ.",
             parse_mode=ParseMode.MARKDOWN,
             reply_markup=InlineKeyboardMarkup(
                 [
-                 [
-                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"t.me/{SUPPORT_CHAT}"),
-                    InlineKeyboardButton(text="ᴜᴘᴅᴀᴛᴇꜱ", url=f"https://t.me/{UPDATE_CHANNEL}"),
-                 ],
-                 [
-                    InlineKeyboardButton(text="ʙᴀᴄᴋ", callback_data="about_"),
-                 
-                 ]
+                    [
+                        InlineKeyboardButton(
+                            text="sᴜᴩᴩᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"
+                        ),
+                        InlineKeyboardButton(
+                            text="ᴜᴩᴅᴀᴛᴇs", url=f"https://t.me/{SUPPORT_CHAT}"
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(
+                            text="ᴅᴇᴠᴇʟᴏᴩᴇʀ", url=f"tg://user?id=1413518510"
+                        ),
+                        InlineKeyboardButton(
+                            text="ɢɪᴛʜᴜʙ",
+                            url="https://github.com/LinuxGuy312",
+                        ),
+                    ],
+                    [
+                        InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="about_"),
+                    ],
                 ]
             ),
         )
@@ -586,7 +599,7 @@ def razer_callback_query(update: Update, context: CallbackContext):
                  ],
                  [  
                     InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", callback_data="razer_support"),
-                    InlineKeyboardButton(text="ᴏᴡɴᴇʀ", url=f"t.me/{OWNER_USERNAME}"),
+                    InlineKeyboardButton(text="ᴏᴡɴᴇʀ", url=f"tg://user?id={OWNER_ID}"),
                  ],
                  [
                      InlineKeyboardButton(text="ᴛᴇʀᴍs ᴀɴᴅ ᴄᴏɴᴅɪᴛɪᴏɴs", callback_data="razer_term"),
@@ -638,23 +651,8 @@ def Source_about_callback(update: Update, context: CallbackContext):
             parse_mode=ParseMode.MARKDOWN,
             disable_web_page_preview=True,
             reply_markup=InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="⇚", callback_data="source_back")]]
+                [[InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="about_")]]
             ),
-        )
-    elif query.data == "source_back":
-        first_name = update.effective_user.first_name
-        uptime = get_readable_time((time.time() - StartTime))
-        query.message.edit_text(
-                PM_START_TEXT.format(
-                    escape_markdown(first_name),
-                    START_IMG,
-                    escape_markdown(uptime),
-                    sql.num_users(),
-                    sql.num_chats()),
-                reply_markup=InlineKeyboardMarkup(buttons),
-                parse_mode=ParseMode.MARKDOWN,
-                timeout=60,
-                disable_web_page_preview=False,
         )
 
 
@@ -718,7 +716,7 @@ def get_help(update: Update, context: CallbackContext):
             chat.id,
             text,
             InlineKeyboardMarkup(
-                [[InlineKeyboardButton(text="⇚", callback_data="help_back")]]
+                [[InlineKeyboardButton(text="• ʙᴀᴄᴋ •", callback_data="help_back")]]
             ),
         )
 
