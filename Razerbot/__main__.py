@@ -366,7 +366,7 @@ def help_button(update, context):
 
 
 @run_async
-def Fallen_about_callback(update: Update, context: CallbackContext):
+def Razer_about_callback(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "razer_":
         query.message.edit_text(
@@ -430,7 +430,7 @@ Bᴇғᴏʀᴇ Wᴇ Gᴏ Fᴜʀᴛʜᴇʀ, I Nᴇᴇᴅ Aᴅᴍɪɴ Pᴇʀᴍɪs
         )
     elif query.data == "razer_helpb":
         query.message.edit_text(
-            text=f"""Cᴏɴɢʀᴀɢᴜʟᴀᴛɪᴏɴs, {BOT_NAME} Nᴏᴡ Rᴇᴀᴅʏ Tᴏ Mᴀɴᴀɢᴇ Yᴏᴜʀ Gʀᴏᴜᴘ
+            text=f"""Cᴏɴɢʀᴀᴛᴜʟᴀᴛɪᴏɴs, {BOT_NAME} Is Nᴏᴡ Rᴇᴀᴅʏ Tᴏ Mᴀɴᴀɢᴇ Yᴏᴜʀ Gʀᴏᴜᴘ
 
 Hᴇʀᴇ Aʀᴇ Sᴏᴍᴇ Essᴇɴᴛɪᴀʟs Tᴏ Tʀʏ Oɴ {BOT_NAME}.
 
@@ -571,7 +571,7 @@ Aɢᴀɪɴ Tʜᴀɴᴋs Fᴏʀ Usɪɴɢ Mᴇ
         )
 
 @run_async
-def razer_about_callback(update: Update, context: CallbackContext):
+def razer_callback_query(update: Update, context: CallbackContext):
     query = update.callback_query
     if query.data == "about_":
         query.message.edit_text(
@@ -923,17 +923,20 @@ def main():
     settings_callback_handler = CallbackQueryHandler(settings_button, pattern=r"stngs_")
 
     about_callback_handler = CallbackQueryHandler(
-        Fallen_about_callback, pattern=r"razer_"
+        Razer_about_callback, pattern=r"razer_"
     )
     source_callback_handler = CallbackQueryHandler(
         Source_about_callback, pattern=r"source_"
     )
-
+    razer_callback_handler = CallbackQueryHandler(
+        razer_callback_query, pattern=r"about_"
+    )
     migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)
 
     dispatcher.add_handler(start_handler)
     dispatcher.add_handler(help_handler)
     dispatcher.add_handler(about_callback_handler)
+    dispatcher.add_handler(razer_callback_handler)
     dispatcher.add_handler(source_callback_handler)
     dispatcher.add_handler(settings_handler)
     dispatcher.add_handler(help_callback_handler)
