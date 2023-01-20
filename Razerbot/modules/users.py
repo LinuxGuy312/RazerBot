@@ -146,9 +146,11 @@ def chats(update: Update, context: CallbackContext):
         )
 
 @run_async
-@sudo_plus
 def chat_leave(update: Update, context: CallbackContext):
     bot = context.bot
+    msg = update.effective_message
+    if msg.from_user.id not in DEV_AND_MORE:
+        return msg.reply_text("This command is only for Developers.")
     try:
         update.effective_message.reply_text(
             f"Ok, I'm leaving this chat now. Bye!"
