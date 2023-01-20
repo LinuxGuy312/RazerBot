@@ -150,6 +150,9 @@ def chats(update: Update, context: CallbackContext):
 def chat_leave(update: Update, context: CallbackContext):
     bot = context.bot
     try:
+        update.effective_message.reply_text(
+            f"Ok, I'm leaving this chat now. Bye!"
+        )
         bot.leaveChat(update.effective_message.chat.id)
     except Exception as e:
         print(str(e))
