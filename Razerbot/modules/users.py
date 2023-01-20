@@ -151,8 +151,8 @@ def chat_leave(update: Update, context: CallbackContext):
     bot = context.bot
     try:
         bot.leaveChat(update.effective_message.chat.id)
-    except:
-        pass
+    except Exception as e:
+        print(str(e))
 
 @run_async
 def chat_checker(update: Update, context: CallbackContext):
