@@ -6,7 +6,7 @@ from pyrogram import filters
 from pyrogram.types import Message, InlineKeyboardMarkup, InlineKeyboardButton
 from Razerbot import pbot, SUPPORT_CHAT, BOT_NAME, OWNER_ID, OWNER_USERNAME, ALIVE_IMG
 
-@pbot.on_message(filters.command("alive", prefixes=["/", ".", "!"]))
+@pbot.on_message(filters.command("alive", prefixes=["/", "!"]))
 async def alive(_, message):
     ALIVE_TEXT = f"""
 Hᴇʟʟᴏ {message.from_user.mention}!
@@ -22,7 +22,7 @@ Hᴇʟʟᴏ {message.from_user.mention}!
 ───────────────────────"""
     buttons = [
                 [
-                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"), 
+                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"tg://resolve?domain={SUPPORT_CHAT}"),
                     InlineKeyboardButton(text="oᴡɴᴇʀ", user_id=OWNER_ID)
                 ]
             ]
