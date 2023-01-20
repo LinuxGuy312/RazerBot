@@ -43,3 +43,12 @@ async def song(hbd):
 	os.remove(fn)
 	os.remove(sfn)
 	os.remove(fl)
+
+__mod_name__ = "HBD Sᴏɴɢ"
+__help__ = """Hᴀᴘᴘʏ Bɪʀᴛʜᴅᴀʏ Sᴏɴɢ
+
+Usage:
+> /hbds <name>
+> /hbds <reply to name>
+
+Wɪʟʟ ɢᴇɴᴇʀᴀᴛᴇ ᴀ ᴄᴜsᴛᴏᴍ ɴᴀᴍᴇ ʜᴀᴘᴘʏ ʙɪʀᴛʜᴅᴀʏ sᴏɴɢ."""

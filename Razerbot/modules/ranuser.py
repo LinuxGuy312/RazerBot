@@ -42,3 +42,10 @@ async def gen(event):
 	capt = f"**ɴᴀᴍᴇ:** {name}\n**ᴅᴏʙ:** {dob}\n**sᴛʀᴇᴇᴛ:** {street}\n**ᴄɪᴛʏ:** {city}\n**sᴛᴀᴛᴇ:** {state}\n**ᴄᴏᴜɴᴛʀʏ:** {country}\n**ᴘᴏsᴛᴀʟ ᴄᴏᴅᴇ:** {pscd}\n**ᴇᴍᴀɪʟ:** {email}\n**ᴘʜᴏɴᴇ:** {cell}\n\n**ᴄᴄ ɪɴꜰᴏ:**\n    **ᴄᴄ ɴᴜᴍʙᴇʀ:** {ccnum}\n    **ᴇxᴘɪʀʏ:** {ccexp}\n    **ᴄᴠᴠ:** {cvv}"
 	await bhurr.delete()
 	await tbot.send_file(event.chat_id, poto, caption=capt, reply_to=event.reply_to_msg_id, force_document=False)
+
+__mod_name__ = "Rᴀɴᴜsᴇʀ"
+__help__ = """Rᴀɴᴅᴏᴍ Usᴇʀ Iɴғᴏ Gᴇɴᴇʀᴀᴛᴏʀ
+
+ᴜsᴀɢᴇ:
+> /ranuser | Gᴇɴᴇʀᴀᴛᴇs Fᴀᴋᴇ Rᴀɴᴅᴏᴍ Usᴇʀ Iɴғᴏ (ɪᴍᴀɢᴇ ɪs ɢᴇɴᴇʀᴀᴛᴇᴅ ғʀᴏᴍ [ᴛʜɪsᴘᴇʀsᴏɴᴅᴏᴇsɴᴏᴛᴇxɪsᴛ.ᴄᴏᴍ](https://www.thispersondoesnotexist.com/))
+"""

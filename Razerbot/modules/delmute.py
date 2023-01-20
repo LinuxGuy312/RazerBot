@@ -117,8 +117,8 @@ async def undelmute(_, m):
             f"**Chat :** {m.chat.title}(`{m.chat.id}`)"
         )
 
-__mod_name__ = "Delmute"
-__help__ = """Delmute
+__mod_name__ = "Dᴇʟᴍᴜᴛᴇ"
+__help__ = """Dᴇʟᴍᴜᴛᴇ
 
 Usage:
 > /delmute <reply to anyone> or <user id>

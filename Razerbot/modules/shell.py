@@ -43,8 +43,8 @@ def shell(update: Update, context: CallbackContext):
         message.reply_text(reply, parse_mode=ParseMode.MARKDOWN)
 
 
-SHELL_HANDLER = CommandHandler(["sh"], shell)
+SHELL_HANDLER = CommandHandler(["shell"], shell)
 dispatcher.add_handler(SHELL_HANDLER)
 __mod_name__ = "Shell"
-__command_list__ = ["sh"]
+__command_list__ = ["shell"]
 __handlers__ = [SHELL_HANDLER]

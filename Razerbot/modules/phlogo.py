@@ -49,3 +49,10 @@ async def ph(event):
 	result.save(stc, "webp")
 	await tbot.send_file(event.chat_id, stc, reply_to=event.reply_to_msg_id, forcedocument=False)
 	os.remove(stc)
+
+__mod_name__ = "PHᴜʙ Lᴏɢᴏ"
+__help__ = """PᴏʀɴHᴜʙ Lᴏɢᴏ
+ᴜsᴀɢᴇ:
+> /phlogo <word1> <word2> | Tᴏ ɢᴇɴᴇʀᴀᴛᴇ ʟᴏɢᴏ ᴀs ɪᴍᴀɢᴇ
+> /phst <word1> <word2> | Tᴏ ɢᴇɴᴇʀᴀᴛᴇ ʟᴏɢᴏ ᴀs sᴛɪᴄᴋᴇʀ
+"""
