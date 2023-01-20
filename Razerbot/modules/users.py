@@ -145,6 +145,14 @@ def chats(update: Update, context: CallbackContext):
             caption="Here be the list of groups in my database.",
         )
 
+@run_async
+@sudo_plus
+def chat_leave(update: Update, context: CallbackContext):
+    bot = context.bot
+    try:
+        bot.leaveChat(update.effective_message.chat.id)
+    except:
+        pass
 
 @run_async
 def chat_checker(update: Update, context: CallbackContext):
@@ -173,6 +181,9 @@ def __migrate__(old_chat_id, new_chat_id):
 
 __help__ = ""  # no help string
 
+LEAVE_HANDLER = CommandHandler(
+    ["leave", "leavechat"], chat_leave
+)
 BROADCAST_HANDLER = CommandHandler(
     ["broadcastall", "broadcastusers", "broadcastgroups"], broadcast
 )
