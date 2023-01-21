@@ -176,8 +176,11 @@ def lock(update, context) -> str:
                     chat_id = update.effective_chat.id
                     chat_name = update.effective_message.chat.title
                     text = "Locked {} for non-admins!".format(ltype)
-                sql.update_lock(chat.id, ltype, locked=True)
-                send_message(update.effective_message, text, parse_mode="markdown")
+                try:
+                    sql.update_lock(chat.id, ltype, locked=True)
+                    send_message(update.effective_message, text, parse_mode="markdown")
+                except BadRequest:
+                    return send_message(update.effective_message, "I am not administrator or haven't got enough rights.")
 
                 return (
                     "<b>{}:</b>"
@@ -213,15 +216,17 @@ def lock(update, context) -> str:
                     text = "Locked {} for all non-admins!".format(ltype)
 
                 current_permission = context.bot.getChat(chat_id).permissions
-                context.bot.set_chat_permissions(
-                    chat_id=chat_id,
-                    permissions=get_permission_list(
-                        eval(str(current_permission)),
-                        LOCK_CHAT_RESTRICTION[ltype.lower()],
-                    ),
-                )
-
-                send_message(update.effective_message, text, parse_mode="markdown")
+                try:
+                    context.bot.set_chat_permissions(
+                        chat_id=chat_id,
+                        permissions=get_permission_list(
+                            eval(str(current_permission)),
+                            LOCK_CHAT_RESTRICTION[ltype.lower()],
+                        ),
+                    )
+                    send_message(update.effective_message, text, parse_mode="markdown")
+                except BadRequest:
+                    return send_message(update.effective_message, "I am not administrator or haven't got enough rights.")
                 return (
                     "<b>{}:</b>"
                     "\n#Permission_LOCK"
@@ -281,8 +286,11 @@ def unlock(update, context) -> str:
                     chat_id = update.effective_chat.id
                     chat_name = update.effective_message.chat.title
                     text = "Unlocked {} for everyone!".format(ltype)
-                sql.update_lock(chat.id, ltype, locked=False)
-                send_message(update.effective_message, text, parse_mode="markdown")
+                try:
+                    sql.update_lock(chat.id, ltype, locked=False)
+                    send_message(update.effective_message, text, parse_mode="markdown")
+                except BadRequest:
+                    return send_message(update.effective_message, "I am not administrator or haven't got enough rights.")
                 return (
                     "<b>{}:</b>"
                     "\n#UNLOCK"
@@ -324,15 +332,18 @@ def unlock(update, context) -> str:
                     return
 
                 current_permission = context.bot.getChat(chat_id).permissions
-                context.bot.set_chat_permissions(
-                    chat_id=chat_id,
-                    permissions=get_permission_list(
-                        eval(str(current_permission)),
-                        UNLOCK_CHAT_RESTRICTION[ltype.lower()],
-                    ),
-                )
+                try:
+                    context.bot.set_chat_permissions(
+                        chat_id=chat_id,
+                        permissions=get_permission_list(
+                            eval(str(current_permission)),
+                            UNLOCK_CHAT_RESTRICTION[ltype.lower()],
+                        ),
+                    )
 
-                send_message(update.effective_message, text, parse_mode="markdown")
+                    send_message(update.effective_message, text, parse_mode="markdown")
+                except BadRequest:
+                    return send_message(update.effective_message, "I am not administrator or haven't got enough rights.")
 
                 return (
                     "<b>{}:</b>"
