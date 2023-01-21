@@ -3,7 +3,6 @@ import html
 from alphabet_detector import AlphabetDetector
 from telegram import (
     Chat,
-    ChatMemberAdministrator,
     ChatPermissions,
     MessageEntity,
     Update,
@@ -18,9 +17,11 @@ from Razerbot import DRAGONS, LOGGER, application
 from Razerbot.modules.connection import connected
 from Razerbot.modules.disable import DisableAbleCommandHandler
 from Razerbot.modules.helper_funcs.alternate import send_message, typing_action
-from Razerbot.modules.helper_funcs.chat_status import (
-    check_admin,
+from FallenRobot.modules.helper_funcs.chat_status import (
+    can_delete,
     is_bot_admin,
+    is_user_admin,
+    user_admin,
     user_not_admin,
 )
 from Razerbot.modules.log_channel import loggable
@@ -176,7 +177,7 @@ async def locktypes(update: Update, context: ContextTypes.DEFAULT_TYPE):
     )
 
 
-@check_admin(permission="can_delete_messages", is_both=True)
+@user_admin
 @loggable
 @typing_action
 async def lock(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
@@ -297,7 +298,7 @@ async def lock(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
     return ""
 
 
-@check_admin(permission="can_delete_messages", is_both=True)
+@user_admin
 @loggable
 @typing_action
 async def unlock(update: Update, context: ContextTypes.DEFAULT_TYPE) -> str:
