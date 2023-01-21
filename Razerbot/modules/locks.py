@@ -7,7 +7,7 @@ from telegram import (
     MessageEntity,
     Update,
 )
-from telegram.constants import ParseMode
+
 from telegram.error import BadRequest, TelegramError
 from telegram.ext import CommandHandler, ContextTypes, MessageHandler, filters
 from telegram.helpers import mention_html
