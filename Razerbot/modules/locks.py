@@ -17,7 +17,7 @@ from Razerbot import DRAGONS, LOGGER, dispatcher as application
 from Razerbot.modules.connection import connected
 from Razerbot.modules.disable import DisableAbleCommandHandler
 from Razerbot.modules.helper_funcs.alternate import send_message, typing_action
-from FallenRobot.modules.helper_funcs.chat_status import (
+from Razerbot.modules.helper_funcs.chat_status import (
     can_delete,
     is_bot_admin,
     is_user_admin,
