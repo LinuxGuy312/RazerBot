@@ -6,7 +6,7 @@ import traceback
 from inspect import getfullargspec
 from io import StringIO
 from time import time
-
+from Razerbot.utils import format as _format
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 
@@ -14,6 +14,7 @@ from Razerbot import DRAGONS, pbot as app
 
 
 async def aexec(code, client, message):
+    p = lambda _x: print(_format.yaml_format(_x))
     exec(
         "async def __aexec(client, message): "
         + "".join(f"\n {a}" for a in code.split("\n"))

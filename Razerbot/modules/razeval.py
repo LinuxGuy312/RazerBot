@@ -75,7 +75,19 @@ async def _(event):
     final_output = (
         f"⥤ ᴇᴠᴀʟ : \n```{cmd}``` \n\n⥤ ʀᴇsᴜʟᴛ : \n```{evaluation}``` \n"
     )
-    await razevent.edit(text=final_output)
+    if len(final_output) > 4096:
+        filename = "result.txt"
+        with open(filename, "w+", encoding="utf8") as out_file:
+            out_file.write(str(evaluation.strip()))
+        await event.client.send_file(
+            event.chat_id,
+            filename,
+            caption=f"**INPUT:**\n`{cmd[0:980]}`\n\n**OUTPUT:**\n`Attached Document`",
+        )
+        await event.delete()
+        os.remove(filename)
+    else:
+        await razevent.edit(final_output)
     if EVENT_LOGS:
         await event.client.send_message(int(EVENT_LOGS), f"#RAZEVAL\nᴇᴠᴀʟ ᴄᴏᴍᴍᴀɴᴅ `{cmd}` ᴡᴀs ᴇxᴇᴄᴜᴛᴇᴅ sᴜᴄᴇssꜰᴜʟʟʏ ɪɴ `{event.chat_id}`")
 
