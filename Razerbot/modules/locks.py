@@ -13,7 +13,7 @@ from telegram.ext import CommandHandler, MessageHandler, filters
 from telegram.utils.helpers import mention_html
 
 import Razerbot.modules.sql.locks_sql as sql
-from Razerbot import DRAGONS, LOGGER, application
+from Razerbot import DRAGONS, LOGGER, dispatcher as application
 from Razerbot.modules.connection import connected
 from Razerbot.modules.disable import DisableAbleCommandHandler
 from Razerbot.modules.helper_funcs.alternate import send_message, typing_action
