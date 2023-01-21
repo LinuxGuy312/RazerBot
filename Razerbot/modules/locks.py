@@ -9,8 +9,8 @@ from telegram import (
 )
 
 from telegram.error import BadRequest, TelegramError
-from telegram.ext import CommandHandler, ContextTypes, MessageHandler, filters
-from telegram.helpers import mention_html
+from telegram.ext import CommandHandler, MessageHandler, filters
+from telegram.utils.helpers import mention_html
 
 import Razerbot.modules.sql.locks_sql as sql
 from Razerbot import DRAGONS, LOGGER, application
