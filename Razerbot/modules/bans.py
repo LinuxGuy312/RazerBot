@@ -399,14 +399,14 @@ def selfunban(context: CallbackContext, update: Update) -> str:
 
 
 __help__ = """
- ❍ /punchme*:* punchs the user who issued the command
+ ⋗ /punchme*:* punchs the user who issued the command
 
 *Admins only:*
- ❍ /ban <userhandle>*:* bans a user. (via handle, or reply)
- ❍ /sban <userhandle>*:* Silently ban a user. Deletes command, Replied message and doesn't reply. (via handle, or reply)
- ❍ /tban <userhandle> x(m/h/d)*:* bans a user for `x` time. (via handle, or reply). `m` = `minutes`, `h` = `hours`, `d` = `days`.
- ❍ /unban <userhandle>*:* unbans a user. (via handle, or reply)
- ❍ /punch <userhandle>*:* Punches a user out of the group, (via handle, or reply)
+ ⋗ /ban <userhandle>*:* bans a user. (via handle, or reply)
+ ⋗ /sban <userhandle>*:* Silently ban a user. Deletes command, Replied message and doesn't reply. (via handle, or reply)
+ ⋗ /tban <userhandle> x(m/h/d)*:* bans a user for `x` time. (via handle, or reply). `m` = `minutes`, `h` = `hours`, `d` = `days`.
+ ⋗ /unban <userhandle>*:* unbans a user. (via handle, or reply)
+ ⋗ /punch <userhandle>*:* Punches a user out of the group, (via handle, or reply)
 
 *FedBan or Fban Info:*
 Everything is fun, until a spammer starts entering your group, and you have to block it. Then you need to start banning more, and more, and it hurts.
@@ -416,9 +416,9 @@ You can even designate federation admins, so your trusted admin can ban all the 
 
 *Commands:*\n
 Feds are now divided into 3 sections for your ease. 
-❍ /fedownerhelp*:* Provides help for fed creation and owner only commands
-❍ /fedadminhelp*:* Provides help for fed administration commands
-❍ /feduserhelp*:* Provides help for commands anyone can use
+⋗ /fedownerhelp*:* Provides help for fed creation and owner only commands
+⋗ /fedadminhelp*:* Provides help for fed administration commands
+⋗ /feduserhelp*:* Provides help for commands anyone can use
 """
 
 BAN_HANDLER = CommandHandler(["ban", "sban"], ban)

@@ -46,7 +46,7 @@ async def eor(msg: Message, **kwargs):
 aiohttpsession = ClientSession()
 
     
-from Razerbot.config import Development as Config
+from config import Development as Config
 
 TOKEN = Config.TOKEN
 

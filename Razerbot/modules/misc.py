@@ -84,41 +84,41 @@ def markdown_help(update: Update, context: CallbackContext):
 __help__ = """
 *Available commands:*
 *Markdown:*
- ❍ /markdownhelp*:* quick summary of how markdown works in telegram - can only be called in private chats
+ ⋗ /markdownhelp*:* quick summary of how markdown works in telegram - can only be called in private chats
 *Paste:*
- ❍ /paste*:* Saves replied content to `nekobin.com` and replies with a url
+ ⋗ /paste*:* Saves replied content to `nekobin.com` and replies with a url
 *Gps:*
- ❍ /gps <location>*:* Get gps location.
+ ⋗ /gps <location>*:* Get gps location.
 *Country:*
- ❍ /country <country name>: Gathering info about given country.
+ ⋗ /country <country name>: Gathering info about given country.
 *React:*
- ❍ /react*:* Reacts with a random reaction 
+ ⋗ /react*:* Reacts with a random reaction 
 *Urban Dictonary:*
- ❍ /ud <word>*:* Type the word or expression you want to search use
+ ⋗ /ud <word>*:* Type the word or expression you want to search use
 *Wikipedia:*
- ❍ /wiki <query>*:* wikipedia your query
+ ⋗ /wiki <query>*:* wikipedia your query
 *Wallpapers:*
- ❍ /wall <query> ; <count 1-10>*:* get wallpapers from wall.alphacoders.com, if no count is given then 1 wallpaper will be sent.
+ ⋗ /wall <query> ; <count 1-10>*:* get wallpapers from wall.alphacoders.com, if no count is given then 1 wallpaper will be sent.
 *Json*
- ❍ /json*:* Get Detailed info about any message
+ ⋗ /json*:* Get Detailed info about any message
 *Knowledge:*
- ❍ /define <text>*:* Type the word or expression you want to search\nFor example /define kill
- ❍ /spell*:* while replying to a message, will reply with a grammar corrected version
+ ⋗ /define <text>*:* Type the word or expression you want to search\nFor example /define kill
+ ⋗ /spell*:* while replying to a message, will reply with a grammar corrected version
  *Wikipedia:*
- ❍ /wiki : For serching wikipedia.
+ ⋗ /wiki : For serching wikipedia.
 *Telegraph:*
- ❍ /tm :Get Telegraph Link Of Replied Media
- ❍ /txt :Get Telegraph Link of Replied Text
+ ⋗ /tm :Get Telegraph Link Of Replied Media
+ ⋗ /txt :Get Telegraph Link of Replied Text
 *Translate:* 
- ❍ /tr or /tl (language code) as reply to a long message
+ ⋗ /tr or /tl (language code) as reply to a long message
 *Example:* 
- ❍ /covid - To Get Global Stats of Covid.
- ❍ /covid <COUNTRY> - To Get Stats of A Single Country.
+ ⋗ /covid - To Get Global Stats of Covid.
+ ⋗ /covid <COUNTRY> - To Get Stats of A Single Country.
 *Text to Speach:*
- ❍ /tts <lang code>*:* Reply to any message to get text to speech output
- ❍ /stt*:* Type in reply to a voice message(support english only) to extract text from it.
+ ⋗ /tts <lang code>*:* Reply to any message to get text to speech output
+ ⋗ /stt*:* Type in reply to a voice message(support english only) to extract text from it.
 *Currency converter:* 
- ❍ /cash*:* currency converter
+ ⋗ /cash*:* currency converter
 Example:
  `/cash 1 USD INR`  
       _OR_

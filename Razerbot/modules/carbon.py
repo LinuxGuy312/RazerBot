@@ -19,7 +19,7 @@ async def carbon_func(_, message):
     try:
         cod = message.reply_to_message.text
     except:
-        cod = message.text.split(" ", 1)[1]
+        cod = (message.text.split(" ", 1)[1]).replace(r"\W", " ")
     m = await message.reply_text("ɢᴇɴᴇʀᴀᴛɪɴɢ ᴄᴀʀʙᴏɴ...")
     carbon = await make_carbon(cod)
     await m.edit("ᴜᴩʟᴏᴀᴅɪɴɢ ɢᴇɴᴇʀᴀᴛᴇᴅ ᴄᴀʀʙᴏɴ...")
@@ -32,5 +32,5 @@ __mod_name__ = "Cᴀʀʙᴏɴ"
 __help__ = """
 Generate a carbon of given text 
 
- ❍ /carbon <text>
+ ⋗ /carbon <text>
 """

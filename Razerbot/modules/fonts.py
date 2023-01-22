@@ -1,3 +1,5 @@
+import re
+
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
@@ -189,7 +191,9 @@ async def style(c, m):
         cls = Fonts.strike
     if style == "frozen":
         cls = Fonts.frozen
-    new_text = cls((m.message.reply_to_message.text.replace(r"\n", " ", 1)).split(' ', 1)[1])
+    txt = str(m.message.reply_to_message.text)
+    mtext = re.sub('\s+', ' ', txt)
+    new_text = cls(mtext.split(' ', 1)[1])
     try:
         await m.message.edit_text(new_text, reply_markup=m.message.reply_markup)
     except:
@@ -198,7 +202,7 @@ async def style(c, m):
 
 __help__ = """
 
- ❍ font <text> *:* ᴄᴏɴᴠᴇʀᴛs sɪᴍᴩʟᴇ ᴛᴇxᴛ ᴛᴏ ʙᴇᴀᴜᴛɪғᴜʟ ᴛᴇxᴛ ʙʏ ᴄʜᴀɴɢɪɴɢ ɪᴛ's ғᴏɴᴛ.
+ ⋗ font <text> *:* ᴄᴏɴᴠᴇʀᴛs sɪᴍᴩʟᴇ ᴛᴇxᴛ ᴛᴏ ʙᴇᴀᴜᴛɪғᴜʟ ᴛᴇxᴛ ʙʏ ᴄʜᴀɴɢɪɴɢ ɪᴛ's ғᴏɴᴛ.
  """
 
 __mod_name__ = "Fᴏɴᴛ Eᴅɪᴛᴏʀ"
