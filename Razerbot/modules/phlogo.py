@@ -53,6 +53,6 @@ async def ph(event):
 __mod_name__ = "PHᴜʙ Lᴏɢᴏ"
 __help__ = """PᴏʀɴHᴜʙ Lᴏɢᴏ
 ᴜsᴀɢᴇ:
-> /phlogo <word1> <word2> | Tᴏ ɢᴇɴᴇʀᴀᴛᴇ ʟᴏɢᴏ ᴀs ɪᴍᴀɢᴇ
-> /phst <word1> <word2> | Tᴏ ɢᴇɴᴇʀᴀᴛᴇ ʟᴏɢᴏ ᴀs sᴛɪᴄᴋᴇʀ
+⋗ /phlogo <word1> <word2> | Tᴏ ɢᴇɴᴇʀᴀᴛᴇ ʟᴏɢᴏ ᴀs ɪᴍᴀɢᴇ
+⋗ /phst <word1> <word2> | Tᴏ ɢᴇɴᴇʀᴀᴛᴇ ʟᴏɢᴏ ᴀs sᴛɪᴄᴋᴇʀ
 """

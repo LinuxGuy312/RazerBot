@@ -110,3 +110,10 @@ sᴜʙ ʀᴇɢɪᴏɴ: {sub}
         caption,
         parse_mode="HTML",
     )
+
+__mod_name__ = "Cᴏᴜɴᴛʀʏ"
+__help__ = """Cᴏᴜɴᴛʀʏ
+
+⋗ /country <country name or code>
+
+Will give information about a country."""
