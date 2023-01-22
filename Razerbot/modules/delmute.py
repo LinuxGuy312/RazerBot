@@ -17,7 +17,7 @@ async def watcher(_, m):
         await m.delete()
 
 
-@pbot.on_message(filters.command("delmute", prefixes=["/", ".", "!"]))
+@pbot.on_message(filters.command("delmute"))
 async def delmute(_, m):
     if not m.from_user:
         return
@@ -26,12 +26,10 @@ async def delmute(_, m):
     try:
         if m.reply_to_message:
             jadu = m.reply_to_message.from_user.id
-            lst = m.text.split(" ")[1:]
-            reason = " ".join(lst)
+            reason = m.text.split(" ", 1)[1]
         else:
             jadu = m.text.split(" ")[1]
-            lst = m.text.split(" ")[2:]
-            reason = " ".join(lst)
+            reason = m.text.split(" ", 2)[2]
     except Exception as e:
         return await m.reply_text(f"**Error:** {e}")
     userid = m.from_user.id
@@ -74,7 +72,7 @@ async def delmute(_, m):
     if EVENT_LOGGER:
         await pbot.send_message(EVENT_LOGS, evt_msg)
 
-@pbot.on_message(filters.command(["undelmute", "delunmute"], prefixes=["/", ".", "!"]))
+@pbot.on_message(filters.command(["undelmute", "delunmute"]))
 async def undelmute(_, m):
     if not m.from_user:
         return
