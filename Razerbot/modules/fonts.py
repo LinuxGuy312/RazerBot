@@ -4,7 +4,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from Razerbot import pbot as Client
 from Razerbot.utils.fonts import Fonts
 
-@Client.on_message(filters.command(["font", "fonts"]))
+@Client.on_message(filters.regex("^[/!]fon(t|ts)"))
 async def style_buttons(c, m, cb=False):
     buttons = [
         [
