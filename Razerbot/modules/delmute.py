@@ -26,10 +26,10 @@ async def delmute(_, m):
     try:
         if m.reply_to_message:
             jadu = m.reply_to_message.from_user.id
-            reason = m.text.split(" ", 1)[1] or None
+            reason = " ".join(m.text.split(" ")[1:])
         else:
-            jadu = m.text.split(" ")[1]
-            reason = m.text.split(" ", 2)[2] or None
+            jadu = "".join(m.text.split(" ")[1])
+            reason = " ".join(m.text.split(" ")[2:])
     except Exception as e:
         return await m.reply_text(f"**Error:** {e}")
     userid = m.from_user.id
