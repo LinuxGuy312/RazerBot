@@ -65,7 +65,7 @@ async def Logo(event):
 
 
 async def get_font_file(client, channel_id):
-    font_file_message_s = await tbot.iter_messages(entity=channel_id, filter=InputMessagesFilterDocument, limit=50)
+    font_file_message_s = tbot.iter_messages(entity=channel_id, filter=InputMessagesFilterDocument, limit=50)
     font_file = []
     for file in font_file_message_s:
         font_file.append(file)
