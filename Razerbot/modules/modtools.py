@@ -120,3 +120,48 @@ async def uninstall(event):
         await event.reply(f"Successfully uninstalled {shortname}\n{e}")
     if shortname in MOD_INFO:
         MOD_INFO.pop(shortname)
+
+@dev_plus
+@register(pattern='^[/!]send ([\s\S]*)')
+async def send(event):
+    "To uplaod a module file to telegram chat"
+    input_str = event.pattern_match.group(1)
+    module = f"./Razerbot/modules/{input_str}.py"
+    if os.path.exists(module):
+        await event.client.send_file(
+            event.chat_id,
+            module,
+            force_document=True,
+            allow_cache=False,
+            reply_to=event.reply_to_msg_id,
+            caption=f"**➥ Module Name:-** `{input_str}`",
+        )
+        await event.delete()
+    else:
+        await event.reply("404: File Not Found")
+
+@dev_plus
+@register(pattern='^[!/]munload ([\s\S]*)')
+async def unload(event):
+    "To unload a module temporarily."
+    shortname = event.pattern_match.group(1)
+    try:
+        remove_plugin(shortname)
+        await event.reply(f"Unloaded {shortname} successfully")
+    except Exception as e:
+        await event.reply(f"Successfully unload {shortname}\n{e}")
+
+@dev_plus
+@register(pattern='^[/!]mload ([\s\S]*)')
+async def load(event):
+    "To load a module again. if you have unloaded it"
+    shortname = event.pattern_match.group(1)
+    try:
+        with contextlib.suppress(BaseException):
+            remove_plugin(shortname)
+        load_module(shortname)
+        await event.reply(f"`Successfully loaded {shortname}`")
+    except Exception as e:
+        await event.reply(
+            f"Could not load {shortname} because of the following error.\n{e}"
+        )
