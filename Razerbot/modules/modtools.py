@@ -146,7 +146,7 @@ async def unload(event):
     "To unload a module temporarily."
     shortname = event.pattern_match.group(1)
     try:
-        remove_plugin(shortname)
+        remove_module(shortname)
         await event.reply(f"Unloaded {shortname} successfully")
     except Exception as e:
         await event.reply(f"Successfully unload {shortname}\n{e}")
@@ -158,7 +158,7 @@ async def load(event):
     shortname = event.pattern_match.group(1)
     try:
         with contextlib.suppress(BaseException):
-            remove_plugin(shortname)
+            remove_module(shortname)(shortname)
         load_module(shortname)
         await event.reply(f"`Successfully loaded {shortname}`")
     except Exception as e:
