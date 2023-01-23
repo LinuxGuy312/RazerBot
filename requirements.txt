@@ -1,3 +1,4 @@
+setuptools
 future
 emoji
 lxml
@@ -75,3 +76,4 @@ img2pdf
 multicolorcaptcha
 youtube-search
 phlogo
+Faker
