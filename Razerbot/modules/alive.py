@@ -22,7 +22,7 @@ Hᴇʟʟᴏ {message.from_user.mention}!
 ───────────────────────"""
     buttons = [
                 [
-                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"tg://resolve?domain={SUPPORT_CHAT}"),
+                    InlineKeyboardButton(text="sᴜᴘᴘᴏʀᴛ", url=f"https://t.me/{SUPPORT_CHAT}"),
                     InlineKeyboardButton(text="oᴡɴᴇʀ", user_id=OWNER_ID)
                 ]
             ]
