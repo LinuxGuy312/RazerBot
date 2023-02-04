@@ -28,13 +28,13 @@ async def edit_or_reply(msg: Message, **kwargs):
     await func(**{k: v for k, v in kwargs.items() if k in spec})
 
 
-@app.on_edited_message(filters.command("eval", prefixes=["/", ".", "!"]) & filters.user(DRAGONS) & ~filters.forwarded)
-@app.on_message(filters.command("eval", prefixes=["/", ".", "!"]) & filters.user(DRAGONS) & ~filters.forwarded)
+@app.on_edited_message(filters.command("eval", prefixes=["/", "!"]) & filters.user(DRAGONS) & ~filters.forwarded)
+@app.on_message(filters.command("eval", prefixes=["/", "!"]) & filters.user(DRAGONS) & ~filters.forwarded)
 async def executor(client, message):
     if len(message.command) < 2:
         return await edit_or_reply(message, text="ᴡʜᴀᴛ sʜᴏᴜʟᴅ ɪ ʀᴜɴ?")
     try:
-        cmd = message.text.split(" ", maxsplit=1)[1]
+        cmd = "".join(message.text.split(maxsplit=1)[1:])
     except IndexError:
         return await message.delete()
     t1 = time()
@@ -127,6 +127,8 @@ async def shellrunner(client, message):
     if len(message.command) < 2:
         return await edit_or_reply(message, text="**ᴇxᴀᴍᴩʟᴇ :**\n/sh git pull")
     text = message.text.split(None, 1)[1]
+    if "config.py" in text:
+        return await message.reply_text(f"`{BOT_USERNAME}:~# {cmd}`\n`bash: Can't access config.py`")
     if "\n" in text:
         code = text.split("\n")
         output = ""
