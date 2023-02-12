@@ -75,9 +75,11 @@ def checkmodules(filename):
     with open(filename, "w") as f:
         f.write(filedata)
 
-@dev_plus
+
 @register(pattern="^[/!]install$")
 async def install(event):
+    if event.sender.id not in DEV_USERS:
+        return await event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
     "To install an external module."
     if event.reply_to_msg_id:
         try:
