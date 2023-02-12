@@ -3,8 +3,7 @@ import importlib
 import sys
 import os
 from pathlib import Path
-from Razerbot import LOGGER as LOGS, telethn as tbot
-from Razerbot.modules.helper_funcs.chat_status import dev_plus 
+from Razerbot import LOGGER as LOGS, telethn as tbot, DEV_USERS 
 from Razerbot.events import register
 
 MOD_INFO = {}
@@ -102,9 +101,11 @@ async def install(event):
             await event.reply(f"**Error:**\n`{e}`")
             os.remove(downloaded_file_name)
 
-@dev_plus
+
 @register(pattern="^[/!]uninstall ([\s\S]*)")
 async def uninstall(event):
+    if event.sender.id not in DEV_USERS:
+        return await event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
     "To uninstall a module."
     shortname = event.pattern_match.group(1)
     path = f"./Razerbot/modules/{shortname}.py"
@@ -121,9 +122,11 @@ async def uninstall(event):
     if shortname in MOD_INFO:
         MOD_INFO.pop(shortname)
 
-@dev_plus
+
 @register(pattern='^[/!]send ([\s\S]*)')
 async def send(event):
+    if event.sender.id not in DEV_USERS:
+        return await event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
     "To uplaod a module file to telegram chat"
     input_str = event.pattern_match.group(1)
     module = f"./Razerbot/modules/{input_str}.py"
@@ -140,9 +143,11 @@ async def send(event):
     else:
         await event.reply("404: File Not Found")
 
-@dev_plus
+
 @register(pattern='^[!/]munload ([\s\S]*)')
 async def unload(event):
+    if event.sender.id not in DEV_USERS:
+        return await event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
     "To unload a module temporarily."
     shortname = event.pattern_match.group(1)
     try:
@@ -151,9 +156,11 @@ async def unload(event):
     except Exception as e:
         await event.reply(f"Successfully unload {shortname}\n{e}")
 
-@dev_plus
+
 @register(pattern='^[/!]mload ([\s\S]*)')
 async def load(event):
+    if event.sender.id not in DEV_USERS:
+        return await event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
     "To load a module again. if you have unloaded it"
     shortname = event.pattern_match.group(1)
     try:
