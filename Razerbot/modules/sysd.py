@@ -1,4 +1,5 @@
 import subprocess
+from pyrogram import filters
 from Razerbot import pbot
 
 @pbot.on_message(filters.regex('^[/!](sysd|neofetch)'))
