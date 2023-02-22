@@ -11,4 +11,4 @@ async def neofetch(bot, m):
     )
     stdout, _ = process.communicate()
     out = stdout.decode()
-    m.reply_text(out)
+    await m.reply_text(out)
