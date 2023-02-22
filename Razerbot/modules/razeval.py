@@ -42,6 +42,8 @@ async def _(event):
     if event.sender.id not in DEV_USERS:
         return await event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
     cmd = "".join(event.message.message.split(maxsplit=1)[1:])
+    if "config.py" in cmd:
+        return await event.reply(f"#PRIVACY_ERROR\nCan't access config.py`")
     if not cmd:
         return await event.reply("ᴡʜᴀᴛ sʜᴏᴜʟᴅ ɪ ʀᴜɴ?")
     cmd = (
@@ -72,9 +74,7 @@ async def _(event):
         evaluation = stdout
     else:
         evaluation = "sᴜᴄᴄᴇss"
-    final_output = (
-        f"⥤ ᴇᴠᴀʟ : \n```{cmd}``` \n\n⥤ ʀᴇsᴜʟᴛ : \n```{evaluation}``` \n"
-    )
+    final_output = (f"⥤ ᴇᴠᴀʟ : \n```{cmd}``` \n\n⥤ ʀᴇsᴜʟᴛ : \n```{evaluation}``` \n")
     if len(final_output) > 4096:
         filename = "result.txt"
         with open(filename, "w+", encoding="utf8") as out_file:
@@ -98,11 +98,11 @@ async def aexec(code, smessatatus):
     reply = await event.get_reply_message()
     exec(
         (
-            "async def __aexec(message, event , reply, client, p, chat): "
+            "async def __aexec(message, event, client, p): "
             + "".join(f"\n {l}" for l in code.split("\n"))
         )
     )
 
     return await locals()["__aexec"](
-        message, event, reply, message.client, p, message.chat_id
+        message, event, message.client, p
     )

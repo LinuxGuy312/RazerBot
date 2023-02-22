@@ -73,7 +73,7 @@ def yaml_format(obj, indent=0, max_str_len=256, max_byte_len=64):
 
 
 async def aexec_(code, smessatatus, client):
-    message = event = smessatatus
+    message = event = smessatatus = m
     p = lambda _x: print(yaml_format(_x))
     exec("async def __aexec(message, event, client, p): "
             + "".join(f"\n {l}" for l in code.split("\n")))
@@ -89,10 +89,12 @@ async def eval(client, message):
     if message.from_user.id not in DEV_USERS:
         return await message.reply_text("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
     cmd = "".join(message.text.split(maxsplit=1)[1:])
+    if "config.py" in cmd:
+        return await message.reply_text(f"#PRIVACY_ERROR\nCan't access config.py`")
     print(cmd)
     if not cmd:
-        return await message.reply_text("`What should i run?..`")
-    eval_ = await message.reply_text("`Running ...`")
+        return await message.reply_text("ᴡʜᴀᴛ sʜᴏᴜʟᴅ ɪ ʀᴜɴ?")
+    eva = await message.reply_text("ʀᴜɴɴɪɴɢ...")
     t1 = time()
     old_stderr = sys.stderr
     old_stdout = sys.stdout
@@ -115,10 +117,10 @@ async def eval(client, message):
     elif stdout:
         evaluation = stdout
     else:
-        evaluation = "Success"
-    final_output = f"**•  Eval : **\n`{cmd}` \n\n**•  Output :**\n`{evaluation}`\n"
+        evaluation = "sᴜᴄᴄᴇss"
+    final_output = (f"⥤ ᴇᴠᴀʟ : \n```{cmd}``` \n\n⥤ ʀᴇsᴜʟᴛ : \n```{evaluation}```")
     if len(final_output) > 4096:
-        filename = "output.txt"
+        filename = "result.txt"
         with open(filename, "w+", encoding="utf8") as out_file:
             out_file.write(str(evaluation.strip()))
         t2 = time()
@@ -138,7 +140,7 @@ async def eval(client, message):
             quote=False,
             reply_markup=keyboard,
         )
-        await message.delete()
+        await eva.delete()
         os.remove(filename)
     else:
         t2 = time()
@@ -147,15 +149,12 @@ async def eval(client, message):
                 [
                     InlineKeyboardButton(
                         text="⏳",
-                        callback_data=f"Runtime {round(t2-t1, 3)} Seconds",
-                    ),
-                    InlineKeyboardButton(
-                        text="🗑",
-                        callback_data=f"forceclose abc|{message.from_user.id}",
-                    ),
+                        callback_data=f"runtime {t2-t1} Seconds",
+                    )
                 ]
             ]
         )
+        await eva.delete()
         await message.reply(text=final_output, reply_markup=keyboard)
     
 @app.on_callback_query(filters.regex(r"runtime"))
