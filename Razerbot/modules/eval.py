@@ -93,6 +93,7 @@ async def eval(client, message):
     if not cmd:
         return await message.reply_text("`What should i run?..`")
     eval_ = await message.reply_text("`Running ...`")
+    t1 = time()
     old_stderr = sys.stderr
     old_stdout = sys.stdout
     redirected_output = sys.stdout = io.StringIO()
