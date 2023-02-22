@@ -8,7 +8,7 @@ import time
 from datetime import datetime
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
-from Razerbot import DRAGONS, pbot as app
+from Razerbot import DRAGONS, pbot as app, DEV_USERS
 
 
 def utc_to_local(utc_datetime):
@@ -86,8 +86,8 @@ async def aexec_(code, smessatatus, client):
 @app.on_edited_message(filters.command("eval", prefixes=["/", "!"]) & filters.user(DRAGONS) & ~filters.forwarded)
 @app.on_message(filters.command("eval", prefixes=["/", "!"]) & filters.user(DRAGONS) & ~filters.forwarded)
 async def eval(client, message):
-    if event.sender.id not in DEV_USERS:
-        return await event.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
+    if message.from_user.id not in DEV_USERS:
+        return await message.reply("ᴛʜɪs ɪs ᴀ ᴅᴇᴠᴇʟᴏᴘᴇʀ ʀᴇsᴛʀɪᴄᴛᴇᴅ ᴄᴏᴍᴍᴀɴᴅ.\nʏᴏᴜ ᴅᴏ ɴᴏᴛ ʜᴀᴠᴇ ᴘᴇʀᴍɪssɪᴏɴs ᴛᴏ ʀᴜɴ ᴛʜɪs.")
     cmd = "".join(message.text.split(maxsplit=1)[1:])
     print(cmd)
     if not cmd:
