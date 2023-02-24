@@ -346,4 +346,4 @@ async def fm(event):
         return
 
     msg, buttons = get_manager(os.getcwd(), 1)
-    await event.edit(msg, buttons=buttons)
+    await event.reply(msg, buttons=buttons)
