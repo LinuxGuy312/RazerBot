@@ -5,7 +5,7 @@ import os
 import time
 from pathlib import Path
 
-from telethon import Button, types
+from telethon import Button, types, events
 from telethon.events import CallbackQuery
 from telethon.utils import get_attributes
 
