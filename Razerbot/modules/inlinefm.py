@@ -1,20 +1,31 @@
-# For CatUB By MineisZarox https://t.me/IrisZarox (Demon), Ported By @WH0907
+# For CatUB By MineisZarox https://t.me/IrisZarox (Demon), Ported to pyrogram By https://telegram.dog/WH0907 (Eren)
 import asyncio
 import io
 import os
 import time
 from pathlib import Path
 
-from telethon import Button, types, events
-from telethon.events import CallbackQuery
-from telethon.utils import get_attributes
+from pyrogram import filters
+from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
 
-from Razerbot import telethn as tbot, OWNER_ID
+from Razerbot import pbot, OWNER_ID
 
 
 CC = []
 PATH = []  # using list method for some reason
 
+async def runcmd(cmd: str) -> Tuple[str, str, int, int]:
+    args = shlex.split(cmd)
+    process = await asyncio.create_subprocess_exec(
+        *args, stdout=asyncio.subprocess.PIPE, stderr=asyncio.subprocess.PIPE
+    )
+    stdout, stderr = await process.communicate()
+    return (
+        stdout.decode("utf-8", "replace").strip(),
+        stderr.decode("utf-8", "replace").strip(),
+        process.returncode,
+        process.pid,
+    )
 
 def humanbytes(size: int) -> str:
     if size is None or isinstance(size, str):
@@ -50,16 +61,16 @@ def add_s(msg, num: int):
             fmsg += f"{ff}\n"
     buttons = [
         [
-            Button.inline("D", data=f"fmrem_{msgs[valv]}|{valv}"),
-            Button.inline("X", data=f"fmcut_{msgs[valv]}|{valv}"),
-            Button.inline("C", data=f"fmcopy_{msgs[valv]}|{valv}"),
-            Button.inline("V", data=f"fmpaste_{valv}"),
+            IKB("D", callback_data=f"fmrem_{msgs[valv]}|{valv}"),
+            IKB("X", callback_data=f"fmcut_{msgs[valv]}|{valv}"),
+            IKB("C", callback_data=f"fmcopy_{msgs[valv]}|{valv}"),
+            IKB("V", callback_data=f"fmpaste_{valv}"),
         ],
         [
-            Button.inline("⬅️", data="fmback"),
-            Button.inline("⬆️", data=f"fmup_{valv}"),
-            Button.inline("⬇️", data=f"fmdown_{valv}"),
-            Button.inline("➡️", data=f"fmforth_{msgs[valv]}"),
+            IKB("⬅️", callback_data="fmback"),
+            IKB("⬆️", callback_data=f"fmup_{valv}"),
+            IKB("⬇️", callback_data=f"fmdown_{valv}"),
+            IKB("➡️", callback_data=f"fmforth_{msgs[valv]}"),
         ],
     ]
     return fmsg, buttons
@@ -125,16 +136,16 @@ def get_manager(path, num: int):
         msg += f"**Last Accessed Time:** `{time3}`"
         buttons = [
             [
-                Button.inline("D", data=f"fmrem_File|{num}"),
-                Button.inline("S", data="fmsend"),
-                Button.inline("X", data=f"fmcut_File|{num}"),
-                Button.inline("C", data=f"fmcopy_File{num}"),
+                IKB("D", callback_data=f"fmrem_File|{num}"),
+                IKB("S", callback_data="fmsend"),
+                IKB("X", callback_data=f"fmcut_File|{num}"),
+                IKB("C", callback_data=f"fmcopy_File{num}"),
             ],
             [
-                Button.inline("⇚", data="fmback"),
-                Button.inline("⤊", data="fmup_File"),
-                Button.inline("⤋", data="fmdown_File"),
-                Button.inline("⇛", data="fmforth_File"),
+                IKB("⇚", callback_data="fmback"),
+                IKB("⤊", callback_data="fmup_File"),
+                IKB("⤋", callback_data="fmdown_File"),
+                IKB("⇛", callback_data="fmforth_File"),
             ],
         ]
         PATH.clear()
@@ -144,8 +155,8 @@ def get_manager(path, num: int):
 
 
 # BACK
-@tbot.on(CallbackQuery(pattern="fmback"))
-async def back(event):
+@pbot.on_callback_query(filters.regex("fmback"))
+async def back(_, m):
     path = PATH[0]
     paths = path.split("/")
     if paths[-1] == "":
@@ -159,43 +170,43 @@ async def back(event):
     num = 1
     msg, buttons = get_manager(npath, num)
     await asyncio.sleep(1)
-    await event.edit(msg, buttons=buttons)
+    await m.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # UP
-@tbot.on(CallbackQuery(pattern="fmup_(.*)"))
-async def up(event):
-    num = event.pattern_match.group(1).decode("UTF-8")
+@pbot.on_callback_query(filters.regex("fmup_(.*)"))
+async def up(_, m):
+    num = m.matches.group(1).decode("UTF-8")
     if num == "File":
-        await event.answer("Its a File dummy!", alert=True)
+        await m.answer("Its a File dummy!", show_alert=True)
     else:
         num1 = int(num) - 1
         path = PATH[0]
         msg, buttons = get_manager(path, num1)
         await asyncio.sleep(1)
-        await event.edit(msg, buttons=buttons)
+        await m.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # DOWN
-@tbot.on(CallbackQuery(pattern="fmdown_(.*)"))
-async def down(event):
-    num = event.pattern_match.group(1).decode("UTF-8")
+@pbot.on_callback_query(filters.regex("fmdown_(.*)"))
+async def down(bot, m):
+    num = m.matches.group(1).decode("UTF-8")
     if num == "File":
-        await event.answer("Its a file dummy!", alert=True)
+        await m.answer("Its a file dummy!", show_alert=True)
     else:
         path = PATH[0]
         num1 = int(num) + 1
         msg, buttons = get_manager(path, num1)
         await asyncio.sleep(1)
-        await event.edit(msg, buttons=buttons)
+        await m.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # FORTH
-@tbot.on(CallbackQuery(pattern="fmforth_(.*)"))
-async def forth(event):
-    npath = event.pattern_match.group(1).decode("UTF-8")
+@pbot.on_callback_query(filters.regex("fmforth_(.*)"))
+async def forth(_, m):
+    npath = m.matches.group(1).decode("UTF-8")
     if npath == "File":
-        await event.answer("Its a file dummy!", alert=True)
+        await m.answer("Its a file dummy!", show_alert=True)
     else:
         path = PATH[0]
         npath = npath[2:-4]
@@ -203,13 +214,13 @@ async def forth(event):
         num = 1
         msg, buttons = get_manager(rpath, num)
         await asyncio.sleep(1)
-        await event.edit(msg, buttons=buttons)
+        await m.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # REMOVE
-@tbot.on(CallbackQuery(pattern="fmrem_(.*)"))
-async def remove(event):
-    fn, num = (event.pattern_match.group(1).decode("UTF-8")).split("|", 1)
+@pbot.on_callback_query(filters.regex("fmrem_(.*)"))
+async def remove(_, m):
+    fn, num = (m.matches.group(1).decode("UTF-8")).split("|", 1)
     path = PATH[0]
     if fn == "File":
         paths = path.split("/")
@@ -228,40 +239,24 @@ async def remove(event):
         npath = path
     msg, buttons = get_manager(npath, num)
     await asyncio.sleep(1)
-    await event.edit(msg, buttons=buttons)
-    await _catutils.runcmd(f"rm -rf '{rpath}'")
-    await event.answer(f"{rpath} removed successfully...")
+    await m.edit_text(msg, reply_markup=IKM(buttons))
+    await runcmd(f"rm -rf '{rpath}'")
+    await m.answer(f"{rpath} removed successfully...")
 
 
 # SEND
-@tbot.on(CallbackQuery(pattern="fmsend"))
-async def send(event):
+@pbot.on_callback_query(filters.regex("fmsend"))
+async def send(_, m):
     path = PATH[0]
-    startTime = time.time()
-    attributes, mime_type = get_attributes(str(path))
-    ul = io.open(Path(path), "rb")
-    uploaded = await event.client.fast_upload_file(
-        file=ul
-    )
-    ul.close()
-    media = types.InputMediaUploadedDocument(
-        file=uploaded,
-        mime_type=mime_type,
-        attributes=attributes,
-        force_file=False,
-        thumb=await event.client.upload_file(thumb_image_path)
-        if thumb_image_path
-        else None,
-    )
-    await event.edit("hi", file=media)
+    uploaded = await m.reply_document(file=path, caption='Uploaded By Razer.')
 
 
 # CUT
-@tbot.on(CallbackQuery(pattern="fmcut_(.*)"))
-async def cut(event):
-    f, n = (event.pattern_match.group(1).decode("UTF-8")).split("|", 1)
+@pbot.on_callback_query(filters.regex("fmcut_(.*)"))
+async def cut(_, m):
+    f, n = (m.matches.group(1).decode("UTF-8")).split("|", 1)
     if CC:
-        return await event.answer(f"Paste {CC[1]} first")
+        return await m.answer(f"Paste {CC[1]} first")
     else:
         if f == "File":
             npath = PATH[0]
@@ -276,25 +271,25 @@ async def cut(event):
                 path += f"{ii}/"
             CC.append("cut")
             CC.append(npath)
-            await event.answer(f"Moving {npath} ...")
+            await m.answer(f"Moving {npath} ...")
         else:
             path = PATH[0]
             npath = f[2:-4]
             rpath = f"{path}/{npath}"
             CC.append("cut")
             CC.append(rpath)
-            await event.answer(f"Moving {rpath} ...")
+            await m.answer(f"Moving {rpath} ...")
         msg, buttons = get_manager(path, n)
         await asyncio.sleep(1)
-        await event.edit(msg, buttons=buttons)
+        await m.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # COPY
-@tbot.on(CallbackQuery(pattern="fmcopy_(.*)"))
-async def copy(event):
-    f, n = (event.pattern_match.group(1).decode("UTF-8")).split("|", 1)
+@pbot.on_callback_query(filters.regex("fmcopy_(.*)"))
+async def copy(_, m):
+    f, n = (m.matches.group(1).decode("UTF-8")).split("|", 1)
     if CC:
-        return await event.answer(f"Paste {CC[1]} first")
+        return await m.answer(f"Paste {CC[1]} first")
     else:
         if f == "File":
             npath = PATH[0]
@@ -309,41 +304,39 @@ async def copy(event):
                 path += f"{ii}/"
             CC.append("copy")
             CC.append(npath)
-            await event.answer(f"Copying {path} ...")
+            await m.answer(f"Copying {path} ...")
         else:
             path = PATH[0]
             npath = f[2:-4]
             rpath = f"{path}/{npath}"
             CC.append("copy")
             CC.append(rpath)
-            await event.answer(f"Copying {rpath} ...")
+            await m.answer(f"Copying {rpath} ...")
         msg, buttons = get_manager(path, n)
         await asyncio.sleep(1)
-        await event.edit(msg, buttons=buttons)
+        await m.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # PASTE
-@tbot.on(CallbackQuery(pattern="fmpaste_(.*)"))
-async def paste(event):
-    n = event.pattern_match.group(1).decode("UTF-8")
+@pbot.on_callback_query(filters.regex("fmpaste_(.*)"))
+async def paste(_, m):
+    n = m.matches.group(1).decode("UTF-8")
     path = PATH[0]
     if CC:
         if CC[0] == "cut":
             cmd = f"mv '{CC[1]}' '{path}'"
         else:
             cmd = f"cp '{CC[1]}' '{path}'"
-        await _catutils.runcmd(cmd)
+        await runcmd(cmd)
         msg, buttons = get_manager(path, n)
-        await event.edit(msg, buttons=buttons)
-        CC.clear
+        await m.reply_text(msg, reply_markup=IKM(buttons))
+        CC.clear()
     else:
-        await event.answer("You aint copied anything to paste")
+        await m.answer("You aint copied anything to paste")
 
 
-@tbot.on(events.NewMessage(incoming=True, pattern="^[!/]ls$"))
-async def fm(event):
-    if event.sender.id != OWNER_ID:
-        return
-
+@pbot.on_message(filters.command('ls'))
+@pbot.on_edited_message(filters.command('ls'))
+async def fm(_, m):
     msg, buttons = get_manager(os.getcwd(), 1)
-    await event.reply(msg, buttons=buttons)
+    await m.reply_text(msg, reply_markup=IKM(buttons))

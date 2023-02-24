@@ -73,7 +73,7 @@ def yaml_format(obj, indent=0, max_str_len=256, max_byte_len=64):
 
 
 async def aexec_(code, smessatatus, client):
-    message = event = smessatatus = m
+    message = event = m = smessatatus
     p = lambda _x: print(yaml_format(_x))
     exec("async def __aexec(message, event, client, p): "
             + "".join(f"\n {l}" for l in code.split("\n")))
