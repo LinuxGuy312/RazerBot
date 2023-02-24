@@ -4,6 +4,7 @@ import io
 import os
 import time
 from pathlib import Path
+from typing import Dict, Tuple
 
 from pyrogram import filters
 from pyrogram.types import InlineKeyboardButton as IKB, InlineKeyboardMarkup as IKM
