@@ -249,7 +249,7 @@ async def remove(_, m):
 @pbot.on_callback_query(filters.regex("fmsend"))
 async def send(_, m):
     path = PATH[0]
-    uploaded = await m.message.reply_document(file=path, caption='Uploaded By Razer.')
+    uploaded = await m.message.reply_document(path, caption='Uploaded By Razer.')
 
 
 # CUT
