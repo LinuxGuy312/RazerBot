@@ -171,7 +171,7 @@ async def back(_, m):
     num = 1
     msg, buttons = get_manager(npath, num)
     await asyncio.sleep(1)
-    await m.edit_text(msg, reply_markup=IKM(buttons))
+    await m.message.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # UP
@@ -185,7 +185,7 @@ async def up(_, m):
         path = PATH[0]
         msg, buttons = get_manager(path, num1)
         await asyncio.sleep(1)
-        await m.edit_text(msg, reply_markup=IKM(buttons))
+        await m.message.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # DOWN
@@ -199,7 +199,7 @@ async def down(bot, m):
         num1 = int(num) + 1
         msg, buttons = get_manager(path, num1)
         await asyncio.sleep(1)
-        await m.edit_text(msg, reply_markup=IKM(buttons))
+        await m.message.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # FORTH
@@ -215,7 +215,7 @@ async def forth(_, m):
         num = 1
         msg, buttons = get_manager(rpath, num)
         await asyncio.sleep(1)
-        await m.edit_text(msg, reply_markup=IKM(buttons))
+        await m.message.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # REMOVE
@@ -240,7 +240,7 @@ async def remove(_, m):
         npath = path
     msg, buttons = get_manager(npath, num)
     await asyncio.sleep(1)
-    await m.edit_text(msg, reply_markup=IKM(buttons))
+    await m.message.edit_text(msg, reply_markup=IKM(buttons))
     await runcmd(f"rm -rf '{rpath}'")
     await m.answer(f"{rpath} removed successfully...")
 
@@ -282,7 +282,7 @@ async def cut(_, m):
             await m.answer(f"Moving {rpath} ...")
         msg, buttons = get_manager(path, n)
         await asyncio.sleep(1)
-        await m.edit_text(msg, reply_markup=IKM(buttons))
+        await m.message.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # COPY
@@ -315,7 +315,7 @@ async def copy(_, m):
             await m.answer(f"Copying {rpath} ...")
         msg, buttons = get_manager(path, n)
         await asyncio.sleep(1)
-        await m.edit_text(msg, reply_markup=IKM(buttons))
+        await m.message.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # PASTE
@@ -330,7 +330,7 @@ async def paste(_, m):
             cmd = f"cp '{CC[1]}' '{path}'"
         await runcmd(cmd)
         msg, buttons = get_manager(path, n)
-        await m.reply_text(msg, reply_markup=IKM(buttons))
+        await m.message.edit_text(msg, reply_markup=IKM(buttons))
         CC.clear()
     else:
         await m.answer("You aint copied anything to paste")
