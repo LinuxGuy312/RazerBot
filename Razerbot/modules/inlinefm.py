@@ -171,13 +171,13 @@ async def back(_, m):
     num = 1
     msg, buttons = get_manager(npath, num)
     await asyncio.sleep(1)
-    await m.message.edit_text(msg, reply_markup=IKM(buttons))
+    await m.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # UP
 @pbot.on_callback_query(filters.regex("fmup_(.*)"))
 async def up(_, m):
-    num = m.matches('(.*)').decode("UTF-8")
+    num = m.matches[0].group(1).decode("UTF-8")
     if num == "File":
         await m.answer("Its a File dummy!", show_alert=True)
     else:
@@ -185,13 +185,13 @@ async def up(_, m):
         path = PATH[0]
         msg, buttons = get_manager(path, num1)
         await asyncio.sleep(1)
-        await m.message.edit_text(msg, reply_markup=IKM(buttons))
+        await m.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # DOWN
 @pbot.on_callback_query(filters.regex("fmdown_(.*)"))
 async def down(bot, m):
-    num = m.matches('(.*)').decode("UTF-8")
+    num = m.matches[0].group(1).decode("UTF-8")
     if num == "File":
         await m.answer("Its a file dummy!", show_alert=True)
     else:
@@ -199,13 +199,13 @@ async def down(bot, m):
         num1 = int(num) + 1
         msg, buttons = get_manager(path, num1)
         await asyncio.sleep(1)
-        await m.message.edit_text(msg, reply_markup=IKM(buttons))
+        await m.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # FORTH
 @pbot.on_callback_query(filters.regex("fmforth_(.*)"))
 async def forth(_, m):
-    npath = m.matches('(.*)').decode("UTF-8")
+    npath = m.matches[0].group(1).decode("UTF-8")
     if npath == "File":
         await m.answer("Its a file dummy!", show_alert=True)
     else:
@@ -215,13 +215,13 @@ async def forth(_, m):
         num = 1
         msg, buttons = get_manager(rpath, num)
         await asyncio.sleep(1)
-        await m.message.edit_text(msg, reply_markup=IKM(buttons))
+        await m.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # REMOVE
 @pbot.on_callback_query(filters.regex("fmrem_(.*)"))
 async def remove(_, m):
-    fn, num = (m.matches('(.*)')).decode("UTF-8").split("|", 1)
+    fn, num = (m.matches[0].group(1).decode("UTF-8")).split("|", 1)
     path = PATH[0]
     if fn == "File":
         paths = path.split("/")
@@ -240,7 +240,7 @@ async def remove(_, m):
         npath = path
     msg, buttons = get_manager(npath, num)
     await asyncio.sleep(1)
-    await m.message.edit_text(msg, reply_markup=IKM(buttons))
+    await m.edit_text(msg, reply_markup=IKM(buttons))
     await runcmd(f"rm -rf '{rpath}'")
     await m.answer(f"{rpath} removed successfully...")
 
@@ -255,7 +255,7 @@ async def send(_, m):
 # CUT
 @pbot.on_callback_query(filters.regex("fmcut_(.*)"))
 async def cut(_, m):
-    f, n = (m.matches('(.*)')).decode("UTF-8").split("|", 1)
+    f, n = (m.matches[0].group(1).decode("UTF-8")).split("|", 1)
     if CC:
         return await m.answer(f"Paste {CC[1]} first")
     else:
@@ -282,13 +282,13 @@ async def cut(_, m):
             await m.answer(f"Moving {rpath} ...")
         msg, buttons = get_manager(path, n)
         await asyncio.sleep(1)
-        await m.message.edit_text(msg, reply_markup=IKM(buttons))
+        await m.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # COPY
 @pbot.on_callback_query(filters.regex("fmcopy_(.*)"))
 async def copy(_, m):
-    f, n = (m.matches('(.*)')).decode("UTF-8").split("|", 1)
+    f, n = (m.matches[0].group(1).decode("UTF-8")).split("|", 1)
     if CC:
         return await m.answer(f"Paste {CC[1]} first")
     else:
@@ -315,13 +315,13 @@ async def copy(_, m):
             await m.answer(f"Copying {rpath} ...")
         msg, buttons = get_manager(path, n)
         await asyncio.sleep(1)
-        await m.message.edit_text(msg, reply_markup=IKM(buttons))
+        await m.edit_text(msg, reply_markup=IKM(buttons))
 
 
 # PASTE
 @pbot.on_callback_query(filters.regex("fmpaste_(.*)"))
 async def paste(_, m):
-    n = m.matches('(.*)').decode("UTF-8")
+    n = m.matches[0].group(1).decode("UTF-8")
     path = PATH[0]
     if CC:
         if CC[0] == "cut":
@@ -330,7 +330,7 @@ async def paste(_, m):
             cmd = f"cp '{CC[1]}' '{path}'"
         await runcmd(cmd)
         msg, buttons = get_manager(path, n)
-        await m.message.edit_text(msg, reply_markup=IKM(buttons))
+        await m.reply_text(msg, reply_markup=IKM(buttons))
         CC.clear()
     else:
         await m.answer("You aint copied anything to paste")
