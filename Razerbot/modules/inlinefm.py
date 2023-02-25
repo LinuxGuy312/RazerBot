@@ -177,7 +177,7 @@ async def back(_, m):
 # UP
 @pbot.on_callback_query(filters.regex("fmup_(.*)"))
 async def up(_, m):
-    num = m.matches[0].group(1).decode("UTF-8")
+    num = m.matches[0].group(1)
     if num == "File":
         await m.answer("Its a File dummy!", show_alert=True)
     else:
@@ -191,7 +191,7 @@ async def up(_, m):
 # DOWN
 @pbot.on_callback_query(filters.regex("fmdown_(.*)"))
 async def down(bot, m):
-    num = m.matches[0].group(1).decode("UTF-8")
+    num = m.matches[0].group(1)
     if num == "File":
         await m.answer("Its a file dummy!", show_alert=True)
     else:
@@ -205,7 +205,7 @@ async def down(bot, m):
 # FORTH
 @pbot.on_callback_query(filters.regex("fmforth_(.*)"))
 async def forth(_, m):
-    npath = m.matches[0].group(1).decode("UTF-8")
+    npath = m.matches[0].group(1)
     if npath == "File":
         await m.answer("Its a file dummy!", show_alert=True)
     else:
@@ -221,7 +221,7 @@ async def forth(_, m):
 # REMOVE
 @pbot.on_callback_query(filters.regex("fmrem_(.*)"))
 async def remove(_, m):
-    fn, num = (m.matches[0].group(1).decode("UTF-8")).split("|", 1)
+    fn, num = (m.matches[0].group(1)).split("|", 1)
     path = PATH[0]
     if fn == "File":
         paths = path.split("/")
@@ -255,7 +255,7 @@ async def send(_, m):
 # CUT
 @pbot.on_callback_query(filters.regex("fmcut_(.*)"))
 async def cut(_, m):
-    f, n = (m.matches[0].group(1).decode("UTF-8")).split("|", 1)
+    f, n = (m.matches[0].group(1)).split("|", 1)
     if CC:
         return await m.answer(f"Paste {CC[1]} first")
     else:
@@ -288,7 +288,7 @@ async def cut(_, m):
 # COPY
 @pbot.on_callback_query(filters.regex("fmcopy_(.*)"))
 async def copy(_, m):
-    f, n = (m.matches[0].group(1).decode("UTF-8")).split("|", 1)
+    f, n = (m.matches[0].group(1)).split("|", 1)
     if CC:
         return await m.answer(f"Paste {CC[1]} first")
     else:
@@ -321,7 +321,7 @@ async def copy(_, m):
 # PASTE
 @pbot.on_callback_query(filters.regex("fmpaste_(.*)"))
 async def paste(_, m):
-    n = m.matches[0].group(1).decode("UTF-8")
+    n = m.matches[0].group(1)
     path = PATH[0]
     if CC:
         if CC[0] == "cut":
